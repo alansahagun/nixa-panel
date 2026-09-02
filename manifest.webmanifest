@@ -1,0 +1,9 @@
+{
+  "name": "Nixa · panel",
+  "short_name": "Nixa",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#EDEBE3",
+  "theme_color": "#EDEBE3",
+  "icons": [{ "src": "icon.png", "sizes": "512x512", "type": "image/png" }]
+}
