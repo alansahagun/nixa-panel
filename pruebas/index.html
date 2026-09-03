@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nixa · Pruebas de diseño</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--obsidiana:#141416;--cal:#EDEBE3;--grano:#C8862B;--gris:#8a887f}
+*{box-sizing:border-box}
+body{margin:0;background:var(--obsidiana);color:var(--cal);font-family:'Source Sans 3',system-ui,sans-serif;line-height:1.5;padding:24px 16px 64px}
+main{max-width:880px;margin:0 auto}
+h1{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:1.6rem;margin:0 0 4px}
+h2{font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:1.15rem;margin:40px 0 12px;color:var(--grano)}
+.sub{color:var(--gris);font-size:.95rem;margin:0 0 8px}
+.mono{font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--gris)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;margin-top:16px}
+.card{border:1px solid #2a2a2e;border-radius:14px;padding:18px 16px;background:#191a1d}
+.card h3{font-family:'Bricolage Grotesque',sans-serif;font-size:1rem;margin:0 0 2px}
+.card p{font-size:.85rem;color:var(--gris);margin:0 0 14px}
+.row{display:flex;align-items:flex-end;gap:12px}
+.sq{width:96px;height:96px;border-radius:22px;overflow:hidden}
+.c64{width:64px;height:64px;border-radius:50%;overflow:hidden}
+.c36{width:36px;height:36px;border-radius:50%;overflow:hidden}
+.sq svg,.c64 svg,.c36 svg{width:100%;height:100%;display:block}
+.bio{border:1px solid #2a2a2e;border-radius:14px;padding:16px;background:#191a1d;margin-bottom:12px}
+.bio h3{font-family:'Bricolage Grotesque',sans-serif;font-size:1rem;margin:0 0 6px;color:var(--cal)}
+.bio p{margin:0 0 6px;font-size:.95rem}
+.tag{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--grano);border:1px solid var(--grano);border-radius:99px;padding:1px 8px;margin-left:8px;vertical-align:middle}
+footer{margin-top:48px;color:var(--gris);font-size:.85rem;border-top:1px solid #2a2a2e;padding-top:16px}
+</style>
+</head>
+<body>
+<main>
+<h1>Nixa · Pruebas de diseño</h1>
+<p class="sub">Borradores internos — nada está publicado. Paleta del panel: cal <span class="mono">#EDEBE3</span> · obsidiana <span class="mono">#141416</span> · grano <span class="mono">#C8862B</span>.</p>
+
+<h2>Avatar / isotipo — 4 opciones</h2>
+<p class="sub">Cada una en cuadro (app), círculo 64 (perfil) y círculo 36 (comentarios), que es donde los avatares se mueren.</p>
+<div class="grid" id="grid"></div>
+
+<h2>Bios y textos para las 5 redes</h2>
+<p class="sub">Listos para pegar. El handle sigue <b>por confirmar</b> (lo registra Alan); donde diga @nixa va el definitivo.</p>
+<div class="bio"><h3>Instagram <span class="tag">150 car. máx</span></h3><p>Herramientas de belleza que se sienten tan bien como se ven. Brochas, esponjas y kits. Hecho para durar. 📍 Guadalajara, México.</p></div>
+<div class="bio"><h3>TikTok <span class="tag">80 car. máx</span></h3><p>Brochas que no sueltan pelo. Herramientas de belleza · GDL, México.</p></div>
+<div class="bio"><h3>Facebook <span class="tag">corta + larga</span></h3><p><b>Corta:</b> Herramientas de belleza hechas para durar. Guadalajara, México.</p><p><b>Larga:</b> Nixa es una marca mexicana de herramientas de belleza: brochas, esponjas y kits pensados para durar y sentirse bien en la mano. Cada set pasa por revisión pieza por pieza antes de llegar a ti. Envíos a todo México desde Guadalajara.</p></div>
+<div class="bio"><h3>Pinterest</h3><p>Brochas y herramientas de belleza en México. Ideas de maquillaje, cuidado de brochas y kits Nixa para regalar (o para ti).</p></div>
+<div class="bio"><h3>YouTube</h3><p>Canal oficial de Nixa. Herramientas de belleza hechas para durar: tutoriales, cuidado de brochas y el detrás de cámaras de una marca que empieza desde cero en Guadalajara.</p></div>
+
+<footer>Cuando Alan elija opción (A–D), Jarvis exporta PNG 512×512 y 1:1 para cada red. Página generada por Jarvis · sept 2026.</footer>
+</main>
+<script>
+const OPTS=[
+{k:'A',t:'Actual',d:'La del panel, como referencia.',s:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" fill="#141416"/><path d="M172.9 358.4V159H236L321.5 292.8h3.6l-3-133.8h47.4v199.4h-57.1L220.9 217h-3.3l2.7 141.4Z" fill="#EDEBE3"/><path fill="#C8862B" d="M363.5 212c-19.7-16.1-35.8-34-35.8-50.2 0-18.6 16.1-28.7 35.8-28.7s35.9 10.1 35.9 28.7c0 16.2-16.2 34.1-35.9 50.2Z"/></svg>'},
+{k:'B',t:'N trazo + diagonal grano',d:'N geométrica, la diagonal en dorado. Más limpia en 36 px.',s:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" fill="#141416"/><g stroke-linecap="round" fill="none"><path d="M172 356V156" stroke="#EDEBE3" stroke-width="52"/><path d="M340 356V156" stroke="#EDEBE3" stroke-width="52"/><path d="M172 156 340 356" stroke="#C8862B" stroke-width="52"/></g></svg>'},
+{k:'C',t:'Cal (fondo claro)',d:'Invertida: para apps con fondo oscuro, el avatar claro resalta.',s:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" fill="#EDEBE3"/><g stroke-linecap="round" fill="none"><path d="M172 356V156" stroke="#141416" stroke-width="52"/><path d="M340 356V156" stroke="#141416" stroke-width="52"/><path d="M172 156 340 356" stroke="#C8862B" stroke-width="52"/></g></svg>'},
+{k:'D',t:'Sello con anillo',d:'Anillo grano tipo sello; combina con el sticker de los kits.',s:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" fill="#141416"/><circle cx="256" cy="256" r="224" fill="none" stroke="#C8862B" stroke-width="10"/><g stroke-linecap="round" fill="none"><path d="M190 344V168" stroke="#EDEBE3" stroke-width="44"/><path d="M322 344V168" stroke="#EDEBE3" stroke-width="44"/><path d="M190 168 322 344" stroke="#C8862B" stroke-width="44"/></g></svg>'}
+];
+document.getElementById('grid').innerHTML=OPTS.map(o=>`<div class="card"><h3>Opción ${o.k} · ${o.t}</h3><p>${o.d}</p><div class="row"><div class="sq">${o.s}</div><div class="c64">${o.s}</div><div class="c36">${o.s}</div></div></div>`).join('');
+</script>
+</body>
+</html>
