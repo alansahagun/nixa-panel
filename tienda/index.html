@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F7EFE6">
+<meta name="description" content="Nixa. Brochas numeradas por oficio, esponjas, tapete lavador y rizador. Hechas para durar. Se arman y se envían desde Guadalajara.">
+<title>Nixa — Herramientas de belleza que sí duran</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   Nixa · tienda
+   Misma dirección editorial que el panel: filetes y aire en
+   vez de tarjetas; revista impresa; una franja obsidiana que
+   ancla; el N°01…N°10 como recurso gráfico.
+   ========================================================= */
+:root{
+  --cal:#F7EFE6; --papel:#FFFCF8; --tinta:#2A1B17; --carmin:#9B1B3A; --rubor:#E8B4A6;
+  --linea:#E3D6C8; --tinta2:#6F5B54; --arena:#EFE3D4;
+  --sans:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --tit:"Bricolage Grotesque",var(--sans);
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --pad:20px; --ancho:1200px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;background:var(--cal);scroll-behavior:smooth}
+body{margin:0;background:var(--cal);color:var(--tinta);font:17px/1.45 var(--sans);-webkit-font-smoothing:antialiased;min-height:100dvh}
+h1,h2,h3,h4{margin:0;font-family:var(--tit);font-weight:800;letter-spacing:-.03em}
+p,figure{margin:0}
+ol,ul{margin:0;padding:0;list-style:none}
+button,input,textarea{font:inherit;color:inherit}
+button{-webkit-tap-highlight-color:transparent;cursor:pointer}
+a{color:inherit}
+svg{display:block}
+.w{max-width:var(--ancho);margin:0 auto;padding:0 var(--pad)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.kick{font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--carmin)}
+.oscuro .kick{color:var(--rubor)}
+.display{font-family:var(--tit);font-variation-settings:"opsz" 96;font-weight:800;letter-spacing:-.045em;line-height:.88;font-variant-numeric:tabular-nums}
+.wm{display:inline-block;height:22px;width:auto;--punto:var(--carmin)}
+.oscuro .wm{--punto:var(--rubor)}
+.raya{display:block;width:118px;height:10px;overflow:visible}
+.raya path{fill:none;stroke:var(--carmin);stroke-width:2.2;stroke-linecap:round}
+.oscuro .raya path{stroke:var(--rubor)}
+:focus-visible{outline:2px solid var(--carmin);outline-offset:3px}
+
+/* ---- botones: obsidiana o filete, esquina casi recta ---- */
+.btn{display:inline-flex;align-items:center;justify-content:space-between;gap:14px;min-height:54px;padding:0 18px;border:1.5px solid var(--tinta);background:var(--tinta);color:var(--cal);font:700 17px/1 var(--tit);letter-spacing:-.01em;border-radius:2px;text-align:left;text-decoration:none}
+.btn:after{content:"\2192";font:500 17px/1 var(--mono)}
+.btn.linea{background:transparent;color:var(--tinta)}
+.btn.chico{min-height:46px;font-size:15px;padding:0 14px}
+.btn.ancho{display:flex;width:100%}
+.btn:active{transform:translate(1px,1px)}
+.btn[disabled]{opacity:.5;cursor:default}
+.oscuro .btn{background:var(--cal);color:var(--tinta);border-color:var(--cal)}
+.link{background:none;border:0;padding:8px 0;font:600 15px/1 var(--sans);color:var(--tinta);text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--rubor);text-decoration-thickness:2px;cursor:pointer}
+.msg{min-height:20px;font:400 13px/1.4 var(--mono);color:var(--tinta2);margin-top:10px}
+.msg.err{color:var(--carmin)}
+
+/* ---- campos: subrayados, no cajas ---- */
+.campo{display:block;margin-bottom:14px;min-width:0}
+.campo>span{display:block;font:500 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--tinta2)}
+.campo input{width:100%;border:0;border-bottom:1px solid var(--tinta);border-radius:0;background:transparent;padding:11px 0 9px;font:400 18px/1.3 var(--sans);outline:none;-webkit-appearance:none;appearance:none;margin:0}
+.campo input::placeholder,.campo textarea::placeholder{color:#B8A69B}
+.campo input:focus{box-shadow:0 1.5px 0 var(--tinta)}
+.campo textarea{width:100%;min-height:88px;border:1px solid var(--tinta);border-radius:0;background:var(--papel);padding:12px 14px;font:400 17px/1.4 var(--sans);outline:none;resize:vertical;margin:8px 0 0;display:block}
+.campo textarea:focus{box-shadow:inset 0 0 0 1px var(--tinta)}
+
+/* ---- cabecera de sección ---- */
+.cab{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;padding:0 0 12px;border-bottom:2px solid var(--tinta);margin-bottom:18px}
+.cab .kick{display:block;margin-bottom:10px}
+.cab h2{font-size:clamp(34px,9vw,40px);line-height:.94}
+.cab .res{font:400 11px/1.6 var(--mono);color:var(--tinta2);text-align:right;padding-bottom:3px;max-width:40%;display:none}
+.oscuro .cab{border-bottom-color:var(--cal)}
+.oscuro .cab .res{color:rgba(247,239,230,.65)}
+section{padding:44px 0}
+
+/* =========================================================
+   TOP
+   ========================================================= */
+.top{position:sticky;top:0;z-index:5;background:var(--cal);border-bottom:1.5px solid var(--tinta);padding:calc(10px + env(safe-area-inset-top)) 0 10px}
+.top .w{display:flex;align-items:center;gap:16px}
+.top .lugar{font:400 10.5px/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--tinta2);display:none}
+.top nav{display:none;gap:22px;margin-left:auto}
+.top nav a{font:600 14px/1 var(--sans);text-decoration:none;padding:6px 0;border-bottom:2px solid transparent}
+.top nav a:hover{border-bottom-color:var(--rubor)}
+.top nav a i{font:500 10px/1 var(--mono);font-style:normal;color:var(--tinta2);letter-spacing:.08em;margin-right:6px}
+.bolsa{margin-left:auto;display:inline-flex;align-items:center;gap:10px;min-height:40px;padding:0 12px 0 14px;border:1.5px solid var(--tinta);background:var(--tinta);color:var(--cal);font:700 15px/1 var(--tit);letter-spacing:-.01em;border-radius:2px}
+.bolsa .cnt{font:500 12px/1 var(--mono);color:var(--rubor);min-width:1.4em;text-align:right}
+
+/* =========================================================
+   01 · PORTADA
+   ========================================================= */
+.portada{padding:34px 0 0}
+.portada > .w{display:grid;gap:28px}
+.portada .texto .kick{display:block;margin-bottom:18px}
+.portada h1{font-size:clamp(46px,12.4vw,56px);max-width:12ch}
+.portada h1 em{font-style:normal;color:var(--carmin)}
+.portada .raya{margin:16px 0 20px}
+.portada .lead{font-size:19px;line-height:1.4;max-width:34ch;color:var(--tinta)}
+.portada .lead b{font-weight:600}
+.portada .cta{display:flex;flex-wrap:wrap;align-items:center;gap:8px 22px;margin-top:24px}
+.portada .cta .btn{flex:1 1 100%}
+
+/* lámina: hueco de foto que hoy es composición tipográfica */
+.lamina{position:relative;overflow:hidden;background:var(--tinta);color:var(--cal);border-radius:2px}
+.lamina img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2}
+.lamina .indice{padding:20px 20px 18px;display:flex;flex-direction:column;min-height:100%}
+.lamina .cima{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.lamina .cima .kick{padding-top:6px;max-width:16ch;line-height:1.5}
+.lamina .cima .n{font-size:clamp(84px,24vw,112px);color:var(--rubor)}
+.lamina ol{margin-top:12px;border-top:1px solid rgba(247,239,230,.28)}
+.lamina li{display:grid;grid-template-columns:52px 1fr auto;align-items:baseline;gap:12px;padding:9px 0 8px;border-bottom:1px solid rgba(247,239,230,.16)}
+.lamina li .no{font:500 11px/1 var(--mono);letter-spacing:.06em;color:var(--rubor)}
+.lamina li b{font:700 19px/1 var(--tit);letter-spacing:-.02em}
+.lamina li small{font:400 10.5px/1 var(--mono);color:rgba(247,239,230,.55);letter-spacing:.04em;text-transform:uppercase;display:none}
+.lamina .folio{display:flex;justify-content:space-between;gap:12px;margin-top:auto;padding-top:18px;font:400 10.5px/1.5 var(--mono);color:rgba(247,239,230,.6);letter-spacing:.04em}
+
+/* cinta de datos */
+.cinta{margin-top:40px;border-top:1.5px solid var(--tinta);border-bottom:1.5px solid var(--tinta)}
+.cinta .w{display:grid;grid-template-columns:repeat(3,1fr);padding:0}
+.cinta div{padding:16px var(--pad) 14px;border-right:1px solid var(--linea);min-width:0}
+.cinta div+div{padding-left:14px}
+.cinta div:last-child{border-right:0}
+.cinta .l{font:500 10px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--tinta2)}
+.cinta .v{font:800 28px/1 var(--tit);letter-spacing:-.03em;margin-top:8px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.cinta .v small{font:400 11px/1 var(--mono);letter-spacing:0;color:var(--tinta2);margin-left:3px}
+
+/* =========================================================
+   02 · LA LÍNEA
+   ========================================================= */
+.linea-p{border-top:0}
+.pz{display:grid;grid-template-columns:96px 1fr;grid-template-areas:"idx idx" "foto cuerpo" "compra compra";gap:14px 16px;padding:22px 0 26px;border-bottom:1px solid var(--linea)}
+.pz:last-child{border-bottom:0}
+.pz .idx{grid-area:idx;font:400 11px/1 var(--mono);letter-spacing:.06em;color:var(--tinta2);display:flex;justify-content:space-between}
+.pz .idx .sku{color:var(--tinta2)}
+.pz .foto{grid-area:foto;position:relative;aspect-ratio:1;overflow:hidden;border:1px solid var(--tinta);background:var(--papel);border-radius:2px;align-self:start}
+.pz .foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2}
+.pz .cuerpo{grid-area:cuerpo;min-width:0}
+.pz .cuerpo .kick{display:block;margin-bottom:8px}
+.pz h3{font-size:24px;line-height:.98;letter-spacing:-.03em}
+.pz h3 small{display:block;font:400 12px/1.4 var(--mono);letter-spacing:.02em;color:var(--tinta2);margin-top:7px}
+.pz .desc{margin-top:10px;font-size:15.5px;line-height:1.45;color:var(--tinta);max-width:44ch}
+.pz .compra{grid-area:compra;display:flex;align-items:center;justify-content:space-between;gap:14px;border-top:1px solid var(--linea);padding-top:14px}
+.pz .precio{font:800 30px/1 var(--tit);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.pz .precio small{font:400 11px/1 var(--mono);letter-spacing:.06em;color:var(--tinta2);margin-left:6px}
+.pz .compra .btn{min-width:150px}
+/* el héroe */
+.pz.heroe{grid-template-columns:1fr;grid-template-areas:"idx" "foto" "cuerpo" "compra";padding-top:0}
+.pz.heroe .foto{aspect-ratio:4/3;border:0;background:var(--tinta);color:var(--cal)}
+.pz.heroe h3{font-size:clamp(40px,11vw,52px);letter-spacing:-.04em}
+.pz.heroe .desc{font-size:17px}
+.pz.heroe .compra .btn{flex:1;display:flex}
+
+/* monogramas: lo que se ve mientras no hay foto */
+.mg{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:10px;color:var(--tinta)}
+.mg .big{font-family:var(--tit);font-variation-settings:"opsz" 96;font-weight:800;letter-spacing:-.05em;line-height:.85;font-size:30px;font-variant-numeric:tabular-nums}
+.mg .lbl{font:400 9px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--tinta2)}
+.mg .lbl:last-child{display:none}
+.mg.puntos{background:radial-gradient(circle,var(--tinta) 1.3px,transparent 1.6px) 6px 6px/11px 11px}
+.mg.puntos .big,.mg.puntos .lbl{background:var(--papel);align-self:flex-start;padding:2px 4px 0}
+.mg svg.arco{position:absolute;left:12%;right:12%;top:18%;width:76%;height:auto}
+.mg svg.arco path{fill:none;stroke:var(--carmin);stroke-width:2.4;stroke-linecap:round}
+.heroe .mg{padding:18px;color:var(--cal)}
+.heroe .mg .lbl{color:rgba(247,239,230,.6);font-size:10.5px}
+.heroe .mg .big{font-size:clamp(150px,44vw,220px);color:var(--rubor)}
+.heroe .mg .lista{display:flex;flex-wrap:wrap;gap:4px 14px;font:400 10.5px/1.5 var(--mono);color:rgba(247,239,230,.7);letter-spacing:.03em;margin-top:8px}
+
+/* =========================================================
+   03 · EL MAPA DEL ROSTRO — franja obsidiana
+   ========================================================= */
+.banda{background:var(--tinta);color:var(--cal);padding:48px 0 52px}
+.mapa{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid rgba(247,239,230,.28)}
+.mapa li{padding:16px 12px 16px 0;border-bottom:1px solid rgba(247,239,230,.18);min-width:0}
+.mapa li:nth-child(odd){border-right:1px solid rgba(247,239,230,.18)}
+.mapa li:nth-child(even){padding-left:14px}
+.mapa .no{font:500 11px/1 var(--mono);letter-spacing:.08em;color:var(--rubor)}
+.mapa b{display:block;font:800 clamp(26px,7.4vw,30px)/1 var(--tit);letter-spacing:-.035em;margin-top:10px}
+.mapa small{display:block;font:400 11.5px/1.45 var(--mono);color:rgba(247,239,230,.62);margin-top:8px;letter-spacing:.02em}
+.banda .lectura{margin-top:22px;font-size:16px;line-height:1.45;color:rgba(247,239,230,.86);max-width:40ch}
+.banda .lectura b{font-weight:600;color:var(--cal)}
+/* hueco de foto ancho: la fila de números como composición */
+.tira{position:relative;overflow:hidden;margin-top:30px;border-top:1px solid rgba(247,239,230,.28);border-bottom:1px solid rgba(247,239,230,.28);min-height:120px;display:flex;align-items:center}
+.tira img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2}
+.tira .nums{display:flex;gap:.35em;white-space:nowrap;font-family:var(--tit);font-variation-settings:"opsz" 96;font-weight:800;font-size:clamp(64px,22vw,150px);line-height:1;letter-spacing:-.05em;color:transparent;-webkit-text-stroke:1px rgba(232,180,166,.75);padding:10px 0 12px}
+.tira .nums span:nth-child(3n){color:var(--rubor);-webkit-text-stroke:0}
+.tira .pie{position:absolute;left:0;bottom:8px;font:400 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:rgba(247,239,230,.5)}
+
+/* =========================================================
+   04 · POR QUÉ NIXA
+   ========================================================= */
+.porque .w{display:grid;gap:30px}
+.args{border-top:0}
+.args li{display:grid;grid-template-columns:34px 1fr;gap:12px;padding:18px 0 20px;border-bottom:1px solid var(--linea)}
+.args .no{font:400 11px/1.6 var(--mono);color:var(--tinta2);letter-spacing:.06em;padding-top:5px}
+.args h3{font-size:24px;line-height:1;letter-spacing:-.03em}
+.args p{margin-top:8px;font-size:15.5px;line-height:1.45;max-width:44ch}
+.garantia{border:1.5px solid var(--tinta);border-radius:2px;padding:22px 20px 22px;display:flex;flex-direction:column;background:var(--papel)}
+.garantia .kick{display:block}
+.garantia .n{font-size:clamp(96px,30vw,150px);margin:14px 0 0}
+.garantia .n small{font-size:.24em;letter-spacing:-.02em;color:var(--tinta2);margin-left:.1em}
+.garantia .txt{font-size:17px;line-height:1.4;max-width:30ch;margin-top:14px}
+.garantia .btn{margin-top:22px;align-self:stretch;display:flex}
+.origen{border-top:2px solid var(--tinta);padding-top:16px;display:grid;grid-template-columns:1fr;gap:10px}
+.origen .kick{color:var(--tinta2)}
+.origen .txt{font-family:var(--tit);font-weight:500;font-size:22px;line-height:1.2;letter-spacing:-.02em;max-width:30ch}
+.origen .txt b{font-weight:800;color:var(--carmin)}
+
+/* =========================================================
+   PIE
+   ========================================================= */
+footer{border-top:2px solid var(--tinta);padding:36px 0 calc(60px + env(safe-area-inset-bottom))}
+footer .w{display:grid;gap:22px}
+footer .wm{height:44px}
+footer .cols{display:grid;grid-template-columns:1fr;gap:16px;font:400 12px/1.7 var(--mono);color:var(--tinta2);letter-spacing:.02em}
+footer .cols b{display:block;font:500 10px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--tinta);margin-bottom:6px}
+footer .cols a{text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--rubor)}
+footer .folio{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--linea);padding-top:14px;font:400 10.5px/1.5 var(--mono);color:var(--tinta2);letter-spacing:.06em;text-transform:uppercase}
+
+/* =========================================================
+   BOLSA · panel lateral
+   ========================================================= */
+.panel{position:fixed;inset:0;z-index:50;background:rgba(42,27,23,.5);visibility:hidden;opacity:0;transition:opacity .2s,visibility 0s .2s}
+.panel.on{visibility:visible;opacity:1;transition:opacity .2s}
+.box{position:absolute;right:0;top:0;bottom:0;width:min(440px,100%);background:var(--cal);border-left:1.5px solid var(--tinta);display:flex;flex-direction:column;transform:translateX(24px);transition:transform .22s ease-out;overflow:hidden}
+.panel.on .box{transform:none}
+.box .cabeza{padding:calc(14px + env(safe-area-inset-top)) 22px 12px;border-bottom:2px solid var(--tinta);display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.box .cabeza h2{font-size:34px;line-height:.92}
+.box .cabeza .kick{display:block;margin-bottom:8px}
+.box .cerrar{background:none;border:0;padding:8px 0;font:400 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--tinta2);text-decoration:underline;text-underline-offset:3px;cursor:pointer;white-space:nowrap}
+.box .cuerpo{flex:1;overflow:auto;padding:6px 22px calc(24px + env(safe-area-inset-bottom))}
+.li{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:baseline;padding:13px 0 12px;border-bottom:1px solid var(--linea)}
+.li .q{display:inline-flex;align-items:center;border:1px solid var(--tinta);border-radius:2px;background:var(--papel)}
+.li .q button{width:30px;height:32px;border:0;background:transparent;font:500 16px/1 var(--mono);padding:0;color:var(--tinta)}
+.li .q span{font:500 14px/1 var(--mono);min-width:26px;text-align:center;border-left:1px solid var(--linea);border-right:1px solid var(--linea);height:32px;display:grid;place-items:center}
+.li .nom{font-weight:600;font-size:15.5px;line-height:1.3;min-width:0}
+.li .nom small{display:block;font:400 11px/1.5 var(--mono);color:var(--tinta2);letter-spacing:.03em}
+.li .imp{font:700 18px/1 var(--tit);letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right}
+.li .x{display:block;margin:6px 0 0 auto;background:none;border:0;padding:0;font:400 10.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--tinta2);text-decoration:underline;text-underline-offset:3px}
+.vacio{padding:26px 0 12px;font-size:15.5px;line-height:1.5;color:var(--tinta2);max-width:30ch}
+.vacio:before{content:"\2014\00a0"}
+.tot{display:flex;justify-content:space-between;align-items:baseline;border-top:2px solid var(--tinta);margin-top:6px;padding:14px 0 6px}
+.tot .l{font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--tinta2)}
+.tot .v{font:800 40px/1 var(--tit);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.tot small{display:block;font:400 10.5px/1.5 var(--mono);color:var(--tinta2);letter-spacing:.03em;margin-top:6px}
+.datos{margin-top:22px}
+.datos .kick{display:block;color:var(--tinta2);margin-bottom:18px}
+.nota{font:400 12.5px/1.5 var(--mono);color:var(--tinta2);margin-top:14px;letter-spacing:.01em}
+
+/* =========================================================
+   ESCRITORIO
+   ========================================================= */
+@media(min-width:720px){
+  .top .lugar{display:block}
+  .cab .res{display:block}
+  .portada .cta .btn{flex:0 0 auto}
+  .lamina li small{display:block}
+  .mg .big{font-size:56px}
+  .mg .lbl{font-size:10px}
+  .mg .lbl:last-child{display:block}
+  .pz{grid-template-columns:52px 180px 1fr;grid-template-areas:"idx foto cuerpo" "idx foto compra";gap:12px 22px}
+  .pz .idx{flex-direction:column;gap:8px;justify-content:flex-start;padding-top:5px}
+  .pz .compra{border-top:0;padding-top:0;justify-content:flex-start;gap:26px}
+  .pz.heroe{grid-template-columns:52px 1fr 1fr;grid-template-areas:"idx foto cuerpo" "idx foto compra";align-items:start}
+  .pz.heroe .foto{aspect-ratio:1}
+  .mapa{grid-template-columns:repeat(5,1fr)}
+  .mapa li{border-right:1px solid rgba(247,239,230,.18);padding:18px 14px 20px 0}
+  .mapa li:nth-child(even){padding-left:0}
+  .mapa li:nth-child(5n){border-right:0}
+  .mapa li:nth-child(n+2){padding-left:14px}
+  .mapa li:nth-child(5n+1){padding-left:0}
+  .porque .w{grid-template-columns:1fr 1fr;align-items:start}
+  .origen{grid-column:1/-1;grid-template-columns:200px 1fr}
+  footer .cols{grid-template-columns:repeat(3,1fr)}
+}
+@media(min-width:1000px){
+  :root{--pad:56px}
+  section{padding:64px 0}
+  .top nav{display:flex}
+  .bolsa{margin-left:28px}
+  .cab h2{font-size:56px}
+  .cab .res{font-size:12px}
+  .portada{padding:56px 0 0}
+  .portada > .w{grid-template-columns:7fr 5fr;gap:56px;align-items:stretch}
+  .portada h1{font-size:clamp(64px,6.6vw,88px);max-width:11ch}
+  .portada .lead{font-size:21px;max-width:38ch}
+  .portada .cta{margin-top:34px}
+  .lamina{min-height:100%}
+  .lamina .indice{padding:26px 26px 22px}
+  .lamina li{padding:10px 0 9px}
+  .lamina li b{font-size:21px}
+  .cinta{margin-top:56px}
+  .cinta div{padding:22px var(--pad) 20px}
+  .cinta div+div{padding-left:26px}
+  .cinta .v{font-size:38px}
+  .pz{grid-template-columns:52px 220px 1fr 220px;grid-template-areas:"idx foto cuerpo compra";gap:0 28px;padding:30px 0 32px}
+  .pz .compra{flex-direction:column;align-items:flex-end;justify-content:space-between;gap:20px;align-self:stretch;padding:6px 0 2px}
+  .pz .precio{font-size:34px;text-align:right}
+  .pz .precio small{display:block;margin:8px 0 0;text-align:right}
+  .pz .compra .btn{min-width:200px}
+  .pz h3{font-size:30px}
+  .pz .desc{font-size:16.5px}
+  .pz.heroe{grid-template-columns:52px 1fr 1fr;grid-template-areas:"idx foto cuerpo" "idx foto compra";gap:0 40px}
+  .pz.heroe .compra{flex-direction:row;align-items:center;justify-content:flex-start;gap:30px;align-self:end;padding:0}
+  .pz.heroe .precio{font-size:44px;text-align:left}
+  .pz.heroe .precio small{text-align:left}
+  .pz.heroe h3{font-size:64px}
+  .pz.heroe .desc{font-size:19px;max-width:38ch}
+  .heroe .mg{padding:26px}
+  .mg .big{font-size:72px}
+  .heroe .mg .big{font-size:220px}
+  .banda{padding:72px 0 76px}
+  .mapa li{padding:24px 18px 26px 0}
+  .mapa li:nth-child(n+2){padding-left:18px}
+  .mapa li:nth-child(5n+1){padding-left:0}
+  .mapa b{font-size:34px}
+  .tira{margin-top:44px;min-height:180px}
+  .tira .nums{font-size:80px;gap:.28em}
+  .porque .w{grid-template-columns:1fr 440px;gap:64px}
+  .args h3{font-size:28px}
+  .args p{font-size:16.5px}
+  .garantia{padding:30px 30px 30px}
+  .origen{grid-template-columns:260px 1fr;padding-top:22px}
+  .origen .txt{font-size:28px;max-width:34ch}
+  footer{padding:56px 0 72px}
+  footer .w{grid-template-columns:1fr 2fr;align-items:start}
+  footer .folio{grid-column:1/-1}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .panel,.box{transition:none}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wordmark" viewBox="-60 -895 2324 969">
+    <g fill="currentColor">
+      <path d="M69 0V-660H278L561 -217H573L563 -660H720V0H531L228 -468H217L226 0Z"/>
+      <path d="M834 0V-528H995V0Z"/>
+      <path d="M1051 0 1225 -264 1052 -528H1237L1324 -334H1343L1430 -528H1615L1441 -264L1616 0H1432L1343 -196H1324L1237 0Z"/>
+      <path d="M1795 14Q1751 14 1717.0 -3.5Q1683 -21 1664.0 -54.5Q1645 -88 1645 -136Q1645 -181 1662.5 -210.5Q1680 -240 1713.5 -257.5Q1747 -275 1794.0 -286.5Q1841 -298 1901 -307Q1930 -312 1949.5 -316.5Q1969 -321 1979.0 -331.0Q1989 -341 1989 -360Q1989 -385 1971.0 -403.0Q1953 -421 1913 -421Q1885 -421 1862.5 -411.0Q1840 -401 1824.0 -382.0Q1808 -363 1800 -336L1658 -378Q1671 -420 1694.5 -451.0Q1718 -482 1751.0 -502.5Q1784 -523 1826.5 -532.5Q1869 -542 1917 -542Q1997 -542 2047.5 -516.5Q2098 -491 2122.5 -437.5Q2147 -384 2147 -300V-219Q2147 -183 2148.5 -146.5Q2150 -110 2152.5 -73.5Q2155 -37 2159 0H2017Q2013 -23 2009.0 -55.5Q2005 -88 2003 -122H1984Q1970 -84 1943.5 -52.5Q1917 -21 1879.5 -3.5Q1842 14 1795 14ZM1868 -100Q1886 -100 1904.5 -106.5Q1923 -113 1940.0 -124.5Q1957 -136 1971.0 -153.0Q1985 -170 1992 -190L1990 -269L2012 -264Q1993 -252 1970.0 -245.0Q1947 -238 1923.5 -234.0Q1900 -230 1877.5 -225.5Q1855 -221 1837.5 -214.0Q1820 -207 1810.0 -195.0Q1800 -183 1800 -162Q1800 -134 1819.0 -117.0Q1838 -100 1868 -100Z"/>
+    </g>
+    <path style="fill:var(--punto,#9B1B3A)" d="M 915.5 -559.2 C 858.8 -605.6 812.4 -657.2 812.4 -703.6 C 812.4 -757.3 858.8 -786.1 915.5 -786.1 C 972.2 -786.1 1018.6 -757.3 1018.6 -703.6 C 1018.6 -657.2 972.2 -605.6 915.5 -559.2 Z"/>
+  </symbol>
+</svg>
+
+<!-- ============ TOP ============ -->
+<header class="top">
+  <div class="w">
+    <a href="#portada" aria-label="Nixa, inicio"><svg class="wm" viewBox="0 0 2324 969" role="img" aria-label="Nixa"><use href="#wordmark"/></svg></a>
+    <span class="lugar">Guadalajara, Jal. · Ed. 01</span>
+    <nav aria-label="Secciones">
+      <a href="#linea"><i>02</i>La línea</a>
+      <a href="#mapa"><i>03</i>El mapa del rostro</a>
+      <a href="#porque"><i>04</i>Por qué Nixa</a>
+    </nav>
+    <button class="bolsa" id="btnCarrito" type="button" aria-label="Abrir la bolsa">Bolsa <span class="cnt" id="nCarrito">0</span></button>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ 01 · PORTADA ============ -->
+<section class="portada" id="portada">
+  <div class="w">
+    <div class="texto">
+      <p class="kick">01 · Portada — Hecho en Guadalajara</p>
+      <h1 class="display">Herramientas de belleza que <em>sí</em> duran.</h1>
+      <svg class="raya" viewBox="0 0 118 10" aria-hidden="true"><path d="M1.5 6.2c14-2.6 25-3.4 38-2.1 12 1.2 19 2.9 31 1.6 15-1.6 27-3.2 46-3.9"/></svg>
+      <p class="lead">Diez brochas numeradas por oficio, no por adorno. <b>Cada una dice para qué es y dónde va.</b> Fibra que no suelta pelo ni se come el producto; se lavan mil veces y siguen igual.</p>
+      <div class="cta">
+        <a class="btn" href="#linea" id="irKit">Ver el Kit N°1</a>
+        <a class="link" href="#mapa">Cómo se lee el mapa del rostro</a>
+      </div>
+    </div>
+
+    <figure class="lamina oscuro" aria-label="Índice de las diez brochas del Kit N°1">
+      <!-- FOTO: portada — el Kit N°1 abierto sobre fondo crema, los diez mangos con el número visible. Vertical 4:5. Poner aquí <img src="…" alt="Kit N°1 abierto"> y la composición de abajo queda cubierta. -->
+      <div class="indice">
+        <div class="cima">
+          <p class="kick">Kit N°1 · índice de brochas</p>
+          <span class="display n">10</span>
+        </div>
+        <ol>
+          <li><span class="no">N°01</span><b>Polvo</b><small>Rostro</small></li>
+          <li><span class="no">N°02</span><b>Base</b><small>Rostro</small></li>
+          <li><span class="no">N°03</span><b>Rubor</b><small>Mejillas</small></li>
+          <li><span class="no">N°04</span><b>Difuminar</b><small>Párpado</small></li>
+          <li><span class="no">N°05</span><b>Contorno</b><small>Pómulo</small></li>
+          <li><span class="no">N°06</span><b>Sombra</b><small>Párpado</small></li>
+          <li><span class="no">N°07</span><b>Cuenca</b><small>Ojo</small></li>
+          <li><span class="no">N°08</span><b>Corrector</b><small>Ojeras</small></li>
+          <li><span class="no">N°09</span><b>Delinear</b><small>Pestañas</small></li>
+          <li><span class="no">N°10</span><b>Cejas y pestañas</b><small>Cejas</small></li>
+        </ol>
+        <div class="folio"><span>Diez brochas · estuche · dos esponjas</span><span>$298 MXN</span></div>
+      </div>
+    </figure>
+  </div>
+
+  <div class="cinta" aria-label="Datos de la marca">
+    <div class="w">
+      <div><p class="l">Brochas numeradas</p><p class="v">10<small>oficios</small></p></div>
+      <div><p class="l">Garantía</p><p class="v">90<small>días</small></p></div>
+      <div><p class="l">Entrega en GDL</p><p class="v">Hoy<small>mismo</small></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 · LA LÍNEA ============ -->
+<section id="linea">
+  <div class="w">
+    <div class="cab">
+      <div><p class="kick">02 · La línea</p><h2>Cinco piezas,<br>un sistema.</h2></div>
+      <p class="res">Precios en pesos mexicanos.<br>Se arma y se envía desde Guadalajara.</p>
+    </div>
+    <div class="linea-p" id="prods" aria-live="polite"><p class="vacio">Cargando la línea…</p></div>
+  </div>
+</section>
+
+<!-- ============ 03 · EL MAPA DEL ROSTRO ============ -->
+<section class="banda oscuro" id="mapa">
+  <div class="w">
+    <div class="cab">
+      <div><p class="kick">03 · El mapa del rostro</p><h2>Ninguna brocha<br>sin nombre.</h2></div>
+      <p class="res">El número va grabado en el mango.<br>No hay que adivinar ni ver tutoriales.</p>
+    </div>
+    <ol class="mapa">
+      <li><span class="no">N°01</span><b>Polvo</b><small>Rostro completo · sella y matiza</small></li>
+      <li><span class="no">N°02</span><b>Base</b><small>Rostro · empareja el tono sin marcas</small></li>
+      <li><span class="no">N°03</span><b>Rubor</b><small>Mejillas · color donde sube la sonrisa</small></li>
+      <li><span class="no">N°04</span><b>Difuminar</b><small>Párpado · funde los bordes</small></li>
+      <li><span class="no">N°05</span><b>Contorno</b><small>Pómulo y mandíbula · da forma</small></li>
+      <li><span class="no">N°06</span><b>Sombra</b><small>Párpado móvil · deposita el color</small></li>
+      <li><span class="no">N°07</span><b>Cuenca</b><small>Cuenca del ojo · profundidad</small></li>
+      <li><span class="no">N°08</span><b>Corrector</b><small>Ojeras y detalles · cubre con precisión</small></li>
+      <li><span class="no">N°09</span><b>Delinear</b><small>Línea de pestañas · trazo fino</small></li>
+      <li><span class="no">N°10</span><b>Cejas y pestañas</b><small>Cejas · peina, ordena y separa</small></li>
+    </ol>
+    <p class="lectura"><b>Se lee de arriba hacia abajo:</b> del polvo a las cejas, en el orden en que se maquilla. Quien empieza no tiene que aprenderse nada; quien ya sabe, deja de buscar.</p>
+    <figure class="tira" aria-hidden="true">
+      <!-- FOTO: las diez brochas en abanico sobre obsidiana, mango hacia el frente con los números legibles. Horizontal ancha (mínimo 1600 px). Poner aquí <img src="…" alt=""> y la fila de números queda cubierta. -->
+      <div class="nums"><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span><span>06</span><span>07</span><span>08</span><span>09</span><span>10</span></div>
+      <span class="pie">N°01 — N°10 · grabado en el mango</span>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ 04 · POR QUÉ NIXA ============ -->
+<section class="porque" id="porque">
+  <div class="w">
+    <div>
+      <div class="cab">
+        <div><p class="kick">04 · Por qué Nixa</p><h2>Sin letras<br>chiquitas.</h2></div>
+        <p class="res">Cuatro razones.<br>Ninguna inventada.</p>
+      </div>
+      <ol class="args">
+        <li><span class="no">01</span><div><h3>Se lavan y siguen.</h3><p>Fibra sintética que no absorbe producto ni suelta pelo. Agua tibia, jabón neutro y el tapete de silicón hacen el resto. Mil lavadas después, la brocha es la misma.</p></div></li>
+        <li><span class="no">02</span><div><h3>Cada una dice su oficio.</h3><p>El número y el nombre van en el mango. No hay que adivinar cuál era la de cuenca ni ver un tutorial para empezar.</p></div></li>
+        <li><span class="no">03</span><div><h3>Si falla, se repone.</h3><p>Noventa días. Si una brocha suelta pelo, se manda una foto por WhatsApp y sale la de reemplazo. Sin ticket, sin formulario, sin discusión.</p></div></li>
+        <li><span class="no">04</span><div><h3>De aquí.</h3><p>Se arma y se envía desde Guadalajara. Entrega el mismo día en la ciudad y a todo México por paquetería.</p></div></li>
+      </ol>
+    </div>
+
+    <aside class="garantia" aria-label="Garantía">
+      <p class="kick">Garantía · sin letras chiquitas</p>
+      <p class="display n">90<small>días</small></p>
+      <p class="txt">Si una brocha suelta pelo en sus primeros noventa días, se repone. Basta una foto por WhatsApp.</p>
+      <a class="btn linea" id="waGarantia" href="#" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+    </aside>
+
+    <div class="origen">
+      <p class="kick">De dónde viene el nombre</p>
+      <p class="txt"><b>Nixa</b> viene de <b>nixtamal</b>: el maíz que se prepara con cal para que rinda, alimente y dure. Así pensamos cada herramienta: sin prisa, para que aguante.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ PIE ============ -->
+<footer>
+  <div class="w">
+    <div>
+      <svg class="wm" viewBox="0 0 2324 969" role="img" aria-label="Nixa"><use href="#wordmark"/></svg>
+      <p class="kick" style="margin-top:14px;color:var(--tinta2)">Herramientas de belleza que sí duran</p>
+    </div>
+    <div class="cols">
+      <div><b>Escríbenos</b><a id="waPie" href="#" target="_blank" rel="noopener">WhatsApp</a><br><span id="correoPie">hola@nixa.mx</span></div>
+      <div><b>Envíos</b>Guadalajara: mismo día.<br>Resto de México: paquetería.</div>
+      <div><b>Pagos</b>Se confirman por WhatsApp.<br>Aquí no se cobra nada.</div>
+    </div>
+    <div class="folio"><span>Nixa · Guadalajara, México</span><span>Ed. 01 · 2026</span></div>
+  </div>
+</footer>
+
+<!-- ============ BOLSA ============ -->
+<div class="panel" id="panel" role="dialog" aria-modal="true" aria-labelledby="tituloBolsa">
+  <div class="box">
+    <div class="cabeza">
+      <div><p class="kick">Pedido por WhatsApp</p><h2 id="tituloBolsa">Tu bolsa</h2></div>
+      <button class="cerrar" id="cerrar" type="button">Seguir viendo</button>
+    </div>
+    <div class="cuerpo">
+      <div id="items"></div>
+      <div class="tot">
+        <div><p class="l">Total</p><small>Envío se cotiza al confirmar</small></div>
+        <span class="v" id="total">$0</span>
+      </div>
+      <div class="datos">
+        <p class="kick">Para entregarlo</p>
+        <label class="campo"><span>Tu nombre</span><input id="nom" autocomplete="name" placeholder="Nombre y apellido"></label>
+        <label class="campo"><span>WhatsApp a 10 dígitos</span><input id="tel" inputmode="tel" autocomplete="tel" placeholder="33 0000 0000"></label>
+        <label class="campo"><span>Dirección de entrega</span><textarea id="dir" autocomplete="street-address" placeholder="Calle, número, colonia, CP"></textarea></label>
+        <button class="btn ancho" id="pedir" type="button">Enviar pedido por WhatsApp</button>
+        <p class="msg" id="msgPedido"></p>
+        <p class="nota">Te contestamos para confirmar el pago y la entrega. Aquí no se cobra nada.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script>
+const URL_SB="https://jjtlkneoxmgcyrifckdf.supabase.co";
+const KEY_SB="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpqdGxrbmVveG1nY3lyaWZja2RmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgzNjQ0ODcsImV4cCI6MjEwMzk0MDQ4N30.Ty2qZduVwcIfWuVAzb-judCXVIIpyBq2_D3bE2GsY7g";
+const WA="523300000000"; // <-- AQUÍ VA EL WHATSAPP REAL DE NIXA (52 + 10 dígitos, sin espacios). Es la única línea que hay que cambiar.
+
+// FOTOS: cuando lleguen, poner aquí la ruta de cada una (misma carpeta que este archivo o URL).
+// Con la ruta vacía se muestra el monograma tipográfico; con ruta, la foto lo cubre. No hay que tocar nada más.
+const FOTOS={KIT1:"",ESP4:"",LAV1:"",RIZ1:"",SIS1:""};
+
+const sb=supabase.createClient(URL_SB,KEY_SB);
+const $=s=>document.querySelector(s);
+const money=n=>'$'+Number(n||0).toLocaleString('es-MX',{maximumFractionDigits:0});
+const esc=s=>(s??'').toString().replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]));
+let PROD=[], bolsa={};
+
+// Texto de venta por SKU. El nombre y el precio salen de la base.
+const COPY={
+  KIT1:{tag:'El principal',desc:'Diez brochas numeradas, estuche rígido, dos esponjas y el mapa del rostro. Lo que se necesita para empezar y para no volver a comprar en un buen rato.'},
+  ESP4:{tag:'',desc:'Cuatro esponjas de maquillaje que crecen con agua y no se comen el producto. Se cambian cada tres meses; por eso vienen de a cuatro.'},
+  LAV1:{tag:'',desc:'Tapete lavador de silicón con relieves para lavar sin maltratar la fibra. Se pega al lavabo, se enjuaga y listo.'},
+  RIZ1:{tag:'',desc:'Rizador de acero con almohadilla suave y repuestos incluidos. Abre la mirada sin pellizcar.'},
+  SIS1:{tag:'Todo junto',desc:'La línea completa: kit, esponjas, tapete y rizador. {AHORRO}'}
+};
+
+// Monograma: lo que ocupa el hueco de la foto mientras no hay foto.
+function monograma(sku){
+  if(sku==='KIT1') return `<div class="mg"><span class="lbl">Kit N°1 · diez brochas numeradas</span><span class="big">10</span><span class="lista"><span>estuche rígido</span><span>2 esponjas</span><span>mapa del rostro</span></span></div>`;
+  if(sku==='ESP4') return `<div class="mg"><span class="lbl">Esponjas</span><span class="big">×4</span><span class="lbl">crecen con agua</span></div>`;
+  if(sku==='LAV1') return `<div class="mg puntos"><span class="lbl">Tapete lavador · silicón</span><span class="big">1000</span><span class="lbl">lavadas y sigue</span></div>`;
+  if(sku==='RIZ1') return `<div class="mg"><span class="lbl">Rizador</span><svg class="arco" viewBox="0 0 100 40" aria-hidden="true"><path d="M4 36C18 8 40 2 50 2s32 6 46 34"/></svg><span class="big" style="align-self:flex-end">01</span><span class="lbl">acero · almohadilla suave</span></div>`;
+  return `<div class="mg"><span class="lbl">Sistema completo</span><span class="big">5<span style="font-size:.5em;letter-spacing:-.02em">/5</span></span><span class="lbl">las cinco piezas</span></div>`;
+}
+
+async function cargar(){
+  const {data}=await sb.from('productos').select('*').eq('activo',true).order('precio',{ascending:false});
+  PROD=data||[];
+  // El héroe (KIT1) va primero; el resto en el orden de la base.
+  const orden=[...PROD].sort((a,b)=>(a.sku==='KIT1'?-1:0)-(b.sku==='KIT1'?-1:0));
+  const sis=PROD.find(p=>p.sku==='SIS1');
+  const sueltas=PROD.filter(p=>p.sku!=='SIS1').reduce((a,p)=>a+Number(p.precio),0);
+  const ahorro=sis&&sueltas>sis.precio?`Sale ${money(sueltas-sis.precio)} menos que comprar las piezas por separado.`:'';
+  const n=orden.length;
+  $('#prods').innerHTML=orden.map((p,i)=>{
+    const c=COPY[p.sku]||{tag:'',desc:''};
+    const desc=c.desc.replace('{AHORRO}',ahorro).trim();
+    const [tit,...resto]=p.nombre.split(' · ');
+    const sub=resto.join(' · ');
+    const foto=FOTOS[p.sku]?`<img src="${esc(FOTOS[p.sku])}" alt="${esc(p.nombre)}" loading="lazy">`:monograma(p.sku);
+    return `<article class="pz${p.sku==='KIT1'?' heroe':''}" id="pz-${esc(p.sku)}">
+      <div class="idx"><span>${String(i+1).padStart(2,'0')}/${String(n).padStart(2,'0')}</span><span class="sku">${esc(p.sku)}</span></div>
+      <figure class="foto"><!-- FOTO: ${esc(p.sku)} · ${esc(p.nombre)} · cuadrada, fondo crema, sin logos ajenos. Se llena desde la constante FOTOS. -->${foto}</figure>
+      <div class="cuerpo">
+        ${c.tag?`<p class="kick">${esc(c.tag)}</p>`:''}
+        <h3>${esc(tit)}${sub?`<small>${esc(sub)}</small>`:''}</h3>
+        <p class="desc">${esc(desc)}</p>
+      </div>
+      <div class="compra">
+        <span class="precio">${money(p.precio)}<small>MXN</small></span>
+        <button class="btn${p.sku==='KIT1'?'':' linea'} chico" type="button" data-sku="${esc(p.sku)}">Agregar a la bolsa</button>
+      </div>
+    </article>`;
+  }).join('')||'<p class="vacio">La línea se está armando. Vuelve en un rato o escríbenos por WhatsApp.</p>';
+  document.querySelectorAll('.pz button[data-sku]').forEach(b=>b.onclick=()=>{bolsa[b.dataset.sku]=(bolsa[b.dataset.sku]||0)+1;pinta();abre();});
+}
+
+function pinta(){
+  const n=Object.values(bolsa).reduce((a,b)=>a+b,0);
+  $('#nCarrito').textContent=n;
+  let t=0;
+  $('#items').innerHTML=Object.entries(bolsa).map(([sku,q])=>{
+    const p=PROD.find(x=>x.sku===sku); if(!p) return '';
+    t+=p.precio*q;
+    const [tit,...resto]=p.nombre.split(' · ');
+    return `<div class="li">
+      <span class="q"><button type="button" data-menos="${esc(sku)}" aria-label="Quitar uno">−</button><span>${q}</span><button type="button" data-mas="${esc(sku)}" aria-label="Agregar uno">+</button></span>
+      <span class="nom">${esc(tit)}${resto.length?`<small>${esc(resto.join(' · '))}</small>`:''}</span>
+      <span><span class="imp">${money(p.precio*q)}</span><button class="x" type="button" data-q="${esc(sku)}">Quitar</button></span>
+    </div>`;
+  }).join('')||'<p class="vacio">Tu bolsa está vacía. El Kit N°1 es buen lugar para empezar.</p>';
+  $('#total').textContent=money(t);
+  document.querySelectorAll('.x').forEach(b=>b.onclick=()=>{delete bolsa[b.dataset.q];pinta();});
+  document.querySelectorAll('[data-mas]').forEach(b=>b.onclick=()=>{bolsa[b.dataset.mas]++;pinta();});
+  document.querySelectorAll('[data-menos]').forEach(b=>b.onclick=()=>{const k=b.dataset.menos;bolsa[k]--;if(bolsa[k]<1)delete bolsa[k];pinta();});
+}
+
+const abre=()=>{$('#panel').classList.add('on');document.body.style.overflow='hidden';};
+const cierra=()=>{$('#panel').classList.remove('on');document.body.style.overflow='';};
+$('#btnCarrito').onclick=()=>{pinta();abre();};
+$('#cerrar').onclick=cierra;
+$('#panel').onclick=e=>{if(e.target.id==='panel')cierra()};
+document.addEventListener('keydown',e=>{if(e.key==='Escape')cierra()});
+
+// Enlaces de WhatsApp fuera de la bolsa (garantía y pie) usan el mismo número.
+$('#waGarantia').href=`https://wa.me/${WA}?text=${encodeURIComponent('Hola Nixa, tengo una duda sobre la garantía.')}`;
+$('#waPie').href=`https://wa.me/${WA}`;
+
+$('#pedir').onclick=async()=>{
+  const nom=$('#nom').value.trim(), tel=$('#tel').value.trim(), dir=$('#dir').value.trim();
+  const items=Object.entries(bolsa);
+  const msg=$('#msgPedido');
+  if(!items.length||!nom||!tel){msg.className='msg err';msg.textContent='Falta tu nombre, tu WhatsApp o agregar algo a la bolsa.';return;}
+  msg.className='msg';msg.textContent='Preparando tu pedido…';
+  $('#pedir').disabled=true;
+  let total=0; const lineas=items.map(([sku,q])=>{const p=PROD.find(x=>x.sku===sku);total+=p.precio*q;return `${q} × ${p.nombre} — ${money(p.precio*q)}`;});
+  const {error}=await sb.from('pedidos').insert({canal:'Tienda Nixa',comprador:nom,sku:items.map(i=>i[0]).join('+'),cantidad:items.reduce((a,b)=>a+b[1],0),total,estado:'nuevo',datos:{telefono:tel,direccion:dir,items:Object.fromEntries(items)}});
+  const txt=encodeURIComponent(`Hola Nixa, quiero este pedido:\n\n${lineas.join('\n')}\n\nTotal: ${money(total)}\n\nNombre: ${nom}\nTeléfono: ${tel}\nDirección: ${dir}`);
+  const url=`https://wa.me/${WA}?text=${txt}`;
+  const win=window.open(url,'_blank'); if(!win) location.href=url;
+  $('#pedir').disabled=false;
+  msg.textContent=error?'Se abrió WhatsApp con tu pedido. Si no se abrió, escríbenos directo.':'Listo. Se abrió WhatsApp con tu pedido; ahí confirmamos pago y entrega.';
+};
+cargar();
+</script>
+</body>
+</html>
