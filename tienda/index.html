@@ -4,32 +4,32 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#F6F1EC">
-<meta name="description" content="nixa BEAUTY. Brochas numeradas por oficio, esponjas de maquillaje, tapete lavador de brochas y rizador de pestañas. Las armamos y las enviamos nosotros desde Guadalajara.">
-<title>nixa BEAUTY — Herramientas de belleza que sí duran</title>
+<meta name="description" content="nixa BEAUTY. Brochas de maquillaje numeradas por oficio, esponjas de maquillaje, tapete lavador de brochas y rizador de pestañas. Las armamos y las enviamos nosotros desde Guadalajara.">
+<title>nixa BEAUTY — Brochas y esponjas de maquillaje</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 /* =========================================================
    nixa BEAUTY · tienda
-   Identidad: lujo minimal de belleza. Crema de fondo, cocoa
-   para la tinta, burgundy como acento profundo, nude para los
-   filetes y las formas, dusty rose solo como forma.
-   Serif Cormorant Garamond para títulos y logotipo; Jost para
-   texto, navegación y etiquetas en versalitas espaciadas.
-   Reglas: cuerpo mínimo 17 px; nada por debajo de 13 px.
+   Marca de maquillaje. Crema de fondo, cocoa para la tinta,
+   burgundy en la franja fuerte y el botón principal, nude y
+   rosa para arcos, discos y manchas de polvo.
+   Cormorant Garamond para titulares y logotipo; Jost para
+   cuerpo, navegación y sobretítulos en versalitas espaciadas.
+   Cuerpo 17–19 px. Nada por debajo de 13 px.
    ========================================================= */
 :root{
-  --crema:#F6F1EC; --crema2:#FBF8F5; --nude:#E7D8CC; --nude2:#F0E7DF;
-  --rosa:#CFA59B; --cocoa:#6B422F; --cocoa2:#8A6350; --vino:#6A2C2F;
+  --crema:#F6F1EC; --crema2:#FBF8F5; --nude:#E7D8CC; --nude2:#F0E7DF; --nude3:#F3ECE6;
+  --rosa:#CFA59B; --rosa2:#E3C6BE; --cocoa:#6B422F; --cocoa2:#8A6350; --vino:#6A2C2F;
   --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
   --sans:"Jost","Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --pad:20px; --ancho:1200px;
+  --pad:22px; --ancho:1180px; --t:.22s;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;background:var(--crema);scroll-behavior:smooth}
-body{margin:0;background:var(--crema);color:var(--cocoa);font:400 17px/1.65 var(--sans);font-feature-settings:"lnum";-webkit-font-smoothing:antialiased;min-height:100dvh;overflow-x:hidden}
-h1,h2,h3,h4{margin:0;font-family:var(--serif);font-weight:400;letter-spacing:-.01em;line-height:1.08}
+body{margin:0;background:var(--crema);color:var(--cocoa);font:400 17px/1.7 var(--sans);font-feature-settings:"lnum";-webkit-font-smoothing:antialiased;min-height:100dvh;overflow-x:hidden}
+h1,h2,h3,h4{margin:0;font-family:var(--serif);font-weight:300;letter-spacing:-.005em;line-height:1.06;font-feature-settings:"lnum"}
 p,figure{margin:0}
 ol,ul{margin:0;padding:0;list-style:none}
 button,input,textarea{font:inherit;color:inherit}
@@ -40,283 +40,309 @@ em{font-style:italic;font-weight:400}
 .w{max-width:var(--ancho);margin:0 auto;padding:0 var(--pad)}
 :focus-visible{outline:1.5px solid var(--cocoa);outline-offset:4px}
 
-/* etiquetas en versalitas espaciadas: navegación, sobretítulos, botones */
-.eti{font:500 13px/1.4 var(--sans);letter-spacing:.26em;text-transform:uppercase;color:var(--cocoa2)}
-.eti.oscura{color:var(--cocoa)}
+/* sobretítulos y etiquetas: Jost 500, versalitas espaciadas */
+.eti{font:500 13px/1.5 var(--sans);letter-spacing:.28em;text-transform:uppercase;color:var(--cocoa2)}
 .oscuro .eti{color:var(--rosa)}
 .serif{font-family:var(--serif)}
-.centro{text-align:center}
-.lead{font-size:18px;line-height:1.6;color:var(--cocoa)}
+.lead{font-size:18px;line-height:1.7}
 .gris{color:var(--cocoa2)}
 
-/* logotipo y abanico */
-.logo{display:block;height:44px;width:auto;color:var(--cocoa)}
-.fan{fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;color:var(--cocoa)}
-.fan.chico{--sw1:3.4;--sw2:2.6}
+/* ilustraciones de línea: un solo grosor para toda la colección */
+.ilu{fill:none;stroke:currentColor;stroke-width:1.4px;stroke-linecap:round;stroke-linejoin:round;color:var(--cocoa)}
+.ilu *{vector-effect:non-scaling-stroke}
+.ilu .fina{stroke-width:.9px}
+.ilu .pelo{stroke-width:.8px}
+.ilu .banda{stroke-width:1.6px}
+/* la brocha de la marca, en una sola tinta */
+.brocha{fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round}
+.logo{display:block;color:var(--cocoa)}
+
+/* manchas de polvo: rubor pasado con brocha por el papel. Atmósfera, no ruido. */
+.polvo{position:absolute;pointer-events:none;z-index:0}
+.polvo.blob{border-radius:50%;background:radial-gradient(closest-side,rgba(207,165,155,.55),rgba(207,165,155,.22) 55%,rgba(207,165,155,0))}
+.polvo.nude{background:radial-gradient(closest-side,rgba(231,216,204,.9),rgba(231,216,204,.4) 55%,rgba(231,216,204,0))}
+.polvo svg{width:100%;height:100%;overflow:visible}
 
 /* botones: rectángulos, versalitas espaciadas */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:54px;padding:0 30px;border:1px solid var(--cocoa);background:var(--cocoa);color:var(--crema);font:500 14px/1.2 var(--sans);letter-spacing:.2em;text-transform:uppercase;border-radius:2px;text-decoration:none;text-align:center;transition:background .18s,color .18s,border-color .18s}
-.btn:hover{background:var(--vino);border-color:var(--vino)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:56px;padding:0 32px;border:1px solid var(--cocoa);background:var(--cocoa);color:var(--crema);font:500 13px/1.2 var(--sans);letter-spacing:.24em;text-transform:uppercase;border-radius:0;text-decoration:none;text-align:center;transition:background var(--t),color var(--t),border-color var(--t)}
+.btn:hover{background:var(--vino);border-color:var(--vino);color:var(--crema)}
 .btn.linea{background:transparent;color:var(--cocoa)}
-.btn.linea:hover{background:var(--nude2);border-color:var(--cocoa)}
+.btn.linea:hover{background:var(--nude2);border-color:var(--cocoa);color:var(--cocoa)}
+.btn.vino{background:var(--vino);border-color:var(--vino)}
+.btn.vino:hover{background:var(--cocoa);border-color:var(--cocoa)}
 .btn.claro{background:transparent;color:var(--crema);border-color:var(--crema)}
 .btn.claro:hover{background:var(--crema);color:var(--vino)}
 .btn.ancho{display:flex;width:100%}
 .btn[disabled]{opacity:.5;cursor:default}
-.mas{width:44px;height:44px;border:1px solid var(--cocoa);background:transparent;color:var(--cocoa);border-radius:2px;display:grid;place-items:center;padding:0;transition:background .18s,color .18s}
+.mas{width:44px;height:44px;border:1px solid var(--cocoa);background:transparent;color:var(--cocoa);border-radius:50%;display:grid;place-items:center;padding:0;transition:background var(--t),color var(--t)}
 .mas:hover{background:var(--cocoa);color:var(--crema)}
-.mas svg{width:16px;height:16px;stroke:currentColor;stroke-width:1.5;fill:none}
-.link{background:none;border:0;padding:6px 0;font:500 13px/1.4 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--cocoa);text-decoration:none;border-bottom:1px solid var(--rosa);cursor:pointer}
+.mas svg{width:14px;height:14px;stroke:currentColor;stroke-width:1.3;fill:none}
+.link{background:none;border:0;padding:6px 0;font:500 13px/1.5 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--cocoa);text-decoration:none;border-bottom:1px solid var(--rosa);cursor:pointer;transition:border-color var(--t)}
 .link:hover{border-bottom-color:var(--cocoa)}
 .msg{min-height:20px;font-size:16px;line-height:1.5;color:var(--cocoa2);margin-top:12px}
 .msg.err{color:var(--vino)}
 
 /* campos: subrayado nude, sin cajas */
-.campo{display:block;margin-bottom:18px;min-width:0}
-.campo>span{display:block;font:500 13px/1.4 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--cocoa2)}
-.campo input,.campo textarea{width:100%;border:0;border-bottom:1px solid var(--nude);border-radius:0;background:transparent;padding:10px 0 9px;font:400 17px/1.4 var(--sans);color:var(--cocoa);outline:none;-webkit-appearance:none;appearance:none;margin:0;display:block}
+.campo{display:block;margin-bottom:20px;min-width:0}
+.campo>span{display:block;font:500 13px/1.5 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--cocoa2)}
+.campo input,.campo textarea{width:100%;border:0;border-bottom:1px solid var(--nude);border-radius:0;background:transparent;padding:10px 0 9px;font:400 17px/1.4 var(--sans);color:var(--cocoa);outline:none;-webkit-appearance:none;appearance:none;margin:0;display:block;transition:border-color var(--t)}
 .campo textarea{min-height:76px;resize:vertical}
-.campo input::placeholder,.campo textarea::placeholder{color:var(--cocoa2);opacity:.7}
+.campo input::placeholder,.campo textarea::placeholder{color:var(--cocoa2);opacity:.65}
 .campo input:focus,.campo textarea:focus{border-bottom-color:var(--cocoa)}
 
-/* cabeceras de sección: centradas y serenas */
-.cab{text-align:center;max-width:640px;margin:0 auto 40px}
-.cab .eti{display:block;margin-bottom:16px}
-.cab h2{font-size:clamp(38px,9vw,56px);font-weight:400}
-.cab p{margin-top:16px;font-size:17px;color:var(--cocoa2)}
-section{padding:64px 0}
+/* cabeceras de sección */
+.cab{text-align:center;max-width:680px;margin:0 auto 48px}
+.cab .eti{display:block;margin-bottom:18px}
+.cab h2{font-size:clamp(40px,9.6vw,64px)}
+.cab p:not(.eti){margin-top:18px;font-size:17px;line-height:1.7;color:var(--cocoa2);max-width:46ch;margin-left:auto;margin-right:auto}
+section{padding:72px 0;position:relative}
 .filete{border:0;border-top:1px solid var(--nude);margin:0}
 
 /* =========================================================
-   BARRA SUPERIOR · navegación, logotipo al centro, bolsa
+   BARRA SUPERIOR
    ========================================================= */
-.top{position:sticky;top:0;z-index:5;background:rgba(246,241,236,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--nude);padding:calc(8px + env(safe-area-inset-top)) 0 8px}
+.top{position:sticky;top:0;z-index:5;background:rgba(246,241,236,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--nude);padding:calc(12px + env(safe-area-inset-top)) 0 12px}
 .top .w{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px}
-.top nav{display:none;gap:30px}
-.top nav a,.menu-btn{font:500 13px/1.4 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--cocoa);text-decoration:none;padding:6px 0;border-bottom:1px solid transparent;background:none;border-top:0;border-left:0;border-right:0}
+.top nav{display:none;gap:26px;white-space:nowrap}
+.top nav a,.menu-btn{font:500 13px/1.5 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--cocoa);text-decoration:none;padding:6px 0;border-bottom:1px solid transparent;background:none;border-top:0;border-left:0;border-right:0;transition:border-color var(--t)}
 .top nav a:hover{border-bottom-color:var(--rosa)}
 .menu-btn{display:inline-flex;align-items:center;gap:10px;justify-self:start;cursor:pointer}
 .menu-btn svg{width:20px;height:14px;stroke:currentColor;stroke-width:1.3;fill:none}
 .top .logo-a{justify-self:center;display:block}
-.bolsa{justify-self:end;display:inline-flex;align-items:center;gap:8px;background:none;border:0;padding:6px 0;font:500 13px/1.4 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--cocoa)}
+.top .logo{height:48px;width:auto}
+.bolsa{justify-self:end;display:inline-flex;align-items:center;gap:8px;background:none;border:0;padding:6px 0;font:500 13px/1.5 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--cocoa)}
 .bolsa svg{width:20px;height:22px;stroke:currentColor;stroke-width:1.3;fill:none}
 .bolsa .cnt{min-width:1.4em;text-align:left;letter-spacing:.05em}
 .bolsa .txt{display:none}
 .menu{display:none;border-bottom:1px solid var(--nude);background:var(--crema)}
 .menu.on{display:block}
-.menu a{display:block;padding:14px var(--pad);font:500 13px/1.4 var(--sans);letter-spacing:.22em;text-transform:uppercase;text-decoration:none;border-top:1px solid var(--nude2)}
+.menu a{display:block;padding:16px var(--pad);font:500 13px/1.5 var(--sans);letter-spacing:.24em;text-transform:uppercase;text-decoration:none;border-top:1px solid var(--nude2)}
 
 /* =========================================================
    PORTADA
    ========================================================= */
-.portada{padding:44px 0 56px;position:relative;overflow:hidden}
-.portada > .w{display:grid;gap:44px}
-.portada .texto .eti{display:block;margin-bottom:22px}
-.portada h1{font-size:clamp(54px,14vw,72px);font-weight:300;line-height:.98;max-width:12ch}
-.portada h1 em{font-weight:400}
-.portada .lead{margin-top:24px;max-width:36ch}
-.portada .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.portada{padding:52px 0 64px;overflow:hidden}
+.portada > .w{display:grid;gap:52px;position:relative;z-index:1}
+.portada .texto .eti{display:block;margin-bottom:24px}
+.portada h1{font-size:clamp(56px,14.5vw,76px);line-height:.98;max-width:11ch}
+.portada .lead{margin-top:26px;max-width:38ch;color:var(--cocoa)}
+.portada .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
 .portada .cta .btn{flex:1 1 100%}
-/* la escena: producto sobre arco; hoy sin foto, el abanico y las formas */
-.escena{position:relative;width:min(100%,400px);margin:0 auto;padding-bottom:40px}
-.escena .arco{position:relative;aspect-ratio:4/5;background:var(--nude);border-radius:999px 999px 3px 3px;display:grid;place-items:center;overflow:hidden;z-index:1}
+.portada .nota{margin-top:22px;font-size:15px;color:var(--cocoa2);letter-spacing:.02em}
+/* la escena: brocha sobre arco nude, disco rosa, anillo y una mancha de rubor */
+.escena{position:relative;width:min(100%,400px);margin:0 auto}
+.escena .arco{position:relative;aspect-ratio:4/5;background:var(--nude);border-radius:999px 999px 4px 4px;display:grid;place-items:center;overflow:hidden;z-index:1}
 .escena .arco img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2}
-.escena .arco .fan{width:44%;height:auto;--sw1:2.2;--sw2:1.5}
-.escena .disco{position:absolute;left:-12%;bottom:8%;width:52%;aspect-ratio:1;border-radius:50%;background:var(--rosa);z-index:0;opacity:.85}
-.escena .anillo{position:absolute;right:-6%;top:6%;width:34%;aspect-ratio:1;border-radius:50%;border:1px solid var(--rosa);z-index:2}
-.escena figcaption{position:relative;z-index:2;margin-top:22px;text-align:center}
+.escena .arco .brocha{width:55%;max-width:220px;height:auto;color:var(--cocoa);stroke-width:2}
+.escena .disco{position:absolute;left:-14%;bottom:6%;width:54%;aspect-ratio:1;border-radius:50%;background:var(--rosa);z-index:0;opacity:.9}
+.escena .anillo{position:absolute;right:-8%;top:8%;width:36%;aspect-ratio:1;border-radius:50%;border:1px solid var(--rosa);z-index:2}
+.escena .polvo.blob{left:-30%;top:-14%;width:90%;aspect-ratio:1;opacity:.9}
+.escena .polvo.trazo{right:-24%;bottom:-8%;width:70%;height:34%;z-index:2}
+.escena figcaption{position:relative;z-index:2;margin-top:24px;text-align:center}
 .escena figcaption .eti{display:block}
-.escena figcaption .serif{display:block;font-size:24px;line-height:1.2;margin-top:8px}
+.escena figcaption .serif{display:block;font-size:24px;line-height:1.25;margin-top:8px}
 
 /* =========================================================
    ARGUMENTOS · franja de cuatro
    ========================================================= */
 .args{padding:0}
 .args ul{display:grid;grid-template-columns:1fr;border-top:1px solid var(--nude)}
-.args li{display:grid;grid-template-columns:34px 1fr;gap:0 18px;align-items:start;padding:22px 0;border-bottom:1px solid var(--nude)}
-.args .ico{width:34px;height:34px;margin-top:2px;grid-row:1/3;stroke:var(--cocoa);stroke-width:1.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
-.args h3{font:500 13px/1.4 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--cocoa)}
-.args p{margin-top:6px;font-size:17px;line-height:1.55;color:var(--cocoa2)}
+.args li{display:grid;grid-template-columns:36px 1fr;gap:0 20px;align-items:start;padding:24px 0;border-bottom:1px solid var(--nude)}
+.args .ico{width:36px;height:36px;margin-top:2px;grid-row:1/3;stroke:var(--cocoa);stroke-width:1.1;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.args h3{font:500 13px/1.5 var(--sans);letter-spacing:.26em;text-transform:uppercase;color:var(--cocoa)}
+.args p{margin-top:6px;font-size:17px;line-height:1.6;color:var(--cocoa2)}
 
 /* =========================================================
    LA COLECCIÓN · tarjetas limpias
    ========================================================= */
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:28px 16px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:32px 16px}
 .tar{display:flex;flex-direction:column;min-width:0}
-.tar .lam{position:relative;aspect-ratio:4/5;background:var(--nude2);border-radius:3px;display:grid;place-items:center;overflow:hidden;cursor:pointer;border:0;padding:0;width:100%;transition:background .18s}
-.tar .lam:hover{background:var(--nude)}
+.tar .lam{position:relative;aspect-ratio:4/5;background:var(--nude3);border-radius:3px;display:grid;place-items:center;overflow:hidden;cursor:pointer;border:0;padding:0;width:100%;transition:background var(--t)}
+.tar .lam:hover{background:var(--nude2)}
+.tar .lam:before{content:"";position:absolute;left:50%;top:54%;width:74%;aspect-ratio:1;border-radius:50%;background:var(--nude2);transform:translate(-50%,-50%);transition:background var(--t)}
+.tar .lam:hover:before{background:var(--nude)}
 .tar .lam img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2}
-.tar .lam .ico{width:46%;height:auto;stroke:var(--cocoa);stroke-width:1.3;fill:none;stroke-linecap:round;stroke-linejoin:round}
-.tar .lam .ico.fan{stroke-width:2.2}
+.tar .lam .ilu{position:relative;z-index:1;width:64%;height:auto;transition:transform .3s}
+.tar .lam:hover .ilu{transform:translateY(-3px)}
 .tar.destacada{grid-column:span 2}
 .tar.destacada .lam{aspect-ratio:16/10}
-.tar.destacada .lam .ico{width:26%}
-.tar .lam .sello{position:absolute;top:12px;left:12px;font:500 13px/1.4 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--vino)}
-.tar .cuerpo{padding:16px 0 0;display:flex;flex-direction:column;flex:1}
-.tar h3{font-size:24px;line-height:1.12}
-.tar h3 button{background:none;border:0;padding:0;font:inherit;color:inherit;text-align:left;cursor:pointer}
+.tar.destacada .lam .ilu{width:50%}
+.tar.destacada .lam:before{width:54%}
+.tar .lam .sello{position:absolute;top:14px;left:14px;z-index:2;font:500 13px/1.5 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--vino)}
+.tar .cuerpo{padding:18px 0 0;display:flex;flex-direction:column;flex:1}
+.tar h3{font-size:25px;line-height:1.12;font-weight:400}
+.tar h3 button{background:none;border:0;padding:0;font:inherit;color:inherit;text-align:left;cursor:pointer;transition:color var(--t)}
 .tar h3 button:hover{color:var(--vino)}
-.tar .sub{margin-top:6px;font-size:16px;line-height:1.45;color:var(--cocoa2)}
+.tar .sub{margin-top:6px;font-size:16px;line-height:1.5;color:var(--cocoa2)}
 .tar .pie{margin-top:auto;padding-top:14px;display:flex;align-items:center;justify-content:space-between;gap:10px}
-.tar .precio{font:400 20px/1 var(--sans);color:var(--cocoa);font-variant-numeric:tabular-nums}
-.tar .precio small{font-size:13px;letter-spacing:.1em;color:var(--cocoa2);margin-left:5px}
+.tar .precio{font:400 19px/1 var(--sans);color:var(--cocoa);font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.tar .precio small{font-size:13px;letter-spacing:.12em;color:var(--cocoa2);margin-left:6px}
 .vacio{padding:24px 0;font-size:17px;color:var(--cocoa2);text-align:center;grid-column:1/-1}
 
 /* =========================================================
-   LAS DIEZ BROCHAS · franja burgundy
+   EL RITUAL · las diez brochas, franja burgundy
    ========================================================= */
-.diez{background:var(--vino);color:var(--crema);padding:72px 0}
-.diez .cab h2{color:var(--crema)}
-.diez .cab p{color:var(--nude)}
-.diez ol{display:grid;grid-template-columns:1fr 1fr;gap:0 24px;border-top:1px solid rgba(231,216,204,.28)}
-.diez li{padding:20px 0 22px;border-bottom:1px solid rgba(231,216,204,.22);min-width:0}
-.diez .no{display:block;font:500 13px/1.4 var(--sans);letter-spacing:.26em;color:var(--rosa)}
-.diez ol b{display:block;font:400 26px/1.1 var(--serif);margin-top:8px;color:var(--crema)}
-.diez small{display:block;font-size:15px;line-height:1.5;color:var(--nude);margin-top:6px}
-.diez .lectura{margin:40px auto 0;max-width:52ch;text-align:center;font-size:18px;line-height:1.65;color:var(--nude)}
-.diez .lectura b{display:block;font:400 26px/1.2 var(--serif);color:var(--crema);margin-bottom:8px}
-.diez .acciones{display:flex;justify-content:center;margin-top:32px}
-.diez .tira{position:relative;margin-top:48px;min-height:140px;border-top:1px solid rgba(231,216,204,.28);display:flex;justify-content:center;align-items:center;gap:26px;overflow:hidden;padding-top:28px}
-.diez .tira img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2}
-.diez .tira .fan{color:var(--rosa);width:64px;height:auto;--sw1:2.4;--sw2:1.6;opacity:.9}
-.diez .tira .fan:nth-child(even){width:44px;opacity:.55}
+.ritual{background:var(--vino);color:var(--crema);padding:80px 0}
+.ritual .cab h2{color:var(--crema)}
+.ritual .cab p{color:var(--nude)}
+.ritual .grupo{margin-top:8px}
+.ritual .grupo+.grupo{margin-top:40px}
+.ritual .grupo>.eti{display:flex;align-items:center;gap:16px;margin-bottom:6px}
+.ritual .grupo>.eti:after{content:"";flex:1;border-top:1px solid rgba(231,216,204,.28)}
+.ritual ol{display:grid;grid-template-columns:1fr 1fr;gap:0 24px}
+.ritual li{padding:22px 0 24px;border-bottom:1px solid rgba(231,216,204,.22);min-width:0}
+.ritual .cabeza{width:30px;height:40px;color:var(--rosa);stroke:currentColor;fill:none;stroke-width:1.1;stroke-linecap:round;stroke-linejoin:round;margin-bottom:12px}
+.ritual .cabeza .pelo{stroke-width:.7}
+.ritual .no{display:block;font:500 13px/1.5 var(--sans);letter-spacing:.28em;color:var(--rosa)}
+.ritual ol b{display:block;font:400 26px/1.1 var(--serif);margin-top:6px;color:var(--crema)}
+.ritual small{display:block;font-size:15px;line-height:1.55;color:var(--nude);margin-top:6px}
+.ritual .lectura{margin:48px auto 0;max-width:54ch;text-align:center;font-size:18px;line-height:1.7;color:var(--nude)}
+.ritual .lectura b{display:block;font:300 28px/1.25 var(--serif);color:var(--crema);margin-bottom:10px}
+.ritual .acciones{display:flex;justify-content:center;margin-top:32px}
 
 /* =========================================================
    POR QUÉ NIXA · razones y garantía
    ========================================================= */
-.porque .w{display:grid;gap:44px}
-.razones li{padding:26px 0;border-top:1px solid var(--nude)}
+.porque .w{display:grid;gap:48px}
+.razones li{padding:28px 0;border-top:1px solid var(--nude)}
 .razones li:last-child{border-bottom:1px solid var(--nude)}
-.razones h3{font-size:28px;font-weight:400}
-.razones p{margin-top:10px;font-size:17px;line-height:1.6;color:var(--cocoa2);max-width:52ch}
-.garantia{border:1px solid var(--nude);background:var(--crema2);border-radius:3px;padding:36px 28px;text-align:center;position:relative;overflow:hidden}
-.garantia:before{content:"";position:absolute;left:50%;top:-140px;width:280px;height:280px;border-radius:50%;background:var(--nude2);transform:translateX(-50%);z-index:0}
+.razones h3{font-size:30px;font-weight:400}
+.razones p{margin-top:10px;font-size:17px;line-height:1.7;color:var(--cocoa2);max-width:54ch}
+.garantia{border:1px solid var(--nude);background:var(--crema2);border-radius:3px;padding:40px 28px;text-align:center;position:relative;overflow:hidden}
+.garantia:before{content:"";position:absolute;left:50%;top:-150px;width:300px;height:300px;border-radius:50%;background:var(--nude2);transform:translateX(-50%);z-index:0}
 .garantia>*{position:relative;z-index:1}
 .garantia .eti{display:block}
-.garantia .n{font:300 clamp(96px,28vw,140px)/1 var(--serif);letter-spacing:-.03em;margin-top:14px;color:var(--cocoa)}
-.garantia .n small{display:block;font:500 13px/1.4 var(--sans);letter-spacing:.3em;text-transform:uppercase;color:var(--cocoa2);margin-top:2px}
-.garantia .txt{margin:18px auto 0;max-width:34ch;font-size:17px;line-height:1.6}
+.garantia .n{font:300 clamp(100px,28vw,144px)/1 var(--serif);letter-spacing:-.03em;margin-top:14px;color:var(--cocoa)}
+.garantia .n small{display:block;font:500 13px/1.5 var(--sans);letter-spacing:.32em;text-transform:uppercase;color:var(--cocoa2);margin-top:2px}
+.garantia .txt{margin:20px auto 0;max-width:34ch;font-size:17px;line-height:1.7}
 .garantia .txt+.txt{margin-top:12px}
-.garantia .btn{margin-top:26px;padding:0 22px;letter-spacing:.16em}
-.origen{text-align:center;max-width:620px;margin:0 auto;padding-top:8px}
-.origen .eti{display:block;margin-bottom:14px}
-.origen .txt{font:400 clamp(24px,5.6vw,30px)/1.3 var(--serif)}
-.origen .txt em{font-weight:400}
+.garantia .btn{margin-top:28px;padding:0 22px;letter-spacing:.18em}
+.origen{text-align:center;max-width:640px;margin:0 auto;padding-top:8px}
+.origen .eti{display:block;margin-bottom:16px}
+.origen .txt{font:300 clamp(25px,5.8vw,32px)/1.3 var(--serif)}
 
 /* =========================================================
    QUIÉNES SOMOS
    ========================================================= */
 .somos{padding-top:0}
-.somos .marco{border-top:1px solid var(--nude);padding-top:56px;text-align:center;max-width:680px;margin:0 auto}
-.somos .eti{display:block;margin-bottom:18px}
-.somos .txt{font-size:18px;line-height:1.7}
+.somos .marco{border-top:1px solid var(--nude);padding-top:64px;text-align:center;max-width:700px;margin:0 auto;position:relative}
+.somos .eti{display:block;margin-bottom:20px}
+.somos .txt{font-size:18px;line-height:1.75}
 .somos .txt+.txt{margin-top:16px}
-.somos .txt.serif{font-size:clamp(24px,5.4vw,30px);line-height:1.3;font-weight:400}
-.somos .firma{margin-top:28px;font:400 26px/1.1 var(--serif)}
-.somos .firma span{display:block;font:500 13px/1.4 var(--sans);letter-spacing:.26em;text-transform:uppercase;color:var(--cocoa2);margin-top:8px}
+.somos .txt.serif{font-size:clamp(25px,5.6vw,32px);line-height:1.3;font-weight:300}
+.somos .firma{margin-top:30px;font:400 28px/1.1 var(--serif)}
+.somos .firma span{display:block;font:500 13px/1.5 var(--sans);letter-spacing:.28em;text-transform:uppercase;color:var(--cocoa2);margin-top:10px}
 
 /* =========================================================
    PIE
    ========================================================= */
-footer{border-top:1px solid var(--nude);padding:56px 0 calc(96px + env(safe-area-inset-bottom));text-align:center}
-footer .logo{height:76px;margin:0 auto}
-footer .tag{margin:18px auto 0;font-size:16px;color:var(--cocoa2);max-width:32ch}
-footer .cols{display:grid;grid-template-columns:1fr;gap:26px;margin-top:40px;font-size:16px;line-height:1.6}
-footer .cols b{display:block;font:500 13px/1.4 var(--sans);letter-spacing:.26em;text-transform:uppercase;color:var(--cocoa2);margin-bottom:8px}
+footer{border-top:1px solid var(--nude);padding:64px 0 calc(100px + env(safe-area-inset-bottom));text-align:center;position:relative;overflow:hidden}
+footer .w{position:relative;z-index:1}
+footer .polvo.blob{left:50%;top:-10px;width:420px;height:420px;transform:translateX(-50%);opacity:.7}
+footer .logo{height:150px;width:auto;margin:0 auto}
+footer .tag{margin:22px auto 0;font-size:16px;color:var(--cocoa2);max-width:34ch;line-height:1.6}
+footer .cols{display:grid;grid-template-columns:1fr;gap:28px;margin-top:44px;font-size:16px;line-height:1.7}
+footer .cols b{display:block;font:500 13px/1.5 var(--sans);letter-spacing:.28em;text-transform:uppercase;color:var(--cocoa2);margin-bottom:8px}
 footer .cols a{text-decoration:none;border-bottom:1px solid var(--rosa)}
-footer .pie{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;border-top:1px solid var(--nude);margin-top:40px;padding-top:18px;font-size:14px;color:var(--cocoa2)}
+footer .pie{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;border-top:1px solid var(--nude);margin-top:44px;padding-top:20px;font-size:14px;color:var(--cocoa2);letter-spacing:.04em}
 
 /* =========================================================
    FICHA DE PRODUCTO · vista completa
    ========================================================= */
-.ficha{position:fixed;inset:0;z-index:60;background:var(--crema);overflow:auto;visibility:hidden;opacity:0;transition:opacity .2s,visibility 0s .2s;-webkit-overflow-scrolling:touch}
-.ficha.on{visibility:visible;opacity:1;transition:opacity .2s}
+.ficha{position:fixed;inset:0;z-index:60;background:var(--crema);overflow:auto;visibility:hidden;opacity:0;transition:opacity var(--t),visibility 0s var(--t);-webkit-overflow-scrolling:touch}
+.ficha.on{visibility:visible;opacity:1;transition:opacity var(--t)}
 .ficha .top{position:sticky;top:0}
-.ficha .volver{justify-self:start;display:inline-flex;align-items:center;gap:10px;background:none;border:0;padding:6px 0;font:500 13px/1.4 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--cocoa)}
+.ficha .volver{justify-self:start;display:inline-flex;align-items:center;gap:10px;background:none;border:0;padding:6px 0;font:500 13px/1.5 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--cocoa)}
 .ficha .volver svg{width:18px;height:12px;stroke:currentColor;stroke-width:1.3;fill:none}
-.ficha .cuerpo{padding:36px 0 calc(72px + env(safe-area-inset-bottom))}
-.ficha .cuerpo .w{display:grid;gap:32px}
-.ficha .lam{position:relative;aspect-ratio:4/5;background:var(--nude2);border-radius:999px 999px 3px 3px;display:grid;place-items:center;overflow:hidden;width:min(100%,460px);margin:0 auto}
+.ficha .cuerpo{padding:40px 0 calc(80px + env(safe-area-inset-bottom))}
+.ficha .cuerpo .w{display:grid;gap:36px}
+.ficha .escena-f{position:relative;width:min(100%,460px);margin:0 auto}
+.ficha .lam{position:relative;aspect-ratio:4/5;background:var(--nude2);border-radius:999px 999px 4px 4px;display:grid;place-items:center;overflow:hidden;z-index:1}
 .ficha .lam img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2}
-.ficha .lam .ico{width:44%;height:auto;stroke:var(--cocoa);stroke-width:1.1;fill:none;stroke-linecap:round;stroke-linejoin:round}
-.ficha .lam .ico.fan{stroke-width:2}
-.ficha .info .eti{display:block;margin-bottom:14px}
-.ficha h2{font-size:clamp(38px,9vw,56px);line-height:1.02}
-.ficha .precio{margin-top:16px;font:400 24px/1 var(--sans);font-variant-numeric:tabular-nums}
-.ficha .precio small{font-size:13px;letter-spacing:.1em;color:var(--cocoa2);margin-left:6px}
-.ficha .desc{margin-top:22px;font-size:17px;line-height:1.65;max-width:48ch}
-.ficha .acciones{display:grid;gap:10px;margin-top:28px}
-.ficha .nota{margin-top:14px;font-size:16px;color:var(--cocoa2)}
-.ficha .detalles{margin-top:48px;border-top:1px solid var(--nude);display:grid;grid-template-columns:1fr}
-.ficha .detalles>div{padding:26px 0;border-bottom:1px solid var(--nude)}
-.ficha .detalles h4{font:500 13px/1.4 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--cocoa2)}
+.ficha .lam:before{content:"";position:absolute;left:50%;top:56%;width:78%;aspect-ratio:1;border-radius:50%;background:var(--nude);transform:translate(-50%,-50%)}
+.ficha .lam .ilu{position:relative;z-index:1;width:60%;height:auto}
+.ficha .escena-f .polvo.blob{right:-22%;top:-8%;width:70%;aspect-ratio:1;z-index:0}
+.ficha .escena-f .disco{position:absolute;left:-10%;bottom:10%;width:34%;aspect-ratio:1;border-radius:50%;border:1px solid var(--rosa);z-index:2}
+.ficha .info .eti{display:block;margin-bottom:16px}
+.ficha h2{font-size:clamp(40px,9.6vw,60px);line-height:1.02}
+.ficha .precio{margin-top:18px;font:400 24px/1 var(--sans);font-variant-numeric:tabular-nums}
+.ficha .precio small{font-size:13px;letter-spacing:.12em;color:var(--cocoa2);margin-left:6px}
+.ficha .desc{margin-top:24px;font-size:17px;line-height:1.75;max-width:48ch}
+.ficha .acciones{display:grid;gap:10px;margin-top:30px}
+.ficha .nota{margin-top:16px;font-size:16px;color:var(--cocoa2);line-height:1.6}
+.ficha .detalles{margin-top:52px;border-top:1px solid var(--nude);display:grid;grid-template-columns:1fr}
+.ficha .detalles>div{padding:28px 0;border-bottom:1px solid var(--nude)}
+.ficha .detalles h4{font:500 13px/1.5 var(--sans);letter-spacing:.26em;text-transform:uppercase;color:var(--cocoa2)}
 .ficha .detalles ul{margin-top:12px}
-.ficha .detalles li{font-size:17px;line-height:1.55;padding:5px 0}
-.ficha .detalles p{margin-top:12px;font-size:17px;line-height:1.6}
-.ficha .brochas{grid-column:1/-1;border-bottom:1px solid var(--nude);padding:26px 0}
-.ficha .brochas ol{display:grid;grid-template-columns:1fr 1fr;gap:14px 20px;margin-top:16px}
+.ficha .detalles li{font-size:17px;line-height:1.6;padding:5px 0}
+.ficha .detalles p{margin-top:12px;font-size:17px;line-height:1.7}
+.ficha .brochas{grid-column:1/-1;border-bottom:1px solid var(--nude);padding:28px 0}
+.ficha .brochas ol{display:grid;grid-template-columns:1fr 1fr;gap:16px 20px;margin-top:18px}
 .ficha .brochas li{font-size:17px;line-height:1.4}
-.ficha .brochas li .no{display:block;font:500 13px/1.4 var(--sans);letter-spacing:.24em;color:var(--cocoa2)}
+.ficha .brochas li .no{display:block;font:500 13px/1.5 var(--sans);letter-spacing:.26em;color:var(--cocoa2)}
 .ficha .brochas li b{font:400 22px/1.15 var(--serif)}
 .ficha .brochas li small{display:block;font-size:15px;color:var(--cocoa2)}
 
 /* =========================================================
    BOLSA · panel lateral
    ========================================================= */
-.panel{position:fixed;inset:0;z-index:70;background:rgba(107,66,47,.32);visibility:hidden;opacity:0;transition:opacity .2s,visibility 0s .2s}
-.panel.on{visibility:visible;opacity:1;transition:opacity .2s}
-.box{position:absolute;right:0;top:0;bottom:0;width:min(440px,100%);background:var(--crema);border-left:1px solid var(--nude);display:flex;flex-direction:column;transform:translateX(24px);transition:transform .22s ease-out;overflow:hidden}
+.panel{position:fixed;inset:0;z-index:70;background:rgba(107,66,47,.32);visibility:hidden;opacity:0;transition:opacity var(--t),visibility 0s var(--t)}
+.panel.on{visibility:visible;opacity:1;transition:opacity var(--t)}
+.box{position:absolute;right:0;top:0;bottom:0;width:min(460px,100%);background:var(--crema);border-left:1px solid var(--nude);display:flex;flex-direction:column;transform:translateX(24px);transition:transform .26s ease-out;overflow:hidden}
 .panel.on .box{transform:none}
-.box .cabeza{padding:calc(18px + env(safe-area-inset-top)) 24px 16px;border-bottom:1px solid var(--nude);display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
-.box .cabeza h2{font-size:36px;line-height:1}
+.box .cabeza{padding:calc(20px + env(safe-area-inset-top)) 26px 18px;border-bottom:1px solid var(--nude);display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.box .cabeza h2{font-size:38px;line-height:1;font-weight:400}
 .box .cabeza .eti{display:block;margin-bottom:10px}
-.cerrar{background:none;border:0;padding:6px 0;font:500 13px/1.4 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--cocoa);border-bottom:1px solid var(--rosa);cursor:pointer;white-space:nowrap}
-.box .cuerpo{flex:1;overflow:auto;padding:6px 24px calc(28px + env(safe-area-inset-bottom))}
-.li{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:16px 0;border-bottom:1px solid var(--nude)}
-.li .q{display:inline-flex;align-items:center;border:1px solid var(--nude);border-radius:2px}
+.cerrar{background:none;border:0;padding:6px 0;font:500 13px/1.5 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--cocoa);border-bottom:1px solid var(--rosa);cursor:pointer;white-space:nowrap;transition:border-color var(--t)}
+.cerrar:hover{border-bottom-color:var(--cocoa)}
+.box .cuerpo{flex:1;overflow:auto;padding:6px 26px calc(30px + env(safe-area-inset-bottom))}
+.li{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:18px 0;border-bottom:1px solid var(--nude)}
+.li .q{display:inline-flex;align-items:center;border:1px solid var(--nude)}
 .li .q button{width:32px;height:34px;border:0;background:transparent;font:400 17px/1 var(--sans);padding:0;color:var(--cocoa)}
 .li .q span{font:400 15px/1 var(--sans);min-width:28px;text-align:center;height:34px;display:grid;place-items:center;border-left:1px solid var(--nude);border-right:1px solid var(--nude)}
 .li .nom{font:400 20px/1.2 var(--serif);min-width:0}
 .li .nom small{display:block;font:400 14px/1.5 var(--sans);color:var(--cocoa2);margin-top:3px}
 .li .imp{font:400 17px/1 var(--sans);font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right}
-.li .x{display:block;margin:8px 0 0 auto;background:none;border:0;padding:0;font:400 13px/1.4 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--cocoa2);border-bottom:1px solid var(--nude)}
+.li .x{display:block;margin:8px 0 0 auto;background:none;border:0;padding:0;font:400 13px/1.5 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--cocoa2);border-bottom:1px solid var(--nude)}
 .box .vacio{padding:32px 0 16px;text-align:left}
-.tot{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--cocoa);margin-top:8px;padding:18px 0 8px}
-.tot .l{font:500 13px/1.4 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--cocoa2)}
-.tot .v{font:400 40px/1 var(--serif);font-variant-numeric:tabular-nums}
+.tot{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--cocoa);margin-top:8px;padding:20px 0 8px}
+.tot .l{font:500 13px/1.5 var(--sans);letter-spacing:.26em;text-transform:uppercase;color:var(--cocoa2)}
+.tot .v{font:300 42px/1 var(--serif);font-variant-numeric:tabular-nums}
 .tot small{display:block;font-size:14px;color:var(--cocoa2);margin-top:6px}
-.datos{margin-top:26px}
-.datos .eti{display:block;margin-bottom:18px}
-.nota{font-size:16px;line-height:1.5;color:var(--cocoa2);margin-top:14px}
+.datos{margin-top:28px}
+.datos .eti{display:block;margin-bottom:20px}
+.nota{font-size:16px;line-height:1.6;color:var(--cocoa2);margin-top:14px}
 
 /* =========================================================
-   ¿TE AYUDO A ELEGIR? · tarjeta guiada
+   ¿TE AYUDO A ELEGIR? · tres preguntas, una recomendación
    ========================================================= */
-.ayuda-btn{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:40;min-height:50px;padding:0 20px;border:1px solid var(--cocoa);background:var(--crema);color:var(--cocoa);font:500 13px/1.4 var(--sans);letter-spacing:.2em;text-transform:uppercase;border-radius:2px;box-shadow:0 10px 30px rgba(107,66,47,.10)}
+.ayuda-btn{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:40;min-height:52px;padding:0 22px;border:1px solid var(--cocoa);background:var(--crema);color:var(--cocoa);font:500 13px/1.5 var(--sans);letter-spacing:.22em;text-transform:uppercase;box-shadow:0 12px 32px rgba(107,66,47,.12);transition:background var(--t),color var(--t)}
 .ayuda-btn:hover{background:var(--cocoa);color:var(--crema)}
-.ayuda{position:fixed;inset:0;z-index:80;background:rgba(107,66,47,.32);visibility:hidden;opacity:0;transition:opacity .2s,visibility 0s .2s;display:grid;align-items:end}
-.ayuda.on{visibility:visible;opacity:1;transition:opacity .2s}
-.hoja{position:relative;width:100%;max-height:88dvh;overflow:auto;background:var(--crema);border-top:1px solid var(--nude);padding:22px var(--pad) calc(26px + env(safe-area-inset-bottom));transform:translateY(24px);transition:transform .22s ease-out}
+.ayuda{position:fixed;inset:0;z-index:80;background:rgba(107,66,47,.32);visibility:hidden;opacity:0;transition:opacity var(--t),visibility 0s var(--t);display:grid;align-items:end}
+.ayuda.on{visibility:visible;opacity:1;transition:opacity var(--t)}
+.hoja{position:relative;width:100%;max-height:90dvh;overflow:auto;background:var(--crema);border-top:1px solid var(--nude);padding:24px var(--pad) calc(28px + env(safe-area-inset-bottom));transform:translateY(24px);transition:transform .26s ease-out}
 .ayuda.on .hoja{transform:none}
-.hoja .arriba{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:22px}
-.hoja .paso{font:500 13px/1.4 var(--sans);letter-spacing:.26em;text-transform:uppercase;color:var(--cocoa2)}
-.hoja h3{font-size:clamp(30px,7.6vw,38px);line-height:1.08;max-width:18ch}
-.hoja .nota-a{margin-top:12px;font-size:16px;line-height:1.55;color:var(--cocoa2);max-width:40ch}
-.opcs{display:grid;gap:10px;margin-top:22px}
-.opc{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px;padding:0 18px;border:1px solid var(--nude);background:var(--crema2);color:var(--cocoa);font:400 17px/1.3 var(--sans);text-align:left;border-radius:2px;transition:border-color .18s,background .18s}
+.hoja .arriba{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:24px}
+.hoja .paso{font:500 13px/1.5 var(--sans);letter-spacing:.28em;text-transform:uppercase;color:var(--cocoa2)}
+.hoja h3{font-size:clamp(32px,8vw,40px);line-height:1.08;max-width:18ch;font-weight:300}
+.hoja .nota-a{margin-top:12px;font-size:16px;line-height:1.6;color:var(--cocoa2);max-width:40ch}
+.opcs{display:grid;gap:10px;margin-top:24px}
+.opc{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:58px;padding:0 20px;border:1px solid var(--nude);background:var(--crema2);color:var(--cocoa);font:400 17px/1.3 var(--sans);text-align:left;transition:border-color var(--t),background var(--t)}
 .opc:after{content:"";width:8px;height:8px;border-right:1px solid var(--cocoa);border-bottom:1px solid var(--cocoa);transform:rotate(-45deg);flex:none;opacity:.7}
 .opc:hover{border-color:var(--cocoa);background:var(--nude2)}
-.hoja .link{margin-top:20px}
+.hoja .link{margin-top:22px}
 .reco .eti{display:block;margin-bottom:12px}
-.reco .prod{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;border-top:1px solid var(--nude);border-bottom:1px solid var(--nude);padding:16px 0;margin-top:20px}
-.reco .prod b{font:400 26px/1.1 var(--serif)}
+.reco .prod{display:grid;grid-template-columns:72px 1fr auto;align-items:center;gap:16px;border-top:1px solid var(--nude);border-bottom:1px solid var(--nude);padding:16px 0;margin-top:22px}
+.reco .prod .lamina{width:72px;height:72px;background:var(--nude3);display:grid;place-items:center;border-radius:2px}
+.reco .prod .lamina .ilu{width:70%;height:auto}
+.reco .prod b{font:400 24px/1.1 var(--serif);min-width:0}
 .reco .prod b small{display:block;font:400 15px/1.4 var(--sans);color:var(--cocoa2);margin-top:5px}
-.reco .prod .precio{font:400 20px/1 var(--sans);font-variant-numeric:tabular-nums;white-space:nowrap}
-.reco .razon{margin-top:16px;font-size:17px;line-height:1.6;max-width:42ch}
-.reco .acciones{display:grid;gap:10px;margin-top:22px}
+.reco .prod .precio{font:400 19px/1 var(--sans);font-variant-numeric:tabular-nums;white-space:nowrap}
+.reco .razon{margin-top:18px;font-size:17px;line-height:1.7;max-width:44ch}
+.reco .acciones{display:grid;gap:10px;margin-top:24px}
 
-/* el atajo font: reinicia las features; los serif con atajo vuelven a numerales de caja alta */
-.diez ol b,.diez .lectura b,.garantia .n,.origen .txt,.somos .firma,.ficha .brochas li b,.li .nom,.tot .v,.reco .prod b{font-feature-settings:"lnum"}
+/* numerales de caja alta en todo lo serif */
+.serif,h1,h2,h3,.ritual ol b,.ritual .lectura b,.garantia .n,.origen .txt,.somos .firma,.ficha .brochas li b,.li .nom,.tot .v,.reco .prod b{font-feature-settings:"lnum"}
 
 /* =========================================================
    ESCRITORIO
@@ -326,74 +352,96 @@ footer .pie{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;border-t
   .lead{font-size:19px}
   .portada .cta .btn{flex:0 0 auto}
   .args ul{grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--nude)}
-  .args li{display:block;text-align:center;border-bottom:0;border-right:1px solid var(--nude);padding:34px 22px 36px}
+  .args li{display:block;text-align:center;border-bottom:0;border-right:1px solid var(--nude);padding:36px 24px 38px}
   .args li:last-child{border-right:0}
-  .args .ico{margin:0 auto 16px}
+  .args .ico{margin:0 auto 18px}
   .args p{margin-top:10px}
-  .grid{grid-template-columns:repeat(3,1fr);gap:40px 28px}
-  .diez ol{grid-template-columns:repeat(5,1fr)}
-  .diez li{padding:24px 0 26px}
-  .porque .w{grid-template-columns:1fr 400px;align-items:start;gap:56px}
+  .grid{grid-template-columns:repeat(3,1fr);gap:44px 28px}
+  .ritual ol{grid-template-columns:repeat(5,1fr)}
+  .ritual li{padding:26px 0 28px}
+  .porque .w{grid-template-columns:1fr 400px;align-items:start;gap:64px}
   .origen{grid-column:1/-1}
   footer .cols{grid-template-columns:repeat(3,1fr);gap:24px}
   .ficha .cuerpo .w{grid-template-columns:1fr 1fr;gap:56px;align-items:start}
-  .ficha .lam{margin:0}
-  .ficha .info{padding-top:16px}
+  .ficha .escena-f{margin:0}
+  .ficha .info{padding-top:20px}
   .ficha .acciones{grid-template-columns:1fr}
-  .ficha .detalles{grid-column:1/-1;grid-template-columns:repeat(3,1fr);gap:0 32px;margin-top:24px}
-  .ficha .detalles>div{padding:30px 0}
+  .ficha .detalles{grid-column:1/-1;grid-template-columns:repeat(3,1fr);gap:0 36px;margin-top:28px}
+  .ficha .detalles>div{padding:32px 0}
   .ficha .brochas ol{grid-template-columns:repeat(5,1fr)}
   .ayuda{align-items:center;justify-items:center;padding:24px}
-  .hoja{width:480px;border:1px solid var(--nude);border-radius:3px;max-height:min(720px,90dvh);padding:30px 34px 34px;box-shadow:0 24px 60px rgba(107,66,47,.14)}
+  .hoja{width:500px;border:1px solid var(--nude);border-radius:3px;max-height:min(740px,90dvh);padding:32px 36px 36px;box-shadow:0 24px 60px rgba(107,66,47,.14)}
   .ayuda-btn{right:28px;bottom:28px}
 }
 @media(min-width:1000px){
   :root{--pad:56px}
-  section{padding:88px 0}
+  section{padding:104px 0}
   .somos{padding-top:0}
-  .top{padding:14px 0}
+  .top{padding:16px 0}
   .top nav{display:flex}
   .menu-btn{display:none}
-  .logo{height:52px}
+  .top .logo{height:56px}
   .bolsa .txt{display:inline}
-  .cab{margin-bottom:56px}
-  .cab h2{font-size:60px}
-  .portada{padding:72px 0 88px}
-  .portada > .w{grid-template-columns:7fr 5fr;gap:64px;align-items:center}
-  .portada h1{font-size:clamp(72px,7.4vw,104px);max-width:11ch}
-  .portada .lead{margin-top:28px;max-width:40ch}
-  .portada .cta{margin-top:40px;gap:14px}
-  .escena{width:min(100%,440px);margin:0 0 0 auto;padding-bottom:0}
+  .cab{margin-bottom:64px}
+  .cab h2{font-size:64px}
+  .portada{padding:88px 0 104px}
+  .portada > .w{grid-template-columns:7fr 5fr;gap:72px;align-items:center}
+  .portada h1{font-size:clamp(76px,7.6vw,108px);max-width:10ch}
+  .portada .lead{margin-top:30px;max-width:40ch}
+  .portada .cta{margin-top:44px;gap:14px}
+  .escena{width:min(100%,440px);margin:0 0 0 auto}
   .escena figcaption .serif{font-size:26px}
-  .args li{padding:44px 26px 46px}
-  .tar h3{font-size:26px}
-  .diez{padding:104px 0}
-  .diez ol b{font-size:30px}
-  .diez .tira{margin-top:64px;min-height:180px;gap:40px}
-  .diez .tira .fan{width:84px}
-  .diez .tira .fan:nth-child(even){width:56px}
-  .razones h3{font-size:32px}
-  .garantia{padding:44px 40px}
-  .somos .marco{padding-top:72px}
-  footer{padding:72px 0 110px}
-  footer .logo{height:88px}
-  .ficha .cuerpo{padding:56px 0 96px}
-  .ficha .cuerpo .w{grid-template-columns:6fr 5fr;gap:80px}
-  .ficha .lam{width:100%}
-  .ficha h2{font-size:64px}
+  .args li{padding:48px 28px 50px}
+  .tar h3{font-size:27px}
+  .tar.destacada .lam .ilu{width:36%}
+  .tar.destacada .lam:before{width:40%}
+  .ritual{padding:112px 0}
+  .ritual ol b{font-size:30px}
+  .ritual .grupo+.grupo{margin-top:56px}
+  .razones h3{font-size:34px}
+  .garantia{padding:48px 40px}
+  .somos .marco{padding-top:80px}
+  footer{padding:88px 0 120px}
+  footer .logo{height:170px}
+  .ficha .cuerpo{padding:64px 0 104px}
+  .ficha .cuerpo .w{grid-template-columns:6fr 5fr;gap:88px}
+  .ficha .escena-f{width:100%}
+  .ficha h2{font-size:68px}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .panel,.box,.ayuda,.hoja,.ficha{transition:none}
+  *,*:before,*:after{transition:none!important}
 }
 </style>
 </head>
 <body>
-
-<!-- Marca: abanico y lockup, en una sola tinta (currentColor) -->
+<!-- Marca: la brocha (dos versiones) y los lockups, en una sola tinta (currentColor) -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="abanico" viewBox="0 20 100 76"><path d="M50 78 L0.29 56.9 A5.88 5.88 0 0 1 5.32 47.67 A5.88 5.88 0 0 1 12.04 39.59 A5.88 5.88 0 0 1 20.2 32.97 A5.88 5.88 0 0 1 29.48 28.05 A5.88 5.88 0 0 1 39.54 25.02 A5.88 5.88 0 0 1 50 24 A5.88 5.88 0 0 1 60.46 25.02 A5.88 5.88 0 0 1 70.52 28.05 A5.88 5.88 0 0 1 79.8 32.97 A5.88 5.88 0 0 1 87.96 39.59 A5.88 5.88 0 0 1 94.68 47.67 A5.88 5.88 0 0 1 99.71 56.9 Z" style="stroke-width:var(--sw1,2.6)"/><path d="M44.21 74.07L5.32 47.67 M45.08 73.02L12.04 39.59 M46.14 72.16L20.2 32.97 M47.34 71.53L29.48 28.05 M48.64 71.13L39.54 25.02 M50 71L50 24 M51.36 71.13L60.46 25.02 M52.66 71.53L70.52 28.05 M53.86 72.16L79.8 32.97 M54.92 73.02L87.96 39.59 M55.79 74.07L94.68 47.67" style="stroke-width:var(--sw2,1.9)"/><path d="M50 84.5c-3.1 3.6-3.4 8 0 8s3.1-4.4 0-8z" fill="currentColor" stroke="none"/></symbol>
-  <symbol id="lockup" viewBox="80 76 360 250"><path fill="currentColor" d="M163.5 250.0Q162.9 250.0 162.9 248.8Q162.9 247.6 163.5 247.6Q170.7 247.6 173.0 244.89999999999998Q175.3 242.2 175.3 233.8V202.4Q175.3 191.0 171.1 185.5Q166.89999999999998 180.0 157.7 180.0Q150.7 180.0 143.6 184.1Q136.5 188.2 131.5 195.4L130.7 193.0Q138.9 181.8 147.60000000000002 176.0Q156.3 170.2 165.89999999999998 170.2Q176.89999999999998 170.2 183.0 176.6Q189.1 183.0 189.1 194.8V233.8Q189.1 242.2 191.39999999999998 244.89999999999998Q193.7 247.6 201.1 247.6Q201.7 247.6 201.7 248.8Q201.7 250.0 201.1 250.0Q197.3 250.0 192.5 249.8Q187.7 249.6 182.3 249.6Q176.89999999999998 249.6 172.0 249.8Q167.1 250.0 163.5 250.0ZM109.69999999999999 250.0Q109.1 250.0 109.1 248.8Q109.1 247.6 109.69999999999999 247.6Q116.89999999999999 247.6 119.19999999999999 244.89999999999998Q121.5 242.2 121.5 233.8V194.8Q121.5 188.4 120.0 185.39999999999998Q118.5 182.39999999999998 114.89999999999999 182.39999999999998Q112.89999999999999 182.39999999999998 110.29999999999998 183.1Q107.69999999999999 183.8 104.3 185.2Q103.5 185.6 103.1 184.5Q102.69999999999999 183.39999999999998 103.3 183.0L127.89999999999999 171.2Q128.7 171.0 129.1 171.0Q130.9 171.0 133.10000000000002 175.4Q135.3 179.8 135.3 188.0V233.8Q135.3 242.2 137.60000000000002 244.89999999999998Q139.9 247.6 147.3 247.6Q147.9 247.6 147.9 248.8Q147.9 250.0 147.3 250.0Q143.5 250.0 138.7 249.8Q133.9 249.6 128.5 249.6Q123.1 249.6 118.19999999999999 249.8Q113.3 250.0 109.69999999999999 250.0Z M210.9 250.0Q210.29999999999998 250.0 210.29999999999998 248.8Q210.29999999999998 247.6 210.9 247.6Q218.1 247.6 220.5 244.89999999999998Q222.9 242.2 222.9 233.8V197.0Q222.9 190.0 221.5 186.8Q220.1 183.6 216.5 183.6Q214.9 183.6 212.8 184.2Q210.7 184.8 207.9 186.2Q207.1 186.4 206.6 185.3Q206.1 184.2 206.9 183.8L234.1 171.2Q234.7 171.0 234.9 171.0Q235.5 171.0 236.2 171.6Q236.9 172.2 236.9 173.0Q236.9 174.8 236.7 180.8Q236.5 186.8 236.5 196.6V233.8Q236.5 242.2 238.8 244.89999999999998Q241.1 247.6 248.5 247.6Q249.1 247.6 249.1 248.8Q249.1 250.0 248.5 250.0Q244.9 250.0 240.0 249.8Q235.1 249.6 229.7 249.6Q224.3 249.6 219.5 249.8Q214.7 250.0 210.9 250.0Z M302.3 250.0Q301.7 250.0 301.7 248.8Q301.7 247.6 302.3 247.6Q307.5 247.6 308.1 245.89999999999998Q308.7 244.2 305.9 239.8L272.3 189.4Q267.3 182.0 262.5 178.6Q257.7 175.2 254.1 175.2Q253.7 175.2 253.7 174.0Q253.7 172.8 254.1 172.8Q257.1 172.8 260.3 173.0Q263.5 173.2 266.5 173.2Q273.3 173.2 278.5 173.0Q283.7 172.8 287.9 172.8Q288.3 172.8 288.3 174.0Q288.3 175.2 287.9 175.2Q283.1 175.2 282.20000000000005 176.79999999999998Q281.3 178.39999999999998 284.3 183.0L317.7 233.4Q323.1 241.4 328.3 244.5Q333.5 247.6 337.1 247.6Q337.5 247.6 337.5 248.8Q337.5 250.0 337.1 250.0Q333.9 250.0 330.29999999999995 249.8Q326.7 249.6 323.7 249.6Q316.9 249.6 311.7 249.8Q306.5 250.0 302.3 250.0ZM253.1 250.0Q252.7 250.0 252.7 248.8Q252.7 247.6 253.1 247.6Q258.7 247.6 265.0 243.39999999999998Q271.3 239.2 276.9 231.6L292.1 210.6L294.7 213.0L280.9 233.0Q277.7 237.6 276.9 240.89999999999998Q276.1 244.2 278.5 245.89999999999998Q280.9 247.6 287.3 247.6Q287.9 247.6 287.9 248.8Q287.9 250.0 287.3 250.0Q282.7 250.0 278.4 249.8Q274.1 249.6 267.3 249.6Q262.7 249.6 259.9 249.8Q257.1 250.0 253.1 250.0ZM295.5 211.6 293.3 209.4 306.3 189.8Q311.5 182.39999999999998 310.5 178.79999999999998Q309.5 175.2 299.9 175.2Q299.5 175.2 299.5 174.0Q299.5 172.8 299.9 172.8Q304.7 172.8 309.0 173.0Q313.3 173.2 320.1 173.2Q324.7 173.2 327.5 173.0Q330.3 172.8 334.3 172.8Q334.7 172.8 334.7 174.0Q334.7 175.2 334.3 175.2Q328.9 175.2 322.6 179.2Q316.3 183.2 310.5 191.2Z M398.09999999999997 251.2Q397.29999999999995 251.6 396.29999999999995 251.6Q393.29999999999995 251.6 390.59999999999997 247.1Q387.9 242.6 387.9 234.2V197.6Q387.9 185.2 384.79999999999995 179.89999999999998Q381.7 174.6 376.29999999999995 174.6Q371.29999999999995 174.6 368.29999999999995 177.3Q365.29999999999995 180.0 364.0 183.5Q362.7 187.0 362.09999999999997 190.0Q361.7 193.8 359.79999999999995 196.4Q357.9 199.0 353.5 199.0Q349.5 199.0 347.7 197.0Q345.9 195.0 345.9 192.6Q345.9 188.4 349.79999999999995 184.60000000000002Q353.7 180.8 359.7 177.6Q365.7 174.39999999999998 372.2 172.6Q378.7 170.8 383.9 170.8Q392.09999999999997 170.8 396.79999999999995 176.1Q401.5 181.39999999999998 401.5 191.6V228.4Q401.5 235.0 403.29999999999995 238.2Q405.09999999999997 241.4 409.09999999999997 241.4Q412.5 241.4 417.9 239.2Q418.7 238.8 419.2 239.9Q419.7 241.0 418.7 241.4ZM361.29999999999995 251.4Q353.29999999999995 251.4 349.19999999999993 247.4Q345.09999999999997 243.4 345.09999999999997 237.4Q345.09999999999997 232.6 347.69999999999993 229.3Q350.29999999999995 226.0 355.19999999999993 223.4Q360.09999999999997 220.8 367.09999999999997 218.2L389.9 209.8L390.5 212.4L372.29999999999995 219.8Q369.29999999999995 221.0 366.79999999999995 222.6Q364.29999999999995 224.2 362.69999999999993 226.5Q361.09999999999997 228.8 361.09999999999997 232.0Q361.09999999999997 236.8 364.29999999999995 239.9Q367.5 243.0 372.09999999999997 243.0Q373.9 243.0 375.9 242.4Q377.9 241.8 380.7 240.2L392.5 232.8L392.9 235.6L378.29999999999995 245.2Q373.7 248.6 369.79999999999995 250.0Q365.9 251.4 361.29999999999995 251.4Z"/><path fill="currentColor" d="M184.445 295.17H188.075Q190.085 295.17 191.585 294.6Q193.085 294.03 193.94 292.93499999999995Q194.795 291.84 194.795 290.28Q194.795 288.48 193.94 287.31Q193.085 286.14 191.585 285.57Q190.085 285.0 188.075 285.0H181.745V306.0H188.435Q190.685 306.0 192.38 305.355Q194.075 304.71 195.035 303.36Q195.995 302.01 195.995 299.94Q195.995 298.44 195.39499999999998 297.36Q194.795 296.28 193.745 295.59Q192.695 294.9 191.32999999999998 294.55499999999995Q189.965 294.21 188.435 294.21H184.445V296.19H188.225Q189.125 296.19 189.875 296.385Q190.625 296.58 191.195 297.015Q191.765 297.45 192.065 298.08Q192.365 298.71 192.365 299.58Q192.365 300.75 191.825 301.515Q191.285 302.28 190.35500000000002 302.66999999999996Q189.425 303.06 188.225 303.06H185.285V287.91H187.835Q189.335 287.91 190.25 288.63Q191.165 289.35 191.165 290.67Q191.165 291.54 190.745 292.155Q190.325 292.77 189.575 293.1Q188.825 293.43 187.835 293.43H184.445Z M212.465 306.0H223.055V302.88H212.465ZM212.465 288.12H223.055V285.0H212.465ZM212.465 296.28H222.455V293.22H212.465ZM210.275 285.0V306.0H213.755V285.0Z M240.425 300.6H251.525L250.865 297.6H241.115ZM245.915 290.94 249.275 298.74 249.335 299.61 252.185 306.0H256.205L245.915 283.83L235.655 306.0H239.645L242.555 299.43L242.615 298.65Z M268.955 285.0V299.1Q268.955 300.84 269.51 302.205Q270.065 303.57 271.085 304.53Q272.10499999999996 305.49 273.515 306.0Q274.925 306.51 276.60499999999996 306.51Q278.28499999999997 306.51 279.69499999999994 306.0Q281.10499999999996 305.49 282.14 304.53Q283.175 303.57 283.73 302.205Q284.28499999999997 300.84 284.28499999999997 299.1V285.0H280.715V298.95Q280.715 300.87 279.67999999999995 302.07Q278.645 303.27 276.60499999999996 303.27Q274.59499999999997 303.27 273.54499999999996 302.07Q272.495 300.87 272.495 298.95V285.0Z M297.185 288.27H302.735V306.0H306.275V288.27H311.825V285.0H297.185Z M336.455 285.0 331.565 293.97 326.705 285.0H322.655L329.795 297.18V306.0H333.395V297.15L340.505 285.0Z"/><g transform="translate(178.10 68.80) scale(1.0000)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M50 78 L0.29 56.9 A5.88 5.88 0 0 1 5.32 47.67 A5.88 5.88 0 0 1 12.04 39.59 A5.88 5.88 0 0 1 20.2 32.97 A5.88 5.88 0 0 1 29.48 28.05 A5.88 5.88 0 0 1 39.54 25.02 A5.88 5.88 0 0 1 50 24 A5.88 5.88 0 0 1 60.46 25.02 A5.88 5.88 0 0 1 70.52 28.05 A5.88 5.88 0 0 1 79.8 32.97 A5.88 5.88 0 0 1 87.96 39.59 A5.88 5.88 0 0 1 94.68 47.67 A5.88 5.88 0 0 1 99.71 56.9 Z" stroke-width="2.6"/><path d="M44.21 74.07L5.32 47.67 M45.08 73.02L12.04 39.59 M46.14 72.16L20.2 32.97 M47.34 71.53L29.48 28.05 M48.64 71.13L39.54 25.02 M50 71L50 24 M51.36 71.13L60.46 25.02 M52.66 71.53L70.52 28.05 M53.86 72.16L79.8 32.97 M54.92 73.02L87.96 39.59 M55.79 74.07L94.68 47.67" stroke-width="1.9"/><path d="M50 84.5c-3.1 3.6-3.4 8 0 8s3.1-4.4 0-8z" fill="currentColor" stroke="none"/></g></symbol>
+  <!-- Cabeza de brocha de frente, 17 cerdas, para tamaños grandes -->
+  <symbol id="brocha" viewBox="0 0 100 130"><path d="M34.8 92Q33.94 74.66 24.63 54.32M36.7 92Q35.81 72.17 27.04 49.34M38.6 92Q37.16 69.32 28.58 43.65M40.5 92Q39.31 67.49 31.89 39.97M42.4 92Q41.04 65.12 34.51 35.23M44.3 92Q43.35 64.1 38.42 33.2M46.2 92Q45.39 62.43 41.88 29.85M48.1 92Q47.74 62.33 46.02 29.65M50 92Q50 61.5 50 28M51.9 92Q52.26 62.33 53.98 29.65M53.8 92Q54.61 62.43 58.12 29.85M55.7 92Q56.65 64.1 61.58 33.2M57.6 92Q58.96 65.12 65.49 35.23M59.5 92Q60.69 67.49 68.11 39.97M61.4 92Q62.84 69.32 71.42 43.65M63.3 92Q64.19 72.17 72.96 49.34M65.2 92Q66.06 74.66 75.37 54.32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M33 92H67L64.5 108H35.5ZM43 110h14a2.4 2.4 0 0 1 2.4 2.4v11.6H41V112.4a2.4 2.4 0 0 1 2.4 -2.4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M33.6 95.6H66.4M34.1 98.4H65.9" fill="none" stroke="currentColor" stroke-width="1.02" stroke-linecap="round"/></symbol>
+  <!-- Versión simplificada, 9 cerdas y casquillo macizo, para 22 px -->
+  <symbol id="brocha-chica" viewBox="0 0 100 130"><path d="M34.8 92Q33.94 74.66 24.63 54.32M38.6 92Q37.48 69.69 29.22 44.38M42.4 92Q41.04 65.12 34.51 35.23M46.2 92Q45.52 63 42.12 31M50 92Q50 61.5 50 28M53.8 92Q54.48 63 57.88 31M57.6 92Q58.96 65.12 65.49 35.23M61.4 92Q62.52 69.69 70.78 44.38M65.2 92Q66.06 74.66 75.37 54.32" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><path d="M33 92H67L64.5 108H35.5ZM43 110h14a2.4 2.4 0 0 1 2.4 2.4v11.6H41V112.4a2.4 2.4 0 0 1 2.4 -2.4z" fill="currentColor" stroke="none"/></symbol>
+  <!-- Lockup vertical: brocha sobre la i, nixa, BEAUTY debajo -->
+  <symbol id="lockup" viewBox="90 96 340 224">
+    <path fill="currentColor" d="M163.5 250Q162.9 250 162.9 248.8Q162.9 247.6 163.5 247.6Q170.7 247.6 173 244.9Q175.3 242.2 175.3 233.8V202.4Q175.3 191 171.1 185.5Q166.9 180 157.7 180Q150.7 180 143.6 184.1Q136.5 188.2 131.5 195.4L130.7 193Q138.9 181.8 147.6 176Q156.3 170.2 165.9 170.2Q176.9 170.2 183 176.6Q189.1 183 189.1 194.8V233.8Q189.1 242.2 191.4 244.9Q193.7 247.6 201.1 247.6Q201.7 247.6 201.7 248.8Q201.7 250 201.1 250Q197.3 250 192.5 249.8Q187.7 249.6 182.3 249.6Q176.9 249.6 172 249.8Q167.1 250 163.5 250ZM109.7 250Q109.1 250 109.1 248.8Q109.1 247.6 109.7 247.6Q116.9 247.6 119.2 244.9Q121.5 242.2 121.5 233.8V194.8Q121.5 188.4 120 185.4Q118.5 182.4 114.9 182.4Q112.9 182.4 110.3 183.1Q107.7 183.8 104.3 185.2Q103.5 185.6 103.1 184.5Q102.7 183.4 103.3 183L127.9 171.2Q128.7 171 129.1 171Q130.9 171 133.1 175.4Q135.3 179.8 135.3 188V233.8Q135.3 242.2 137.6 244.9Q139.9 247.6 147.3 247.6Q147.9 247.6 147.9 248.8Q147.9 250 147.3 250Q143.5 250 138.7 249.8Q133.9 249.6 128.5 249.6Q123.1 249.6 118.2 249.8Q113.3 250 109.7 250Z M210.9 250Q210.3 250 210.3 248.8Q210.3 247.6 210.9 247.6Q218.1 247.6 220.5 244.9Q222.9 242.2 222.9 233.8V197Q222.9 190 221.5 186.8Q220.1 183.6 216.5 183.6Q214.9 183.6 212.8 184.2Q210.7 184.8 207.9 186.2Q207.1 186.4 206.6 185.3Q206.1 184.2 206.9 183.8L234.1 171.2Q234.7 171 234.9 171Q235.5 171 236.2 171.6Q236.9 172.2 236.9 173Q236.9 174.8 236.7 180.8Q236.5 186.8 236.5 196.6V233.8Q236.5 242.2 238.8 244.9Q241.1 247.6 248.5 247.6Q249.1 247.6 249.1 248.8Q249.1 250 248.5 250Q244.9 250 240 249.8Q235.1 249.6 229.7 249.6Q224.3 249.6 219.5 249.8Q214.7 250 210.9 250Z M302.3 250Q301.7 250 301.7 248.8Q301.7 247.6 302.3 247.6Q307.5 247.6 308.1 245.9Q308.7 244.2 305.9 239.8L272.3 189.4Q267.3 182 262.5 178.6Q257.7 175.2 254.1 175.2Q253.7 175.2 253.7 174Q253.7 172.8 254.1 172.8Q257.1 172.8 260.3 173Q263.5 173.2 266.5 173.2Q273.3 173.2 278.5 173Q283.7 172.8 287.9 172.8Q288.3 172.8 288.3 174Q288.3 175.2 287.9 175.2Q283.1 175.2 282.2 176.8Q281.3 178.4 284.3 183L317.7 233.4Q323.1 241.4 328.3 244.5Q333.5 247.6 337.1 247.6Q337.5 247.6 337.5 248.8Q337.5 250 337.1 250Q333.9 250 330.3 249.8Q326.7 249.6 323.7 249.6Q316.9 249.6 311.7 249.8Q306.5 250 302.3 250ZM253.1 250Q252.7 250 252.7 248.8Q252.7 247.6 253.1 247.6Q258.7 247.6 265 243.4Q271.3 239.2 276.9 231.6L292.1 210.6L294.7 213L280.9 233Q277.7 237.6 276.9 240.9Q276.1 244.2 278.5 245.9Q280.9 247.6 287.3 247.6Q287.9 247.6 287.9 248.8Q287.9 250 287.3 250Q282.7 250 278.4 249.8Q274.1 249.6 267.3 249.6Q262.7 249.6 259.9 249.8Q257.1 250 253.1 250ZM295.5 211.6 293.3 209.4 306.3 189.8Q311.5 182.4 310.5 178.8Q309.5 175.2 299.9 175.2Q299.5 175.2 299.5 174Q299.5 172.8 299.9 172.8Q304.7 172.8 309 173Q313.3 173.2 320.1 173.2Q324.7 173.2 327.5 173Q330.3 172.8 334.3 172.8Q334.7 172.8 334.7 174Q334.7 175.2 334.3 175.2Q328.9 175.2 322.6 179.2Q316.3 183.2 310.5 191.2Z M398.1 251.2Q397.3 251.6 396.3 251.6Q393.3 251.6 390.6 247.1Q387.9 242.6 387.9 234.2V197.6Q387.9 185.2 384.8 179.9Q381.7 174.6 376.3 174.6Q371.3 174.6 368.3 177.3Q365.3 180 364 183.5Q362.7 187 362.1 190Q361.7 193.8 359.8 196.4Q357.9 199 353.5 199Q349.5 199 347.7 197Q345.9 195 345.9 192.6Q345.9 188.4 349.8 184.6Q353.7 180.8 359.7 177.6Q365.7 174.4 372.2 172.6Q378.7 170.8 383.9 170.8Q392.1 170.8 396.8 176.1Q401.5 181.4 401.5 191.6V228.4Q401.5 235 403.3 238.2Q405.1 241.4 409.1 241.4Q412.5 241.4 417.9 239.2Q418.7 238.8 419.2 239.9Q419.7 241 418.7 241.4ZM361.3 251.4Q353.3 251.4 349.2 247.4Q345.1 243.4 345.1 237.4Q345.1 232.6 347.7 229.3Q350.3 226 355.2 223.4Q360.1 220.8 367.1 218.2L389.9 209.8L390.5 212.4L372.3 219.8Q369.3 221 366.8 222.6Q364.3 224.2 362.7 226.5Q361.1 228.8 361.1 232Q361.1 236.8 364.3 239.9Q367.5 243 372.1 243Q373.9 243 375.9 242.4Q377.9 241.8 380.7 240.2L392.5 232.8L392.9 235.6L378.3 245.2Q373.7 248.6 369.8 250Q365.9 251.4 361.3 251.4Z"/>
+    <path fill="currentColor" d="M184.44 295.17H188.07Q190.09 295.17 191.59 294.6Q193.09 294.03 193.94 292.93Q194.79 291.84 194.79 290.28Q194.79 288.48 193.94 287.31Q193.09 286.14 191.59 285.57Q190.09 285 188.07 285H181.75V306H188.44Q190.69 306 192.38 305.36Q194.07 304.71 195.03 303.36Q196 302.01 196 299.94Q196 298.44 195.39 297.36Q194.79 296.28 193.75 295.59Q192.69 294.9 191.33 294.55Q189.97 294.21 188.44 294.21H184.44V296.19H188.22Q189.12 296.19 189.88 296.38Q190.62 296.58 191.19 297.01Q191.76 297.45 192.06 298.08Q192.37 298.71 192.37 299.58Q192.37 300.75 191.82 301.51Q191.28 302.28 190.36 302.67Q189.43 303.06 188.22 303.06H185.28V287.91H187.84Q189.34 287.91 190.25 288.63Q191.16 289.35 191.16 290.67Q191.16 291.54 190.75 292.15Q190.32 292.77 189.57 293.1Q188.82 293.43 187.84 293.43H184.44Z M212.47 306H223.06V302.88H212.47ZM212.47 288.12H223.06V285H212.47ZM212.47 296.28H222.46V293.22H212.47ZM210.28 285V306H213.75V285Z M240.43 300.6H251.53L250.87 297.6H241.12ZM245.91 290.94 249.28 298.74 249.34 299.61 252.19 306H256.2L245.91 283.83L235.66 306H239.65L242.56 299.43L242.62 298.65Z M268.95 285V299.1Q268.95 300.84 269.51 302.2Q270.06 303.57 271.08 304.53Q272.1 305.49 273.51 306Q274.93 306.51 276.6 306.51Q278.28 306.51 279.69 306Q281.1 305.49 282.14 304.53Q283.18 303.57 283.73 302.2Q284.28 300.84 284.28 299.1V285H280.71V298.95Q280.71 300.87 279.68 302.07Q278.64 303.27 276.6 303.27Q274.59 303.27 273.54 302.07Q272.5 300.87 272.5 298.95V285Z M297.19 288.27H302.74V306H306.27V288.27H311.82V285H297.19Z M336.45 285 331.56 293.97 326.7 285H322.65L329.8 297.18V306H333.39V297.15L340.5 285Z"/>
+    <g transform="translate(198 89.6) scale(.6)"><path d="M34.8 92Q33.94 74.66 24.63 54.32M36.7 92Q35.81 72.17 27.04 49.34M38.6 92Q37.16 69.32 28.58 43.65M40.5 92Q39.31 67.49 31.89 39.97M42.4 92Q41.04 65.12 34.51 35.23M44.3 92Q43.35 64.1 38.42 33.2M46.2 92Q45.39 62.43 41.88 29.85M48.1 92Q47.74 62.33 46.02 29.65M50 92Q50 61.5 50 28M51.9 92Q52.26 62.33 53.98 29.65M53.8 92Q54.61 62.43 58.12 29.85M55.7 92Q56.65 64.1 61.58 33.2M57.6 92Q58.96 65.12 65.49 35.23M59.5 92Q60.69 67.49 68.11 39.97M61.4 92Q62.84 69.32 71.42 43.65M63.3 92Q64.19 72.17 72.96 49.34M65.2 92Q66.06 74.66 75.37 54.32" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><path d="M33 92H67L64.5 108H35.5ZM43 110h14a2.4 2.4 0 0 1 2.4 2.4v11.6H41V112.4a2.4 2.4 0 0 1 2.4 -2.4z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M33.6 95.6H66.4M34.1 98.4H65.9" fill="none" stroke="currentColor" stroke-width="1.32" stroke-linecap="round"/></g>
+  </symbol>
+  <!-- Lockup horizontal para la barra: brocha simplificada, nixa y BEAUTY a la derecha -->
+  <symbol id="lockup-h" viewBox="96 100 630 158">
+    <path fill="currentColor" d="M163.5 250Q162.9 250 162.9 248.8Q162.9 247.6 163.5 247.6Q170.7 247.6 173 244.9Q175.3 242.2 175.3 233.8V202.4Q175.3 191 171.1 185.5Q166.9 180 157.7 180Q150.7 180 143.6 184.1Q136.5 188.2 131.5 195.4L130.7 193Q138.9 181.8 147.6 176Q156.3 170.2 165.9 170.2Q176.9 170.2 183 176.6Q189.1 183 189.1 194.8V233.8Q189.1 242.2 191.4 244.9Q193.7 247.6 201.1 247.6Q201.7 247.6 201.7 248.8Q201.7 250 201.1 250Q197.3 250 192.5 249.8Q187.7 249.6 182.3 249.6Q176.9 249.6 172 249.8Q167.1 250 163.5 250ZM109.7 250Q109.1 250 109.1 248.8Q109.1 247.6 109.7 247.6Q116.9 247.6 119.2 244.9Q121.5 242.2 121.5 233.8V194.8Q121.5 188.4 120 185.4Q118.5 182.4 114.9 182.4Q112.9 182.4 110.3 183.1Q107.7 183.8 104.3 185.2Q103.5 185.6 103.1 184.5Q102.7 183.4 103.3 183L127.9 171.2Q128.7 171 129.1 171Q130.9 171 133.1 175.4Q135.3 179.8 135.3 188V233.8Q135.3 242.2 137.6 244.9Q139.9 247.6 147.3 247.6Q147.9 247.6 147.9 248.8Q147.9 250 147.3 250Q143.5 250 138.7 249.8Q133.9 249.6 128.5 249.6Q123.1 249.6 118.2 249.8Q113.3 250 109.7 250Z M210.9 250Q210.3 250 210.3 248.8Q210.3 247.6 210.9 247.6Q218.1 247.6 220.5 244.9Q222.9 242.2 222.9 233.8V197Q222.9 190 221.5 186.8Q220.1 183.6 216.5 183.6Q214.9 183.6 212.8 184.2Q210.7 184.8 207.9 186.2Q207.1 186.4 206.6 185.3Q206.1 184.2 206.9 183.8L234.1 171.2Q234.7 171 234.9 171Q235.5 171 236.2 171.6Q236.9 172.2 236.9 173Q236.9 174.8 236.7 180.8Q236.5 186.8 236.5 196.6V233.8Q236.5 242.2 238.8 244.9Q241.1 247.6 248.5 247.6Q249.1 247.6 249.1 248.8Q249.1 250 248.5 250Q244.9 250 240 249.8Q235.1 249.6 229.7 249.6Q224.3 249.6 219.5 249.8Q214.7 250 210.9 250Z M302.3 250Q301.7 250 301.7 248.8Q301.7 247.6 302.3 247.6Q307.5 247.6 308.1 245.9Q308.7 244.2 305.9 239.8L272.3 189.4Q267.3 182 262.5 178.6Q257.7 175.2 254.1 175.2Q253.7 175.2 253.7 174Q253.7 172.8 254.1 172.8Q257.1 172.8 260.3 173Q263.5 173.2 266.5 173.2Q273.3 173.2 278.5 173Q283.7 172.8 287.9 172.8Q288.3 172.8 288.3 174Q288.3 175.2 287.9 175.2Q283.1 175.2 282.2 176.8Q281.3 178.4 284.3 183L317.7 233.4Q323.1 241.4 328.3 244.5Q333.5 247.6 337.1 247.6Q337.5 247.6 337.5 248.8Q337.5 250 337.1 250Q333.9 250 330.3 249.8Q326.7 249.6 323.7 249.6Q316.9 249.6 311.7 249.8Q306.5 250 302.3 250ZM253.1 250Q252.7 250 252.7 248.8Q252.7 247.6 253.1 247.6Q258.7 247.6 265 243.4Q271.3 239.2 276.9 231.6L292.1 210.6L294.7 213L280.9 233Q277.7 237.6 276.9 240.9Q276.1 244.2 278.5 245.9Q280.9 247.6 287.3 247.6Q287.9 247.6 287.9 248.8Q287.9 250 287.3 250Q282.7 250 278.4 249.8Q274.1 249.6 267.3 249.6Q262.7 249.6 259.9 249.8Q257.1 250 253.1 250ZM295.5 211.6 293.3 209.4 306.3 189.8Q311.5 182.4 310.5 178.8Q309.5 175.2 299.9 175.2Q299.5 175.2 299.5 174Q299.5 172.8 299.9 172.8Q304.7 172.8 309 173Q313.3 173.2 320.1 173.2Q324.7 173.2 327.5 173Q330.3 172.8 334.3 172.8Q334.7 172.8 334.7 174Q334.7 175.2 334.3 175.2Q328.9 175.2 322.6 179.2Q316.3 183.2 310.5 191.2Z M398.1 251.2Q397.3 251.6 396.3 251.6Q393.3 251.6 390.6 247.1Q387.9 242.6 387.9 234.2V197.6Q387.9 185.2 384.8 179.9Q381.7 174.6 376.3 174.6Q371.3 174.6 368.3 177.3Q365.3 180 364 183.5Q362.7 187 362.1 190Q361.7 193.8 359.8 196.4Q357.9 199 353.5 199Q349.5 199 347.7 197Q345.9 195 345.9 192.6Q345.9 188.4 349.8 184.6Q353.7 180.8 359.7 177.6Q365.7 174.4 372.2 172.6Q378.7 170.8 383.9 170.8Q392.1 170.8 396.8 176.1Q401.5 181.4 401.5 191.6V228.4Q401.5 235 403.3 238.2Q405.1 241.4 409.1 241.4Q412.5 241.4 417.9 239.2Q418.7 238.8 419.2 239.9Q419.7 241 418.7 241.4ZM361.3 251.4Q353.3 251.4 349.2 247.4Q345.1 243.4 345.1 237.4Q345.1 232.6 347.7 229.3Q350.3 226 355.2 223.4Q360.1 220.8 367.1 218.2L389.9 209.8L390.5 212.4L372.3 219.8Q369.3 221 366.8 222.6Q364.3 224.2 362.7 226.5Q361.1 228.8 361.1 232Q361.1 236.8 364.3 239.9Q367.5 243 372.1 243Q373.9 243 375.9 242.4Q377.9 241.8 380.7 240.2L392.5 232.8L392.9 235.6L378.3 245.2Q373.7 248.6 369.8 250Q365.9 251.4 361.3 251.4Z"/>
+    <path d="M446 190v42" stroke="currentColor" stroke-width="1.2"/>
+    <g transform="translate(188.4 -245.4) scale(1.55)"><path fill="currentColor" d="M184.44 295.17H188.07Q190.09 295.17 191.59 294.6Q193.09 294.03 193.94 292.93Q194.79 291.84 194.79 290.28Q194.79 288.48 193.94 287.31Q193.09 286.14 191.59 285.57Q190.09 285 188.07 285H181.75V306H188.44Q190.69 306 192.38 305.36Q194.07 304.71 195.03 303.36Q196 302.01 196 299.94Q196 298.44 195.39 297.36Q194.79 296.28 193.75 295.59Q192.69 294.9 191.33 294.55Q189.97 294.21 188.44 294.21H184.44V296.19H188.22Q189.12 296.19 189.88 296.38Q190.62 296.58 191.19 297.01Q191.76 297.45 192.06 298.08Q192.37 298.71 192.37 299.58Q192.37 300.75 191.82 301.51Q191.28 302.28 190.36 302.67Q189.43 303.06 188.22 303.06H185.28V287.91H187.84Q189.34 287.91 190.25 288.63Q191.16 289.35 191.16 290.67Q191.16 291.54 190.75 292.15Q190.32 292.77 189.57 293.1Q188.82 293.43 187.84 293.43H184.44Z M212.47 306H223.06V302.88H212.47ZM212.47 288.12H223.06V285H212.47ZM212.47 296.28H222.46V293.22H212.47ZM210.28 285V306H213.75V285Z M240.43 300.6H251.53L250.87 297.6H241.12ZM245.91 290.94 249.28 298.74 249.34 299.61 252.19 306H256.2L245.91 283.83L235.66 306H239.65L242.56 299.43L242.62 298.65Z M268.95 285V299.1Q268.95 300.84 269.51 302.2Q270.06 303.57 271.08 304.53Q272.1 305.49 273.51 306Q274.93 306.51 276.6 306.51Q278.28 306.51 279.69 306Q281.1 305.49 282.14 304.53Q283.18 303.57 283.73 302.2Q284.28 300.84 284.28 299.1V285H280.71V298.95Q280.71 300.87 279.68 302.07Q278.64 303.27 276.6 303.27Q274.59 303.27 273.54 302.07Q272.5 300.87 272.5 298.95V285Z M297.19 288.27H302.74V306H306.27V288.27H311.82V285H297.19Z M336.45 285 331.56 293.97 326.7 285H322.65L329.8 297.18V306H333.39V297.15L340.5 285Z"/></g>
+    <g transform="translate(198 89.6) scale(.6)"><path d="M34.8 92Q33.94 74.66 24.63 54.32M38.6 92Q37.48 69.69 29.22 44.38M42.4 92Q41.04 65.12 34.51 35.23M46.2 92Q45.52 63 42.12 31M50 92Q50 61.5 50 28M53.8 92Q54.48 63 57.88 31M57.6 92Q58.96 65.12 65.49 35.23M61.4 92Q62.52 69.69 70.78 44.38M65.2 92Q66.06 74.66 75.37 54.32" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><path d="M33 92H67L64.5 108H35.5ZM43 110h14a2.4 2.4 0 0 1 2.4 2.4v11.6H41V112.4a2.4 2.4 0 0 1 2.4 -2.4z" fill="currentColor" stroke="none"/></g>
+  </symbol>
+  <!-- Ilustraciones de línea de cada pieza -->
+  <symbol id="ilu-kit" viewBox="0 0 120 120"><rect x="12" y="14" width="96" height="94" rx="9"/><rect x="17.5" y="19.5" width="85" height="83" rx="6" class="fina"/><path d="M48 14v-5a3 3 0 0 1 3-3h18a3 3 0 0 1 3 3v5"/><g transform="translate(60 186) rotate(-17) translate(0 -84)"><g transform="translate(0 -43.47)"><path d="M-2.16 0C-2.34 -3.6 -1.26 -8.1 0 -11.7C1.26 -8.1 2.34 -3.6 2.16 0Z"/><path d="M0 -0.9V-7.2" class="pelo"/></g><path d="M-1.68 -1.8Q-1.68 0 -0.6 0H0.6Q1.68 0 1.68 -1.8L2.34 -36.72H-2.34ZM-1.98 -43.47L-2.7 -36.72H2.7L1.98 -43.47Z"/><path d="M-1.53 -41.85H1.53" class="pelo"/></g><g transform="translate(60 186) rotate(-13.22) translate(0 -84)"><g transform="translate(0 -42.75)"><path d="M-2.34 0V-9.9Q0 -12.15 2.34 -9.9V0Z"/><path d="M-2.34 -2.25H2.34M-2.34 -4.5H2.34M-2.34 -6.75H2.34M-2.16 -9H2.16" class="pelo"/></g><path d="M-1.68 -1.8Q-1.68 0 -0.6 0H0.6Q1.68 0 1.68 -1.8L2.34 -36H-2.34ZM-2.07 -42.75L-2.7 -36H2.7L2.07 -42.75Z"/><path d="M-1.62 -41.13H1.62" class="pelo"/></g><g transform="translate(60 186) rotate(-9.44) translate(0 -84)"><g transform="translate(0 -44.19)"><path d="M-3.6 0C-3.96 -4.5 -2.7 -9 0 -11.7C2.7 -9 3.96 -4.5 3.6 0Z"/><path d="M-1.08 -0.9V-7.2M1.08 -0.9V-7.2" class="pelo"/></g><path d="M-1.94 -1.8Q-1.94 0 -0.86 0H0.86Q1.94 0 1.94 -1.8L2.7 -37.44H-2.7ZM-3.15 -44.19L-3.06 -37.44H3.06L3.15 -44.19Z"/><path d="M-2.7 -42.57H2.7" class="pelo"/></g><g transform="translate(60 186) rotate(-5.67) translate(0 -84)"><g transform="translate(0 -44.19)"><path d="M-4.05 0C-4.23 -4.5 -4.05 -8.1 -2.7 -9Q0 -10.35 2.7 -9C4.05 -8.1 4.23 -4.5 4.05 0Z"/><path d="M-1.35 -0.9V-6.3M1.35 -0.9V-6.3" class="pelo"/></g><path d="M-2.07 -1.8Q-2.07 0 -0.99 0H0.99Q2.07 0 2.07 -1.8L2.88 -37.44H-2.88ZM-3.51 -44.19L-3.24 -37.44H3.24L3.51 -44.19Z"/><path d="M-3.06 -42.57H3.06" class="pelo"/></g><g transform="translate(60 186) rotate(-1.89) translate(0 -84)"><g transform="translate(0 -47.07)"><path d="M-4.95 0C-4.95 -7.2 -4.5 -13.5 0 -14.4C4.5 -13.5 4.95 -7.2 4.95 0Z"/><path d="M-1.8 -0.9V-9.9M1.8 -0.9V-9.9" class="pelo"/></g><path d="M-2.46 -1.8Q-2.46 0 -1.38 0H1.38Q2.46 0 2.46 -1.8L3.42 -40.32H-3.42ZM-4.14 -47.07L-3.78 -40.32H3.78L4.14 -47.07Z"/><path d="M-3.69 -45.45H3.69" class="pelo"/></g><g transform="translate(60 186) rotate(1.89) translate(0 -84)"><g transform="translate(0 -49.95)"><path d="M-6.3 0C-6.3 -8.1 -5.85 -15.3 0 -16.2C5.85 -15.3 6.3 -8.1 6.3 0Z"/><path d="M-2.34 -0.9V-11.7M2.34 -0.9V-11.7" class="pelo"/></g><path d="M-2.72 -1.8Q-2.72 0 -1.64 0H1.64Q2.72 0 2.72 -1.8L3.78 -43.2H-3.78ZM-4.86 -49.95L-4.14 -43.2H4.14L4.86 -49.95Z"/><path d="M-4.41 -48.33H4.41" class="pelo"/></g><g transform="translate(60 186) rotate(5.67) translate(0 -84)"><g transform="translate(0 -48.51)"><path d="M-5.4 0C-5.58 -7.2 -5.4 -12.6 -3.6 -14.4Q0 -16.2 3.6 -14.4C5.4 -12.6 5.58 -7.2 5.4 0Z"/><path d="M-1.98 -0.9V-10.8M1.98 -0.9V-10.8" class="pelo"/></g><path d="M-2.59 -1.8Q-2.59 0 -1.51 0H1.51Q2.59 0 2.59 -1.8L3.6 -41.76H-3.6ZM-4.5 -48.51L-3.96 -41.76H3.96L4.5 -48.51Z"/><path d="M-4.05 -46.89H4.05" class="pelo"/></g><g transform="translate(60 186) rotate(9.44) translate(0 -84)"><g transform="translate(0 -46.35)"><path d="M-4.95 0C-5.22 -5.4 -4.95 -9 -4.05 -9.9L3.6 -15.3C4.95 -12.6 5.22 -5.4 4.95 0Z"/><path d="M-1.8 -0.9V-8.1M1.8 -0.9V-10.8" class="pelo"/></g><path d="M-2.33 -1.8Q-2.33 0 -1.25 0H1.25Q2.33 0 2.33 -1.8L3.24 -39.6H-3.24ZM-4.14 -46.35L-3.6 -39.6H3.6L4.14 -46.35Z"/><path d="M-3.69 -44.73H3.69" class="pelo"/></g><g transform="translate(60 186) rotate(13.22) translate(0 -84)"><g transform="translate(0 -45.63)"><path d="M-4.05 0C-4.5 -5.4 -3.6 -9.9 0 -10.8C3.6 -9.9 4.5 -5.4 4.05 0Z"/><path d="M-1.44 -0.9V-7.2M1.44 -0.9V-7.2" class="pelo"/></g><path d="M-2.2 -1.8Q-2.2 0 -1.12 0H1.12Q2.2 0 2.2 -1.8L3.06 -38.88H-3.06ZM-3.51 -45.63L-3.42 -38.88H3.42L3.51 -45.63Z"/><path d="M-3.06 -44.01H3.06" class="pelo"/></g><g transform="translate(60 186) rotate(17) translate(0 -84)"><g transform="translate(0 -42.75)"><path d="M-3.24 0C-3.42 -3.6 -3.06 -7.2 -1.8 -8.1Q0 -9 1.8 -8.1C3.06 -7.2 3.42 -3.6 3.24 0Z"/><path d="M-0.9 -0.9V-5.4M0.9 -0.9V-5.4" class="pelo"/></g><path d="M-1.94 -1.8Q-1.94 0 -0.86 0H0.86Q1.94 0 1.94 -1.8L2.7 -36H-2.7ZM-2.88 -42.75L-3.06 -36H3.06L2.88 -42.75Z"/><path d="M-2.43 -41.13H2.43" class="pelo"/></g><path d="M19.5 84c14 3 27 4.5 40.5 4.5S86.5 87 100.5 84" class="banda"/><path d="M19.5 91c14 3 27 4.5 40.5 4.5S86.5 94 100.5 91" class="banda fina"/></symbol>
+  <symbol id="ilu-esponja" viewBox="0 0 120 120"><path d="M60 12C46 32 30 48 30 72c0 12 4 20 10 24h40c6-4 10-12 10-24 0-24-16-40-30-60z"/><path d="M40 96c6 3 34 3 40 0" class="fina"/><path d="M46 44c-6 10-10 19-10 30" class="fina"/><path d="M60 12c-1 22-4 40-14 58" class="fina"/><path d="M34 108h52" class="fina"/></symbol>
+  <symbol id="ilu-tapete" viewBox="0 0 120 120"><rect x="14" y="20" width="92" height="80" rx="9"/><path d="M22 44h76" class="fina"/><path d="M22 66h76" class="fina"/><circle cx="31" cy="32" r="3.2"/><circle cx="45.5" cy="32" r="3.2"/><circle cx="60" cy="32" r="3.2"/><circle cx="74.5" cy="32" r="3.2"/><circle cx="89" cy="32" r="3.2"/><path d="M30 50v10M40 50v10M50 50v10M60 50v10M70 50v10M80 50v10M90 50v10"/><path d="M26 79c4-4 8-4 12 0s8 4 12 0 8-4 12 0 8 4 12 0 8-4 12 0 8 4 8 4" class="fina"/><path d="M26 90c4-4 8-4 12 0s8 4 12 0 8-4 12 0 8 4 12 0 8-4 12 0 8 4 8 4" class="fina"/><path d="M14 104h92" class="fina"/></symbol>
+  <symbol id="ilu-rizador" viewBox="0 0 120 120"><path d="M18 34c10-14 74-14 84 0"/><path d="M18 34v6c10-14 74-14 84 0v-6" class="fina"/><path d="M25 46c8-9 62-9 70 0"/><path d="M25 46v7c8-9 62-9 70 0v-7"/><path d="M33 53c5-4 49-4 54 0" class="fina"/><path d="M18 34l-3 12M102 34l3 12"/><path d="M15 46l19 32M105 46l-19 32"/><path d="M25 53l14 25M95 53l-14 25" class="fina"/><path d="M39 78h42"/><path d="M60 46v32"/><path d="M60 78c-3 6-9 10-16 12M60 78c3 6 9 10 16 12"/><ellipse cx="41" cy="100" rx="10" ry="8"/><ellipse cx="79" cy="100" rx="10" ry="8"/><path d="M50 96c1-2 2-3 4-3M70 96c-1-2-2-3-4-3" class="fina"/></symbol>
+  <symbol id="ilu-sistema" viewBox="0 0 120 120"><g transform="translate(60 118)"><g transform="translate(0 -73.02)"><path d="M-8.05 0C-8.05 -10.35 -7.47 -19.55 0 -20.7C7.48 -19.55 8.05 -10.35 8.05 0Z"/><path d="M-2.99 -1.15V-14.95M2.99 -1.15V-14.95" class="pelo"/></g><path d="M-3.48 -2.3Q-3.48 0 -2.1 0H2.1Q3.48 0 3.48 -2.3L4.83 -64.4H-4.83ZM-6.21 -73.02L-5.29 -64.4H5.29L6.21 -73.02Z"/><path d="M-5.63 -70.95H5.64" class="pelo"/></g><g transform="translate(16 62) scale(.5)"><path d="M60 12C46 32 30 48 30 72c0 12 4 20 10 24h40c6-4 10-12 10-24 0-24-16-40-30-60z"/><path d="M40 96c6 3 34 3 40 0" class="fina"/><path d="M46 44c-6 10-10 19-10 30" class="fina"/><path d="M60 12c-1 22-4 40-14 58" class="fina"/></g><g transform="translate(68 60) scale(.44)"><path d="M18 34c10-14 74-14 84 0"/><path d="M18 34v6c10-14 74-14 84 0v-6" class="fina"/><path d="M25 46c8-9 62-9 70 0"/><path d="M25 46v7c8-9 62-9 70 0v-7"/><path d="M33 53c5-4 49-4 54 0" class="fina"/><path d="M18 34l-3 12M102 34l3 12"/><path d="M15 46l19 32M105 46l-19 32"/><path d="M25 53l14 25M95 53l-14 25" class="fina"/><path d="M39 78h42"/><path d="M60 46v32"/><path d="M60 78c-3 6-9 10-16 12M60 78c3 6 9 10 16 12"/><ellipse cx="41" cy="100" rx="10" ry="8"/><ellipse cx="79" cy="100" rx="10" ry="8"/><path d="M50 96c1-2 2-3 4-3M70 96c-1-2-2-3-4-3" class="fina"/></g></symbol>
+  <!-- Trazo de polvo: elipse difuminada -->
+  <filter id="difu" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
 </svg>
 
 <!-- ============ BARRA SUPERIOR ============ -->
@@ -402,16 +450,16 @@ footer .pie{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;border-t
     <button class="menu-btn" id="btnMenu" type="button" aria-expanded="false" aria-controls="menu"><svg viewBox="0 0 20 14" aria-hidden="true"><path d="M0 1h20M0 7h20M0 13h20"/></svg>Menú</button>
     <nav aria-label="Secciones">
       <a href="#coleccion">Colección</a>
-      <a href="#diez">El kit</a>
+      <a href="#ritual">El ritual</a>
       <a href="#porque">Por qué nixa</a>
       <a href="#somos">Nosotros</a>
     </nav>
-    <a class="logo-a" href="#portada" aria-label="nixa BEAUTY, inicio"><svg class="logo" viewBox="0 0 360 250" role="img" aria-label="nixa BEAUTY"><use href="#lockup"/></svg></a>
+    <a class="logo-a" href="#portada" aria-label="nixa BEAUTY, inicio"><svg class="logo" viewBox="0 0 630 158" role="img" aria-label="nixa BEAUTY"><use href="#lockup-h"/></svg></a>
     <button class="bolsa" id="btnCarrito" type="button" aria-label="Abrir la bolsa"><svg viewBox="0 0 20 22" aria-hidden="true"><path d="M3 7h14l1 14H2L3 7zM6.5 7V5.5a3.5 3.5 0 0 1 7 0V7"/></svg><span class="txt">Bolsa</span><span class="cnt" id="nCarrito">0</span></button>
   </div>
   <div class="menu" id="menu">
     <a href="#coleccion">Colección</a>
-    <a href="#diez">El kit</a>
+    <a href="#ritual">El ritual</a>
     <a href="#porque">Por qué nixa</a>
     <a href="#somos">Nosotros</a>
   </div>
@@ -423,33 +471,36 @@ footer .pie{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;border-t
 <section class="portada" id="portada">
   <div class="w">
     <div class="texto">
-      <p class="eti">Herramientas de belleza · Guadalajara</p>
-      <h1>Herramientas que <em>sí</em> duran.</h1>
-      <p class="lead">Diez brochas numeradas por oficio, esponjas de maquillaje, un tapete lavador y un rizador. Las probamos a mano antes de enviarlas. Somos Alan y Majo, y esto lo armamos en casa.</p>
+      <p class="eti">Brochas y esponjas de maquillaje · Guadalajara</p>
+      <h1>Para difuminar <em>bien</em>, todos los días.</h1>
+      <p class="lead">Diez brochas numeradas por oficio, esponjas que dejan la base sin marcas, un tapete para lavarlas y un rizador que abre la mirada. Suaves en la piel, y aguantan cientos de lavadas.</p>
       <div class="cta">
         <a class="btn" href="#coleccion" id="irKit">Ver la colección</a>
         <button class="btn linea" type="button" id="btnAyudaPortada">¿Te ayudo a elegir?</button>
       </div>
+      <p class="nota">Las armamos y las enviamos nosotros, Alan y Majo.</p>
     </div>
 
-    <figure class="escena" aria-label="Kit N°1">
-      <!-- FOTO: portada — el Kit N°1 abierto sobre fondo crema, brochas en abanico con los números visibles. Vertical 4:5. Poner <img src="…" alt="Kit N°1 abierto"> dentro de .arco y el abanico queda cubierto. -->
-      <div class="arco"><svg class="fan" viewBox="0 0 100 76" aria-hidden="true"><use href="#abanico"/></svg></div>
+    <figure class="escena" aria-label="La brocha de nixa">
+      <span class="polvo blob" aria-hidden="true"></span>
+      <!-- FOTO: portada — el Kit N°1 abierto sobre fondo crema, brochas en abanico con los números visibles. Vertical 4:5. Poner <img src="…" alt="Kit N°1 abierto"> dentro de .arco y la brocha queda cubierta. -->
+      <div class="arco"><svg class="brocha" viewBox="0 0 100 130" width="220" height="286" aria-hidden="true"><use href="#brocha"/></svg></div>
       <span class="disco" aria-hidden="true"></span>
       <span class="anillo" aria-hidden="true"></span>
+      <span class="polvo trazo" aria-hidden="true"><svg viewBox="0 0 200 100"><ellipse cx="100" cy="50" rx="86" ry="18" fill="#CFA59B" opacity=".55" transform="rotate(-14 100 50)" filter="url(#difu)"/></svg></span>
       <figcaption><span class="eti">Kit N°1</span><span class="serif">Diez brochas, estuche y dos esponjas</span></figcaption>
     </figure>
   </div>
 </section>
 
 <!-- ============ ARGUMENTOS ============ -->
-<section class="args" aria-label="Por qué elegir nixa">
+<section class="args" aria-label="Lo que le prometemos a tu piel">
   <div class="w">
     <ul>
-      <li><svg class="ico" viewBox="0 0 34 34" aria-hidden="true"><path d="M17 31V19M11 19h12l-1.2-7.5a5 5 0 0 0-9.6 0L11 19zM14 11.5c0-4 1.2-7.5 3-9 1.8 1.5 3 5 3 9"/></svg><h3>Probadas a mano</h3><p>Cada brocha se frota contra la palma antes de salir. Si suelta un pelo, no se envía.</p></li>
-      <li><svg class="ico" viewBox="0 0 34 34" aria-hidden="true"><path d="M5 5h13l11 11-13 13L5 18V5z"/><circle cx="11" cy="11" r="2"/></svg><h3>Numeradas por oficio</h3><p>El número y el nombre van en el mango. No hay que adivinar cuál es cuál.</p></li>
-      <li><svg class="ico" viewBox="0 0 34 34" aria-hidden="true"><path d="M17 3l11 4v9c0 7-4.8 12.6-11 15C10.8 28.6 6 23 6 16V7l11-4z"/><path d="M12 17l3.5 3.5L22 13"/></svg><h3>Garantía de 90 días</h3><p>Si algo falla, nos mandas una foto y te llega la de reemplazo.</p></li>
-      <li><svg class="ico" viewBox="0 0 34 34" aria-hidden="true"><path d="M17 31s-9-9.5-9-16a9 9 0 0 1 18 0c0 6.5-9 16-9 16z"/><circle cx="17" cy="15" r="3"/></svg><h3>Armadas en Guadalajara</h3><p>Lo armamos nosotros. En la ciudad, entrega el mismo día.</p></li>
+      <li><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M6 27c4-9 9-14 12-14s8 5 12 14M12 27c2-5 4-8 6-8s4 3 6 8"/><path d="M4 31h28" class="fina"/></svg><h3>Suaves en la piel</h3><p>Fibra sintética densa que difumina sin rayar y no se bebe la base ni el rubor.</p></li>
+      <li><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 33V21M13 21h10l-1-6.5a4 4 0 0 0-8 0L13 21z"/><path d="M15.5 14.5c0-4 1-7.5 2.5-9.5 1.5 2 2.5 5.5 2.5 9.5"/><path d="M15 27h6"/></svg><h3>Numeradas por oficio</h3><p>El número y el oficio van en el mango, del polvo a las cejas. No hay que adivinar.</p></li>
+      <li><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 4l11 4v9c0 7-4.8 12.6-11 15C11.8 29.6 7 24 7 17V8l11-4z"/><path d="M13 18l3.5 3.5L23 14"/></svg><h3>Aguantan cientos de lavadas</h3><p>Si una suelta pelo en sus primeros noventa días, te llega la de reemplazo.</p></li>
+      <li><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 32s-9-9.5-9-16a9 9 0 0 1 18 0c0 6.5-9 16-9 16z"/><circle cx="18" cy="16" r="3"/></svg><h3>Armadas en Guadalajara</h3><p>Cada pedido lo armamos nosotros. En la ciudad, entrega el mismo día.</p></li>
     </ul>
   </div>
 </section>
@@ -459,43 +510,31 @@ footer .pie{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;border-t
   <div class="w">
     <div class="cab">
       <p class="eti">La colección</p>
-      <h2>Cinco piezas, un sistema.</h2>
-      <p>Herramientas, no cosméticos. Precios en pesos mexicanos; lo armamos y lo enviamos nosotros.</p>
+      <h2>Cinco piezas para toda la rutina.</h2>
+      <p>Del polvo a las pestañas. Precios en pesos mexicanos; lo armamos y lo enviamos nosotros.</p>
     </div>
     <div class="grid" id="prods" aria-live="polite"><p class="vacio">Cargando la colección…</p></div>
   </div>
 </section>
 
-<!-- ============ LAS DIEZ BROCHAS ============ -->
-<section class="diez oscuro" id="diez">
+<!-- ============ EL RITUAL · las diez brochas ============ -->
+<section class="ritual oscuro" id="ritual">
   <div class="w">
     <div class="cab">
-      <p class="eti">El Kit N°1 por dentro</p>
-      <h2>Diez brochas, cada una con su oficio.</h2>
-      <p>El número va grabado en el mango, en el orden en que una se maquilla en casa: del polvo a las cejas.</p>
+      <p class="eti">El Kit N°1 · el ritual completo</p>
+      <h2>Del rostro a los ojos, diez brochas con oficio.</h2>
+      <p>Van numeradas en el orden en que una se maquilla por la mañana. Primero la piel, después la mirada.</p>
     </div>
-    <ol id="listaDiez">
-      <li><span class="no">01</span><b>Polvo</b><small>Rostro completo · sella y matiza</small></li>
-      <li><span class="no">02</span><b>Base</b><small>Rostro · empareja el tono sin marcas</small></li>
-      <li><span class="no">03</span><b>Rubor</b><small>Mejillas · color donde sube la sonrisa</small></li>
-      <li><span class="no">04</span><b>Difuminar</b><small>Párpado · funde los bordes</small></li>
-      <li><span class="no">05</span><b>Contorno</b><small>Pómulo y mandíbula · da forma</small></li>
-      <li><span class="no">06</span><b>Sombra</b><small>Párpado móvil · deposita el color</small></li>
-      <li><span class="no">07</span><b>Cuenca</b><small>Cuenca del ojo · profundidad</small></li>
-      <li><span class="no">08</span><b>Corrector</b><small>Ojeras y detalles · cubre con precisión</small></li>
-      <li><span class="no">09</span><b>Delinear</b><small>Línea de pestañas · trazo fino</small></li>
-      <li><span class="no">10</span><b>Cejas y pestañas</b><small>Cejas · peina, ordena y separa</small></li>
-    </ol>
-    <p class="lectura"><b>Si empiezas, no tienes que aprenderte nada.</b> Si ya sabes, dejas de buscar. Las diez vienen en un estuche rígido, con dos esponjas de maquillaje y el mapa del rostro.</p>
+    <div class="grupo">
+      <p class="eti">Rostro</p>
+      <ol id="listaRostro"><li><svg class="cabeza" viewBox="-8 -20 16 26" aria-hidden="true"><path d="M-7 0C-7 -9 -6.5 -17 0 -18C6.5 -17 7 -9 7 0Z"/><path d="M-2.6 -1V-13M2.6 -1V-13" class="pelo"/><path d="M-3.4 0l.6 4.5h5.6l.6-4.5z"/></svg><span class="no">01</span><b>Polvo</b><small>Sella la base y matiza el brillo con un velo ligero.</small></li><li><svg class="cabeza" viewBox="-8 -20 16 26" aria-hidden="true"><path d="M-6 0C-6.2 -8 -6 -14 -4 -16Q0 -18 4 -16C6 -14 6.2 -8 6 0Z"/><path d="M-2.2 -1V-12M2.2 -1V-12" class="pelo"/><path d="M-3.4 0l.6 4.5h5.6l.6-4.5z"/></svg><span class="no">02</span><b>Base</b><small>Empareja el tono del rostro sin dejar marcas.</small></li><li><svg class="cabeza" viewBox="-8 -20 16 26" aria-hidden="true"><path d="M-5.5 0C-5.5 -8 -5 -15 0 -16C5 -15 5.5 -8 5.5 0Z"/><path d="M-2 -1V-11M2 -1V-11" class="pelo"/><path d="M-3.4 0l.6 4.5h5.6l.6-4.5z"/></svg><span class="no">03</span><b>Rubor</b><small>Color en las mejillas, justo donde sube la sonrisa.</small></li><li><svg class="cabeza" viewBox="-8 -20 16 26" aria-hidden="true"><path d="M-4.5 0C-5 -6 -4 -11 0 -12C4 -11 5 -6 4.5 0Z"/><path d="M-1.6 -1V-8M1.6 -1V-8" class="pelo"/><path d="M-3.4 0l.6 4.5h5.6l.6-4.5z"/></svg><span class="no">04</span><b>Difuminar</b><small>Funde los bordes para que nada se vea cortado.</small></li><li><svg class="cabeza" viewBox="-8 -20 16 26" aria-hidden="true"><path d="M-5.5 0C-5.8 -6 -5.5 -10 -4.5 -11L4 -17C5.5 -14 5.8 -6 5.5 0Z"/><path d="M-2 -1V-9M2 -1V-12" class="pelo"/><path d="M-3.4 0l.6 4.5h5.6l.6-4.5z"/></svg><span class="no">05</span><b>Contorno</b><small>Da forma al pómulo y a la mandíbula, en ángulo.</small></li></ol>
+    </div>
+    <div class="grupo">
+      <p class="eti">Ojos</p>
+      <ol id="listaOjos"><li><svg class="cabeza" viewBox="-8 -20 16 26" aria-hidden="true"><path d="M-4.5 0C-4.7 -5 -4.5 -9 -3 -10Q0 -11.5 3 -10C4.5 -9 4.7 -5 4.5 0Z"/><path d="M-1.5 -1V-7M1.5 -1V-7" class="pelo"/><path d="M-3.4 0l.6 4.5h5.6l.6-4.5z"/></svg><span class="no">06</span><b>Sombra</b><small>Deposita el color en el párpado móvil.</small></li><li><svg class="cabeza" viewBox="-8 -20 16 26" aria-hidden="true"><path d="M-4 0C-4.4 -5 -3 -10 0 -13C3 -10 4.4 -5 4 0Z"/><path d="M-1.2 -1V-8M1.2 -1V-8" class="pelo"/><path d="M-3.4 0l.6 4.5h5.6l.6-4.5z"/></svg><span class="no">07</span><b>Cuenca</b><small>Profundidad en la cuenca del ojo, con punta fina.</small></li><li><svg class="cabeza" viewBox="-8 -20 16 26" aria-hidden="true"><path d="M-3.6 0C-3.8 -4 -3.4 -8 -2 -9Q0 -10 2 -9C3.4 -8 3.8 -4 3.6 0Z"/><path d="M-1 -1V-6M1 -1V-6" class="pelo"/><path d="M-3.4 0l.6 4.5h5.6l.6-4.5z"/></svg><span class="no">08</span><b>Corrector</b><small>Cubre ojeras y detalles con precisión.</small></li><li><svg class="cabeza" viewBox="-8 -20 16 26" aria-hidden="true"><path d="M-2.4 0C-2.6 -4 -1.4 -9 0 -13C1.4 -9 2.6 -4 2.4 0Z"/><path d="M0 -1V-8" class="pelo"/><path d="M-3.4 0l.6 4.5h5.6l.6-4.5z"/></svg><span class="no">09</span><b>Delinear</b><small>Trazo fino en la línea de las pestañas.</small></li><li><svg class="cabeza" viewBox="-8 -20 16 26" aria-hidden="true"><path d="M-2.6 0V-11Q0 -13.5 2.6 -11V0Z"/><path d="M-2.6 -2.5H2.6M-2.6 -5H2.6M-2.6 -7.5H2.6M-2.4 -10H2.4" class="pelo"/><path d="M-3.4 0l.6 4.5h5.6l.6-4.5z"/></svg><span class="no">10</span><b>Cejas y pestañas</b><small>Peina, ordena y separa.</small></li></ol>
+    </div>
+    <p class="lectura"><b>Si empiezas, no tienes que aprenderte nada.</b> Si ya te maquillas, dejas de buscar cuál era cuál. Las diez vienen en un estuche rígido, con dos esponjas de maquillaje y el mapa del rostro.</p>
     <div class="acciones"><button class="btn claro" type="button" id="verKit">Ver el Kit N°1</button></div>
-    <figure class="tira" aria-hidden="true">
-      <!-- FOTO: las diez brochas en abanico sobre fondo burgundy, mango hacia el frente con los números legibles. Horizontal ancha (mínimo 1600 px). Poner <img src="…" alt=""> y los abanicos quedan cubiertos. -->
-      <svg class="fan" viewBox="0 0 100 76"><use href="#abanico"/></svg>
-      <svg class="fan" viewBox="0 0 100 76"><use href="#abanico"/></svg>
-      <svg class="fan" viewBox="0 0 100 76"><use href="#abanico"/></svg>
-      <svg class="fan" viewBox="0 0 100 76"><use href="#abanico"/></svg>
-      <svg class="fan" viewBox="0 0 100 76"><use href="#abanico"/></svg>
-    </figure>
   </div>
 </section>
 
@@ -505,17 +544,17 @@ footer .pie{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;border-t
     <div>
       <div class="cab" style="text-align:left;margin-left:0">
         <p class="eti">Por qué nixa</p>
-        <h2>Sin letras chiquitas.</h2>
+        <h2>Lo que le prometemos a tu piel.</h2>
       </div>
       <ol class="razones">
-        <li><h3>Las probamos a mano.</h3><p>Antes de enviar un set, frotamos cada brocha contra la palma. Si suelta un solo pelo, no sale de aquí. La fibra no se bebe el producto, así que se lava con agua tibia y jabón neutro y queda como el primer día.</p></li>
-        <li><h3>Cada una dice su oficio.</h3><p>Grabamos el número y el nombre en el mango porque a nosotros nos pasaba: tres brochas parecidas en el estuche y ninguna idea de cuál era la de cuenca. Con esto no hay que adivinar.</p></li>
-        <li><h3>Lo armamos aquí.</h3><p>Cada pedido se arma en Guadalajara, en nuestra casa. Si estás en la ciudad, te lo entregamos hoy mismo; al resto de México lo mandamos por paquetería.</p></li>
+        <li><h3>Se sienten suaves.</h3><p>Fibra sintética densa, de punta fina, que difumina la base y el rubor sin rayar ni dejar marcas. No se bebe el producto, así que rinde más y se lava con agua tibia y jabón neutro.</p></li>
+        <li><h3>Aguantan cientos de lavadas.</h3><p>Antes de enviar un set, frotamos cada brocha contra la palma. Si suelta un solo pelo, no sale de aquí. Lavada bien, una brocha nixa queda como el primer día durante años.</p></li>
+        <li><h3>Cada una dice su oficio.</h3><p>Grabamos el número y el oficio en el mango porque a nosotros nos pasaba: tres brochas parecidas en el estuche y ninguna idea de cuál era la de cuenca. Con esto, la rutina fluye.</p></li>
       </ol>
     </div>
 
     <aside class="garantia" aria-label="Garantía">
-      <p class="eti">La garantía, contada como es</p>
+      <p class="eti">La garantía, como es</p>
       <p class="n">90<small>días</small></p>
       <p class="txt">Si a una brocha se le cae el pelo en sus primeros noventa días, nos escribes por WhatsApp con una foto. Te contesta Majo o te contesta Alan, el mismo día.</p>
       <p class="txt">Te mandamos la de reemplazo y ya. No pedimos ticket ni formulario, y no te hacemos regresar nada.</p>
@@ -524,7 +563,7 @@ footer .pie{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;border-t
 
     <div class="origen">
       <p class="eti">De dónde viene el nombre</p>
-      <p class="txt"><em>nixa</em> viene de nixtamal: el maíz que se prepara con cal para que rinda, alimente y dure. Así quisimos hacer cada herramienta: sin prisa, para que aguante.</p>
+      <p class="txt"><em>nixa</em> viene de nixtamal: el maíz que se prepara con cal para que rinda, alimente y dure. Así quisimos hacer cada pieza: sin prisa, para que se quede en tu rutina.</p>
     </div>
   </div>
 </section>
@@ -534,8 +573,8 @@ footer .pie{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;border-t
   <div class="w">
     <div class="marco">
       <p class="eti">Quiénes somos</p>
-      <p class="txt serif">nixa existe porque compramos brochas baratas y a la segunda lavada ya soltaban pelo. Las buenas costaban lo de un mes de despensa.</p>
-      <p class="txt">Así que hicimos las nuestras: pocas piezas, probadas a mano, a un precio que se puede pagar. Lo que prometemos es corto: si algo falla, lo reponemos; si nos escribes, te contesta uno de los dos.</p>
+      <p class="txt serif">nixa existe porque nos cansamos de brochas que rayaban la piel, se bebían la base y soltaban pelo a la segunda lavada. Las buenas costaban lo de un mes de despensa.</p>
+      <p class="txt">Así que hicimos las nuestras: pocas piezas, suaves, probadas una por una, a un precio que se puede pagar. Lo que prometemos es corto: si algo falla, lo reponemos; si nos escribes, te contesta uno de los dos.</p>
       <p class="firma">Alan y Majo<span>Guadalajara, Jalisco</span></p>
     </div>
   </div>
@@ -545,9 +584,10 @@ footer .pie{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;border-t
 
 <!-- ============ PIE ============ -->
 <footer>
+  <span class="polvo blob" aria-hidden="true"></span>
   <div class="w">
-    <svg class="logo" viewBox="0 0 360 250" role="img" aria-label="nixa BEAUTY"><use href="#lockup"/></svg>
-    <p class="tag">Herramientas de belleza que sí duran. Armadas en Guadalajara.</p>
+    <svg class="logo" viewBox="0 0 340 224" role="img" aria-label="nixa BEAUTY"><use href="#lockup"/></svg>
+    <p class="tag">Brochas y esponjas de maquillaje. Armadas en Guadalajara.</p>
     <div class="cols">
       <div><b>Escríbenos</b><a id="waPie" href="#" target="_blank" rel="noopener">WhatsApp</a><br><span id="correoPie">hola@nixa.mx</span></div>
       <div><b>Envíos</b>En Guadalajara, el mismo día.<br>Al resto de México, por paquetería.</div>
@@ -562,7 +602,7 @@ footer .pie{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;border-t
   <header class="top">
     <div class="w">
       <button class="volver" id="cerrarFicha" type="button"><svg viewBox="0 0 18 12" aria-hidden="true"><path d="M17 6H1M6 1L1 6l5 5"/></svg>Colección</button>
-      <svg class="logo" viewBox="0 0 360 250" role="img" aria-label="nixa BEAUTY"><use href="#lockup"/></svg>
+      <svg class="logo" viewBox="0 0 630 158" role="img" aria-label="nixa BEAUTY"><use href="#lockup-h"/></svg>
       <button class="bolsa" id="btnCarritoFicha" type="button" aria-label="Abrir la bolsa"><svg viewBox="0 0 20 22" aria-hidden="true"><path d="M3 7h14l1 14H2L3 7zM6.5 7V5.5a3.5 3.5 0 0 1 7 0V7"/></svg><span class="txt">Bolsa</span><span class="cnt" id="nCarritoFicha">0</span></button>
     </div>
   </header>
@@ -587,7 +627,7 @@ footer .pie{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;border-t
         <label class="campo"><span>Tu nombre</span><input id="nom" autocomplete="name" placeholder="Nombre y apellido"></label>
         <label class="campo"><span>WhatsApp a 10 dígitos</span><input id="tel" inputmode="tel" autocomplete="tel" placeholder="33 0000 0000"></label>
         <label class="campo"><span>Dirección de entrega</span><textarea id="dir" autocomplete="street-address" placeholder="Calle, número, colonia, CP"></textarea></label>
-        <button class="btn ancho" id="pedir" type="button">Enviar pedido por WhatsApp</button>
+        <button class="btn vino ancho" id="pedir" type="button">Enviar pedido por WhatsApp</button>
         <p class="msg" id="msgPedido"></p>
         <p class="nota">Te contestamos para confirmar el pago y la entrega. Aquí no se cobra nada.</p>
       </div>
@@ -611,7 +651,7 @@ const KEY_SB="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZ
 const WA="523300000000"; // <-- AQUÍ VA EL WHATSAPP REAL DE NIXA (52 + 10 dígitos, sin espacios). Es la única línea que hay que cambiar.
 
 // FOTOS: cuando lleguen, poner aquí la ruta de cada una (misma carpeta que este archivo o URL).
-// Con la ruta vacía se muestra la lámina con el ícono; con ruta, la foto lo cubre. No hay que tocar nada más.
+// Con la ruta vacía se muestra la lámina con la ilustración; con ruta, la foto la cubre. No hay que tocar nada más.
 const FOTOS={KIT1:"",ESP4:"",LAV1:"",RIZ1:"",SIS1:""};
 
 const sb=supabase.createClient(URL_SB,KEY_SB);
@@ -622,33 +662,28 @@ let PROD=[], bolsa={};
 
 // Texto de venta por SKU, escrito por nosotros. El nombre y el precio salen de la base.
 const COPY={
-  KIT1:{tag:'Por aquí empezaríamos',desc:'Diez brochas numeradas, estuche rígido, dos esponjas de maquillaje y el mapa del rostro. Es lo que compraríamos hoy si no tuviéramos nada: lo que se usa, y ninguna que se quede en el cajón.',
+  KIT1:{tag:'Por aquí empezaríamos',desc:'Diez brochas numeradas, del polvo a las cejas, en un estuche rígido con dos esponjas de maquillaje y el mapa del rostro. Es la rutina completa: la piel primero, la mirada después, y ninguna brocha que se quede en el cajón.',
     incluye:['Diez brochas numeradas, del 01 al 10','Estuche rígido con cierre','Dos esponjas de maquillaje','El mapa del rostro impreso'],
-    cuidado:'Agua tibia y jabón neutro. Se secan acostadas, con la cabeza fuera de la mesa, y quedan como el primer día.'},
-  ESP4:{tag:'',desc:'Cuatro esponjas de maquillaje que crecen con agua y no se beben la base. Nosotros las cambiamos cada tres meses; por eso las mandamos de a cuatro, para que te duren el año.',
-    incluye:['Cuatro esponjas de maquillaje','Se usan húmedas; crecen con el agua'],
-    cuidado:'Se lavan con jabón neutro después de usarlas y se cambian cada tres meses. Por eso van de a cuatro.'},
-  LAV1:{tag:'',desc:'Tapete lavador de silicón que se pega al lavabo. Es con el que lavamos las nuestras: agua tibia, jabón neutro, dos pasadas por los relieves, y la fibra queda como nueva.',
-    incluye:['Tapete de silicón con relieves de dos texturas','Ventosas que lo fijan al lavabo'],
+    cuidado:'Agua tibia y jabón neutro, una vez a la semana. Se secan acostadas, con la cabeza fuera de la mesa, y quedan como el primer día.'},
+  ESP4:{tag:'',desc:'Cuatro esponjas de maquillaje que se usan húmedas: crecen con el agua, no se beben la base y la dejan pareja, sin marcas ni rayas. Nosotros las cambiamos cada tres meses; por eso van de a cuatro, para que te duren el año.',
+    incluye:['Cuatro esponjas de maquillaje','Se usan húmedas; crecen con el agua','Punta fina para ojeras y nariz; base plana para mejillas'],
+    cuidado:'Se lavan con jabón neutro después de cada uso y se cambian cada tres meses. Por eso van de a cuatro.'},
+  LAV1:{tag:'',desc:'Tapete lavador de brochas, de silicón, que se pega al lavabo con ventosas. Es con el que lavamos las nuestras: agua tibia, jabón neutro, dos pasadas por los relieves, y la fibra suelta el rubor y la base sin maltratarse.',
+    incluye:['Tapete de silicón con relieves de tres texturas','Ventosas que lo fijan al lavabo'],
     cuidado:'Se enjuaga y se deja secar. No se deforma ni guarda olor.'},
-  RIZ1:{tag:'',desc:'Rizador de acero con almohadilla suave; lleva repuestos. Lo probamos en cada pedido antes de cerrarlo: abre la mirada y no pellizca. Si quieres algo chico para conocernos, es este.',
+  RIZ1:{tag:'',desc:'Rizador de pestañas de acero con almohadilla suave, y trae repuestos. Abre la mirada sin pellizcar: lo probamos en cada pedido antes de cerrarlo. Si quieres algo chico para conocernos, es este.',
     incluye:['Rizador de pestañas de acero','Almohadilla suave','Repuestos de almohadilla'],
     cuidado:'La almohadilla se cambia cuando se marca. Los repuestos vienen en la caja.'},
-  SIS1:{tag:'Todo junto',desc:'La línea completa: kit, esponjas, tapete y rizador. Es lo que regalamos nosotros cuando queremos quedar bien. {AHORRO}',
+  SIS1:{tag:'Todo junto',desc:'La rutina completa: el kit de diez brochas, las esponjas de maquillaje, el tapete para lavarlas y el rizador. Es lo que regalamos nosotros cuando queremos quedar bien. {AHORRO}',
     incluye:['Kit N°1: diez brochas, estuche y dos esponjas','Esponjas de maquillaje, pack de 4','Tapete lavador de brochas','Rizador de pestañas'],
     cuidado:'Cada pieza trae su cuidado escrito. En resumen: agua tibia, jabón neutro y paciencia.'}
 };
-const GARANTIA='Noventa días. Si algo falla, nos escribes por WhatsApp con una foto y te mandamos el reemplazo. Sin ticket, sin formulario.';
+const GARANTIA='Noventa días. Si una brocha suelta pelo, nos escribes por WhatsApp con una foto y te mandamos el reemplazo. Sin ticket, sin formulario.';
 const DIEZ=[['01','Polvo','Rostro'],['02','Base','Rostro'],['03','Rubor','Mejillas'],['04','Difuminar','Párpado'],['05','Contorno','Pómulo'],['06','Sombra','Párpado'],['07','Cuenca','Ojo'],['08','Corrector','Ojeras'],['09','Delinear','Pestañas'],['10','Cejas y pestañas','Cejas']];
 
-// Lámina: lo que ocupa el hueco de la foto mientras no hay foto. Un ícono de línea por pieza.
-function lamina(sku){
-  if(sku==='KIT1') return `<svg class="ico fan" viewBox="0 0 100 76" aria-hidden="true"><use href="#abanico"/></svg>`;
-  if(sku==='ESP4') return `<svg class="ico" viewBox="0 0 100 100" aria-hidden="true"><path d="M30 44c0-11 7-22 15-28 8 6 15 17 15 28a15 15 0 0 1-30 0z"/><path d="M62 60c0-8 5-16 11-21 6 5 11 13 11 21a11 11 0 0 1-22 0z"/><path d="M16 66c0-8 5-16 11-21 6 5 11 13 11 21a11 11 0 0 1-22 0z"/><path d="M40 82c0-6 4-12 8-16 4 4 8 10 8 16a8 8 0 0 1-16 0z"/></svg>`;
-  if(sku==='LAV1') return `<svg class="ico" viewBox="0 0 100 100" aria-hidden="true"><rect x="16" y="22" width="68" height="56" rx="9"/><path d="M16 50h68"/><circle cx="30" cy="36" r="2"/><circle cx="43" cy="36" r="2"/><circle cx="57" cy="36" r="2"/><circle cx="70" cy="36" r="2"/><path d="M28 58v12M36 58v12M44 58v12M52 58v12M60 58v12M68 58v12"/></svg>`;
-  if(sku==='RIZ1') return `<svg class="ico" viewBox="0 0 100 100" aria-hidden="true"><path d="M18 40c10-16 54-16 64 0"/><path d="M24 47c8-11 44-11 52 0"/><path d="M18 40v8M82 40v8M24 47v5M76 47v5"/><path d="M50 52v14"/><path d="M50 66c-3 2-6 4-8 7"/><path d="M50 66c3 2 6 4 8 7"/><ellipse cx="38" cy="80" rx="10" ry="7.5"/><ellipse cx="62" cy="80" rx="10" ry="7.5"/></svg>`;
-  return `<svg class="ico fan" viewBox="0 0 100 100" style="--sw1:3.6;--sw2:2.6" aria-hidden="true"><circle cx="50" cy="50" r="45" style="stroke-width:1.2"/><g transform="translate(20 21) scale(.6)"><use href="#abanico"/></g></svg>`;
-}
+// Lámina: lo que ocupa el hueco de la foto mientras no hay foto. Una ilustración de línea por pieza.
+const ILU={KIT1:'ilu-kit',ESP4:'ilu-esponja',LAV1:'ilu-tapete',RIZ1:'ilu-rizador',SIS1:'ilu-sistema'};
+function lamina(sku){return `<svg class="ilu" viewBox="0 0 120 120" aria-hidden="true"><use href="#${ILU[sku]||'ilu-sistema'}"/></svg>`;}
 function tituloDe(p){const [tit,...resto]=p.nombre.split(' · ');return {tit,sub:resto.join(' · ')};}
 function ahorroSistema(){
   const sis=PROD.find(p=>p.sku==='SIS1');
@@ -663,7 +698,7 @@ function agrega(sku){bolsa[sku]=(bolsa[sku]||0)+1;pinta();abre();}
 async function cargar(){
   const {data}=await sb.from('productos').select('*').eq('activo',true).order('precio',{ascending:false});
   PROD=data||[];
-  // El Kit N°1 va primero y destacado; luego las piezas sueltas; el sistema completo cierra.
+  // El Kit N°1 va primero y destacado; luego las piezas sueltas; la rutina completa cierra.
   const ORDEN=['KIT1','ESP4','LAV1','RIZ1','SIS1'];
   const pos=s=>{const i=ORDEN.indexOf(s);return i<0?99:i;};
   const orden=[...PROD].sort((a,b)=>pos(a.sku)-pos(b.sku));
@@ -695,14 +730,18 @@ function abreFicha(sku){
   const foto=FOTOS[sku]?`<img src="${esc(FOTOS[sku])}" alt="${esc(p.nombre)}">`:lamina(sku);
   const waTxt=encodeURIComponent(`Hola nixa, tengo una duda sobre ${p.nombre}.`);
   $('#cuerpoFicha').innerHTML=`
-    <figure class="lam"><!-- FOTO: ${esc(sku)} · ${esc(p.nombre)} · grande, vertical 4:5. Se llena desde la constante FOTOS. -->${foto}</figure>
+    <div class="escena-f">
+      <span class="polvo blob" aria-hidden="true"></span>
+      <figure class="lam"><!-- FOTO: ${esc(sku)} · ${esc(p.nombre)} · grande, vertical 4:5. Se llena desde la constante FOTOS. -->${foto}</figure>
+      <span class="disco" aria-hidden="true"></span>
+    </div>
     <div class="info">
       <p class="eti">${esc(c.tag||sub||'nixa BEAUTY')}</p>
       <h2 id="tituloFicha">${esc(tit)}</h2>
       <p class="precio">${money(p.precio)}<small>MXN</small></p>
       <p class="desc">${esc(descDe(p))}</p>
       <div class="acciones">
-        <button class="btn" type="button" id="agregaFicha">Agregar a la bolsa</button>
+        <button class="btn vino" type="button" id="agregaFicha">Agregar a la bolsa</button>
         <a class="btn linea" href="https://wa.me/${WA}?text=${waTxt}" target="_blank" rel="noopener">Preguntar por WhatsApp</a>
       </div>
       <p class="nota">Envío en Guadalajara el mismo día. El pago se confirma por WhatsApp; aquí no se cobra nada.</p>
@@ -789,18 +828,18 @@ const PREG=[
 ];
 let resp=[];
 
-// Reglas: regalo o "lo quiero todo" → sistema completo; algo chico → rizador;
+// Reglas: regalo o "lo quiero todo" → rutina completa; algo chico → rizador;
 // de cero → Kit N°1; ya tiene y se maquilla diario → esponjas; ya tiene y sale → tapete.
 function recomienda(r){
   const [inicio,uso,quien]=r;
-  if(quien==='regalo') return {sku:'SIS1',razon:'Para regalar, la línea completa: no falta nada y sale más barato que las piezas por separado.'};
+  if(quien==='regalo') return {sku:'SIS1',razon:'Para regalar, la rutina completa: no falta nada, del polvo a las pestañas, y sale más barato que las piezas por separado.'};
   if(quien==='todo') return {sku:'SIS1',razon:'Si lo quieres todo, junto sale más barato. Es lo que regalamos nosotros cuando queremos quedar bien.'};
-  if(inicio==='chico') return {sku:'RIZ1',razon:'Para probar sin gastar mucho, el rizador. Si te gusta cómo hacemos las cosas, después vienes por el kit.'};
+  if(inicio==='chico') return {sku:'RIZ1',razon:'Para probar sin gastar mucho, el rizador: abre la mirada sin pellizcar. Si te gusta cómo hacemos las cosas, después vienes por el kit.'};
   if(inicio==='cero') return {sku:'KIT1',razon:uso==='diario'
-    ?'Empiezas de cero y te maquillas diario: con el Kit N°1 tienes las diez que se usan y ninguna que sobre.'
-    :'Empiezas de cero: el Kit N°1 trae las diez que se usan, con el número en el mango para no adivinar.'};
-  if(uso==='diario') return {sku:'ESP4',razon:'Ya tienes brochas y te maquillas diario: lo que se gasta son las esponjas. Cuatro te duran el año.'};
-  return {sku:'LAV1',razon:'Ya tienes brochas; lo que las acaba es lavarlas mal. Con el tapete quedan como nuevas y te duran años.'};
+    ?'Empiezas de cero y te maquillas diario: con el Kit N°1 tienes las diez que se usan, de la base a las cejas, y ninguna que sobre.'
+    :'Empiezas de cero: el Kit N°1 trae las diez que se usan, con el número y el oficio en el mango para no adivinar.'};
+  if(uso==='diario') return {sku:'ESP4',razon:'Ya tienes brochas y te maquillas diario: lo que se gasta son las esponjas. Cuatro te duran el año y la base queda sin marcas.'};
+  return {sku:'LAV1',razon:'Ya tienes brochas; lo que las acaba es lavarlas mal. Con el tapete sueltan el producto sin maltratarse y te duran años.'};
 }
 
 function pintaAyuda(){
@@ -827,10 +866,10 @@ function pintaAyuda(){
   } else {
     const {tit,sub}=tituloDe(p);
     c.innerHTML=`<div class="reco"><p class="eti">Nosotros te diríamos</p><h3 id="tituloAyuda">Empieza por aquí.</h3>
-      <div class="prod"><b>${esc(tit)}${sub?`<small>${esc(sub)}</small>`:''}</b><span class="precio">${money(p.precio)}</span></div>
+      <div class="prod"><span class="lamina">${lamina(sku)}</span><b>${esc(tit)}${sub?`<small>${esc(sub)}</small>`:''}</b><span class="precio">${money(p.precio)}</span></div>
       <p class="razon">${esc(razon)}</p>
       <div class="acciones">
-        <button class="btn ancho" type="button" id="agregaReco">Agregarlo a la bolsa</button>
+        <button class="btn vino ancho" type="button" id="agregaReco">Agregarlo a la bolsa</button>
         <a class="btn linea ancho" href="https://wa.me/${WA}?text=${waTxt}" target="_blank" rel="noopener">Preguntarnos por WhatsApp</a>
       </div>
       <button class="link" type="button" id="otraVez">Volver a empezar</button></div>`;
