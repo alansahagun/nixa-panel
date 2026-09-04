@@ -177,6 +177,9 @@ section{padding-top:18px}
 .leyenda .l:before{content:"";display:inline-block;width:9px;height:9px;background:var(--cal);margin-right:6px;vertical-align:-1px}
 .leyenda .majo .l:before{background:var(--rubor)}
 .leyenda .gasto .l:before{background:transparent;border:1px solid rgba(247,239,230,.5);width:7px;height:7px}
+.cuentas{margin-top:18px;padding-top:16px;border-top:1px solid rgba(247,239,230,.16);font:400 13px/1.5 var(--mono);color:rgba(247,239,230,.86);letter-spacing:.01em}
+.cuentas b{color:var(--cal);font-weight:700}
+.cuentas.debe b{color:var(--rubor)}
 
 /* meta de ventas */
 .meta-cab{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
@@ -431,6 +434,7 @@ section{padding-top:18px}
             <div class="majo"><span class="l">Puso Majo</span><b id="cMajo">$0</b></div>
             <div class="gasto"><span class="l">Ha salido</span><b id="cGasto">$0</b></div>
           </div>
+          <div class="cuentas" id="cuentas">Cuentas: van parejos 50/50.</div>
         </div>
 
         <div class="dos forma-lista">
@@ -761,6 +765,12 @@ async function cargarCaja() {
   const a = Number(s?.puso_alan || 0), m = Number(s?.puso_majo || 0), tot = a + m;
   $('#reparto .alan').style.width = tot ? (a / tot * 100) + '%' : '0';
   $('#reparto .majo').style.width = tot ? (m / tot * 100) + '%' : '0';
+  const { data: soc } = await sb.from('caja_socios').select('*').maybeSingle();
+  const bal = Number(soc?.balance_alan || 0);
+  const cu = $('#cuentas');
+  if (Math.abs(bal) < 1) { cu.textContent = 'Cuentas: van parejos 50/50.'; cu.classList.remove('debe'); }
+  else if (bal > 0) { cu.innerHTML = `Cuentas: Majo te debe <b>${money(bal)}</b>.`; cu.classList.remove('debe'); }
+  else { cu.innerHTML = `Cuentas: le debes a Majo <b>${money(-bal)}</b>.`; cu.classList.add('debe'); }
   const { data } = await sb.from('caja').select('*').order('fecha', { ascending: false }).order('id', { ascending: false }).limit(40);
   const cont = $('#listCaja'); cont.innerHTML = '';
   if (!data?.length) return cont.appendChild(el('<div class="vacio">La caja está en ceros. Cuando alguien ponga dinero o se pague algo, queda anotado aquí.</div>'));
