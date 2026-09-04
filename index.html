@@ -3,347 +3,539 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#F7EFE6">
+<meta name="theme-color" content="#F6F1EC">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Nixa">
+<meta name="apple-mobile-web-app-title" content="nixa">
 <meta name="robots" content="noindex">
-<title>Nixa · panel</title>
+<title>nixa BEAUTY · Orquestador</title>
 <link rel="icon" href="icon.png">
 <link rel="apple-touch-icon" href="icon.png">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 /* =========================================================
-   Nixa · panel interno
-   Revista impresa + herramienta. Reglas en vez de cajas.
+   nixa BEAUTY · Orquestador (panel interno)
+   El mismo cuaderno que la tienda: papel crema, tinta cocoa,
+   reglas finas en vez de cajas, Cormorant en titulares y
+   cifras, Jost en lectura y en las versalitas espaciadas.
+   Es herramienta, así que respira un poco menos que la
+   tienda (48–64 px entre bloques) pero nunca aprieta.
+   Nada por debajo de 13 px. Áreas táctiles de 46 px o más.
    ========================================================= */
 :root{
-  --cal:#F7EFE6; --papel:#FFFCF8; --tinta:#2A1B17; --carmin:#9B1B3A; --rubor:#E8B4A6;
-  --linea:#E3D6C8; --verde:#2E6B4F; --tinta2:#6F5B54; --arena:#EFE3D4;
-  --sans:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --tit:"Bricolage Grotesque",var(--sans);
-  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-  --pad:20px;
+  --crema:#F6F1EC; --crema2:#FBF8F5; --nude:#E7D8CC; --nude2:#EFE4DA; --nude3:#F3ECE6;
+  --rosa:#CFA59B; --rosa2:#E3C6BE; --cocoa:#6B422F; --cocoa2:#7A4F3B; --vino:#6A2C2F;
+  --fondo:var(--crema);
+  --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --sans:"Jost","Futura","Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --pad:22px; --ancho:1180px; --t:.25s; --ease:cubic-bezier(.2,.6,.2,1);
 }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;background:var(--cal)}
-body{margin:0;background:var(--cal);color:var(--tinta);font:16px/1.4 var(--sans);min-height:100dvh;-webkit-font-smoothing:antialiased}
-h1,h2,h3,h4{margin:0;font-family:var(--tit);font-weight:800;letter-spacing:-.03em}
-p{margin:0}
+html{-webkit-text-size-adjust:100%;background:var(--crema)}
+body{margin:0;background:var(--crema);color:var(--cocoa);font:400 17px/1.6 var(--sans);font-feature-settings:"lnum";-webkit-font-smoothing:antialiased;min-height:100dvh;overflow-x:hidden}
+h1,h2,h3,h4{margin:0;text-wrap:balance;font-family:var(--serif);font-weight:300;letter-spacing:-.008em;line-height:1.04;font-feature-settings:"lnum"}
+p,figure{margin:0}
+ol,ul{margin:0;padding:0;list-style:none}
 button,input,select,textarea{font:inherit;color:inherit}
-button{-webkit-tap-highlight-color:transparent}
+button{-webkit-tap-highlight-color:transparent;cursor:pointer}
 a{color:inherit}
-img{max-width:100%}
+svg{display:block}
+img{display:block;max-width:100%}
+em{font-style:italic;font-weight:400}
+:focus-visible{outline:1.5px solid var(--cocoa);outline-offset:4px}
+::selection{background:var(--rosa);color:var(--crema)}
 .hide{display:none!important}
-.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
-.kick{font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--carmin)}
-.oscuro .kick{color:var(--rubor)}
-.display{font-family:var(--tit);font-variation-settings:"opsz" 96;font-weight:800;letter-spacing:-.045em;line-height:.88;font-variant-numeric:tabular-nums}
+.gris{color:var(--cocoa2)}
 
-/* ---- wordmark ---- */
-.wm{display:inline-block;height:24px;width:auto;--punto:var(--carmin)}
-.oscuro .wm{--punto:var(--rubor)}
+/* sobretítulos y etiquetas: Jost 500, versalitas espaciadas */
+.eti{font:500 13px/1.5 var(--sans);letter-spacing:.3em;text-transform:uppercase;color:var(--cocoa2)}
+.eti.linea{display:flex;align-items:center;gap:18px}
+.eti.linea:before{content:"";width:36px;border-top:1px solid var(--rosa);flex:none}
+.oscuro .eti{color:var(--rosa)}
 
-/* ---- campos: subrayados, no cajas ---- */
-.campo{display:block;margin-bottom:16px;min-width:0}
-.campo>span{display:block;font:500 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--tinta2);margin-bottom:0}
-.campo input,.campo select{width:100%;border:0;border-bottom:1px solid var(--tinta);border-radius:0;background:transparent;padding:11px 0 9px;font:400 18px/1.3 var(--sans);outline:none;-webkit-appearance:none;appearance:none;margin:0}
-.campo input::placeholder{color:#B8A69B}
-.campo input:focus,.campo select:focus{box-shadow:0 1.5px 0 var(--tinta)}
-.campo select{padding-right:28px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%232A1B17' stroke-width='1.6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 2px center;cursor:pointer}
-.campo textarea,textarea.hoja{width:100%;min-height:96px;border:1px solid var(--tinta);border-radius:0;background:var(--papel);padding:12px 14px;font:400 17px/1.4 var(--sans);outline:none;resize:vertical;margin:0;display:block}
-.campo textarea:focus,textarea.hoja:focus{box-shadow:inset 0 0 0 1px var(--tinta)}
-.forma{display:grid;grid-template-columns:1fr 1fr;gap:0 22px}
-.forma .ancho{grid-column:1/-1}
+/* los numerales de la marca: itálica de Cormorant con el N° volado */
+.n{font:italic 400 1em/1 var(--serif);color:var(--rosa);letter-spacing:0;font-feature-settings:"lnum";white-space:nowrap}
+.n:before{content:"N°";font-size:.56em;font-style:normal;vertical-align:.34em;margin-right:2px;letter-spacing:.04em}
 
-/* ---- botones ---- */
-.btn{display:flex;align-items:center;justify-content:space-between;gap:14px;width:100%;min-height:54px;padding:0 18px;border:1.5px solid var(--tinta);background:var(--tinta);color:var(--cal);font:700 17px/1 var(--tit);letter-spacing:-.01em;border-radius:2px;cursor:pointer;margin-top:8px;text-align:left}
-.btn:after{content:"\2192";font:500 17px/1 var(--mono)}
-.btn.linea{background:transparent;color:var(--tinta)}
-.btn.chico{width:auto;display:inline-flex;min-height:48px;font-size:15px;padding:0 16px}
-.btn:active{transform:translate(1px,1px)}
+/* la brocha, el abanico y los íconos de línea */
+.marca{color:var(--cocoa)}
+.ilu{fill:none;stroke:currentColor;stroke-width:1.2px;stroke-linecap:round;stroke-linejoin:round;color:var(--cocoa)}
+.ilu *{vector-effect:non-scaling-stroke}
+
+/* botones: rectángulos, versalitas espaciadas */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:58px;padding:0 36px;border:1px solid var(--cocoa);background:var(--cocoa);color:var(--crema);font:500 13px/1.2 var(--sans);letter-spacing:.26em;text-transform:uppercase;border-radius:0;text-decoration:none;text-align:center;cursor:pointer;transition:background var(--t),color var(--t),border-color var(--t)}
+.btn:hover{background:var(--vino);border-color:var(--vino);color:var(--crema)}
+.btn.linea{background:transparent;color:var(--cocoa)}
+.btn.linea:hover{background:var(--cocoa);color:var(--crema)}
+.btn.ancho{display:flex;width:100%}
 .btn[disabled]{opacity:.5;cursor:default}
-.oscuro .btn{background:var(--cal);color:var(--tinta);border-color:var(--cal)}
-.link{background:none;border:0;padding:10px 0;font:400 14px/1 var(--sans);color:var(--tinta);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--rubor);text-decoration-thickness:1.5px;cursor:pointer}
-.msg{min-height:20px;font:400 13px/1.4 var(--mono);color:var(--tinta2);margin-top:8px}
-.msg.err{color:var(--carmin)} .msg.ok{color:var(--verde)}
-.o{display:flex;align-items:center;gap:12px;color:var(--tinta2);font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;margin:18px 0 10px}
-.o:before,.o:after{content:"";flex:1;height:1px;background:var(--linea)}
+.mas{width:46px;height:46px;border:1px solid var(--cocoa);background:transparent;color:var(--cocoa);border-radius:50%;display:grid;place-items:center;padding:0;flex:none;transition:background var(--t),color var(--t)}
+.mas:hover{background:var(--cocoa);color:var(--crema)}
+.mas svg{width:14px;height:14px;stroke:currentColor;stroke-width:1.2;fill:none}
+.link{display:inline-block;background:none;border:0;padding:6px 0;font:500 13px/1.5 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--cocoa);text-decoration:none;border-bottom:1px solid var(--rosa);cursor:pointer;transition:border-color var(--t),color var(--t);white-space:nowrap}
+.link:hover{border-bottom-color:var(--cocoa);color:var(--vino)}
+/* área táctil de 46 px sin mover el texto */
+.link,.tarea .ver,.cerrar{position:relative}
+.link:after,.tarea .ver:after,.cerrar:after{content:"";position:absolute;left:-6px;right:-6px;top:-12px;bottom:-12px}
+.link.suave{color:var(--cocoa2);border-bottom-color:var(--nude)}
+.msg{min-height:20px;font-size:16px;line-height:1.5;color:var(--cocoa2);margin-top:12px}
+.msg.err{color:var(--vino)}
+.msg:empty{display:none}
+
+/* campos: subrayado nude, sin cajas. La etiqueta arriba, en versalitas */
+.campo{display:block;margin-bottom:22px;min-width:0}
+.campo>span{display:block;font:500 13px/1.5 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--cocoa2)}
+.campo input,.campo textarea,.campo select{width:100%;border:0;border-bottom:1px solid var(--nude);border-radius:0;background:transparent;padding:10px 0 9px;min-height:46px;font:400 17px/1.4 var(--sans);color:var(--cocoa);outline:none;-webkit-appearance:none;appearance:none;margin:0;display:block;transition:border-color var(--t)}
+.campo textarea{min-height:76px;resize:vertical}
+.campo input::placeholder,.campo textarea::placeholder{color:var(--cocoa2);opacity:.6}
+.campo input:focus,.campo textarea:focus,.campo select:focus{border-bottom-color:var(--cocoa)}
+.campo select{padding-right:28px;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%236B422F' stroke-width='1.2'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 2px center}
+.campo input[type=date]{min-height:46px}
+.campo input[type=date]::-webkit-calendar-picker-indicator{opacity:.55;cursor:pointer}
+.forma{display:grid;grid-template-columns:1fr 1fr;gap:0 24px;margin-top:22px}
+.forma .ancho{grid-column:1/-1}
+.forma+.btn{margin-top:4px}
+.filete{border:0;border-top:1px solid var(--nude);margin:0}
 
 /* =========================================================
-   ENTRAR
+   ¿QUIÉN ERES? · la única puerta. Sin contraseña.
    ========================================================= */
-.login{min-height:100dvh;display:grid;grid-template-rows:auto 1fr}
-.login .marca{padding:calc(36px + env(safe-area-inset-top)) 24px 30px;background:var(--tinta);color:var(--cal);display:flex;flex-direction:column;gap:0}
-.login .marca .wm{height:64px;align-self:flex-start}
-.login .lema{font:700 clamp(26px,7.4vw,44px)/1.02 var(--tit);letter-spacing:-.03em;margin:26px 0 0;max-width:14ch}
-.login .raya{display:block;width:118px;height:10px;margin:10px 0 18px;overflow:visible}
-.login .raya path{fill:none;stroke:var(--rubor);stroke-width:2.2;stroke-linecap:round}
-.login .folio{display:flex;justify-content:space-between;gap:12px;font:400 11px/1.5 var(--mono);color:rgba(247,239,230,.62);letter-spacing:.04em;margin-top:auto;padding-top:22px;border-top:1px solid rgba(247,239,230,.18)}
-.login .hoja{padding:28px 24px calc(36px + env(safe-area-inset-bottom));width:100%;max-width:460px}
-.login .hoja h2{font-size:32px;margin-bottom:18px}
-.login .hoja h2 small{display:block;font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--carmin);margin-bottom:8px}
-.login .nota{color:var(--tinta2);font-size:15px;line-height:1.45;margin:0 0 16px;max-width:36ch}
+.puerta{position:fixed;inset:0;z-index:100;background:var(--crema);overflow:auto;display:flex;flex-direction:column;padding:calc(40px + env(safe-area-inset-top)) var(--pad) calc(40px + env(safe-area-inset-bottom));text-align:center}
+.puerta .q-in{margin:auto;width:100%;max-width:560px}
+.puerta .logo{height:110px;width:auto;margin:0 auto 34px}
+.puerta .eti{display:block;margin-bottom:22px}
+.puerta h1{font-size:clamp(46px,11vw,84px);max-width:12ch;margin:0 auto}
+.puerta .q-nota{margin:22px auto 0;font-size:17px;line-height:1.65;color:var(--cocoa2);max-width:34ch}
+.opcs{display:grid;gap:0;margin:40px auto 0;width:min(100%,520px);border-top:1px solid var(--nude)}
+.opc{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:92px;padding:14px 6px;width:100%;border:0;border-bottom:1px solid var(--nude);background:transparent;color:var(--cocoa);font:300 clamp(34px,8vw,44px)/1.1 var(--serif);text-align:left;transition:padding var(--t),color var(--t);cursor:pointer}
+.opc>span{min-width:0}
+.opc small{display:block;font:500 13px/1.5 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--cocoa2);margin-top:4px}
+.opc:after{content:"";width:11px;height:11px;border-right:1px solid var(--cocoa);border-bottom:1px solid var(--cocoa);transform:rotate(-45deg);flex:none;opacity:.7;transition:transform var(--t)}
+.opc:hover{padding-left:16px;color:var(--vino)}
+.opc:hover:after{transform:rotate(-45deg) translate(3px,3px)}
+.puerta .cerrar-q{margin-top:34px}
 
 /* =========================================================
-   APP · estructura
+   ESTRUCTURA · barra arriba (móvil), lateral (escritorio)
    ========================================================= */
 #app{min-height:100dvh}
-.top{position:sticky;top:0;z-index:5;background:var(--cal);border-bottom:1.5px solid var(--tinta);padding:calc(12px + env(safe-area-inset-top)) var(--pad) 10px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.top .yo{display:flex;align-items:baseline;gap:10px;font:700 15px/1 var(--tit)}
-.top .salir{background:none;border:0;padding:6px 0;font:400 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--tinta2);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.top{position:sticky;top:0;z-index:20;padding:calc(10px + env(safe-area-inset-top)) var(--pad) 10px;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:12px}
+.top:before{content:"";position:absolute;inset:0;background:rgba(246,241,236,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--nude);pointer-events:none}
+.top>*{position:relative}
+.top .logo{height:50px;width:auto;justify-self:center}
+.top .sec{justify-self:start;font-size:22px}
+.top .yo{justify-self:end}
 .lado{display:none}
-.wrap{padding:0 var(--pad) calc(96px + env(safe-area-inset-bottom));max-width:1240px}
-section{padding-top:18px}
+.wrap{padding:26px var(--pad) calc(112px + env(safe-area-inset-bottom));max-width:calc(var(--ancho) + var(--pad)*2);margin:0 auto}
+section{padding:0 0 64px}
 
-/* cabecera de sección */
-.cab{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;padding:6px 0 10px;border-bottom:2px solid var(--tinta);margin-bottom:16px}
-.cab .kick{display:block;margin-bottom:8px}
-.cab h2{font-size:36px;line-height:.92}
-.cab .res{font:400 11px/1.5 var(--mono);color:var(--tinta2);text-align:right;padding-bottom:3px;max-width:44%}
-.sub{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:1px solid var(--tinta);padding:0 0 7px;margin:30px 0 2px}
-.sub h3{font:700 19px/1 var(--tit);letter-spacing:-.02em}
-.sub .n{font:400 11px/1 var(--mono);color:var(--tinta2);letter-spacing:.06em}
-.bloque{margin-bottom:6px}
-.vacio{padding:22px 0 8px;font-size:15px;line-height:1.5;color:var(--tinta2);max-width:38ch}
-.vacio:before{content:"\2014\00a0"}
+/* cabecera de sección: el numeral, el titular y una nota a la derecha */
+.cab{display:grid;gap:6px;padding:10px 0 24px;border-bottom:1px solid var(--nude);margin-bottom:36px}
+.cab .n{font-size:30px;display:block}
+.cab h2{font-size:clamp(46px,11vw,64px);margin-top:2px}
+.cab .res{font-size:16px;line-height:1.5;color:var(--cocoa2);max-width:40ch;margin-top:8px}
+.sub{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 18px;border-bottom:1px solid var(--nude);padding:0 0 12px;margin:0 0 4px}
+.sub h3{font-size:30px;font-weight:300;flex:1 0 auto;min-width:0}
+.sub .eti{letter-spacing:.2em;text-align:right;margin-left:auto;white-space:nowrap}
+.bloque{min-width:0}
+.dos{display:grid;gap:0 64px}
+.dos,.dos+.bloque{margin-top:44px}
+.cab+.dos,.cab+.bloque{margin-top:0}
+.bloque+.bloque{margin-top:48px}
 
-/* filas genéricas */
-.lista>*{border-bottom:1px solid var(--linea)}
-.fila{display:grid;grid-template-columns:26px 1fr auto;gap:12px;padding:14px 0 13px;align-items:baseline}
-.fila .idx{font:400 11px/1 var(--mono);color:var(--tinta2);letter-spacing:.04em}
-.fila .t{font-weight:600;font-size:16px;line-height:1.3}
-.fila .s{font:400 12px/1.5 var(--mono);color:var(--tinta2);margin-top:3px}
-.fila .big{font:700 20px/1 var(--tit);letter-spacing:-.02em;white-space:nowrap;font-variant-numeric:tabular-nums}
-.fila .big.entra{color:var(--verde)} .fila .big.sale{color:var(--carmin)}
+/* estados vacíos: una frase en Cormorant y una línea en Jost */
+.vacio{padding:30px 0 12px;max-width:44ch}
+.vacio b{display:block;font:italic 300 27px/1.15 var(--serif);color:var(--cocoa)}
+.vacio span{display:block;margin-top:8px;font-size:16px;line-height:1.6;color:var(--cocoa2)}
+
+/* filas: numeral, texto, cifra a la derecha */
+.fila{display:grid;grid-template-columns:44px 1fr auto;gap:0 16px;padding:16px 0;border-bottom:1px solid var(--nude);align-items:baseline}
+.fila .n{font-size:22px;padding-top:2px}
+.fila .t{font:400 22px/1.15 var(--serif);color:var(--cocoa);min-width:0;overflow-wrap:anywhere}
+.fila .s{font-size:14px;line-height:1.5;color:var(--cocoa2);margin-top:5px}
+.fila .imp{font:300 28px/1 var(--serif);font-variant-numeric:lining-nums tabular-nums;white-space:nowrap;text-align:right}
+.fila .imp small{display:block;font:400 13px/1.5 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--cocoa2);margin-top:6px}
+.fila .imp.sale{color:var(--vino)}
 
 /* =========================================================
-   HOY
+   N°01 · HOY
    ========================================================= */
-.hero{padding:8px 0 0}
-.hero .fecha{font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--tinta2)}
-.hero h1{font-size:clamp(36px,9.6vw,60px);line-height:.95;margin:8px 0 22px}
-.hero .cifra{display:grid;grid-template-columns:auto 1fr;align-items:end;gap:16px;border-top:2px solid var(--tinta);padding-top:12px}
-.hero .cifra .n{font-size:clamp(84px,26vw,132px)}
-.hero .cifra .l{font:600 17px/1.2 var(--sans);padding-bottom:10px;max-width:15ch}
-.hero .cifra .l small{display:block;font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--tinta2);margin-top:6px}
-.hero .cifra.warn .n{color:var(--carmin)}
-.hero .cifra.warn .l small{color:var(--carmin)}
-.strip{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--tinta);border-bottom:1px solid var(--tinta);margin:22px 0 4px}
-.strip>div{padding:14px 10px 12px;border-right:1px solid var(--linea)}
-.strip>div:last-child{border-right:0}
-.strip .l{font:500 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--tinta2)}
-.strip .v{font:800 26px/1 var(--tit);letter-spacing:-.03em;margin-top:8px;font-variant-numeric:tabular-nums;white-space:nowrap}
-.strip .v small{font:400 11px var(--mono);letter-spacing:0;color:var(--tinta2)}
+.hoy-cab{padding-top:14px}
+.hoy-cab .eti{display:block;margin-bottom:16px}
+.hoy-cab h1{font-size:clamp(46px,11.5vw,88px);max-width:12ch}
+.cifra{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:end;gap:22px;margin-top:30px;padding-top:18px;border-top:1px solid var(--nude)}
+.cifra .num{font:300 clamp(118px,32vw,200px)/.82 var(--serif);letter-spacing:-.045em;font-variant-numeric:lining-nums tabular-nums;color:var(--cocoa);margin-left:-.04em}
+.cifra .l{padding-bottom:.45em;font-size:17px;line-height:1.35;max-width:14ch}
+.cifra .l small{display:block;font:500 13px/1.5 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--cocoa2);margin-top:10px}
+.cifra.alerta .l small{color:var(--vino)}
+.tira{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--nude);border-bottom:1px solid var(--nude);margin-top:34px}
+.tira>div{padding:18px 12px 16px;border-right:1px solid var(--nude);min-width:0}
+.tira>div:last-child{border-right:0}
+.tira>div:first-child{padding-left:0}
+.tira .l{font:500 13px/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--cocoa2)}
+.tira .v{font:300 38px/1 var(--serif);margin-top:10px;font-variant-numeric:lining-nums tabular-nums;white-space:nowrap;letter-spacing:-.01em}
+.tira .v small{font:italic 400 .5em/1 var(--serif);color:var(--rosa);margin-left:2px}
 
-/* tareas */
-.tarea{display:grid;grid-template-columns:46px 1fr;gap:14px;padding:13px 0;align-items:start}
-.chk{width:46px;height:46px;border-radius:50%;border:1.5px solid var(--tinta);background:transparent;display:grid;place-items:center;cursor:pointer;padding:0;flex:none}
-.chk svg{width:24px;height:24px;fill:none;stroke:var(--cal);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;opacity:0;transition:opacity .12s}
-.chk:active{background:var(--arena)}
-.tarea.hecha .chk{background:var(--tinta)}
+/* tareas: la palomita es un círculo de 46 px, como el + de la tienda */
+.tarea{display:grid;grid-template-columns:46px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--nude);align-items:start}
+.chk{width:46px;height:46px;border-radius:50%;border:1px solid var(--cocoa);background:transparent;display:grid;place-items:center;padding:0;flex:none;transition:background var(--t)}
+.chk svg{width:20px;height:20px;fill:none;stroke:var(--crema);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;opacity:0;transition:opacity .15s}
+.chk:hover{background:var(--nude2)}
+.tarea.hecha .chk{background:var(--cocoa)}
 .tarea.hecha .chk svg{opacity:1}
-.tarea .cuerpo{min-width:0;padding-top:3px}
-.tarea .tit{font-weight:600;font-size:17px;line-height:1.3;cursor:default}
-.tarea.hecha .tit{color:var(--tinta2);font-weight:400;text-decoration:line-through;text-decoration-color:var(--rubor);text-decoration-thickness:2px}
-.tarea .meta{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;margin-top:6px;font:400 11.5px/1.4 var(--mono);color:var(--tinta2);letter-spacing:.03em}
-.tarea .quien{text-transform:uppercase;letter-spacing:.1em;font-weight:500;color:var(--tinta)}
-.tarea .quien.jarvis{color:var(--tinta2)}
-.cuando{text-transform:uppercase;letter-spacing:.1em;font-weight:500}
-.cuando.hoy{color:var(--tinta);border-bottom:2px solid var(--tinta)}
-.cuando.tarde{color:var(--carmin);border-bottom:2px solid var(--carmin)}
-.tarea .ver{background:none;border:0;padding:0;font:inherit;color:var(--tinta2);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
-.tarea .det{margin-top:10px;padding:10px 12px;border-left:2px solid var(--rubor);font-size:15px;line-height:1.45;color:var(--tinta);white-space:pre-wrap}
-.chips{display:flex;gap:18px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--linea);margin-bottom:2px}
+.tarea .cuerpo{min-width:0;padding-top:8px}
+.tarea .tit{font:400 22px/1.15 var(--serif);color:var(--cocoa);overflow-wrap:anywhere}
+.tarea.hecha .tit{color:var(--cocoa2);text-decoration:line-through;text-decoration-color:var(--rosa);text-decoration-thickness:1px}
+.tarea .meta{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;margin-top:8px;font:500 13px/1.5 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--cocoa2)}
+.tarea .quien{color:var(--cocoa)}
+.tarea .quien.jarvis{color:var(--cocoa2)}
+.cuando.hoy{color:var(--cocoa);border-bottom:1px solid var(--rosa)}
+.cuando.tarde{color:var(--vino);border-bottom:1px solid var(--vino)}
+.tarea .ver{background:none;border:0;padding:0;font:inherit;letter-spacing:inherit;text-transform:inherit;color:var(--cocoa2);border-bottom:1px solid var(--nude);cursor:pointer}
+.tarea .ver:hover{border-bottom-color:var(--cocoa)}
+.tarea .det{margin-top:12px;padding:2px 0 2px 16px;border-left:1px solid var(--rosa);font-size:16px;line-height:1.6;color:var(--cocoa);white-space:pre-wrap;overflow-wrap:anywhere}
+.chips{display:flex;gap:26px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--nude);margin-top:8px;-webkit-overflow-scrolling:touch}
 .chips::-webkit-scrollbar{display:none}
-.chip{flex:none;background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;padding:12px 0 10px;font:600 14px/1 var(--sans);color:var(--tinta2);cursor:pointer;white-space:nowrap}
-.chip.on{color:var(--tinta);border-bottom-color:var(--tinta)}
+.chip{flex:none;background:none;border:0;border-bottom:1px solid transparent;margin-bottom:-1px;padding:16px 0 14px;font:500 13px/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--cocoa2);cursor:pointer;white-space:nowrap;transition:color var(--t)}
+.chip:hover{color:var(--cocoa)}
+.chip.on{color:var(--cocoa);border-bottom-color:var(--cocoa)}
 
 /* =========================================================
-   BANDA OBSIDIANA (caja, ventas)
+   N°02 · CAJA · la franja vino a sangre con la cifra y la marca de agua
    ========================================================= */
-.banda{background:var(--tinta);color:var(--cal);margin:0 calc(-1 * var(--pad));padding:26px var(--pad) 24px}
-.banda .saldo{font-size:clamp(60px,18vw,112px);margin-top:10px}
-.banda .saldo.neg{color:var(--rubor)}
-.reparto{display:flex;height:7px;margin:24px 0 10px;background:rgba(247,239,230,.16);overflow:hidden}
-.reparto i{display:block;height:100%;background:var(--cal);transition:width .3s}
-.reparto i.majo{background:var(--rubor)}
-.leyenda{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;font:400 11px/1.5 var(--mono);color:rgba(247,239,230,.72);letter-spacing:.03em}
-.leyenda b{display:block;font:700 18px/1.1 var(--tit);color:var(--cal);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-.leyenda .majo b{color:var(--rubor)}
-.leyenda .l:before{content:"";display:inline-block;width:9px;height:9px;background:var(--cal);margin-right:6px;vertical-align:-1px}
-.leyenda .majo .l:before{background:var(--rubor)}
-.leyenda .gasto .l:before{background:transparent;border:1px solid rgba(247,239,230,.5);width:7px;height:7px}
-.cuentas{margin-top:18px;padding-top:16px;border-top:1px solid rgba(247,239,230,.16);font:400 13px/1.5 var(--mono);color:rgba(247,239,230,.86);letter-spacing:.01em}
-.cuentas b{color:var(--cal);font-weight:700}
-.cuentas.debe b{color:var(--rubor)}
-
-/* meta de ventas */
-.meta-cab{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
-.meta-cab h3{font:700 22px/1.05 var(--tit);letter-spacing:-.025em;margin-top:8px;max-width:14ch}
-.meta-n{font-size:clamp(56px,16vw,96px);white-space:nowrap}
-.meta-n small{font-size:.42em;color:rgba(247,239,230,.55);letter-spacing:-.02em}
-.slots{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;list-style:none;padding:0;margin:20px 0 0}
-.slots li{position:relative;aspect-ratio:1/1.1;border:1px solid rgba(232,180,166,.5);display:flex;align-items:flex-end;padding:6px;font:400 10px/1 var(--mono);letter-spacing:.04em;color:rgba(247,239,230,.55);background:repeating-linear-gradient(-45deg,transparent 0 5px,rgba(232,180,166,.16) 5px 6px)}
-.slots li.ok{background:var(--cal);color:var(--tinta);border-color:var(--cal);font-weight:500}
-.slots li.ok:before{content:"";position:absolute;top:6px;left:6px;width:7px;height:7px;background:var(--carmin)}
-.meta-nota{margin-top:14px;font-size:15px;line-height:1.4;color:rgba(247,239,230,.85);max-width:40ch}
+.franja{position:relative;overflow:hidden;background:var(--vino);color:var(--crema);margin:0 calc(-1 * var(--pad));padding:44px var(--pad) 40px;--fondo:var(--vino)}
+.franja .agua{position:absolute;right:-6%;bottom:-16%;width:min(62vw,440px);height:auto;color:var(--crema);opacity:.06;pointer-events:none;stroke-width:2.2}
+.franja .w{position:relative}
+.franja .eti{color:var(--rosa);display:block}
+.franja .saldo{font:300 clamp(78px,21vw,150px)/.9 var(--serif);letter-spacing:-.035em;color:var(--crema);margin:14px 0 0 -.03em;font-variant-numeric:lining-nums tabular-nums;white-space:nowrap}
+.franja .saldo.neg{color:var(--rosa2)}
+.franja .saldo small{font:500 13px/1.5 var(--sans);letter-spacing:.36em;text-transform:uppercase;color:var(--rosa);display:block;margin-top:14px;letter-spacing:.3em}
+.reparto{display:flex;height:5px;margin:34px 0 16px;background:rgba(246,241,236,.14);overflow:hidden}
+.reparto i{display:block;height:100%;background:var(--crema);transition:width .4s var(--ease)}
+.reparto i.majo{background:var(--rosa)}
+.leyenda{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.leyenda .l{font:500 13px/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--rosa);display:flex;align-items:center;gap:8px}
+.leyenda .l:before{content:"";width:8px;height:8px;background:var(--crema);flex:none}
+.leyenda .majo .l:before{background:var(--rosa)}
+.leyenda .gasto .l:before{background:transparent;border:1px solid var(--rosa);width:7px;height:7px}
+.leyenda b{display:block;font:300 28px/1.1 var(--serif);color:var(--crema);margin-top:6px;font-variant-numeric:lining-nums tabular-nums;white-space:nowrap}
+.cuentas{background:var(--nude3);margin:0 calc(-1 * var(--pad));padding:34px var(--pad) 36px;border-bottom:1px solid var(--nude)}
+.cuentas .eti{display:block;margin-bottom:12px}
+.cuentas h3{font-size:clamp(30px,7.6vw,42px)}
+.cuentas h3 em{color:var(--vino)}
+.cuentas p:not(.eti){margin-top:12px;font-size:16px;line-height:1.6;color:var(--cocoa2);max-width:48ch}
 
 /* =========================================================
-   INVENTARIO
+   N°03 · VENTAS · la meta viva: diez casillas
    ========================================================= */
-.pieza{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:12px 0}
-.pieza .t{font-weight:600;font-size:16px;line-height:1.25}
-.pieza .s{font:400 11.5px/1.5 var(--mono);color:var(--tinta2);margin-top:2px;letter-spacing:.03em}
-.pieza .s .aviso{color:var(--carmin);font-weight:500;text-transform:uppercase;letter-spacing:.1em}
-.pieza .ctl{display:flex;align-items:center;gap:0;border:1.5px solid var(--tinta);border-radius:2px;background:var(--papel)}
-.mini{width:48px;height:48px;border:0;background:transparent;font:500 26px/1 var(--mono);cursor:pointer;color:var(--tinta);padding:0}
-.mini:active{background:var(--arena)}
-.cant{font:800 30px/1 var(--tit);letter-spacing:-.03em;min-width:52px;text-align:center;border-left:1px solid var(--linea);border-right:1px solid var(--linea);height:48px;display:grid;place-items:center;font-variant-numeric:tabular-nums}
-.prod{display:grid;grid-template-columns:1fr auto;gap:12px;padding:13px 0;align-items:baseline}
-.prod .t{font-weight:600;font-size:16px}
-.prod .s{font:400 11.5px/1.5 var(--mono);color:var(--tinta2);margin-top:2px;letter-spacing:.03em}
-.prod .big{font:700 22px/1 var(--tit);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-.prod .mg{font:400 11px/1.4 var(--mono);color:var(--verde);text-align:right;margin-top:3px}
+.metaml{padding:8px 0 32px;margin-bottom:12px;border-bottom:1px solid var(--nude)}
+.meta-cab{display:flex;justify-content:space-between;align-items:flex-end;gap:16px}
+.meta-cab .eti{display:block;margin-bottom:12px}
+.metaml h3{font-size:clamp(32px,7.6vw,44px)}
+.metaml .cnt{font:300 clamp(64px,17vw,112px)/.85 var(--serif);white-space:nowrap;letter-spacing:-.03em;font-variant-numeric:lining-nums tabular-nums}
+.metaml .cnt small{font:italic 400 .42em/1 var(--serif);color:var(--rosa);margin-left:.06em}
+.casillas{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:28px}
+.casillas li{position:relative;aspect-ratio:1/1.05;border:1px solid var(--nude);background:var(--crema2);display:flex;align-items:flex-end;justify-content:flex-end;padding:8px 10px;transition:background var(--t)}
+.casillas li .n{font-size:22px}
+.casillas li .ilu{position:absolute;left:8px;top:8px;width:18px;height:18px;color:var(--crema);opacity:0}
+.casillas li.ok{background:var(--cocoa);border-color:var(--cocoa)}
+.casillas li.ok .n{color:var(--crema)}
+.casillas li.ok .ilu{opacity:.55}
+.meta-nota{margin-top:20px;font-size:17px;line-height:1.6;color:var(--cocoa2);max-width:46ch}
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:18px 0;border-top:1px solid var(--nude);border-bottom:1px solid var(--nude);margin:2px 0 22px}
+.calc .l{font:500 13px/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--cocoa2)}
+.calc .v{font:300 32px/1 var(--serif);margin-top:8px;font-variant-numeric:lining-nums tabular-nums;white-space:nowrap}
+.calc .v.neto{color:var(--cocoa)}
+.calc.vacia .v{color:var(--rosa)}
+.calc+.msg{margin:0 0 24px}
 
 /* =========================================================
-   BITÁCORA
+   N°04 · INVENTARIO Y COMPRAS
    ========================================================= */
-.nota{display:grid;grid-template-columns:62px 1fr;gap:14px;padding:16px 0}
-.nota .cuando{font:400 11px/1.6 var(--mono);color:var(--tinta2);text-transform:none;letter-spacing:.03em;font-weight:400}
-.nota .cuando b{display:block;font-weight:500;color:var(--tinta)}
-.nota .txt{white-space:pre-wrap;font-size:16px;line-height:1.45;min-width:0;overflow-wrap:anywhere}
-.nota .firma{font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--tinta2);margin-top:8px}
-.nota .firma .tg{color:var(--carmin)}
-.nota img{display:block;width:100%;max-height:360px;object-fit:cover;border:1px solid var(--tinta);margin-bottom:10px;background:var(--arena)}
+.pieza{display:grid;grid-template-columns:44px 1fr;gap:12px 16px;align-items:center;padding:16px 0;border-bottom:1px solid var(--nude)}
+.pieza .ctl{grid-column:2}
+.pieza .n{font-size:22px}
+.pieza .t{font:400 22px/1.15 var(--serif);min-width:0;overflow-wrap:anywhere}
+.pieza .s{font-size:14px;line-height:1.5;color:var(--cocoa2);margin-top:4px}
+.pieza .s .aviso{color:var(--vino);font-weight:500;letter-spacing:.14em;text-transform:uppercase;font-size:13px}
+.pieza .ctl{display:flex;align-items:center;gap:8px;justify-self:start}
+.pieza .cant{font:300 36px/1 var(--serif);min-width:52px;text-align:center;font-variant-numeric:lining-nums tabular-nums}
+.pieza .mas.menos svg{width:12px}
+.prod{display:grid;grid-template-columns:44px 1fr;gap:0 16px;padding:16px 0;border-bottom:1px solid var(--nude);align-items:baseline}
+.prod .der{grid-column:2;display:flex;align-items:baseline;gap:14px;margin-top:10px}
+.prod .n{font-size:22px}
+.prod .t{font:400 22px/1.15 var(--serif);min-width:0;overflow-wrap:anywhere}
+.prod .s{font-size:14px;line-height:1.5;color:var(--cocoa2);margin-top:4px}
+.prod .imp{font:300 28px/1 var(--serif);font-variant-numeric:lining-nums tabular-nums;white-space:nowrap}
+.prod .mg{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--cocoa2);white-space:nowrap}
+.prod .mg.bajo{color:var(--vino)}
 
 /* =========================================================
-   TABS (móvil)
+   N°05 · ENVÍOS · N°06 · SOPORTE
    ========================================================= */
-.tabs{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--tinta);display:grid;grid-template-columns:repeat(6,1fr);padding:0 0 env(safe-area-inset-bottom)}
-.tabs button{border:0;border-top:3px solid transparent;background:none;display:flex;flex-direction:column;align-items:center;gap:5px;padding:9px 0 12px;color:rgba(247,239,230,.55);cursor:pointer;min-height:58px}
-.tabs button .i{font:500 9px/1 var(--mono);letter-spacing:.14em;color:rgba(232,180,166,.6)}
-.tabs button .t{font:700 11px/1 var(--tit);letter-spacing:-.02em;max-width:100%;overflow:hidden}
-.tabs button.on{color:var(--cal);border-top-color:var(--rubor)}
-.tabs button.on .i{color:var(--rubor)}
+.pedido{display:grid;grid-template-columns:44px 1fr;gap:0 16px;padding:18px 0;border-bottom:1px solid var(--nude)}
+.pedido .n{font-size:22px;padding-top:3px}
+.pedido .cab-p{display:flex;justify-content:space-between;align-items:baseline;gap:14px}
+.pedido .t{font:400 24px/1.15 var(--serif);min-width:0;overflow-wrap:anywhere}
+.pedido .imp{font:300 26px/1 var(--serif);white-space:nowrap;font-variant-numeric:lining-nums tabular-nums}
+.pedido .s{font-size:15px;line-height:1.55;color:var(--cocoa2);margin-top:6px;overflow-wrap:anywhere}
+.pedido .pasos{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;margin-top:14px}
+.pedido .estado{font:500 13px/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--cocoa);display:inline-flex;align-items:center;gap:10px}
+.pedido .estado:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--rosa)}
+.pedido.entregado{opacity:.6}
+.pedido.entregado .estado:before{background:var(--cocoa)}
+.pedido .link{min-height:46px;display:inline-flex;align-items:center}
+.ruta{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--nude);border-bottom:1px solid var(--nude);margin-bottom:8px}
+.ruta>div{padding:16px 12px 14px;border-right:1px solid var(--nude);border-bottom:1px solid var(--nude)}
+.ruta>div:nth-child(2n){border-right:0}
+.ruta>div:nth-child(n+3){border-bottom:0}
+.ruta>div:nth-child(2n+1){padding-left:0}
+.ruta .l{font:500 13px/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--cocoa2)}
+.ruta .v{font:300 34px/1 var(--serif);margin-top:8px;font-variant-numeric:lining-nums tabular-nums}
 
-/* toast */
-.toast{position:fixed;left:var(--pad);right:var(--pad);bottom:calc(78px + env(safe-area-inset-bottom));z-index:20;background:var(--tinta);color:var(--cal);padding:14px 16px;font:600 15px/1.3 var(--sans);border-left:4px solid var(--rubor);opacity:0;transform:translateY(10px);transition:.2s;pointer-events:none}
+.msj{display:grid;grid-template-columns:44px 1fr;gap:0 16px;padding:18px 0;border-bottom:1px solid var(--nude)}
+.msj .n{font-size:22px;padding-top:3px}
+.msj .cab-m{display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap}
+.msj .t{font:400 24px/1.15 var(--serif)}
+.msj .cuando{font:500 13px/1.5 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--cocoa2)}
+.msj .txt{margin-top:8px;font-size:17px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}
+.msj img{max-width:min(100%,420px);max-height:360px;object-fit:cover;background:var(--nude);margin:12px 0 4px}
+.msj .pie-m{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;margin-top:12px}
+.flag{font:500 13px/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--cocoa2);display:inline-flex;align-items:center;gap:10px}
+.flag:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--nude)}
+.flag.jarvis{color:var(--vino)}
+.flag.jarvis:before{background:var(--vino)}
+.flag.pend{color:var(--cocoa)}
+.flag.pend:before{background:var(--rosa)}
+.msj.atendido{opacity:.62}
+.msj .link{min-height:46px;display:inline-flex;align-items:center}
+
+/* =========================================================
+   N°07 · QUÉ MEJORAR · reglas sobre los datos, sin inventar nada
+   ========================================================= */
+.hallazgo{display:grid;grid-template-columns:44px 1fr;gap:0 16px;padding:22px 0;border-bottom:1px solid var(--nude);align-items:baseline}
+.hallazgo .n{font-size:24px}
+.hallazgo b{display:block;font:400 26px/1.15 var(--serif);color:var(--cocoa);text-wrap:balance}
+.hallazgo.crit b{color:var(--vino)}
+.hallazgo small{display:block;font-size:16px;line-height:1.6;color:var(--cocoa2);margin-top:8px;max-width:64ch}
+.hallazgo .pie-h{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center}
+.hallazgo .tag{font:500 13px/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--vino)}
+.mej-nota{margin-top:26px;font-size:15px;line-height:1.6;color:var(--cocoa2);max-width:56ch}
+
+/* =========================================================
+   N°08 · BITÁCORA
+   ========================================================= */
+.nota{display:grid;grid-template-columns:64px 1fr;gap:18px;padding:18px 0;border-bottom:1px solid var(--nude)}
+.nota .cuando{padding-top:4px}
+.nota .cuando b{display:block;font:300 34px/1 var(--serif);color:var(--cocoa);font-variant-numeric:lining-nums tabular-nums}
+.nota .cuando span{display:block;font:500 13px/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--cocoa2);margin-top:4px}
+.nota .cuando i{display:block;font-style:normal;font-size:14px;color:var(--cocoa2);margin-top:2px}
+.nota.mismo .cuando i{margin-top:6px}
+.nota .txt{white-space:pre-wrap;font-size:17px;line-height:1.6;min-width:0;overflow-wrap:anywhere}
+.nota .firma{font:500 13px/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--cocoa2);margin-top:10px}
+.nota .firma .tg{color:var(--vino)}
+.nota img{width:100%;max-width:520px;max-height:380px;object-fit:cover;background:var(--nude);margin-bottom:12px}
+
+/* =========================================================
+   BARRA INFERIOR (móvil) y el índice completo
+   ========================================================= */
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:repeat(5,1fr);padding-bottom:env(safe-area-inset-bottom);background:rgba(246,241,236,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--nude)}
+.tabs button{border:0;background:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:9px 0 10px;min-height:62px;color:var(--cocoa2);transition:color var(--t)}
+.tabs button .n{font-size:20px}
+.tabs button .t{font:500 13px/1.2 var(--sans);letter-spacing:.14em;text-transform:uppercase;border-bottom:1px solid transparent;padding-bottom:2px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tabs button.on{color:var(--cocoa)}
+.tabs button.on .n{color:var(--cocoa)}
+.tabs button.on .t{border-bottom-color:var(--cocoa)}
+.indice{position:fixed;inset:0;z-index:40;background:var(--crema);overflow:auto;padding:calc(20px + env(safe-area-inset-top)) var(--pad) calc(30px + env(safe-area-inset-bottom));transform:translateY(8px);opacity:0;visibility:hidden;transition:opacity .3s,transform .3s,visibility 0s .3s}
+.indice.on{opacity:1;transform:none;visibility:visible;transition:opacity .3s,transform .3s}
+.indice .arriba{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:28px;min-height:46px}
+.indice .arriba .logo{height:48px;width:auto}
+.indice a{display:grid;grid-template-columns:48px 1fr;align-items:baseline;gap:14px;padding:16px 0;font:400 28px/1.15 var(--serif);text-decoration:none;border-top:1px solid var(--nude2);color:var(--cocoa)}
+.indice a .n{font-size:22px}
+.indice a small{display:block;font:500 13px/1.5 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--cocoa2);margin-top:3px}
+.indice a.on{color:var(--vino)}
+.indice .pie{padding:26px 0 0;margin-top:8px;border-top:1px solid var(--nude);font-size:16px;color:var(--cocoa2);line-height:1.6}
+.cerrar{background:none;border:0;padding:6px 0;font:500 13px/1.5 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--cocoa);border-bottom:1px solid var(--rosa);cursor:pointer;white-space:nowrap;transition:border-color var(--t)}
+.cerrar:hover{border-bottom-color:var(--cocoa)}
+
+/* aviso breve tras guardar */
+.toast{position:fixed;left:var(--pad);right:var(--pad);bottom:calc(84px + env(safe-area-inset-bottom));z-index:50;background:var(--cocoa);color:var(--crema);padding:16px 20px;font:400 16px/1.4 var(--sans);opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s;pointer-events:none;display:flex;gap:14px;align-items:center}
+.toast .marca{width:14px;height:auto;color:var(--rosa);flex:none;stroke-width:3}
 .toast.on{opacity:1;transform:none}
 
 /* =========================================================
-   ESCRITORIO
+   ESCRITORIO · lateral fijo a la izquierda
    ========================================================= */
-.dos{display:grid;gap:0 44px}
 @media(min-width:900px){
-  :root{--pad:0px}
-  .login{grid-template-rows:none;grid-template-columns:1fr 1fr}
-  .login .marca{padding:64px 72px 48px;min-height:100dvh}
-  .login .marca .wm{height:92px}
-  .login .lema{font-size:48px;margin-top:40px}
-  .login .hoja{align-self:center;justify-self:center;padding:48px 64px;max-width:520px}
-  #app{display:grid;grid-template-columns:236px 1fr;background:linear-gradient(90deg,var(--tinta) 236px,var(--cal) 236px)}
+  :root{--pad:56px}
+  body{font-size:17px}
+  #app{display:grid;grid-template-columns:264px minmax(0,1fr)}
   .top{display:none}
-  .lado{display:flex;flex-direction:column;position:sticky;top:0;height:100dvh;background:var(--tinta);color:var(--cal);padding:36px 28px 28px}
-  .lado .wm{height:30px;align-self:flex-start}
-  .lado .kick{margin:44px 0 10px;color:rgba(232,180,166,.7)}
-  .lado nav{display:flex;flex-direction:column;gap:2px}
-  .lado nav button{display:grid;grid-template-columns:34px 1fr;align-items:baseline;text-align:left;background:none;border:0;border-left:2px solid transparent;padding:9px 10px;margin-left:-12px;color:rgba(247,239,230,.6);cursor:pointer;border-radius:0}
-  .lado nav button .i{font:500 10px/1 var(--mono);letter-spacing:.1em;color:rgba(232,180,166,.55)}
-  .lado nav button .t{font:700 18px/1 var(--tit);letter-spacing:-.02em}
-  .lado nav button:hover{color:var(--cal)}
-  .lado nav button.on{color:var(--cal);border-left-color:var(--rubor)}
-  .lado nav button.on .i{color:var(--rubor)}
-  .lado .pie{margin-top:auto;border-top:1px solid rgba(247,239,230,.18);padding-top:16px;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
-  .lado .pie .yo{font:700 16px/1 var(--tit)}
-  .lado .pie .yo small{display:block;font:400 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(247,239,230,.5);margin-top:6px}
-  .lado .salir{background:none;border:0;padding:0;font:400 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(247,239,230,.6);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
-  .wrap{padding:44px 56px 80px;width:100%}
-  section{padding-top:0}
-  .cab h2{font-size:52px}
-  .cab .res{font-size:12px}
-  .hero h1{font-size:64px}
-  .hero .cifra .n{font-size:140px}
-  .hero .cifra .l{font-size:19px;max-width:20ch}
-  .strip{grid-template-columns:repeat(3,1fr);max-width:760px}
-  .strip>div{padding:18px 18px 16px}
-  .strip .v{font-size:34px}
-  .banda{margin:0;padding:40px 44px 36px}
-  .banda .saldo{font-size:120px}
-  .leyenda{max-width:560px}
-  .slots{grid-template-columns:repeat(10,1fr);max-width:760px;gap:8px}
-  .meta-cab h3{font-size:28px}
+  .tabs,.indice{display:none}
+  .lado{display:flex;flex-direction:column;position:sticky;top:0;height:100dvh;overflow:auto;border-right:1px solid var(--nude);background:var(--crema2);padding:38px 30px 30px}
+  .lado .logo{height:104px;width:auto;align-self:flex-start;margin-left:-8px}
+  .lado>.eti{margin:34px 0 10px;letter-spacing:.3em}
+  .lado nav{display:flex;flex-direction:column}
+  .lado nav button{display:grid;grid-template-columns:44px 1fr;align-items:baseline;gap:8px;text-align:left;background:none;border:0;border-top:1px solid var(--nude2);padding:11px 0;color:var(--cocoa2);font:400 22px/1.1 var(--serif);cursor:pointer;transition:color var(--t),padding var(--t)}
+  .lado nav button:first-child{border-top:0}
+  .lado nav button .n{font-size:17px}
+  .lado nav button:hover{color:var(--vino)}
+  .lado nav button.on{color:var(--cocoa)}
+  .lado nav button.on .n{color:var(--cocoa)}
+  .lado .pie{margin-top:auto;padding-top:22px;border-top:1px solid var(--nude)}
+  .lado .pie .eti{display:block;margin-bottom:6px;letter-spacing:.24em}
+  .lado .pie .nombre{font:300 30px/1 var(--serif);color:var(--cocoa);display:block;margin-bottom:12px}
+  .wrap{padding:56px var(--pad) 96px;margin:0}
+  section{padding-bottom:80px}
+  .cab{grid-template-columns:1fr auto;align-items:end;padding-bottom:26px;margin-bottom:44px}
+  .cab .res{grid-column:2;text-align:right;margin-top:0;padding-bottom:8px}
+  .cab h2{font-size:64px}
+  .sub h3{font-size:32px}
+  .hoy-cab h1{font-size:84px}
+  .cifra .num{font-size:200px}
+  .cifra .l{font-size:19px;max-width:20ch}
+  .tira{max-width:760px}
+  .tira>div{padding:22px 24px 20px}
+  .tira .v{font-size:44px}
   .dos{grid-template-columns:1fr 1fr}
-  .dos.forma-lista{grid-template-columns:minmax(320px,400px) 1fr}
-  .dos.forma-lista>.pegado{position:sticky;top:44px;align-self:start}
-  .tabs{display:none}
-  .toast{left:auto;right:40px;bottom:32px;width:360px}
-  .tarea .tit{font-size:18px}
-  .nota{grid-template-columns:90px 1fr}
-  .nota img{max-width:520px}
+  .dos>.bloque+.bloque{margin-top:0}
+  .dos.forma-lista{grid-template-columns:minmax(300px,380px) 1fr}
+  .dos.forma-lista>.pegado{position:sticky;top:48px;align-self:start}
+  .franja{padding:56px var(--pad) 48px}
+  .franja .w{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:48px;align-items:end}
+  .franja .saldo{font-size:150px}
+  .reparto{margin-top:0}
+  .cuentas{padding:40px var(--pad)}
+  .casillas{grid-template-columns:repeat(10,1fr);gap:10px}
+  .ruta{grid-template-columns:repeat(4,1fr);max-width:760px}
+  .ruta>div:nth-child(n){padding:20px 24px 18px;border-bottom:0;border-right:1px solid var(--nude)}
+  .ruta>div:nth-child(n):last-child{border-right:0}
+  .ruta>div:nth-child(n):first-child{padding-left:0}
+  .metaml h3{font-size:44px;max-width:16ch}
+  .nota{grid-template-columns:84px 1fr;gap:24px}
+  .pieza{grid-template-columns:44px 1fr auto;gap:0 16px}
+  .pieza .ctl{grid-column:auto;justify-self:end}
+  .prod{grid-template-columns:44px 1fr auto}
+  .prod .der{grid-column:auto;display:block;margin-top:0;text-align:right}
+  .prod .mg{margin-top:8px}
+  .hoy-cab h1{max-width:none}
+  .toast{left:auto;right:40px;bottom:36px;width:380px}
+  .btn.ancho{width:auto;display:inline-flex;padding:0 44px}
+  .btn.ancho.si{display:flex;width:100%}
 }
-@media(min-width:1200px){
-  .wrap{padding:52px 72px 80px}
+@media(min-width:1240px){
+  :root{--pad:72px}
+  #app{grid-template-columns:288px minmax(0,1fr)}
+  .lado{padding:44px 36px 36px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{transition:none!important;animation:none!important}
 }
 </style>
 </head>
 <body>
 
+<!-- =========================================================
+     MARCA · UN SOLO LUGAR.
+     Aquí vive todo el logo: #lockup (nixa + BEAUTY con la brocha en la i),
+     #brocha (la brocha sola) y #abanico (el isotipo). Todo en currentColor.
+     Cuando llegue la versión corregida de Majo, se cambia este bloque
+     de un jalón y el resto del panel no se toca (todo usa <use href="#...">).
+     Origen: marca/logo-nixa.svg · marca/icono-abanico.svg (mismos trazos que la tienda).
+     ========================================================= -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="wordmark" viewBox="-60 -895 2324 969">
-    <g fill="currentColor">
-      <path d="M69 0V-660H278L561 -217H573L563 -660H720V0H531L228 -468H217L226 0Z"/>
-      <path d="M834 0V-528H995V0Z"/>
-      <path d="M1051 0 1225 -264 1052 -528H1237L1324 -334H1343L1430 -528H1615L1441 -264L1616 0H1432L1343 -196H1324L1237 0Z"/>
-      <path d="M1795 14Q1751 14 1717.0 -3.5Q1683 -21 1664.0 -54.5Q1645 -88 1645 -136Q1645 -181 1662.5 -210.5Q1680 -240 1713.5 -257.5Q1747 -275 1794.0 -286.5Q1841 -298 1901 -307Q1930 -312 1949.5 -316.5Q1969 -321 1979.0 -331.0Q1989 -341 1989 -360Q1989 -385 1971.0 -403.0Q1953 -421 1913 -421Q1885 -421 1862.5 -411.0Q1840 -401 1824.0 -382.0Q1808 -363 1800 -336L1658 -378Q1671 -420 1694.5 -451.0Q1718 -482 1751.0 -502.5Q1784 -523 1826.5 -532.5Q1869 -542 1917 -542Q1997 -542 2047.5 -516.5Q2098 -491 2122.5 -437.5Q2147 -384 2147 -300V-219Q2147 -183 2148.5 -146.5Q2150 -110 2152.5 -73.5Q2155 -37 2159 0H2017Q2013 -23 2009.0 -55.5Q2005 -88 2003 -122H1984Q1970 -84 1943.5 -52.5Q1917 -21 1879.5 -3.5Q1842 14 1795 14ZM1868 -100Q1886 -100 1904.5 -106.5Q1923 -113 1940.0 -124.5Q1957 -136 1971.0 -153.0Q1985 -170 1992 -190L1990 -269L2012 -264Q1993 -252 1970.0 -245.0Q1947 -238 1923.5 -234.0Q1900 -230 1877.5 -225.5Q1855 -221 1837.5 -214.0Q1820 -207 1810.0 -195.0Q1800 -183 1800 -162Q1800 -134 1819.0 -117.0Q1838 -100 1868 -100Z"/>
-    </g>
-    <path style="fill:var(--punto,#9B1B3A)" d="M 915.5 -559.2 C 858.8 -605.6 812.4 -657.2 812.4 -703.6 C 812.4 -757.3 858.8 -786.1 915.5 -786.1 C 972.2 -786.1 1018.6 -757.3 1018.6 -703.6 C 1018.6 -657.2 972.2 -605.6 915.5 -559.2 Z"/>
-  </symbol>
+  <defs><linearGradient id="nxpelo" x1="0" y1="88" x2="0" y2="31" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="var(--fondo,#F6F1EC)" stop-opacity=".46"/><stop offset=".55" stop-color="var(--fondo,#F6F1EC)" stop-opacity=".30"/><stop offset="1" stop-color="var(--fondo,#F6F1EC)" stop-opacity="0"/></linearGradient></defs>
+  <g id="brochaG"><g fill="currentColor"><path d="M22 88 C 20 76, 15.5 62, 16.5 52 C 19 39, 34 31, 50 31 C 66 31, 81 39, 83.5 52 C 84.5 62, 80 76, 78 88 Z"/></g><g fill="none" stroke="url(#nxpelo)" stroke-linecap="round"><path d="M23.9 88 Q16.2 71.2 16.2 59" stroke-width="1"/>
+    <path d="M27 88 Q20.2 69.9 20.2 56.8" stroke-width="1"/>
+    <path d="M29.8 88 Q23.8 66.9 23.7 51.6" stroke-width="1"/>
+    <path d="M32.4 88 Q27.1 64.8 27 48" stroke-width="1"/>
+    <path d="M35.3 88 Q30.9 64 30.8 46.5" stroke-width="1"/>
+    <path d="M38.2 88 Q34.7 65.1 34.7 48.5" stroke-width="1"/>
+    <path d="M41.3 88 Q38.6 59.1 38.5 38.2" stroke-width="1"/>
+    <path d="M44 88 Q42.2 62.6 42.2 44.3" stroke-width="1"/>
+    <path d="M47.2 88 Q46.3 56.9 46.3 34.4" stroke-width="1"/>
+    <path d="M50 88 Q50.1 60.7 50.1 40.8" stroke-width="1"/>
+    <path d="M53.2 88 Q54.1 63.4 54.1 45.6" stroke-width="1"/>
+    <path d="M56 88 Q57.8 62.2 57.8 43.5" stroke-width="1"/>
+    <path d="M58.4 88 Q60.9 64 60.9 46.5" stroke-width="1"/>
+    <path d="M61.4 88 Q64.9 60.2 65.1 40" stroke-width="1"/>
+    <path d="M64.2 88 Q68.5 62.8 68.6 44.6" stroke-width="1"/>
+    <path d="M67.4 88 Q72.6 65.5 72.7 49.2" stroke-width="1"/>
+    <path d="M70.3 88 Q76.2 68.6 76.2 54.6" stroke-width="1"/>
+    <path d="M72.8 88 Q79.6 69.1 79.6 55.4" stroke-width="1"/>
+    <path d="M76.1 88 Q83.9 69.9 84.1 56.7" stroke-width="1"/>
+    <path d="M25.3 88 Q18.3 75.2 18.7 66" stroke-width="0.75"/>
+    <path d="M28.3 88 Q22.3 75.8 22.7 67" stroke-width="0.75"/>
+    <path d="M31.5 88 Q26.2 72.3 26.4 60.9" stroke-width="0.75"/>
+    <path d="M33.9 88 Q29.4 72.3 29.6 61" stroke-width="0.75"/>
+    <path d="M37 88 Q33.3 69.3 33.4 55.8" stroke-width="0.75"/>
+    <path d="M40.1 88 Q37.3 72.9 37.5 62" stroke-width="0.75"/>
+    <path d="M43.2 88 Q41.3 73.7 41.4 63.3" stroke-width="0.75"/>
+    <path d="M45.6 88 Q44.4 68.4 44.4 54.3" stroke-width="0.75"/>
+    <path d="M48.3 88 Q47.8 70.3 47.8 57.5" stroke-width="0.75"/>
+    <path d="M51.1 88 Q51.4 68.8 51.4 55" stroke-width="0.75"/>
+    <path d="M54.5 88 Q55.8 69.9 55.8 56.8" stroke-width="0.75"/>
+    <path d="M57.5 88 Q59.6 72.3 59.5 60.9" stroke-width="0.75"/>
+    <path d="M60.3 88 Q63.2 70.7 63 58.2" stroke-width="0.75"/>
+    <path d="M63.1 88 Q66.7 72.3 66.5 61" stroke-width="0.75"/>
+    <path d="M66.2 88 Q70.8 69.9 70.7 56.7" stroke-width="0.75"/>
+    <path d="M68.8 88 Q74.1 72.6 73.8 61.4" stroke-width="0.75"/>
+    <path d="M71.3 88 Q77.4 73.3 77.1 62.6" stroke-width="0.75"/>
+    <path d="M74.7 88 Q81.8 73 81.6 62.1" stroke-width="0.75"/>
+    <path d="M25.3 88 Q18.8 83.2 19.8 79.7" stroke-width="0.6"/>
+    <path d="M26.5 88 Q20.3 81.4 21.1 76.6" stroke-width="0.6"/>
+    <path d="M27.9 88 Q22 82 22.9 77.7" stroke-width="0.6"/>
+    <path d="M29.7 88 Q24.4 83.3 25.3 80" stroke-width="0.6"/>
+    <path d="M31.3 88 Q26.3 80.1 26.9 74.3" stroke-width="0.6"/>
+    <path d="M33.1 88 Q28.6 82.3 29.3 78.3" stroke-width="0.6"/>
+    <path d="M35 88 Q31 78.9 31.5 72.3" stroke-width="0.6"/>
+    <path d="M36.4 88 Q32.8 80.9 33.4 75.8" stroke-width="0.6"/>
+    <path d="M38.6 88 Q35.5 78.3 35.9 71.3" stroke-width="0.6"/>
+    <path d="M40.6 88 Q38 78.2 38.3 71.1" stroke-width="0.6"/>
+    <path d="M41.7 88 Q39.5 80.6 39.8 75.3" stroke-width="0.6"/>
+    <path d="M43.5 88 Q41.7 77.8 42 70.4" stroke-width="0.6"/>
+    <path d="M45.8 88 Q44.7 81.9 44.9 77.5" stroke-width="0.6"/>
+    <path d="M46.7 88 Q45.8 81.4 46 76.6" stroke-width="0.6"/>
+    <path d="M48.5 88 Q48 79.8 48.1 73.9" stroke-width="0.6"/>
+    <path d="M50.5 88 Q50.7 81.1 50.6 76.2" stroke-width="0.6"/>
+    <path d="M51.6 88 Q52 80.2 52 74.6" stroke-width="0.6"/>
+    <path d="M53.7 88 Q54.7 79.4 54.5 73.3" stroke-width="0.6"/>
+    <path d="M56 88 Q57.6 78.9 57.4 72.2" stroke-width="0.6"/>
+    <path d="M57.2 88 Q59.2 79.4 58.9 73.1" stroke-width="0.6"/>
+    <path d="M59.1 88 Q61.5 82.7 61.1 78.9" stroke-width="0.6"/>
+    <path d="M61 88 Q64 78.9 63.6 72.2" stroke-width="0.6"/>
+    <path d="M62.7 88 Q66.1 79 65.7 72.4" stroke-width="0.6"/>
+    <path d="M63.9 88 Q67.6 81.2 67 76.3" stroke-width="0.6"/>
+    <path d="M65.3 88 Q69.4 80.2 68.8 74.5" stroke-width="0.6"/>
+    <path d="M67 88 Q71.4 83.2 70.6 79.8" stroke-width="0.6"/>
+    <path d="M68.8 88 Q73.7 83 72.9 79.3" stroke-width="0.6"/>
+    <path d="M70.6 88 Q76 83.7 75.1 80.6" stroke-width="0.6"/>
+    <path d="M72 88 Q77.7 83.4 76.8 80.1" stroke-width="0.6"/>
+    <path d="M73.8 88 Q80.1 82.7 79.1 78.9" stroke-width="0.6"/></g><g fill="none" stroke="var(--fondo,#F6F1EC)" stroke-opacity=".38" stroke-linecap="round"></g></g>
+  <symbol id="brocha" viewBox="12 27 76 66"><use href="#brochaG"/></symbol>
+  <symbol id="lockup" viewBox="0 24 176.9 113.74"><g transform="translate(6 92.34)"><path fill="currentColor" d="M31.2 0Q30.9 0 30.9 -0.6Q30.9 -1.2 31.2 -1.2Q34.8 -1.2 35.95 -2.55Q37.1 -3.9 37.1 -8.1V-23.8Q37.1 -29.5 35 -32.25Q32.9 -35 28.3 -35Q24.8 -35 21.25 -32.95Q17.7 -30.9 15.2 -27.3L14.8 -28.5Q18.9 -34.1 23.25 -37Q27.6 -39.9 32.4 -39.9Q37.9 -39.9 40.95 -36.7Q44 -33.5 44 -27.6V-8.1Q44 -3.9 45.15 -2.55Q46.3 -1.2 50 -1.2Q50.3 -1.2 50.3 -0.6Q50.3 0 50 0Q48.1 0 45.7 -0.1Q43.3 -0.2 40.6 -0.2Q37.9 -0.2 35.45 -0.1Q33 0 31.2 0ZM4.3 0Q4 0 4 -0.6Q4 -1.2 4.3 -1.2Q7.9 -1.2 9.05 -2.55Q10.2 -3.9 10.2 -8.1V-27.6Q10.2 -30.8 9.45 -32.3Q8.7 -33.8 6.9 -33.8Q5.9 -33.8 4.6 -33.45Q3.3 -33.1 1.6 -32.4Q1.2 -32.2 1 -32.75Q0.8 -33.3 1.1 -33.5L13.4 -39.4Q13.8 -39.5 14 -39.5Q14.9 -39.5 16 -37.3Q17.1 -35.1 17.1 -31V-8.1Q17.1 -3.9 18.25 -2.55Q19.4 -1.2 23.1 -1.2Q23.4 -1.2 23.4 -0.6Q23.4 0 23.1 0Q21.2 0 18.8 -0.1Q16.4 -0.2 13.7 -0.2Q11 -0.2 8.55 -0.1Q6.1 0 4.3 0Z M56.9 0Q56.6 0 56.6 -0.6Q56.6 -1.2 56.9 -1.2Q60.5 -1.2 61.7 -2.55Q62.9 -3.9 62.9 -8.1V-26.5Q62.9 -30 62.2 -31.6Q61.5 -33.2 59.7 -33.2Q58.9 -33.2 57.85 -32.9Q56.8 -32.6 55.4 -31.9Q55 -31.8 54.75 -32.35Q54.5 -32.9 54.9 -33.1L68.5 -39.4Q68.8 -39.5 68.9 -39.5Q69.2 -39.5 69.55 -39.2Q69.9 -38.9 69.9 -38.5Q69.9 -37.6 69.8 -34.6Q69.7 -31.6 69.7 -26.7V-8.1Q69.7 -3.9 70.85 -2.55Q72 -1.2 75.7 -1.2Q76 -1.2 76 -0.6Q76 0 75.7 0Q73.9 0 71.45 -0.1Q69 -0.2 66.3 -0.2Q63.6 -0.2 61.2 -0.1Q58.8 0 56.9 0Z M104.6 0Q104.3 0 104.3 -0.6Q104.3 -1.2 104.6 -1.2Q107.2 -1.2 107.5 -2.05Q107.8 -2.9 106.4 -5.1L89.6 -30.3Q87.1 -34 84.7 -35.7Q82.3 -37.4 80.5 -37.4Q80.3 -37.4 80.3 -38Q80.3 -38.6 80.5 -38.6Q82 -38.6 83.6 -38.5Q85.2 -38.4 86.7 -38.4Q90.1 -38.4 92.7 -38.5Q95.3 -38.6 97.4 -38.6Q97.6 -38.6 97.6 -38Q97.6 -37.4 97.4 -37.4Q95 -37.4 94.55 -36.6Q94.1 -35.8 95.6 -33.5L112.3 -8.3Q115 -4.3 117.6 -2.75Q120.2 -1.2 122 -1.2Q122.2 -1.2 122.2 -0.6Q122.2 0 122 0Q120.4 0 118.6 -0.1Q116.8 -0.2 115.3 -0.2Q111.9 -0.2 109.3 -0.1Q106.7 0 104.6 0ZM80 0Q79.8 0 79.8 -0.6Q79.8 -1.2 80 -1.2Q82.8 -1.2 85.95 -3.3Q89.1 -5.4 91.9 -9.2L99.5 -19.7L100.8 -18.5L93.9 -8.5Q92.3 -6.2 91.9 -4.55Q91.5 -2.9 92.7 -2.05Q93.9 -1.2 97.1 -1.2Q97.4 -1.2 97.4 -0.6Q97.4 0 97.1 0Q94.8 0 92.65 -0.1Q90.5 -0.2 87.1 -0.2Q84.8 -0.2 83.4 -0.1Q82 0 80 0ZM101.2 -19.2 100.1 -20.3 106.6 -30.1Q109.2 -33.8 108.7 -35.6Q108.2 -37.4 103.4 -37.4Q103.2 -37.4 103.2 -38Q103.2 -38.6 103.4 -38.6Q105.8 -38.6 107.95 -38.5Q110.1 -38.4 113.5 -38.4Q115.8 -38.4 117.2 -38.5Q118.6 -38.6 120.6 -38.6Q120.8 -38.6 120.8 -38Q120.8 -37.4 120.6 -37.4Q117.9 -37.4 114.75 -35.4Q111.6 -33.4 108.7 -29.4Z M154.5 0.6Q154.1 0.8 153.6 0.8Q152.1 0.8 150.75 -1.45Q149.4 -3.7 149.4 -7.9V-26.2Q149.4 -32.4 147.85 -35.05Q146.3 -37.7 143.6 -37.7Q141.1 -37.7 139.6 -36.35Q138.1 -35 137.45 -33.25Q136.8 -31.5 136.5 -30Q136.3 -28.1 135.35 -26.8Q134.4 -25.5 132.2 -25.5Q130.2 -25.5 129.3 -26.5Q128.4 -27.5 128.4 -28.7Q128.4 -30.8 130.35 -32.7Q132.3 -34.6 135.3 -36.2Q138.3 -37.8 141.55 -38.7Q144.8 -39.6 147.4 -39.6Q151.5 -39.6 153.85 -36.95Q156.2 -34.3 156.2 -29.2V-10.8Q156.2 -7.5 157.1 -5.9Q158 -4.3 160 -4.3Q161.7 -4.3 164.4 -5.4Q164.8 -5.6 165.05 -5.05Q165.3 -4.5 164.8 -4.3ZM136.1 0.7Q132.1 0.7 130.05 -1.3Q128 -3.3 128 -6.3Q128 -8.7 129.3 -10.35Q130.6 -12 133.05 -13.3Q135.5 -14.6 139 -15.9L150.4 -20.1L150.7 -18.8L141.6 -15.1Q140.1 -14.5 138.85 -13.7Q137.6 -12.9 136.8 -11.75Q136 -10.6 136 -9Q136 -6.6 137.6 -5.05Q139.2 -3.5 141.5 -3.5Q142.4 -3.5 143.4 -3.8Q144.4 -4.1 145.8 -4.9L151.7 -8.6L151.9 -7.2L144.6 -2.4Q142.3 -0.7 140.35 0Q138.4 0.7 136.1 0.7Z"/><path fill="currentColor" transform="translate(32.14 35.4)" d="M2.57 -6.48H4.55Q5.65 -6.48 6.47 -6.79Q7.28 -7.11 7.74 -7.72Q8.19 -8.33 8.19 -9.19Q8.19 -10.24 7.74 -10.91Q7.28 -11.59 6.47 -11.92Q5.65 -12.25 4.55 -12.25H1.4V0H4.73Q5.92 0 6.85 -0.39Q7.79 -0.79 8.34 -1.58Q8.89 -2.38 8.89 -3.59Q8.89 -4.43 8.58 -5.04Q8.26 -5.65 7.69 -6.05Q7.12 -6.44 6.37 -6.63Q5.62 -6.83 4.73 -6.83H2.57V-6H4.73Q5.32 -6 5.81 -5.85Q6.3 -5.71 6.66 -5.41Q7.02 -5.11 7.21 -4.67Q7.4 -4.24 7.4 -3.68Q7.4 -2.92 7.06 -2.4Q6.72 -1.87 6.12 -1.59Q5.51 -1.31 4.73 -1.31H2.89V-10.94H4.55Q5.48 -10.94 6.09 -10.46Q6.7 -9.98 6.7 -9.1Q6.7 -8.52 6.42 -8.12Q6.14 -7.72 5.65 -7.51Q5.16 -7.3 4.55 -7.3H2.57Z M20.04 0H26.22V-1.4H20.04ZM20.04 -10.85H26.22V-12.25H20.04ZM20.04 -5.95H25.87V-7.35H20.04ZM19.21 -12.25V0H20.7V-12.25Z M38.06 -3.68H44.54L44.01 -5.08H38.59ZM41.27 -9.49 43.37 -4.55 43.51 -4.2 45.29 0H46.95L41.27 -12.86L35.58 0H37.24L39.06 -4.31L39.2 -4.62Z M56.4 -12.25V-4.03Q56.4 -3.12 56.69 -2.35Q56.98 -1.58 57.53 -1.02Q58.08 -0.46 58.85 -0.14Q59.62 0.18 60.57 0.18Q61.51 0.18 62.28 -0.14Q63.05 -0.46 63.6 -1.02Q64.16 -1.58 64.44 -2.35Q64.73 -3.12 64.73 -4.03V-12.25H63.25V-4.03Q63.25 -2.77 62.56 -2Q61.88 -1.23 60.57 -1.23Q59.26 -1.23 58.57 -2Q57.89 -2.77 57.89 -4.03V-12.25Z M74.27 -10.85H77.42V0H78.91V-10.85H82.06V-12.25H74.27Z M98.88 -12.25 95.71 -6.58 92.56 -12.25H90.9L94.97 -5.27V0H96.46V-5.29L100.54 -12.25Z"/><g transform="translate(51.29 -68.6) scale(0.28)"><use href="#brochaG"/></g></g></symbol>
+  <!-- Isotipo: la brocha de abanico, en trazo (marca/icono-abanico.svg) -->
+  <symbol id="abanico" viewBox="0 0 100 100"><path d="M50 78 L0.29 56.9 A5.88 5.88 0 0 1 5.32 47.67 A5.88 5.88 0 0 1 12.04 39.59 A5.88 5.88 0 0 1 20.2 32.97 A5.88 5.88 0 0 1 29.48 28.05 A5.88 5.88 0 0 1 39.54 25.02 A5.88 5.88 0 0 1 50 24 A5.88 5.88 0 0 1 60.46 25.02 A5.88 5.88 0 0 1 70.52 28.05 A5.88 5.88 0 0 1 79.8 32.97 A5.88 5.88 0 0 1 87.96 39.59 A5.88 5.88 0 0 1 94.68 47.67 A5.88 5.88 0 0 1 99.71 56.9 Z"/><path d="M44.21 74.07L5.32 47.67 M45.08 73.02L12.04 39.59 M46.14 72.16L20.2 32.97 M47.34 71.53L29.48 28.05 M48.64 71.13L39.54 25.02 M50 71L50 24 M51.36 71.13L60.46 25.02 M52.66 71.53L70.52 28.05 M53.86 72.16L79.8 32.97 M54.92 73.02L87.96 39.59 M55.79 74.07L94.68 47.67"/><path d="M50 84.5c-3.1 3.6-3.4 8 0 8s3.1-4.4 0-8z" fill="currentColor" stroke="none"/></symbol>
+  <!-- Ícono de línea: la palomita de las tareas -->
   <symbol id="paloma" viewBox="0 0 24 24"><path d="M4.5 12.8l4.6 4.4L19.5 6.6"/></symbol>
 </svg>
+<!-- ===== fin de MARCA ===== -->
 
-<!-- ============ ENTRAR ============ -->
-<div id="login" class="login hide">
-  <div class="marca oscuro">
-    <svg class="wm" viewBox="0 0 2324 969" role="img" aria-label="Nixa"><use href="#wordmark"/></svg>
-    <p class="lema">Herramientas de belleza que sí duran.</p>
-    <svg class="raya" viewBox="0 0 118 10" aria-hidden="true"><path d="M1.5 6.2c14-2.6 25-3.4 38-2.1 12 1.2 19 2.9 31 1.6 15-1.6 27-3.2 46-3.9"/></svg>
-    <p class="kick">Panel de operación · Guadalajara, Jal.</p>
-    <div class="folio"><span>Ed. interna · N°01</span><span>Dos personas y un bot</span></div>
+<!-- ============ ¿QUIÉN ERES? ============ -->
+<div id="quien" class="puerta hide" role="dialog" aria-modal="true" aria-labelledby="tituloQuien">
+  <div class="q-in">
+  <svg class="logo marca" viewBox="0 24 176.9 113.74" role="img" aria-label="nixa BEAUTY"><use href="#lockup"/></svg>
+  <p class="eti">Orquestador · uso interno</p>
+  <h1 id="tituloQuien">¿Quién eres?</h1>
+  <p class="q-nota">Se guarda en este aparato. Lo que anotes, lo que pongas en la caja y lo que cierres va a tu nombre.</p>
+  <div class="opcs">
+    <button class="opc" type="button" data-quien="Alan"><span>Alan<small>Números y tienda</small></span></button>
+    <button class="opc" type="button" data-quien="Majo"><span>Majo<small>Proveedores y producto</small></span></button>
   </div>
-
-  <div class="hoja">
-    <div id="fPass">
-      <h2><small>Entrar</small>Buenos días, o lo que sea la hora.</h2>
-      <label class="campo"><span>Correo</span><input id="email" type="email" inputmode="email" autocomplete="email" placeholder="tu@correo.mx"></label>
-      <label class="campo"><span>Contraseña</span><input id="pass" type="password" autocomplete="current-password" placeholder="••••••••"></label>
-      <button class="btn" id="btnLogin">Entrar</button>
-      <div class="o">o bien</div>
-      <button class="btn linea" id="btnMagic">Mandarme un enlace al correo</button>
-      <div class="msg" id="loginMsg"></div>
-      <button class="link" id="verReset">No tengo contraseña / la olvidé</button>
-    </div>
-
-    <div id="fReset" class="hide">
-      <h2><small>Contraseña</small>Te mando un enlace.</h2>
-      <p class="nota">Al abrirlo desde el correo, aquí mismo eliges tu contraseña nueva.</p>
-      <label class="campo"><span>Correo</span><input id="emailReset" type="email" inputmode="email" autocomplete="email" placeholder="tu@correo.mx"></label>
-      <button class="btn" id="btnReset">Mandar enlace</button>
-      <div class="msg" id="resetMsg"></div>
-      <button class="link" id="volverLogin">Volver</button>
-    </div>
-
-    <div id="fNueva" class="hide">
-      <h2><small>Contraseña nueva</small>Elige una que sí recuerdes.</h2>
-      <p class="nota">Mínimo 8 caracteres.</p>
-      <label class="campo"><span>Contraseña nueva</span><input id="pass1" type="password" autocomplete="new-password"></label>
-      <label class="campo"><span>Repítela</span><input id="pass2" type="password" autocomplete="new-password"></label>
-      <button class="btn" id="btnNueva">Guardar y entrar</button>
-      <div class="msg" id="nuevaMsg"></div>
-    </div>
+  <button class="link suave cerrar-q hide" id="cerrarQuien" type="button">Dejarlo como estaba</button>
   </div>
 </div>
 
@@ -351,72 +543,74 @@ section{padding-top:18px}
 <div id="app" class="hide">
 
   <!-- lateral (escritorio) -->
-  <aside class="lado oscuro">
-    <svg class="wm" viewBox="0 0 2324 969" role="img" aria-label="Nixa"><use href="#wordmark"/></svg>
-    <span class="kick">Panel de operación</span>
-    <nav id="navDesk"></nav>
+  <aside class="lado">
+    <svg class="logo marca" viewBox="0 24 176.9 113.74" role="img" aria-label="nixa BEAUTY"><use href="#lockup"/></svg>
+    <span class="eti">Orquestador</span>
+    <nav id="navDesk" aria-label="Secciones"></nav>
     <div class="pie">
-      <span class="yo"><span class="nombreYo"></span><small>sesión abierta</small></span>
-      <button class="salir" type="button">salir</button>
+      <span class="eti">Estás como</span>
+      <span class="nombre nombreYo"></span>
+      <button class="link suave cambiaYo" type="button">Cambiar</button>
     </div>
   </aside>
 
   <div>
-    <!-- masthead (móvil) -->
+    <!-- barra superior (móvil) -->
     <header class="top">
-      <svg class="wm" viewBox="0 0 2324 969" role="img" aria-label="Nixa"><use href="#wordmark"/></svg>
-      <span class="yo"><span class="nombreYo" id="userName"></span><button class="salir" id="btnOut" type="button">salir</button></span>
+      <span class="n sec" id="secTop" aria-hidden="true">01</span>
+      <svg class="logo marca" viewBox="0 24 176.9 113.74" role="img" aria-label="nixa BEAUTY"><use href="#lockup"/></svg>
+      <button class="link yo cambiaYo" type="button" aria-label="Cambiar de persona"><span class="nombreYo"></span></button>
     </header>
 
-    <div class="wrap">
+    <main class="wrap">
 
       <!-- N°01 HOY -->
       <section id="v-hoy">
-        <div class="hero">
-          <div class="fecha" id="fechaHoy"></div>
-          <h1 id="hola">Hola</h1>
+        <div class="hoy-cab">
+          <p class="eti linea" id="fechaHoy"></p>
+          <h1 id="hola">Hola.</h1>
           <div class="cifra" id="kpiHoy">
-            <div class="n display" id="kHoy">0</div>
-            <div class="l"><span id="kHoyTxt">pendientes para hoy</span><small id="kHoyNota">sin atraso</small></div>
+            <div class="num" id="kHoy">0</div>
+            <div class="l"><span id="kHoyTxt">pendientes para hoy</span><small id="kHoyNota">día limpio</small></div>
           </div>
         </div>
-        <div class="strip">
+        <div class="tira">
           <div><div class="l">Piezas</div><div class="v" id="kStock">0</div></div>
-          <div><div class="l">Ventas en ML</div><div class="v" id="kVentas">0 <small>/ 10</small></div></div>
+          <div><div class="l">Meta ML</div><div class="v" id="kVentas">0<small>/10</small></div></div>
           <div><div class="l">Caja</div><div class="v" id="kCaja">$0</div></div>
         </div>
 
-        <div class="dos">
+        <div class="dos hoy-dos">
           <div class="bloque">
-            <div class="sub"><h3 id="tituloMias">Lo tuyo</h3><span class="n" id="nMias"></span></div>
+            <div class="sub"><h3 id="tituloMias">Lo tuyo</h3><span class="eti" id="nMias"></span></div>
             <div class="lista" id="listMias"></div>
           </div>
           <div class="bloque">
-            <div class="sub"><h3>Del equipo</h3><span class="n" id="nEquipo"></span></div>
+            <div class="sub"><h3>Del equipo</h3><span class="eti" id="nEquipo"></span></div>
             <div class="lista" id="listEquipo"></div>
           </div>
         </div>
 
         <div class="dos">
           <div class="bloque">
-            <div class="sub"><h3>Tarea rápida</h3><span class="n">se agrega al momento</span></div>
-            <div class="forma" style="margin-top:14px">
+            <div class="sub"><h3>Tarea rápida</h3><span class="eti">al momento</span></div>
+            <div class="forma">
               <label class="campo ancho"><span>Qué hay que hacer</span><input id="nt" placeholder="Recoger muestras en Ele-Gate"></label>
               <label class="campo"><span>Responsable</span><select id="ntr"><option>Majo</option><option>Alan</option><option>Jarvis</option></select></label>
               <label class="campo"><span>Para cuándo</span><input id="ntf" type="date"></label>
-              <label class="campo ancho"><span>Detalle (opcional)</span><textarea id="ntd" placeholder="Dirección, qué revisar, a quién preguntar…" style="min-height:72px"></textarea></label>
+              <label class="campo ancho"><span>Detalle (opcional)</span><textarea id="ntd" placeholder="Dirección, qué revisar, a quién preguntar…" style="min-height:64px"></textarea></label>
             </div>
-            <button class="btn chico" id="btnTarea">Agregar tarea</button>
+            <button class="btn ancho" id="btnTarea" type="button">Agregar tarea</button>
           </div>
           <div class="bloque">
-            <div class="sub"><h3>Anotar algo</h3><span class="n">va a la bitácora</span></div>
-            <label class="campo" style="margin-top:14px"><span>Qué pasó</span><textarea id="notaRapida" placeholder="Un precio, un hallazgo, un pendiente…"></textarea></label>
-            <button class="btn chico" id="btnNotaRapida">Guardar en la bitácora</button>
+            <div class="sub"><h3>Anotar algo</h3><span class="eti">va a la bitácora</span></div>
+            <div class="forma"><label class="campo ancho"><span>Qué pasó</span><textarea id="notaRapida" placeholder="Un precio, un hallazgo, un pendiente…"></textarea></label></div>
+            <button class="btn ancho linea" id="btnNotaRapida" type="button">Guardar en la bitácora</button>
           </div>
         </div>
 
         <div class="bloque">
-          <div class="sub"><h3>Todas las tareas</h3><span class="n" id="tarResumen"></span></div>
+          <div class="sub"><h3>Todas las tareas</h3><span class="eti" id="tarResumen"></span></div>
           <div class="chips" id="chipsTar"></div>
           <div class="lista" id="listTareas"></div>
         </div>
@@ -424,138 +618,185 @@ section{padding-top:18px}
 
       <!-- N°02 CAJA -->
       <section id="v-caja" class="hide">
-        <header class="cab"><div><span class="kick">N°02</span><h2>Caja</h2></div><div class="res">dinero compartido<br>Alan + Majo</div></header>
-        <div class="banda oscuro">
-          <span class="kick">En la caja ahora</span>
-          <div class="saldo display" id="cSaldo">$0</div>
-          <div class="reparto" id="reparto"><i class="alan" style="width:0"></i><i class="majo" style="width:0"></i></div>
-          <div class="leyenda">
-            <div><span class="l">Puso Alan</span><b id="cAlan">$0</b></div>
-            <div class="majo"><span class="l">Puso Majo</span><b id="cMajo">$0</b></div>
-            <div class="gasto"><span class="l">Ha salido</span><b id="cGasto">$0</b></div>
+        <header class="cab"><div><span class="n">02</span><h2>Caja</h2></div><p class="res">Dinero compartido de Alan y Majo. Todo gasto se parte a la mitad, lo haya pagado quien lo haya pagado.</p></header>
+        <div class="franja oscuro">
+          <svg class="agua ilu" viewBox="0 0 100 100" aria-hidden="true"><use href="#abanico"/></svg>
+          <div class="w">
+            <div>
+              <span class="eti">En la caja ahora</span>
+              <div class="saldo" id="cSaldo">$0<small>pesos mexicanos</small></div>
+            </div>
+            <div>
+              <div class="reparto" id="reparto" aria-hidden="true"><i class="alan" style="width:0"></i><i class="majo" style="width:0"></i></div>
+              <div class="leyenda">
+                <div><span class="l">Alan</span><b id="cAlan">$0</b></div>
+                <div class="majo"><span class="l">Majo</span><b id="cMajo">$0</b></div>
+                <div class="gasto"><span class="l">Gastado</span><b id="cGasto">$0</b></div>
+              </div>
+            </div>
           </div>
-          <div class="cuentas" id="cuentas">Cuentas: van parejos 50/50.</div>
+        </div>
+        <div class="cuentas" id="cuentas">
+          <span class="eti">Cuentas entre socios</span>
+          <h3 id="cuentasTit">Van parejos, <em>50/50.</em></h3>
+          <p id="cuentasTxt">Nadie ha puesto nada todavía, así que nadie le debe nada a nadie.</p>
         </div>
 
         <div class="dos forma-lista">
           <div class="bloque pegado">
             <div class="sub"><h3>Registrar movimiento</h3></div>
-            <div class="forma" style="margin-top:14px">
+            <div class="forma">
               <label class="campo"><span>Tipo</span><select id="ktipo"><option value="aportacion">Aportación</option><option value="gasto">Gasto</option><option value="reembolso">Reembolso</option><option value="venta">Entrada por venta</option></select></label>
               <label class="campo"><span>Quién</span><select id="kquien"><option>Alan</option><option>Majo</option></select></label>
-              <label class="campo ancho"><span>Concepto</span><input id="kconcepto" placeholder="50 sets Ele-Gate"></label>
+              <label class="campo ancho"><span>Concepto</span><input id="kconcepto" placeholder="50 sets en Ele-Gate"></label>
               <label class="campo"><span>Monto</span><input id="kmonto" type="number" inputmode="decimal" step="0.01" placeholder="$"></label>
-              <label class="campo"><span>Folio (opcional)</span><input id="kcomp" placeholder="Ticket, transferencia…"></label>
+              <label class="campo"><span>Folio</span><input id="kcomp" placeholder="Ticket, opcional"></label>
             </div>
-            <button class="btn chico" id="btnCaja">Guardar movimiento</button>
+            <button class="btn ancho" id="btnCaja" type="button">Guardar movimiento</button>
             <div class="msg" id="kmsg"></div>
           </div>
           <div class="bloque">
-            <div class="sub"><h3>Movimientos</h3><span class="n">últimos 40</span></div>
+            <div class="sub"><h3>Movimientos</h3><span class="eti">últimos 40</span></div>
             <div class="lista" id="listCaja"></div>
           </div>
         </div>
       </section>
 
-      <!-- N°03 INVENTARIO -->
-      <section id="v-inv" class="hide">
-        <header class="cab"><div><span class="kick">N°03</span><h2>Inventario</h2></div><div class="res" id="invResumen"></div></header>
-        <div class="dos">
-          <div class="bloque">
-            <div class="sub"><h3>Piezas en casa</h3><span class="n">toca − o + para ajustar</span></div>
-            <div class="lista" id="listInv"></div>
-          </div>
-          <div class="bloque">
-            <div class="sub"><h3>Catálogo</h3><span class="n">precio · costo · margen</span></div>
-            <div class="lista" id="listProd"></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- N°04 COMPRAS -->
-      <section id="v-com" class="hide">
-        <header class="cab"><div><span class="kick">N°04</span><h2>Compras</h2></div><div class="res">cada compra suma<br>al inventario</div></header>
-        <div class="dos forma-lista">
-          <div class="bloque pegado">
-            <div class="sub"><h3>Registrar compra</h3></div>
-            <div class="forma" style="margin-top:14px">
-              <label class="campo ancho"><span>Proveedor</span><input id="cprov" placeholder="Ele-Gate" list="provs"><datalist id="provs"></datalist></label>
-              <label class="campo ancho"><span>Producto</span><select id="csku"></select></label>
-              <label class="campo"><span>Cantidad</span><input id="ccant" type="number" inputmode="numeric" placeholder="0"></label>
-              <label class="campo"><span>Costo por pieza</span><input id="ccosto" type="number" inputmode="decimal" step="0.01" placeholder="$"></label>
-              <label class="campo ancho"><span>Factura</span><select id="cfact"><option value="false">Sin factura</option><option value="true">Con factura</option></select></label>
-            </div>
-            <button class="btn chico" id="btnCompra">Guardar compra</button>
-            <div class="msg" id="cmsg"></div>
-          </div>
-          <div class="bloque">
-            <div class="sub"><h3>Últimas compras</h3><span class="n">últimas 30</span></div>
-            <div class="lista" id="listCom"></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- N°05 VENTAS -->
+      <!-- N°03 VENTAS -->
       <section id="v-ven" class="hide">
-        <header class="cab"><div><span class="kick">N°05</span><h2>Ventas</h2></div><div class="res" id="venResumen"></div></header>
-        <div class="banda oscuro">
+        <header class="cab"><div><span class="n">03</span><h2>Ventas</h2></div><p class="res" id="venResumen">Meta viva: diez en Mercado Libre.</p></header>
+        <div class="metaml">
           <div class="meta-cab">
-            <div><span class="kick">Meta N°1</span><h3>Diez ventas en Mercado Libre</h3></div>
-            <div class="meta-n display"><span id="mN">0</span><small>/10</small></div>
+            <div><span class="eti linea">Meta N°1</span><h3>Diez ventas en Mercado Libre.</h3></div>
+            <div class="cnt"><span id="mN">0</span><small>/10</small></div>
           </div>
-          <ol class="slots" id="slots"></ol>
+          <ol class="casillas" id="casillas" aria-label="Avance de la meta"></ol>
           <p class="meta-nota" id="metaNota"></p>
         </div>
 
         <div class="dos forma-lista">
           <div class="bloque pegado">
-            <div class="sub"><h3>Registrar venta</h3></div>
-            <div class="forma" style="margin-top:14px">
+            <div class="sub"><h3>Registrar venta</h3><span class="eti">en vivo</span></div>
+            <div class="forma">
               <label class="campo ancho"><span>Canal</span><select id="vcanal"><option>Mercado Libre</option><option>TikTok Shop</option><option>WhatsApp</option><option>Facebook</option><option>Amazon</option><option>En persona</option></select></label>
               <label class="campo ancho"><span>Producto</span><select id="vsku"></select></label>
               <label class="campo"><span>Precio de venta</span><input id="vprecio" type="number" inputmode="decimal" step="0.01" placeholder="$"></label>
-              <label class="campo"><span>Cantidad</span><input id="vcant" type="number" inputmode="numeric" value="1"></label>
+              <label class="campo"><span>Cantidad</span><input id="vcant" type="number" inputmode="numeric" value="1" min="1"></label>
             </div>
-            <div class="msg" id="vcalc"></div>
-            <button class="btn chico" id="btnVenta">Guardar venta</button>
+            <div class="calc vacia" id="vcalc"><div><div class="l">Comisión y envío</div><div class="v" id="vcom">—</div></div><div><div class="l">Neto para nixa</div><div class="v neto" id="vneto">—</div></div></div>
+            <p class="msg" id="vregla">Mercado Libre cobra 14% más $38 de envío por pieza. TikTok Shop, 8%. Amazon, 15%. En persona y WhatsApp, nada.</p>
+            <button class="btn ancho" id="btnVenta" type="button">Guardar venta</button>
             <div class="msg" id="vmsg"></div>
           </div>
           <div class="bloque">
-            <div class="sub"><h3>Últimas ventas</h3><span class="n">con su neto</span></div>
+            <div class="sub"><h3>Últimas ventas</h3><span class="eti">con su neto</span></div>
             <div class="lista" id="listVen"></div>
           </div>
         </div>
       </section>
 
-      <!-- N°06 BITÁCORA -->
+      <!-- N°04 INVENTARIO Y COMPRAS -->
+      <section id="v-inv" class="hide">
+        <header class="cab"><div><span class="n">04</span><h2>Inventario y compras</h2></div><p class="res" id="invResumen">0 piezas en casa</p></header>
+        <div class="dos">
+          <div class="bloque">
+            <div class="sub"><h3>Piezas en casa</h3><span class="eti">− y + ajustan</span></div>
+            <div class="lista" id="listInv"></div>
+          </div>
+          <div class="bloque">
+            <div class="sub"><h3>Catálogo</h3><span class="eti">precio y margen</span></div>
+            <div class="lista" id="listProd"></div>
+          </div>
+        </div>
+        <div class="dos forma-lista">
+          <div class="bloque pegado">
+            <div class="sub"><h3>Registrar compra</h3><span class="eti">suma piezas</span></div>
+            <div class="forma">
+              <label class="campo ancho"><span>Proveedor</span><input id="cprov" placeholder="Ele-Gate" list="provs"><datalist id="provs"></datalist></label>
+              <label class="campo ancho"><span>Producto</span><select id="csku"></select></label>
+              <label class="campo"><span>Cantidad</span><input id="ccant" type="number" inputmode="numeric" placeholder="0" min="1"></label>
+              <label class="campo"><span>Costo por pieza</span><input id="ccosto" type="number" inputmode="decimal" step="0.01" placeholder="$"></label>
+              <label class="campo ancho"><span>Factura</span><select id="cfact"><option value="false">Sin factura</option><option value="true">Con factura</option></select></label>
+            </div>
+            <button class="btn ancho" id="btnCompra" type="button">Guardar compra</button>
+            <div class="msg" id="cmsg"></div>
+          </div>
+          <div class="bloque">
+            <div class="sub"><h3>Últimas compras</h3><span class="eti">últimas 30</span></div>
+            <div class="lista" id="listCom"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- N°05 ENVÍOS -->
+      <section id="v-env" class="hide">
+        <header class="cab"><div><span class="n">05</span><h2>Envíos</h2></div><p class="res" id="envResumen">Los pedidos de la tienda y de los canales, con su estado.</p></header>
+        <div class="ruta" id="ruta"><div><div class="l">Nuevos</div><div class="v">0</div></div><div><div class="l">Preparando</div><div class="v">0</div></div><div><div class="l">Enviados</div><div class="v">0</div></div><div><div class="l">Entregados</div><div class="v">0</div></div></div>
+        <div class="chips" id="chipsEnv"></div>
+        <div class="lista" id="listEnv"></div>
+      </section>
+
+      <!-- N°06 SOPORTE -->
+      <section id="v-sop" class="hide">
+        <header class="cab"><div><span class="n">06</span><h2>Soporte</h2></div><p class="res" id="sopResumen">Lo que llega por Telegram, hasta que alguien lo atiende.</p></header>
+        <div class="chips" id="chipsSop"></div>
+        <div class="lista" id="listSop"></div>
+      </section>
+
+      <!-- N°07 QUÉ MEJORAR -->
+      <section id="v-mej" class="hide">
+        <header class="cab"><div><span class="n">07</span><h2>Qué mejorar</h2></div><p class="res" id="mejResumen">Reglas sobre los datos reales, calculadas al abrir.</p></header>
+        <div class="lista" id="listMej"></div>
+        <p class="mej-nota">Nada de esto es opinión: cada línea sale de una regla fija sobre las tareas, el inventario, la caja, las ventas, las compras, los pedidos y los mensajes. Se recalcula cada vez que abres el panel o guardas algo.</p>
+      </section>
+
+      <!-- N°08 BITÁCORA -->
       <section id="v-bit" class="hide">
-        <header class="cab"><div><span class="kick">N°06</span><h2>Bitácora</h2></div><div class="res">panel + Telegram<br>lo más reciente arriba</div></header>
+        <header class="cab"><div><span class="n">08</span><h2>Bitácora</h2></div><p class="res">Panel y Telegram, lo más reciente arriba.</p></header>
         <div class="dos forma-lista">
           <div class="bloque pegado">
             <div class="sub"><h3>Anotar</h3></div>
-            <label class="campo" style="margin-top:14px"><span>Qué pasó</span><textarea id="btexto" placeholder="Precios, hallazgos, medidas, avances…"></textarea></label>
-            <button class="btn chico" id="btnBit">Guardar</button>
+            <div class="forma"><label class="campo ancho"><span>Qué pasó</span><textarea id="btexto" placeholder="Precios, hallazgos, medidas, avances…"></textarea></label></div>
+            <button class="btn ancho" id="btnBit" type="button">Guardar</button>
           </div>
           <div class="bloque">
-            <div class="sub"><h3>Entradas</h3><span class="n">últimas 60</span></div>
+            <div class="sub"><h3>Entradas</h3><span class="eti">últimas 60</span></div>
             <div class="lista" id="listBit"></div>
           </div>
         </div>
       </section>
 
-    </div>
+    </main>
   </div>
 
-  <nav class="tabs" id="navTabs"></nav>
+  <!-- barra inferior (móvil) -->
+  <nav class="tabs" id="navTabs" aria-label="Secciones"></nav>
+  <div class="indice" id="indice" role="dialog" aria-modal="true" aria-label="Índice del orquestador">
+    <div class="arriba"><svg class="logo marca" viewBox="0 24 176.9 113.74" aria-hidden="true"><use href="#lockup"/></svg><button class="cerrar" id="cerrarIndice" type="button">Cerrar</button></div>
+    <div id="indiceLista"></div>
+    <p class="pie">Estás como <b class="nombreYo"></b>. <button class="link suave cambiaYo" type="button">Cambiar</button></p>
+  </div>
 </div>
 
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"><svg class="marca ilu" viewBox="0 0 100 100" aria-hidden="true"><use href="#abanico"/></svg><span id="toastTxt"></span></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script>
+// Si el CDN de supabase no cargó (red caída, wifi de café, bloqueo), avisamos
+// con la cara de la marca en vez de dejar la página en blanco sin explicación.
+if (typeof supabase === 'undefined') {
+  document.body.innerHTML = '<div style="min-height:100dvh;display:grid;place-items:center;padding:40px 24px;text-align:center">'
+    + '<div style="max-width:34ch">'
+    + '<p style="font:500 13px/1.5 var(--sans);letter-spacing:.3em;text-transform:uppercase;color:var(--cocoa2);margin:0 0 20px">Sin conexión</p>'
+    + '<h1 style="font:300 clamp(34px,8vw,48px)/1.05 var(--serif);color:var(--cocoa);margin:0">No se pudo cargar el panel.</h1>'
+    + '<p style="font:400 17px/1.6 var(--sans);color:var(--cocoa2);margin:22px 0 0">Revisa tu internet y vuelve a abrir. Los datos están a salvo; esto es solo la pantalla.</p>'
+    + '<button onclick="location.reload()" style="margin-top:32px;min-height:58px;padding:0 36px;border:1px solid var(--cocoa);background:var(--cocoa);color:var(--crema);font:500 13px/1.2 var(--sans);letter-spacing:.26em;text-transform:uppercase;cursor:pointer">Reintentar</button>'
+    + '</div></div>';
+  throw new Error('supabase-js no cargó');
+}
 const URL_SB = "https://jjtlkneoxmgcyrifckdf.supabase.co";
 const KEY_SB = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpqdGxrbmVveG1nY3lyaWZja2RmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgzNjQ0ODcsImV4cCI6MjEwMzk0MDQ4N30.Ty2qZduVwcIfWuVAzb-judCXVIIpyBq2_D3bE2GsY7g";
-const sb = supabase.createClient(URL_SB, KEY_SB);
+const sb = supabase.createClient(URL_SB, KEY_SB, { auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false } });
 
 const $ = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
@@ -563,113 +804,107 @@ const el = h => { const d = document.createElement('div'); d.innerHTML = h.trim(
 const esc = s => (s ?? '').toString().replace(/[<>&"]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]));
 const money = n => '$' + Number(n || 0).toLocaleString('es-MX', { maximumFractionDigits: 0 });
 const idx = i => String(i + 1).padStart(2, '0');
+const plural = (n, uno, varios) => n === 1 ? uno : varios;
 const TZ = 'America/Mexico_City';
 const hoyISO = () => new Intl.DateTimeFormat('en-CA', { timeZone: TZ, year:'numeric', month:'2-digit', day:'2-digit' }).format(new Date());
+const diasDesde = iso => { if (!iso) return 0; const h = new Date(hoyISO() + 'T12:00:00'); const d = new Date(String(iso).slice(0, 10) + 'T12:00:00'); return Math.round((h - d) / 864e5); };
 const fechaCorta = iso => { if (!iso) return ''; const h = hoyISO(); if (iso === h) return 'hoy'; const d = new Date(iso + 'T12:00:00'); const m = new Date(h + 'T12:00:00'); if ((d - m) / 864e5 === 1) return 'mañana'; return d.toLocaleDateString('es-MX', { weekday:'short', day:'numeric', month:'short' }).replace(/\./g, ''); };
-const fechaDia = ts => new Date(ts).toLocaleDateString('es-MX', { timeZone: TZ, day:'2-digit', month:'short' }).replace(/\./g, '').replace(/-/g, ' ');
+const fechaLarga = iso => iso ? new Date(String(iso).slice(0, 10) + 'T12:00:00').toLocaleDateString('es-MX', { day:'numeric', month:'long' }) : '';
+const fechaDia = ts => new Date(ts).toLocaleDateString('es-MX', { timeZone: TZ, day:'2-digit' });
+const fechaMes = ts => new Date(ts).toLocaleDateString('es-MX', { timeZone: TZ, month:'short' }).replace(/\./g, '');
 const horaSola = ts => new Date(ts).toLocaleTimeString('es-MX', { timeZone: TZ, hour:'2-digit', minute:'2-digit', hour12:false });
 const PERSONAS = ['Majo', 'Alan', 'Jarvis'];
 const META_ML = 10;
-let productos = [], YO = 'Alan', tareasCache = [], filtroTar = 'todas';
+const LS_QUIEN = 'nixa_quien';
+let productos = [], YO = null, tareasCache = [], filtroTar = 'todas', filtroEnv = 'activos', filtroSop = 'pendientes';
+// Lo que ya se cargó, para que "Qué mejorar" calcule sobre datos reales sin volver a pedirlos.
+const D = { tareas: [], inv: [], ventas: [], compras: [], saldo: null, socios: null, mensajes: [], pedidos: [], listo: {} };
 const nombreDe = sku => (productos.find(p => p.sku === sku) || {}).nombre || sku || '';
+const nombreCorto = sku => nombreDe(sku).split(' · ')[0];
+const nombreResto = sku => nombreDe(sku).split(' · ').slice(1).join(' · ');
+const abanico = '<svg class="ilu" viewBox="0 0 100 100" aria-hidden="true"><use href="#abanico"/></svg>';
+const paloma = '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#paloma"/></svg>';
+const vacio = (b, s) => `<div class="vacio"><b>${b}</b>${s ? `<span>${s}</span>` : ''}</div>`;
 
-function toast(t) { const x = $('#toast'); x.textContent = t; x.classList.add('on'); clearTimeout(x._t); x._t = setTimeout(() => x.classList.remove('on'), 2200); }
+function toast(t) { const x = $('#toast'); $('#toastTxt').textContent = t; x.classList.add('on'); clearTimeout(x._t); x._t = setTimeout(() => x.classList.remove('on'), 2400); }
 const msg = (sel, texto, cls = '') => { const m = $(sel); m.className = 'msg ' + cls; m.textContent = texto; };
+const anota = texto => sb.from('bitacora').insert({ autor: YO, texto, origen: 'panel' });
 
-/* ================= sesión ================= */
-const hash = new URLSearchParams(location.hash.slice(1));
-const esRecovery = hash.get('type') === 'recovery';
-const hayError = hash.get('error_description');
+/* ================= ¿quién eres? · sin sesión, se guarda en el aparato ================= */
+function leeQuien() { try { return localStorage.getItem(LS_QUIEN); } catch (e) { return null; } }
+function guardaQuien(n) { try { localStorage.setItem(LS_QUIEN, n); } catch (e) {} }
+function pideQuien(puedeCerrar) {
+  $('#quien').classList.remove('hide');
+  $('#cerrarQuien').classList.toggle('hide', !puedeCerrar);
+  document.body.style.overflow = 'hidden';
+}
+function cierraQuien() { $('#quien').classList.add('hide'); document.body.style.overflow = ''; }
+$$('.opc[data-quien]').forEach(b => b.onclick = () => { const n = b.dataset.quien; const cambio = YO && YO !== n; guardaQuien(n); cierraQuien(); if (!YO || cambio) arranca(n); });
+$('#cerrarQuien').onclick = cierraQuien;
+$$('.cambiaYo').forEach(b => b.onclick = () => { cierraIndice(); pideQuien(true); });
 
-$('#btnLogin').onclick = async () => {
-  const email = $('#email').value.trim(), password = $('#pass').value;
-  if (!email || !password) return msg('#loginMsg', 'Pon tu correo y tu contraseña.', 'err');
-  msg('#loginMsg', 'Entrando…');
-  const { error } = await sb.auth.signInWithPassword({ email, password });
-  if (error) msg('#loginMsg', 'Correo o contraseña incorrectos. Si no tienes contraseña, usa el enlace por correo.', 'err');
-};
-$('#pass').addEventListener('keydown', e => { if (e.key === 'Enter') $('#btnLogin').click(); });
-$('#btnMagic').onclick = async () => {
-  const email = $('#email').value.trim();
-  if (!email) return msg('#loginMsg', 'Escribe tu correo arriba y vuelve a tocar el botón.', 'err');
-  msg('#loginMsg', 'Mandando…');
-  const { error } = await sb.auth.signInWithOtp({ email, options: { emailRedirectTo: location.origin + location.pathname, shouldCreateUser: false } });
-  if (error) msg('#loginMsg', error.message.includes('Signups not allowed') ? 'Ese correo no está invitado. Pídele a Alan que te invite.' : error.message, 'err');
-  else msg('#loginMsg', 'Listo. Abre el correo y toca el enlace; entras directo.', 'ok');
-};
-$('#verReset').onclick = () => { $('#fPass').classList.add('hide'); $('#fReset').classList.remove('hide'); $('#emailReset').value = $('#email').value; };
-$('#volverLogin').onclick = () => { $('#fReset').classList.add('hide'); $('#fPass').classList.remove('hide'); };
-$('#btnReset').onclick = async () => {
-  const email = $('#emailReset').value.trim();
-  if (!email) return msg('#resetMsg', 'Escribe tu correo.', 'err');
-  msg('#resetMsg', 'Mandando…');
-  const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: location.origin + location.pathname });
-  if (error) msg('#resetMsg', error.message, 'err'); else msg('#resetMsg', 'Listo. Abre el correo, toca el enlace y elige tu contraseña.', 'ok');
-};
-$('#btnNueva').onclick = async () => {
-  const a = $('#pass1').value, b = $('#pass2').value;
-  if (a.length < 8) return msg('#nuevaMsg', 'Mínimo 8 caracteres.', 'err');
-  if (a !== b) return msg('#nuevaMsg', 'No coinciden.', 'err');
-  msg('#nuevaMsg', 'Guardando…');
-  const { error } = await sb.auth.updateUser({ password: a });
-  if (error) return msg('#nuevaMsg', error.message, 'err');
-  history.replaceState(null, '', location.pathname);
-  const { data } = await sb.auth.getSession();
-  render(data.session);
-  toast('Contraseña guardada');
-};
-$$('.salir').forEach(b => b.onclick = async () => { await sb.auth.signOut(); location.reload(); });
-
-sb.auth.onAuthStateChange((ev, session) => {
-  if (ev === 'PASSWORD_RECOVERY' || (esRecovery && session)) { mostrarLogin(); $('#fPass').classList.add('hide'); $('#fNueva').classList.remove('hide'); return; }
-  if (ev === 'SIGNED_IN' && location.hash) history.replaceState(null, '', location.pathname);
-  render(session);
-});
-sb.auth.getSession().then(({ data }) => { if (!(esRecovery && data.session)) render(data.session); });
-if (hayError) { mostrarLogin(); msg('#loginMsg', 'El enlace ya no sirve (caducó o ya se usó). Pide otro.', 'err'); history.replaceState(null, '', location.pathname); }
-
-function mostrarLogin() { $('#login').classList.remove('hide'); $('#app').classList.add('hide'); }
-
-async function render(session) {
-  if (!session) return mostrarLogin();
-  $('#login').classList.add('hide'); $('#app').classList.remove('hide');
-  const { data: p } = await sb.from('perfiles').select('nombre').eq('id', session.user.id).maybeSingle();
-  const correo = session.user.email || '';
-  YO = p?.nombre ? p.nombre.split(' ')[0] : (correo.startsWith('majo') ? 'Majo' : 'Alan');
-  if (!PERSONAS.includes(YO)) YO = YO.charAt(0).toUpperCase() + YO.slice(1);
-  $$('.nombreYo').forEach(n => n.textContent = YO);
-  $('#hola').textContent = `Hola, ${YO}.`;
-
+function saludo() {
+  const h = Number(new Intl.DateTimeFormat('en-US', { timeZone: TZ, hour: 'numeric', hour12: false }).format(new Date()));
+  return h < 12 ? 'Buenos días' : h < 19 ? 'Buenas tardes' : 'Buenas noches';
+}
+function arranca(n) {
+  YO = n;
+  $('#app').classList.remove('hide');
+  $$('.nombreYo').forEach(x => x.textContent = YO);
+  $('#hola').innerHTML = `${saludo()}, <em>${esc(YO)}.</em>`;
   const f = new Date().toLocaleDateString('es-MX', { timeZone: TZ, weekday:'long', day:'numeric', month:'long' });
   $('#fechaHoy').textContent = f.charAt(0).toUpperCase() + f.slice(1);
-
-  $('#kquien').value = PERSONAS.includes(YO) && YO !== 'Jarvis' ? YO : 'Alan';
+  $('#kquien').value = YO;
   buildNav();
-  await cargarProductos();
-  cargarTodo();
+  cargarProductos().then(cargarTodo);
 }
 
 /* ================= navegación ================= */
-const VISTAS = [['hoy','Hoy'],['caja','Caja'],['inv','Inventario'],['com','Compras'],['ven','Ventas'],['bit','Bitácora']];
-const CARGA = { hoy: () => cargarTareas(), caja: () => cargarCaja(), inv: () => cargarInv(), com: () => cargarCompras(), ven: () => cargarVentas(), bit: () => cargarBitacora() };
+// clave, nombre, nota corta (para el índice), en la barra inferior (móvil)
+const VISTAS = [
+  ['hoy', 'Hoy', 'Pendientes y cifras del día', true],
+  ['caja', 'Caja', 'Saldo, reparto y cuentas', true],
+  ['ven', 'Ventas', 'La meta de diez y cada venta', true],
+  ['inv', 'Piezas', 'Inventario, catálogo y compras', true],
+  ['env', 'Envíos', 'Pedidos y su estado', false],
+  ['sop', 'Soporte', 'Mensajes por atender', false],
+  ['mej', 'Mejorar', 'Hallazgos sobre los datos', false],
+  ['bit', 'Bitácora', 'Todo lo que pasó', false],
+];
+const NOMBRE_LARGO = { inv: 'Inventario y compras', mej: 'Qué mejorar' };
+const CARGA = { hoy: () => cargarTareas(), caja: () => cargarCaja(), ven: () => cargarVentas(), inv: () => { cargarInv(); cargarCompras(); }, env: () => cargarPedidos(), sop: () => cargarMensajes(), mej: () => cargarTodo(), bit: () => cargarBitacora() };
+const LEGADO = { com: 'inv' };
 let vista = 'hoy';
 function buildNav() {
-  if ($('#navTabs').children.length) return;
-  VISTAS.forEach(([k, txt], i) => {
-    const b = document.createElement('button'); b.type = 'button'; b.innerHTML = `<span class="i">${idx(i)}</span><span class="t">${txt}</span>`; b.dataset.k = k; b.onclick = () => irA(k); $('#navTabs').appendChild(b);
-    const d = document.createElement('button'); d.type = 'button'; d.innerHTML = `<span class="i">N°${idx(i)}</span><span class="t">${txt}</span>`; d.dataset.k = k; d.onclick = () => irA(k); $('#navDesk').appendChild(d);
+  if ($('#navDesk').children.length) return;
+  VISTAS.forEach(([k, txt, nota, enBarra], i) => {
+    const d = el(`<button type="button" data-k="${k}"><span class="n">${idx(i)}</span><span>${NOMBRE_LARGO[k] || txt}</span></button>`); d.onclick = () => irA(k); $('#navDesk').appendChild(d);
+    if (enBarra) { const b = el(`<button type="button" data-k="${k}"><span class="n">${idx(i)}</span><span class="t">${txt}</span></button>`); b.onclick = () => irA(k); $('#navTabs').appendChild(b); }
+    const a = el(`<a href="#${k}" data-k="${k}"><span class="n">${idx(i)}</span><span>${NOMBRE_LARGO[k] || txt}<small>${nota}</small></span></a>`); a.onclick = e => { e.preventDefault(); cierraIndice(); irA(k); }; $('#indiceLista').appendChild(a);
   });
+  const mas = el(`<button type="button" data-k="mas"><span class="n">…</span><span class="t">Más</span></button>`); mas.onclick = abreIndice; $('#navTabs').appendChild(mas);
   const h = location.hash.replace('#', '');
-  irA(h in CARGA ? h : 'hoy');
+  irA((LEGADO[h] || h) in CARGA ? (LEGADO[h] || h) : 'hoy');
 }
 function irA(k) {
   vista = k;
-  $$('#navTabs button, #navDesk button').forEach(b => b.classList.toggle('on', b.dataset.k === k));
+  const i = VISTAS.findIndex(v => v[0] === k), enBarra = VISTAS[i][3];
+  $$('#navDesk button, #indiceLista a').forEach(b => b.classList.toggle('on', b.dataset.k === k));
+  $$('#navTabs button').forEach(b => {
+    const esMas = b.dataset.k === 'mas';
+    b.classList.toggle('on', esMas ? !enBarra : b.dataset.k === k);
+    if (esMas) { b.querySelector('.n').textContent = enBarra ? '…' : idx(i); b.querySelector('.t').textContent = enBarra ? 'Más' : VISTAS[i][1]; }
+  });
+  $('#secTop').textContent = idx(i);
   VISTAS.forEach(([kk]) => $('#v-' + kk).classList.toggle('hide', kk !== k));
   window.scrollTo({ top: 0 });
   if (k !== 'hoy') history.replaceState(null, '', '#' + k); else history.replaceState(null, '', location.pathname);
   CARGA[k]?.();
 }
+const abreIndice = () => { $('#indice').classList.add('on'); document.body.style.overflow = 'hidden'; };
+const cierraIndice = () => { $('#indice').classList.remove('on'); if ($('#quien').classList.contains('hide')) document.body.style.overflow = ''; };
+$('#cerrarIndice').onclick = cierraIndice;
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { cierraIndice(); if (YO) cierraQuien(); } });
 
 /* ================= datos ================= */
 async function cargarProductos() {
@@ -677,24 +912,26 @@ async function cargarProductos() {
   productos = data || [];
   ['#csku', '#vsku'].forEach(sel => { const s = $(sel); s.innerHTML = ''; productos.forEach(p => s.appendChild(el(`<option value="${esc(p.sku)}">${esc(p.nombre)}</option>`))); });
   const cont = $('#listProd'); cont.innerHTML = '';
-  if (!productos.length) cont.appendChild(el('<div class="vacio">Sin productos activos. El catálogo se llena desde la base.</div>'));
-  productos.forEach(p => {
+  if (!productos.length) cont.appendChild(el(vacio('Sin productos activos.', 'El catálogo se llena desde la base.')));
+  productos.forEach((p, i) => {
     const mg = p.precio - (p.costo || 0), pct = p.precio ? Math.round(mg / p.precio * 100) : 0;
-    cont.appendChild(el(`<div class="prod"><div><div class="t">${esc(p.nombre)}</div><div class="s">${esc(p.sku)} · costo ${money(p.costo)}</div></div>
-      <div><div class="big">${money(p.precio)}</div><div class="mg">margen ${money(mg)} · ${pct}%</div></div></div>`));
+    cont.appendChild(el(`<div class="prod"><span class="n">${idx(i)}</span><div><div class="t">${esc(nombreCorto(p.sku))}</div><div class="s">${nombreResto(p.sku) ? esc(nombreResto(p.sku)) + ' · ' : ''}${esc(p.sku)} · costo ${money(p.costo)}</div></div>
+      <div class="der"><div class="imp">${money(p.precio)}</div><div class="mg ${pct < 50 ? 'bajo' : ''}">margen ${money(mg)} · ${pct}%</div></div></div>`));
   });
   const { data: pv } = await sb.from('proveedores').select('nombre');
   $('#provs').innerHTML = (pv || []).map(x => `<option value="${esc(x.nombre)}">`).join('');
   calcVenta();
 }
-function cargarTodo() { cargarTareas(); cargarCaja(); cargarInv(); cargarCompras(); cargarVentas(); cargarBitacora(); }
+function cargarTodo() { return Promise.all([cargarTareas(), cargarCaja(), cargarInv(), cargarCompras(), cargarVentas(), cargarPedidos(), cargarMensajes(), cargarBitacora()]).then(pintaMejoras); }
+// Cada carga avisa; "Qué mejorar" se recalcula una sola vez aunque lleguen varias seguidas.
+let _tm; const recalcula = () => { clearTimeout(_tm); _tm = setTimeout(pintaMejoras, 120); };
 
 /* ---- tareas ---- */
 function filaTarea(t, { conPersona = true } = {}) {
   const hecha = t.estado === 'hecha', hoy = hoyISO();
   const tarde = t.fecha && t.fecha < hoy && !hecha, esHoy = t.fecha === hoy && !hecha;
   const r = el(`<div class="tarea ${hecha ? 'hecha' : ''}">
-    <button class="chk" type="button" aria-label="${hecha ? 'reabrir' : 'marcar hecha'}" aria-pressed="${hecha}"><svg><use href="#paloma"/></svg></button>
+    <button class="chk" type="button" aria-label="${hecha ? 'reabrir' : 'marcar hecha'}" aria-pressed="${hecha}">${paloma}</button>
     <div class="cuerpo"><div class="tit">${esc(t.titulo)}</div>
       <div class="meta">${conPersona ? `<span class="quien ${esc((t.responsable || '').toLowerCase())}">${esc(t.responsable)}</span>` : ''}
       ${t.fecha ? `<span class="cuando ${tarde ? 'tarde' : esHoy ? 'hoy' : ''}">${tarde ? 'venció · ' : ''}${fechaCorta(t.fecha)}</span>` : ''}
@@ -704,8 +941,8 @@ function filaTarea(t, { conPersona = true } = {}) {
   r.querySelector('.chk').onclick = async () => {
     const ok = !hecha;
     await sb.from('tareas').update({ estado: ok ? 'hecha' : 'pendiente', cerrado: ok ? new Date().toISOString() : null }).eq('id', t.id);
-    if (ok) await sb.from('bitacora').insert({ autor: YO, texto: `Cerró la tarea ${t.id}: ${t.titulo}`, origen: 'panel' });
-    toast(ok ? 'Tarea cerrada' : 'Tarea reabierta'); cargarTareas();
+    await anota(ok ? `Cerró la tarea ${t.id}: ${t.titulo}` : `Reabrió la tarea ${t.id}: ${t.titulo}`);
+    toast(ok ? 'Tarea cerrada' : 'Tarea reabierta'); cargarTareas(); cargarBitacora();
   };
   const b = r.querySelector('button.ver');
   if (b) { const abre = () => { const d = r.querySelector('.det'); d.classList.toggle('hide'); b.textContent = d.classList.contains('hide') ? 'ver detalle' : 'ocultar'; }; b.onclick = abre; r.querySelector('.tit').onclick = abre; r.querySelector('.tit').style.cursor = 'pointer'; }
@@ -713,97 +950,116 @@ function filaTarea(t, { conPersona = true } = {}) {
 }
 async function cargarTareas() {
   const { data } = await sb.from('tareas').select('*').order('fecha', { ascending: true, nullsFirst: false }).order('prioridad').order('id');
-  tareasCache = data || [];
+  tareasCache = D.tareas = data || [];
   const hoy = hoyISO();
   const pend = tareasCache.filter(t => t.estado !== 'hecha');
   const paraHoy = pend.filter(t => t.fecha && t.fecha <= hoy);
   const atraso = paraHoy.filter(t => t.fecha < hoy).length;
   $('#kHoy').textContent = paraHoy.length;
   $('#kHoyTxt').textContent = paraHoy.length === 1 ? 'pendiente para hoy' : 'pendientes para hoy';
-  $('#kHoyNota').textContent = atraso ? `${atraso} ${atraso === 1 ? 'vencida' : 'vencidas'}` : (paraHoy.length ? 'nada vencido' : 'día limpio');
-  $('#kpiHoy').classList.toggle('warn', atraso > 0);
+  $('#kHoyNota').textContent = atraso ? `${atraso} ${plural(atraso, 'vencida', 'vencidas')}` : (paraHoy.length ? 'nada vencido' : 'día limpio');
+  $('#kpiHoy').classList.toggle('alerta', atraso > 0);
 
-  // Hoy: mías y del equipo
   const mias = pend.filter(t => t.responsable === YO);
   const equipo = pend.filter(t => t.responsable !== YO && t.responsable !== 'Jarvis');
-  const pinta = (cont, lista, conPersona, vacio) => { cont.innerHTML = ''; if (!lista.length) return cont.appendChild(el(`<div class="vacio">${vacio}</div>`)); lista.slice(0, 12).forEach(t => cont.appendChild(filaTarea(t, { conPersona }))); };
-  pinta($('#listMias'), mias, false, 'Nada a tu nombre. Sospechoso, pero disfrútalo.');
-  pinta($('#listEquipo'), equipo, true, 'El equipo no debe nada. Por ahora.');
-  $('#nMias').textContent = mias.length ? `${mias.length} pendiente${mias.length === 1 ? '' : 's'}` : '';
-  $('#nEquipo').textContent = equipo.length ? `${equipo.length} pendiente${equipo.length === 1 ? '' : 's'}` : '';
+  const pinta = (cont, lista, conPersona, b, s) => { cont.innerHTML = ''; if (!lista.length) return cont.appendChild(el(vacio(b, s))); lista.slice(0, 12).forEach(t => cont.appendChild(filaTarea(t, { conPersona }))); };
+  pinta($('#listMias'), mias, false, 'Nada a tu nombre.', 'Sospechoso, pero disfrútalo.');
+  pinta($('#listEquipo'), equipo, true, 'El equipo no debe nada.', 'Por ahora.');
+  $('#nMias').textContent = mias.length ? `${mias.length} ${plural(mias.length, 'pendiente', 'pendientes')}` : '';
+  $('#nEquipo').textContent = equipo.length ? `${equipo.length} ${plural(equipo.length, 'pendiente', 'pendientes')}` : '';
 
-  // Todas: filtros
   const chips = $('#chipsTar'); chips.innerHTML = '';
   [['todas', `Pendientes (${pend.length})`], ...PERSONAS.map(p => [p, `${p} (${pend.filter(t => t.responsable === p).length})`]), ['hechas', 'Hechas']].forEach(([k, txt]) => {
     const c = el(`<button class="chip ${filtroTar === k ? 'on' : ''}" type="button">${txt}</button>`); c.onclick = () => { filtroTar = k; cargarTareas(); }; chips.appendChild(c);
   });
   const lista = filtroTar === 'hechas' ? tareasCache.filter(t => t.estado === 'hecha').sort((a, b) => (b.cerrado || '').localeCompare(a.cerrado || '')) : filtroTar === 'todas' ? pend : pend.filter(t => t.responsable === filtroTar);
   const cont = $('#listTareas'); cont.innerHTML = '';
-  if (!lista.length) cont.appendChild(el(`<div class="vacio">${filtroTar === 'hechas' ? 'Nada cerrado todavía. Las palomitas se ganan.' : 'Nada por aquí.'}</div>`));
+  if (!lista.length) cont.appendChild(el(filtroTar === 'hechas' ? vacio('Nada cerrado todavía.', 'Las palomitas se ganan.') : vacio('Nada por aquí.', 'Ni una tarea con ese nombre.')));
   lista.slice(0, 80).forEach(t => cont.appendChild(filaTarea(t, { conPersona: filtroTar === 'todas' || filtroTar === 'hechas' })));
   const tarde = pend.filter(t => t.fecha && t.fecha < hoy).length;
-  $('#tarResumen').textContent = tarde ? `${tarde} con atraso · ${pend.length} pendientes` : `${pend.length} pendientes`;
+  $('#tarResumen').textContent = tarde ? `${tarde} con atraso · ${pend.length} pendientes` : `${pend.length} ${plural(pend.length, 'pendiente', 'pendientes')}`;
+  recalcula();
 }
 $('#btnTarea').onclick = async () => {
   const titulo = $('#nt').value.trim(); if (!titulo) return;
-  await sb.from('tareas').insert({ titulo, responsable: $('#ntr').value, fecha: $('#ntf').value || null, detalle: $('#ntd').value.trim() || null });
-  $('#nt').value = ''; $('#ntf').value = ''; $('#ntd').value = ''; toast('Tarea agregada'); cargarTareas();
+  const responsable = $('#ntr').value, fecha = $('#ntf').value || null;
+  await sb.from('tareas').insert({ titulo, responsable, fecha, detalle: $('#ntd').value.trim() || null });
+  await anota(`Tarea nueva para ${responsable}${fecha ? ' (' + fecha + ')' : ''}: ${titulo}`);
+  $('#nt').value = ''; $('#ntf').value = ''; $('#ntd').value = ''; toast('Tarea agregada'); cargarTareas(); cargarBitacora();
 };
 $('#btnNotaRapida').onclick = async () => {
   const texto = $('#notaRapida').value.trim(); if (!texto) return;
-  await sb.from('bitacora').insert({ autor: YO, texto, origen: 'panel' });
+  await anota(texto);
   $('#notaRapida').value = ''; toast('Guardado en la bitácora'); cargarBitacora();
 };
 
 /* ---- caja ---- */
 async function cargarCaja() {
   const { data: s } = await sb.from('caja_saldo').select('*').maybeSingle();
+  D.saldo = s || { saldo: 0, puso_alan: 0, puso_majo: 0, gastado: 0 };
   const saldo = Number(s?.saldo || 0);
-  $('#cSaldo').textContent = money(saldo); $('#cSaldo').classList.toggle('neg', saldo < 0);
+  $('#cSaldo').innerHTML = `${money(saldo)}<small>pesos mexicanos</small>`; $('#cSaldo').classList.toggle('neg', saldo < 0);
   $('#cGasto').textContent = money(s?.gastado); $('#cAlan').textContent = money(s?.puso_alan); $('#cMajo').textContent = money(s?.puso_majo);
   $('#kCaja').textContent = money(saldo);
   const a = Number(s?.puso_alan || 0), m = Number(s?.puso_majo || 0), tot = a + m;
   $('#reparto .alan').style.width = tot ? (a / tot * 100) + '%' : '0';
   $('#reparto .majo').style.width = tot ? (m / tot * 100) + '%' : '0';
   const { data: soc } = await sb.from('caja_socios').select('*').maybeSingle();
-  const bal = Number(soc?.balance_alan || 0);
-  const cu = $('#cuentas');
-  if (Math.abs(bal) < 1) { cu.textContent = 'Cuentas: van parejos 50/50.'; cu.classList.remove('debe'); }
-  else if (bal > 0) { cu.innerHTML = `Cuentas: Majo te debe <b>${money(bal)}</b>.`; cu.classList.remove('debe'); }
-  else { cu.innerHTML = `Cuentas: le debes a Majo <b>${money(-bal)}</b>.`; cu.classList.add('debe'); }
+  D.socios = soc || { balance_alan: 0, puesto_alan: 0, puesto_majo: 0, total_puesto: 0 };
+  // Reconciliación 50/50: balance_alan > 0 → Majo le debe a Alan; < 0 → Alan le debe a Majo.
+  const bal = Number(soc?.balance_alan || 0), otro = YO === 'Majo' ? 'Alan' : 'Majo';
+  const tit = $('#cuentasTit'), txt = $('#cuentasTxt');
+  if (Math.abs(bal) < 1) { tit.innerHTML = 'Van parejos, <em>50/50.</em>'; txt.textContent = tot ? 'Cada quien ha puesto lo mismo, o las diferencias ya se compensaron.' : 'Nadie ha puesto nada todavía, así que nadie le debe nada a nadie.'; }
+  else {
+    const debeAlan = bal < 0, monto = money(Math.abs(bal));
+    const yoDebo = (YO === 'Alan' && debeAlan) || (YO === 'Majo' && !debeAlan);
+    tit.innerHTML = yoDebo ? `Le debes a ${otro} <em>${monto}.</em>` : `${otro} te debe <em>${monto}.</em>`;
+    txt.textContent = `Todo gasto se parte a la mitad sin importar quién lo pagó. Hasta hoy, Alan ha puesto ${money(a)} y Majo ${money(m)}.`;
+  }
   const { data } = await sb.from('caja').select('*').order('fecha', { ascending: false }).order('id', { ascending: false }).limit(40);
   const cont = $('#listCaja'); cont.innerHTML = '';
-  if (!data?.length) return cont.appendChild(el('<div class="vacio">La caja está en ceros. Cuando alguien ponga dinero o se pague algo, queda anotado aquí.</div>'));
+  recalcula();
+  if (!data?.length) return cont.appendChild(el(vacio('La caja está en ceros.', 'Cuando alguien ponga dinero o se pague algo, queda anotado aquí: qué, cuánto y quién.')));
   const nombre = { aportacion: 'Aportación', gasto: 'Gasto', reembolso: 'Reembolso', venta: 'Venta' };
   data.forEach((k, i) => { const sale = k.tipo === 'gasto' || k.tipo === 'reembolso';
-    cont.appendChild(el(`<div class="fila"><span class="idx">${idx(i)}</span><div><div class="t">${esc(k.concepto)}</div>
+    cont.appendChild(el(`<div class="fila"><span class="n">${idx(i)}</span><div><div class="t">${esc(k.concepto)}</div>
       <div class="s">${fechaCorta(k.fecha)} · ${nombre[k.tipo] || esc(k.tipo)} · ${esc(k.quien)}${k.comprobante ? ' · ' + esc(k.comprobante) : ''}</div></div>
-      <div class="big ${sale ? 'sale' : 'entra'}">${sale ? '−' : '+'}${money(k.monto)}</div></div>`)); });
+      <div class="imp ${sale ? 'sale' : 'entra'}">${sale ? '−' : '+'}${money(k.monto)}</div></div>`)); });
 }
 $('#btnCaja').onclick = async () => {
   const monto = parseFloat($('#kmonto').value || 0), concepto = $('#kconcepto').value.trim();
   if (!monto || !concepto) return msg('#kmsg', 'Falta el concepto o el monto.', 'err');
   const tipo = $('#ktipo').value, quien = $('#kquien').value;
   await sb.from('caja').insert({ tipo, quien, concepto, monto, comprobante: $('#kcomp').value || null });
-  await sb.from('bitacora').insert({ autor: YO, texto: `Caja · ${tipo} de ${money(monto)} (${quien}): ${concepto}`, origen: 'panel' });
+  await anota(`Caja · ${tipo} de ${money(monto)} (${quien}): ${concepto}`);
   msg('#kmsg', ''); $('#kmonto').value = ''; $('#kconcepto').value = ''; $('#kcomp').value = ''; toast('Movimiento guardado');
   cargarCaja(); cargarBitacora();
 };
 
 /* ---- inventario ---- */
+// Los ± se anotan en la bitácora una sola vez por ráfaga de toques, con el cambio neto.
+const _ajustes = {};
+function anotaAjuste(sku, desde, hasta) {
+  const a = _ajustes[sku] || (_ajustes[sku] = { desde, t: null });
+  clearTimeout(a.t);
+  a.t = setTimeout(() => { const d = hasta - a.desde; delete _ajustes[sku]; if (d) { anota(`Inventario · ${nombreCorto(sku)}: de ${a.desde} a ${hasta} (${d > 0 ? '+' : ''}${d})`); cargarBitacora(); } }, 1400);
+}
 async function cargarInv() {
   const { data } = await sb.from('inventario').select('*').order('sku');
+  // Mismo orden que el catálogo (por precio); lo que no esté en el catálogo, al final.
+  const pos = sku => { const i = productos.findIndex(p => p.sku === sku); return i < 0 ? 99 : i; };
+  D.inv = (data || []).slice().sort((a, b) => pos(a.sku) - pos(b.sku));
   const cont = $('#listInv'); cont.innerHTML = ''; let total = 0;
-  (data || []).forEach(i => { total += i.cantidad;
-    const p = productos.find(x => x.sku === i.sku) || { nombre: i.sku };
+  D.inv.forEach((i, k) => { total += i.cantidad;
     const aviso = i.cantidad === 0 ? '<span class="aviso">sin existencia</span>' : i.cantidad < 15 ? '<span class="aviso">reponer</span>' : '';
-    const r = el(`<div class="pieza"><div><div class="t">${esc(p.nombre)}</div><div class="s">${esc(i.sku)}${aviso ? ' · ' + aviso : ''}</div></div>
-      <div class="ctl"><button class="mini" type="button" aria-label="una menos">−</button><div class="cant">${i.cantidad}</div><button class="mini" type="button" aria-label="una más">+</button></div></div>`);
+    const r = el(`<div class="pieza"><span class="n">${idx(k)}</span><div><div class="t">${esc(nombreCorto(i.sku))}</div><div class="s">${nombreResto(i.sku) ? esc(nombreResto(i.sku)) + ' · ' : ''}${esc(i.sku)}${aviso ? ' · ' + aviso : ''}</div></div>
+      <div class="ctl"><button class="mas menos" type="button" aria-label="una menos"><svg viewBox="0 0 16 16"><path d="M1 8h14"/></svg></button><div class="cant">${i.cantidad}</div><button class="mas" type="button" aria-label="una más"><svg viewBox="0 0 16 16"><path d="M8 1v14M1 8h14"/></svg></button></div></div>`);
     const [menos, mas] = r.querySelectorAll('button');
-    const mueve = async d => { await sb.from('inventario').update({ cantidad: Math.max(0, i.cantidad + d), actualizado: new Date().toISOString() }).eq('sku', i.sku); cargarInv(); };
+    const mueve = async d => { const nuevo = Math.max(0, i.cantidad + d); await sb.from('inventario').update({ cantidad: nuevo, actualizado: new Date().toISOString() }).eq('sku', i.sku); anotaAjuste(i.sku, i.cantidad, nuevo); cargarInv(); };
     menos.onclick = () => mueve(-1); mas.onclick = () => mueve(1); cont.appendChild(r); });
-  if (!data?.length) cont.appendChild(el('<div class="vacio">Sin piezas registradas. El inventario empieza cuando llega la primera caja.</div>'));
-  $('#kStock').textContent = total; $('#invResumen').textContent = `${total} pieza${total === 1 ? '' : 's'} en casa`;
+  if (!data?.length) cont.appendChild(el(vacio('Sin piezas en casa.', 'El inventario empieza cuando llega la primera caja del proveedor.')));
+  $('#kStock').textContent = total; $('#invResumen').textContent = `${total} ${plural(total, 'pieza', 'piezas')} en casa`;
+  recalcula();
 }
 $('#btnCompra').onclick = async () => {
   const cantidad = parseInt($('#ccant').value || 0), costo = parseFloat($('#ccosto').value || 0), sku = $('#csku').value, prov = $('#cprov').value.trim();
@@ -812,28 +1068,35 @@ $('#btnCompra').onclick = async () => {
   const { data: inv } = await sb.from('inventario').select('cantidad').eq('sku', sku).maybeSingle();
   if (inv) await sb.from('inventario').update({ cantidad: inv.cantidad + cantidad, actualizado: new Date().toISOString() }).eq('sku', sku);
   else await sb.from('inventario').insert({ sku, cantidad });
-  await sb.from('bitacora').insert({ autor: YO, texto: `Compra: ${cantidad} × ${sku} a ${money(costo)} c/u${prov ? ' en ' + prov : ''} (${money(cantidad * costo)}).`, origen: 'panel' });
+  await anota(`Compra: ${cantidad} × ${sku} a ${money(costo)} c/u${prov ? ' en ' + prov : ''} (${money(cantidad * costo)}).`);
   msg('#cmsg', ''); $('#ccant').value = ''; $('#ccosto').value = ''; toast('Compra guardada, inventario actualizado');
   cargarCompras(); cargarInv(); cargarBitacora();
 };
 async function cargarCompras() {
-  const { data } = await sb.from('compras').select('*').order('fecha', { ascending: false }).order('id', { ascending: false }).limit(30);
+  const [{ data }, { data: todas }] = await Promise.all([
+    sb.from('compras').select('*').order('fecha', { ascending: false }).order('id', { ascending: false }).limit(30),
+    sb.from('compras').select('total,factura,cantidad,costo_unitario'),
+  ]);
+  D.compras = todas || [];
   const cont = $('#listCom'); cont.innerHTML = '';
-  if (!data?.length) return cont.appendChild(el('<div class="vacio">Ninguna compra todavía. Los proveedores siguen sin saber que existimos.</div>'));
-  data.forEach((c, i) => cont.appendChild(el(`<div class="fila"><span class="idx">${idx(i)}</span><div><div class="t">${c.cantidad} × ${esc(c.sku ? nombreDe(c.sku) : (c.descripcion || ''))}</div>
-    <div class="s">${fechaCorta(c.fecha)} · ${esc(c.proveedor || 'sin proveedor')} · ${money(c.costo_unitario)} c/u${c.factura ? ' · facturado' : ''}</div></div>
-    <div class="big">${money(c.total ?? c.cantidad * c.costo_unitario)}</div></div>`)));
+  recalcula();
+  if (!data?.length) return cont.appendChild(el(vacio('Ninguna compra todavía.', 'Los proveedores siguen sin saber que existimos.')));
+  data.forEach((c, i) => cont.appendChild(el(`<div class="fila"><span class="n">${idx(i)}</span><div><div class="t">${c.cantidad} × ${esc(c.sku ? nombreCorto(c.sku) : (c.descripcion || ''))}</div>
+    <div class="s">${fechaCorta(c.fecha)} · ${esc(c.proveedor || 'sin proveedor')} · ${money(c.costo_unitario)} c/u${c.factura ? ' · facturado' : ' · sin factura'}</div></div>
+    <div class="imp">${money(c.total ?? c.cantidad * c.costo_unitario)}</div></div>`)));
 }
 
 /* ---- ventas ---- */
 const COMISION = { 'Mercado Libre': p => p * 0.14 + 38, 'TikTok Shop': p => p * 0.08, 'Amazon': p => p * 0.15 };
 function calcVenta() {
   const canal = $('#vcanal').value, precio = parseFloat($('#vprecio').value || 0), cant = parseInt($('#vcant').value || 1);
-  if (!precio) return msg('#vcalc', '');
+  const c = $('#vcalc');
+  if (!precio) { c.classList.add('vacia'); $('#vcom').textContent = '—'; $('#vneto').textContent = '—'; return; }
   const com = (COMISION[canal] ? COMISION[canal](precio) : 0) * cant;
-  msg('#vcalc', `Comisión y envío estimados: ${money(com)} · neto ${money(precio * cant - com)}`);
+  c.classList.remove('vacia'); $('#vcom').textContent = money(com); $('#vneto').textContent = money(precio * cant - com);
 }
 ['#vcanal', '#vprecio', '#vcant'].forEach(s => $(s).addEventListener('input', calcVenta));
+$('#vsku').addEventListener('change', () => { const p = productos.find(x => x.sku === $('#vsku').value); if (p && !$('#vprecio').value) { $('#vprecio').placeholder = money(p.precio); } });
 $('#btnVenta').onclick = async () => {
   const sku = $('#vsku').value, precio = parseFloat($('#vprecio').value || 0), cantidad = parseInt($('#vcant').value || 1), canal = $('#vcanal').value;
   if (!precio) return msg('#vmsg', 'Falta el precio.', 'err');
@@ -842,13 +1105,13 @@ $('#btnVenta').onclick = async () => {
   await sb.from('ventas').insert({ canal, sku, cantidad, precio, comision: +comision.toFixed(2), envio, neto: +(precio * cantidad - com).toFixed(2) });
   const { data: inv } = await sb.from('inventario').select('cantidad').eq('sku', sku).maybeSingle();
   if (inv) await sb.from('inventario').update({ cantidad: Math.max(0, inv.cantidad - cantidad), actualizado: new Date().toISOString() }).eq('sku', sku);
-  await sb.from('bitacora').insert({ autor: YO, texto: `Venta: ${cantidad} × ${sku} en ${canal} a ${money(precio)}.`, origen: 'panel' });
+  await anota(`Venta: ${cantidad} × ${sku} en ${canal} a ${money(precio)}.`);
   msg('#vmsg', ''); $('#vprecio').value = ''; $('#vcant').value = 1; calcVenta(); toast('Venta guardada');
   cargarVentas(); cargarInv(); cargarBitacora();
 };
 function pintaMeta(ml, n) {
-  const ol = $('#slots'); ol.innerHTML = '';
-  for (let i = 0; i < META_ML; i++) ol.appendChild(el(`<li class="${i < ml ? 'ok' : ''}">N°${idx(i)}</li>`));
+  const ol = $('#casillas'); ol.innerHTML = '';
+  for (let i = 0; i < META_ML; i++) ol.appendChild(el(`<li class="${i < ml ? 'ok' : ''}">${abanico}<span class="n">${idx(i)}</span></li>`));
   $('#mN').textContent = Math.min(ml, META_ML);
   const otras = n - ml;
   $('#metaNota').textContent = ml >= META_ML ? 'Meta cumplida. Ahora sí, esto es un negocio.'
@@ -857,35 +1120,174 @@ function pintaMeta(ml, n) {
 }
 async function cargarVentas() {
   const { data } = await sb.from('ventas').select('*').order('fecha', { ascending: false }).order('id', { ascending: false }).limit(40);
+  D.ventas = data || [];
   const cont = $('#listVen'); cont.innerHTML = '';
   const n = (data || []).reduce((a, v) => a + (v.cantidad || 1), 0), neto = (data || []).reduce((a, v) => a + Number(v.neto || 0), 0);
   const ml = (data || []).filter(v => v.canal === 'Mercado Libre').reduce((a, v) => a + (v.cantidad || 1), 0);
-  $('#kVentas').innerHTML = `${Math.min(ml, META_ML)} <small>/ ${META_ML}</small>`;
-  $('#venResumen').textContent = n ? `${n} pieza${n === 1 ? '' : 's'} vendida${n === 1 ? '' : 's'} · neto ${money(neto)}` : 'meta: 10 en Mercado Libre';
+  $('#kVentas').innerHTML = `${Math.min(ml, META_ML)}<small>/${META_ML}</small>`;
+  $('#venResumen').textContent = n ? `${n} ${plural(n, 'pieza vendida', 'piezas vendidas')} · neto ${money(neto)}` : 'Meta viva: diez en Mercado Libre.';
   pintaMeta(ml, n);
-  if (!data?.length) return cont.appendChild(el('<div class="vacio">Cero ventas todavía. Técnicamente esto aún no es un negocio, es una conversación.</div>'));
-  data.forEach((v, i) => cont.appendChild(el(`<div class="fila"><span class="idx">${idx(i)}</span><div><div class="t">${v.cantidad > 1 ? v.cantidad + ' × ' : ''}${esc(nombreDe(v.sku))}</div>
-    <div class="s">${esc(v.canal)} · ${fechaCorta(v.fecha)} · neto ${money(v.neto)}</div></div><div class="big">${money(v.precio)}</div></div>`)));
+  recalcula();
+  if (!data?.length) return cont.appendChild(el(vacio('Cero ventas todavía.', 'Técnicamente esto aún no es un negocio, es una conversación.')));
+  data.forEach((v, i) => cont.appendChild(el(`<div class="fila"><span class="n">${idx(i)}</span><div><div class="t">${v.cantidad > 1 ? v.cantidad + ' × ' : ''}${esc(nombreCorto(v.sku))}</div>
+    <div class="s">${esc(v.canal)} · ${fechaCorta(v.fecha)} · neto ${money(v.neto)}</div></div><div class="imp">${money(v.precio)}</div></div>`)));
+}
+
+/* ---- envíos (pedidos) ---- */
+const SIGUIENTE = { nuevo: 'preparando', preparando: 'enviado', enviado: 'entregado' };
+const ESTADO_TXT = { nuevo: 'Nuevo', preparando: 'Preparando', enviado: 'Enviado', entregado: 'Entregado', cancelado: 'Cancelado' };
+async function cargarPedidos() {
+  const { data } = await sb.from('pedidos').select('*').order('fecha', { ascending: false }).order('id', { ascending: false }).limit(80);
+  D.pedidos = data || [];
+  const activos = D.pedidos.filter(p => p.estado !== 'entregado' && p.estado !== 'cancelado');
+  ['nuevo', 'preparando', 'enviado', 'entregado'].forEach((e, i) => $('#ruta').children[i].querySelector('.v').textContent = D.pedidos.filter(p => p.estado === e).length);
+  const chips = $('#chipsEnv'); chips.innerHTML = '';
+  [['activos', `En curso (${activos.length})`], ['todos', `Todos (${D.pedidos.length})`]].forEach(([k, txt]) => {
+    const c = el(`<button class="chip ${filtroEnv === k ? 'on' : ''}" type="button">${txt}</button>`); c.onclick = () => { filtroEnv = k; cargarPedidos(); }; chips.appendChild(c);
+  });
+  $('#envResumen').textContent = activos.length ? `${activos.length} ${plural(activos.length, 'pedido en curso', 'pedidos en curso')}` : 'Los pedidos de la tienda y de los canales, con su estado.';
+  const cont = $('#listEnv'); cont.innerHTML = '';
+  recalcula();
+  const lista = filtroEnv === 'activos' ? activos : D.pedidos;
+  if (!lista.length) return cont.appendChild(el(D.pedidos.length
+    ? vacio('Nada en curso.', 'Todo lo que se pidió ya se entregó.')
+    : vacio('Ningún pedido por ahora.', 'Cuando alguien pida desde la tienda o por un canal, cae aquí con su estado. De esta lista sale cada envío: nuevo, preparando, enviado, entregado.')));
+  lista.forEach((p, i) => {
+    const d = p.datos || {};
+    const items = d.items && typeof d.items === 'object' ? Object.entries(d.items).map(([s, q]) => `${q} × ${nombreCorto(s)}`).join(', ') : `${p.cantidad || 1} × ${(p.sku || '').split('+').map(nombreCorto).join(', ')}`;
+    const extra = [d.direccion, d.telefono].filter(Boolean).map(esc).join(' · ');
+    const sig = SIGUIENTE[p.estado];
+    const r = el(`<div class="pedido ${p.estado === 'entregado' ? 'entregado' : ''}"><span class="n">${idx(i)}</span><div>
+      <div class="cab-p"><div class="t">${esc(p.comprador || 'Sin nombre')}</div><div class="imp">${money(p.total)}</div></div>
+      <div class="s">${esc(items)}<br>${esc(p.canal || '')}${p.id_externo ? ' · ' + esc(p.id_externo) : ''} · ${fechaCorta(String(p.fecha || '').slice(0, 10))}${extra ? '<br>' + extra : ''}</div>
+      <div class="pasos"><span class="estado">${ESTADO_TXT[p.estado] || esc(p.estado)}</span>${sig ? `<button class="link" type="button">Pasar a ${ESTADO_TXT[sig].toLowerCase()} →</button>` : ''}</div>
+    </div></div>`);
+    const b = r.querySelector('.link');
+    if (b) b.onclick = async () => {
+      await sb.from('pedidos').update({ estado: sig }).eq('id', p.id);
+      await anota(`Pedido ${p.id} (${p.comprador || p.canal}): ${p.estado} → ${sig}`);
+      toast(`Pedido ${ESTADO_TXT[sig].toLowerCase()}`); cargarPedidos(); cargarBitacora();
+    };
+    cont.appendChild(r);
+  });
+}
+
+/* ---- soporte (mensajes de Telegram) ---- */
+async function cargarMensajes() {
+  const { data } = await sb.from('mensajes').select('*').order('fecha', { ascending: false }).limit(80);
+  D.mensajes = data || [];
+  const pend = D.mensajes.filter(m => !m.atendido), jarvis = D.mensajes.filter(m => m.necesita_jarvis && !m.atendido);
+  const chips = $('#chipsSop'); chips.innerHTML = '';
+  [['pendientes', `Sin atender (${pend.length})`], ['jarvis', `Para Jarvis (${jarvis.length})`], ['todos', `Todos (${D.mensajes.length})`]].forEach(([k, txt]) => {
+    const c = el(`<button class="chip ${filtroSop === k ? 'on' : ''}" type="button">${txt}</button>`); c.onclick = () => { filtroSop = k; cargarMensajes(); }; chips.appendChild(c);
+  });
+  $('#sopResumen').textContent = pend.length ? `${pend.length} ${plural(pend.length, 'mensaje sin atender', 'mensajes sin atender')}` : 'Lo que llega por Telegram, hasta que alguien lo atiende.';
+  const cont = $('#listSop'); cont.innerHTML = '';
+  recalcula();
+  const lista = filtroSop === 'pendientes' ? pend : filtroSop === 'jarvis' ? jarvis : D.mensajes;
+  if (!lista.length) return cont.appendChild(el(!D.mensajes.length
+    ? vacio('Nadie pregunta nada.', 'Los mensajes que lleguen por Telegram se quedan aquí hasta que alguien los atienda.')
+    : filtroSop === 'jarvis' ? vacio('Nada para Jarvis.', 'Cuando un mensaje lo necesite, aquí se distingue.')
+    : vacio('Todo atendido.', 'Nadie está esperando respuesta.')));
+  lista.forEach((m, i) => {
+    const r = el(`<div class="msj ${m.atendido ? 'atendido' : ''}"><span class="n">${idx(i)}</span><div>
+      <div class="cab-m"><div class="t">${esc(m.autor || 'Sin nombre')}</div><span class="cuando">${fechaDia(m.fecha)} ${fechaMes(m.fecha)} · ${horaSola(m.fecha)}</span></div>
+      ${m.foto_url ? `<a href="${esc(m.foto_url)}" target="_blank" rel="noopener"><img src="${esc(m.foto_url)}" alt="" loading="lazy"></a>` : ''}
+      ${m.texto ? `<div class="txt">${esc(m.texto)}</div>` : ''}
+      <div class="pie-m">${m.necesita_jarvis ? '<span class="flag jarvis">Necesita a Jarvis</span>' : ''}<span class="flag ${m.atendido ? '' : 'pend'}">${m.atendido ? 'Atendido' : 'Sin atender'}</span>${m.atendido ? '' : '<button class="link" type="button">Marcar atendido</button>'}</div>
+    </div></div>`);
+    const b = r.querySelector('.link');
+    if (b) b.onclick = async () => {
+      await sb.from('mensajes').update({ atendido: true }).eq('id', m.id);
+      await anota(`Atendió el mensaje ${m.id} de ${m.autor || 'Telegram'}: ${(m.texto || '').slice(0, 80)}`);
+      toast('Mensaje atendido'); cargarMensajes(); cargarBitacora();
+    };
+    cont.appendChild(r);
+  });
+}
+
+/* ---- qué mejorar · reglas fijas sobre los datos que ya están cargados ---- */
+function reglas() {
+  const hoy = hoyISO(), out = [];
+  const lista = (arr, f = x => x) => { const n = arr.map(f); return n.length <= 3 ? n.join(n.length === 2 ? ' y ' : ', ').replace(/, ([^,]*)$/, ' y $1') : n.slice(0, 3).join(', ') + ` y ${n.length - 3} más`; };
+  const pend = D.tareas.filter(t => t.estado !== 'hecha');
+
+  const venc = pend.filter(t => t.fecha && t.fecha < hoy).sort((a, b) => a.fecha.localeCompare(b.fecha));
+  if (venc.length) { const v = venc[0], d = diasDesde(v.fecha); out.push({ crit: true, t: `${venc.length} ${plural(venc.length, 'tarea vencida', 'tareas vencidas')}`, d: `La más vieja es «${v.titulo}» (${v.responsable}), vencía el ${fechaLarga(v.fecha)}: hace ${d} ${plural(d, 'día', 'días')}.`, ir: 'hoy', txt: 'Ver las tareas' }); }
+
+  const sinF = pend.filter(t => !t.fecha && t.responsable !== 'Jarvis');
+  if (sinF.length) out.push({ t: `${sinF.length} ${plural(sinF.length, 'tarea sin fecha', 'tareas sin fecha')}`, d: `Sin fecha no vencen, pero tampoco llegan: ${lista(sinF, t => '«' + t.titulo + '»')}.`, ir: 'hoy', txt: 'Ponerles fecha' });
+
+  const cant = sku => { const i = D.inv.find(x => x.sku === sku); return i ? Number(i.cantidad) : 0; };
+  const ceros = productos.filter(p => cant(p.sku) === 0), bajos = productos.filter(p => { const c = cant(p.sku); return c > 0 && c < 15; });
+  if (ceros.length) out.push({ crit: ceros.length === productos.length, t: ceros.length === productos.length ? 'Todo el catálogo está en cero' : `${ceros.length} ${plural(ceros.length, 'producto sin existencia', 'productos sin existencia')}`, d: `No se puede vender lo que no está en casa: ${lista(ceros, p => nombreCorto(p.sku))}.`, ir: 'inv', txt: 'Ir al inventario' });
+  if (bajos.length) out.push({ t: `${bajos.length} ${plural(bajos.length, 'producto por debajo de 15 piezas', 'productos por debajo de 15 piezas')}`, d: `Toca reponer: ${lista(bajos, p => `${nombreCorto(p.sku)} (${cant(p.sku)})`)}.`, ir: 'inv', txt: 'Registrar compra' });
+
+  if (!D.ventas.length) {
+    const primero = D.tareas.map(t => t.creado).filter(Boolean).sort()[0];
+    const d = primero ? diasDesde(primero) : 0;
+    out.push({ t: 'Ninguna venta registrada', d: `${primero ? `Desde que se abrió la primera tarea (${fechaLarga(primero)}) han pasado ${d} ${plural(d, 'día', 'días')} y la` : 'La'} meta de Mercado Libre sigue en 0 de 10.`, ir: 'ven', txt: 'Ver la meta' });
+  } else {
+    const ult = D.ventas[0], d = diasDesde(ult.fecha);
+    if (d >= 3) out.push({ crit: d >= 7, t: `${d} días sin registrar una venta`, d: `La última fue el ${fechaLarga(ult.fecha)}, por ${ult.canal}.`, ir: 'ven', txt: 'Registrar venta' });
+  }
+
+  const sinFac = D.compras.filter(c => !c.factura);
+  if (sinFac.length) { const suma = sinFac.reduce((a, c) => a + Number(c.total ?? c.cantidad * c.costo_unitario), 0); out.push({ t: `${sinFac.length} ${plural(sinFac.length, 'compra sin factura', 'compras sin factura')}`, d: `Suman ${money(suma)} que no se pueden deducir. Importa para impuestos.`, ir: 'inv', txt: 'Ver las compras' }); }
+
+  const margen = productos.filter(p => p.precio && (p.precio - (p.costo || 0)) / p.precio < .5);
+  if (margen.length) out.push({ t: `${margen.length} ${plural(margen.length, 'producto con margen menor al 50%', 'productos con margen menor al 50%')}`, d: lista(margen, p => `${nombreCorto(p.sku)} deja ${Math.round((p.precio - (p.costo || 0)) / p.precio * 100)}%`) + '.', ir: 'inv', txt: 'Ver el catálogo' });
+
+  const saldo = Number(D.saldo?.saldo || 0), bal = Number(D.socios?.balance_alan || 0);
+  if (saldo < 0) out.push({ crit: true, t: `La caja está en negativo: ${money(saldo)}`, d: 'Se ha gastado más de lo que se ha puesto. Alguien tiene que aportar o registrar lo que falta.', ir: 'caja', txt: 'Ir a la caja' });
+  if (Math.abs(bal) >= 1) out.push({ t: 'Las cuentas entre socios no están parejas', d: bal > 0 ? `Majo le debe ${money(bal)} a Alan. Alan ha puesto ${money(D.saldo?.puso_alan)} y Majo ${money(D.saldo?.puso_majo)}.` : `Alan le debe ${money(-bal)} a Majo. Majo ha puesto ${money(D.saldo?.puso_majo)} y Alan ${money(D.saldo?.puso_alan)}.`, ir: 'caja', txt: 'Ver las cuentas' });
+
+  const sinAt = D.mensajes.filter(m => !m.atendido);
+  if (sinAt.length) { const viejo = sinAt[sinAt.length - 1], d = diasDesde(viejo.fecha); out.push({ crit: d >= 1, t: `${sinAt.length} ${plural(sinAt.length, 'mensaje sin atender', 'mensajes sin atender')}`, d: `El más viejo es de ${viejo.autor || 'Telegram'}, ${d === 0 ? 'de hoy' : `de hace ${d} ${plural(d, 'día', 'días')}`}${viejo.necesita_jarvis ? ', y necesita a Jarvis' : ''}.`, ir: 'sop', txt: 'Ir al soporte' }); }
+
+  const parados = D.pedidos.filter(p => p.estado !== 'entregado' && p.estado !== 'cancelado' && diasDesde(p.fecha) > 2);
+  if (parados.length) { const v = parados.sort((a, b) => String(a.fecha).localeCompare(String(b.fecha)))[0]; out.push({ crit: true, t: `${parados.length} ${plural(parados.length, 'pedido parado', 'pedidos parados')} más de dos días`, d: `El de ${v.comprador || v.canal} entró hace ${diasDesde(v.fecha)} días y sigue en «${ESTADO_TXT[v.estado] || v.estado}».`, ir: 'env', txt: 'Ver los envíos' }); }
+
+  return out.sort((a, b) => (b.crit ? 1 : 0) - (a.crit ? 1 : 0));
+}
+function pintaMejoras() {
+  const out = reglas(), cont = $('#listMej'); cont.innerHTML = '';
+  const hora = new Date().toLocaleTimeString('es-MX', { timeZone: TZ, hour: '2-digit', minute: '2-digit', hour12: false });
+  const crit = out.filter(h => h.crit).length;
+  $('#mejResumen').textContent = out.length ? `${out.length} ${plural(out.length, 'hallazgo', 'hallazgos')}${crit ? ` · ${crit} ${plural(crit, 'urgente', 'urgentes')}` : ''} · calculado a las ${hora}` : `Nada que señalar · calculado a las ${hora}`;
+  if (!out.length) return cont.appendChild(el(vacio('Al corriente.', 'Ninguna regla saltó: sin vencidas, sin ceros, sin cuentas chuecas, sin nadie esperando. Aprovéchalo, dura poco.')));
+  out.forEach((h, i) => {
+    const r = el(`<div class="hallazgo ${h.crit ? 'crit' : ''}"><span class="n">${idx(i)}</span><div><b>${esc(h.t)}</b><small>${esc(h.d)}</small>
+      <div class="pie-h">${h.crit ? '<span class="tag">Urgente</span>' : ''}<button class="link suave" type="button">${esc(h.txt)} →</button></div></div></div>`);
+    r.querySelector('.link').onclick = () => irA(h.ir);
+    cont.appendChild(r);
+  });
 }
 
 /* ---- bitácora ---- */
 $('#btnBit').onclick = async () => {
   const texto = $('#btexto').value.trim(); if (!texto) return;
-  await sb.from('bitacora').insert({ autor: YO, texto, origen: 'panel' });
+  await anota(texto);
   $('#btexto').value = ''; toast('Guardado'); cargarBitacora();
 };
 async function cargarBitacora() {
   const { data } = await sb.from('bitacora').select('*').order('fecha', { ascending: false }).limit(60);
   const cont = $('#listBit'); cont.innerHTML = '';
-  if (!data?.length) return cont.appendChild(el('<div class="vacio">La bitácora está en blanco. Manda una foto por Telegram y aquí aparece.</div>'));
-  data.forEach(b => cont.appendChild(el(`<div class="nota"><div class="cuando"><b>${fechaDia(b.fecha)}</b>${horaSola(b.fecha)}</div>
+  if (!data?.length) return cont.appendChild(el(vacio('La bitácora está en blanco.', 'Manda una foto por Telegram y aquí aparece.')));
+  let diaPrev = '';
+  data.forEach(b => { const dia = fechaDia(b.fecha) + fechaMes(b.fecha), mismo = dia === diaPrev; diaPrev = dia;
+    cont.appendChild(el(`<div class="nota${mismo ? ' mismo' : ''}"><div class="cuando">${mismo ? '' : `<b>${fechaDia(b.fecha)}</b><span>${fechaMes(b.fecha)}</span>`}<i>${horaSola(b.fecha)}</i></div>
     <div>${b.foto_url ? `<a href="${esc(b.foto_url)}" target="_blank" rel="noopener"><img src="${esc(b.foto_url)}" alt="" loading="lazy"></a>` : ''}
     <div class="txt">${esc(b.texto)}</div>
-    <div class="firma">${esc(b.autor)}${b.origen && b.origen !== 'panel' ? ` · <span class="tg">${esc(b.origen)}</span>` : ''}</div></div></div>`)));
+    <div class="firma">${esc(b.autor)}${b.origen && b.origen !== 'panel' ? ` · <span class="tg">${esc(b.origen)}</span>` : ''}</div></div></div>`)); });
 }
 
 /* refresco suave al volver a la pestaña */
-document.addEventListener('visibilitychange', () => { if (!document.hidden && !$('#app').classList.contains('hide')) irA(vista); });
+document.addEventListener('visibilitychange', () => { if (!document.hidden && YO) irA(vista); });
+
+/* arranque: si ya sabemos quién es, directo; si no, la pregunta */
+const quienGuardado = leeQuien();
+if (quienGuardado === 'Alan' || quienGuardado === 'Majo') arranca(quienGuardado); else pideQuien(false);
 </script>
 </body>
 </html>
