@@ -90,7 +90,7 @@ fetch("img/marca.svg")
 /* ---------- 5. CATÁLOGO ---------- */
 function esqueleto(n = 5){
   return Array.from({length:n}, () =>
-    `<div class="esq"><div class="esq__lam"></div><div class="esq__l"></div><div class="esq__l"></div></div>`
+    `<div class="esq" aria-hidden="true"><div class="esq__lam"></div><div class="esq__l"></div><div class="esq__l"></div></div>`
   ).join("");
 }
 
@@ -105,21 +105,22 @@ function ahorroSistema(){
 const titulo = p => { const [tit, ...r] = p.nombre.split(" · "); return {tit, sub:r.join(" · ")}; };
 const descDe = p => (COPY[p.sku]?.desc || "").replace("{AHORRO}", ahorroSistema()).trim();
 
-function tarjeta(p){
+function tarjeta(p, i){
   const c = COPY[p.sku] || {};
   const f = FOTOS[p.sku] || FOTOS.KIT1;
   const {tit, sub} = titulo(p);
   return `<article class="tar rev" id="tar-${esc(p.sku)}">
   <button class="tar__lam" type="button" data-ficha="${esc(p.sku)}" aria-label="Ver ${esc(tit)}">
-    ${c.sello ? `<span class="sello${c.selloOro?" sello--oro":""}">${esc(c.sello)}</span>` : ""}
+    ${c.sello ? `<span class="sello${c.selloOro?"":" sello--claro"}">${esc(c.sello)}</span>` : ""}
     <img class="a" src="${esc(f.a)}" alt="${esc(f.alt||tit)}" loading="lazy" style="object-position:${esc(f.pos)}">
     <img class="b" src="${esc(f.b)}" alt="" loading="lazy" aria-hidden="true">
   </button>
   <div class="tar__cuerpo">
+    <span class="ced tar__no num">N° ${NUM[p.sku] || String(i+1).padStart(2,"0")}</span>
     <h3><button type="button" data-ficha="${esc(p.sku)}">${esc(tit)}</button></h3>
     ${sub ? `<p class="tar__sub">${esc(sub)}</p>` : ""}
     <div class="tar__pie">
-      <span class="precio">${money(p.precio)}<small>MXN</small></span>
+      <span class="precio">${money(p.precio)} <span>MXN</span></span>
       <button class="mas" type="button" data-sku="${esc(p.sku)}" aria-label="Agregar ${esc(tit)} a la bolsa">
         <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5v13M1.5 8h13"/></svg>
       </button>
@@ -141,7 +142,7 @@ async function cargar(){
 
   if (error || !data || !data.length){
     cont.innerHTML = `<p class="vacio">No pudimos cargar la colección en este momento.
-      <br><a class="enlace" style="margin-top:14px" href="https://wa.me/${WA}" target="_blank" rel="noopener">Escríbenos por WhatsApp</a></p>`;
+      <br><a class="link" style="margin-top:14px" href="https://wa.me/${WA}" target="_blank" rel="noopener">Escríbenos por WhatsApp</a></p>`;
     return;
   }
 
@@ -155,7 +156,8 @@ async function cargar(){
   const kit = PROD.find(p => p.sku === "KIT1");
   if (kit){
     $("#precioKit").textContent = money(kit.precio);
-    $("#msiKit").textContent = kit.precio >= MSI_DESDE ? "" : "";
+    const ph = $("#precioHero");
+    if (ph) ph.innerHTML = `${money(kit.precio)} <span>MXN</span>`;
   }
   revela(cont);
 }
@@ -171,18 +173,22 @@ function abreFicha(sku){
   $("#cuerpoModal").innerHTML = `
   <div class="f-grid">
     <div class="f-escena">
-      <span class="f-escena__anillo" aria-hidden="true"></span>
-      <figure class="f-escena__arco">
+      <figure class="f-escena__foto">
         <img src="${esc(f.src)}" alt="${esc(tit)}" style="object-position:${esc(f.pos)}">
       </figure>
+      <span class="ced f-escena__ced">Fig. ${NUM[sku] || "01"} · ${esc(tit)}</span>
     </div>
     <div class="f-info">
-      <p class="eti eti-linea">${esc(c.sello || sub || "nixa BEAUTY")}</p>
+      <span class="ced ced--linea">${esc(c.sello || sub || "nixa BEAUTY")}</span>
       <h2 id="tituloModal">${esc(tit)}</h2>
-      <div class="f-precio"><span class="v">${money(p.precio)}</span><span class="m">MXN</span></div>
+      <div class="f-precio">
+        <span class="v">${money(p.precio)}</span>
+        <span class="ced">MXN · Envío gratis desde ${money(ENVIO_GRATIS)}</span>
+      </div>
       <p class="f-desc">${esc(descDe(p))}</p>
       <div class="f-acciones">
-        <button class="btn" type="button" id="agregaFicha">Agregar a la bolsa</button>
+        <button class="btn" type="button" id="agregaFicha">Agregar a la bolsa
+          <svg class="flecha" viewBox="0 0 13 9" aria-hidden="true"><path d="M0 4.5h11M8 1l3.5 3.5L8 8"/></svg></button>
         <a class="btn btn--linea" href="https://wa.me/${WA}?text=${waTxt}" target="_blank" rel="noopener">Preguntar por WhatsApp</a>
       </div>
       <ul class="confia">
@@ -392,7 +398,7 @@ function pintaAyuda(){
     c.innerHTML = `<h3 id="tituloAyuda">${q.q}</h3>
       ${q.nota ? `<p class="nota">${q.nota}</p>` : ""}
       <div class="opcs">${q.o.map(([v,t]) => `<button class="opc" type="button" data-v="${v}">${t}</button>`).join("")}</div>
-      ${i ? '<button class="enlace" type="button" id="atras" style="margin-top:18px">Pregunta anterior</button>' : ""}`;
+      ${i ? '<button class="link" type="button" id="atras" style="margin-top:18px">Pregunta anterior</button>' : ""}`;
     c.querySelectorAll(".opc").forEach(b => b.onclick = () => { resp.push(b.dataset.v); pintaAyuda(); });
     const a = $("#atras"); if (a) a.onclick = () => { resp.pop(); pintaAyuda(); };
     c.querySelector(".opc")?.focus({preventScroll:true});
@@ -406,12 +412,12 @@ function pintaAyuda(){
     c.innerHTML = `<div class="reco"><h3 id="tituloAyuda">Casi.</h3>
       <p class="razon">Todavía no carga la colección. Escríbenos y te decimos en el momento.</p>
       <div style="margin-top:20px"><a class="btn btn--ancho" href="https://wa.me/${WA}?text=${waTxt}" target="_blank" rel="noopener">Preguntarnos por WhatsApp</a></div>
-      <button class="enlace" type="button" id="otraVez" style="margin-top:18px">Empezar de nuevo</button></div>`;
+      <button class="link" type="button" id="otraVez" style="margin-top:18px">Empezar de nuevo</button></div>`;
   } else {
     const {tit, sub} = titulo(p);
     const f = FOTOS[sku] || FOTOS.KIT1;
     c.innerHTML = `<div class="reco">
-      <p class="eti">Nosotros te diríamos</p>
+      <span class="ced">Nosotros te diríamos</span>
       <h3 id="tituloAyuda">Empieza por aquí.</h3>
       <div class="reco__prod">
         <span class="lam"><img src="${esc(f.a)}" alt="" loading="lazy"></span>
@@ -419,11 +425,11 @@ function pintaAyuda(){
         <span class="precio">${money(p.precio)}</span>
       </div>
       <p class="razon">${esc(razon)}</p>
-      <div style="display:grid;gap:10px;margin-top:20px">
+      <div style="display:grid;gap:11px;margin-top:22px">
         <button class="btn btn--ancho" type="button" id="agregaReco">Agregarlo a la bolsa</button>
         <a class="btn btn--linea btn--ancho" href="https://wa.me/${WA}?text=${waTxt}" target="_blank" rel="noopener">Preguntarnos por WhatsApp</a>
       </div>
-      <button class="enlace" type="button" id="otraVez" style="margin-top:18px">Volver a empezar</button></div>`;
+      <button class="link" type="button" id="otraVez" style="margin-top:18px">Volver a empezar</button></div>`;
     $("#agregaReco").onclick = () => { cierraAyuda(); agrega(sku); };
   }
   $("#otraVez").onclick = () => { resp = []; pintaAyuda(); };
@@ -465,11 +471,21 @@ function animaciones(){
     });
   }
 
-  // parallax muy leve: si se nota, está mal hecho
-  gsap.to("#heroFoto", {yPercent:9, ease:"none",
+  // el halo se aleja despacio: es el único movimiento de color de la página
+  gsap.to(".hero__halo", {yPercent:-14, scale:1.08, ease:"none",
+    scrollTrigger:{trigger:".hero", start:"top top", end:"bottom top", scrub:.8}});
+  gsap.to("#heroFoto", {yPercent:6, ease:"none",
     scrollTrigger:{trigger:".hero", start:"top top", end:"bottom top", scrub:.6}});
-  gsap.to("#fraseFoto", {yPercent:-7, ease:"none",
-    scrollTrigger:{trigger:".frase", start:"top bottom", end:"bottom top", scrub:.6}});
+
+  // las cifras cuentan hacia arriba cuando entran
+  gsap.utils.toArray(".cifras__n").forEach(el => {
+    const meta = parseInt(el.firstChild.textContent, 10);
+    if (!meta) return;
+    const obj = {v:0};
+    gsap.to(obj, {v:meta, duration:1.1, ease:"power2.out",
+      scrollTrigger:{trigger:el, start:"top 86%", once:true},
+      onUpdate(){ el.firstChild.textContent = Math.round(obj.v); }});
+  });
 }
 
 /* ---------- 10. ARRANQUE ---------- */
