@@ -1,648 +1,57 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#F6F1EC">
-<meta name="description" content="nixa BEAUTY. Brochas de maquillaje numeradas por oficio, esponjas de maquillaje, tapete lavador de brochas y rizador de pestañas. Las armamos y las enviamos nosotros desde Guadalajara.">
+<meta name="theme-color" content="#1C130E">
 <title>nixa BEAUTY — Brochas y esponjas de maquillaje</title>
+<meta name="description" content="Brochas de maquillaje numeradas por oficio, esponjas, tapete lavador y rizador de pestañas. Las armamos y las enviamos nosotros desde Guadalajara. Garantía de 90 días.">
+<link rel="canonical" href="https://nixa.mx/">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="icon" href="/icon.png" type="image/png" sizes="512x512">
+<link rel="apple-touch-icon" href="/icon.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_MX">
+<meta property="og:site_name" content="nixa BEAUTY">
+<meta property="og:title" content="nixa BEAUTY — Brochas y esponjas de maquillaje">
+<meta property="og:description" content="Diez brochas numeradas por oficio. Armadas y enviadas desde Guadalajara. Garantía de 90 días.">
+<meta property="og:url" content="https://nixa.mx/">
+<meta property="og:image" content="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/hero-piel.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="nixa BEAUTY — Brochas y esponjas de maquillaje">
+<meta name="twitter:description" content="Diez brochas numeradas por oficio. Armadas y enviadas desde Guadalajara.">
+<meta name="twitter:image" content="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/hero-piel.jpg">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-/* =========================================================
-   nixa BEAUTY · tienda
-   Crema de fondo, cocoa para la tinta, nude para las láminas,
-   burgundy para la franja de la garantía. Cormorant Garamond
-   en titulares (con itálica como acento), Jost en lectura,
-   navegación y botones en versalitas espaciadas.
-   Lectura 17–19 px. Nada por debajo de 13 px.
-   ========================================================= */
-:root{
-  --crema:#F6F1EC; --crema2:#FBF8F5; --nude:#E7D8CC; --nude2:#EFE4DA; --nude3:#F3ECE6;
-  --rosa:#CFA59B; --rosa2:#E3C6BE; --cocoa:#6B422F; --cocoa2:#7A4F3B; --vino:#6A2C2F;
-  --fondo:var(--crema);
-  --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
-  --sans:"Jost","Futura","Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --pad:22px; --ancho:1360px; --t:.25s; --ease:cubic-bezier(.2,.6,.2,1);
-}
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;background:var(--crema);scroll-behavior:smooth}
-body{margin:0;background:var(--crema);color:var(--cocoa);font:400 17px/1.7 var(--sans);font-feature-settings:"lnum";-webkit-font-smoothing:antialiased;min-height:100dvh;overflow-x:hidden}
-h1,h2,h3,h4{margin:0;text-wrap:balance;font-family:var(--serif);font-weight:300;letter-spacing:-.008em;line-height:1.04;font-feature-settings:"lnum"}
-p,figure{margin:0}
-ol,ul{margin:0;padding:0;list-style:none}
-button,input,textarea{font:inherit;color:inherit}
-button{-webkit-tap-highlight-color:transparent;cursor:pointer}
-a{color:inherit}
-svg{display:block}
-img{display:block;max-width:100%}
-em{font-style:italic;font-weight:400}
-.w{max-width:var(--ancho);margin:0 auto;padding:0 var(--pad)}
-:focus-visible{outline:1.5px solid var(--cocoa);outline-offset:4px}
-::selection{background:var(--rosa);color:var(--crema)}
-
-/* sobretítulos y etiquetas: Jost 500, versalitas espaciadas */
-.eti{font:500 13px/1.5 var(--sans);letter-spacing:.3em;text-transform:uppercase;color:var(--cocoa2)}
-.eti.linea{display:flex;align-items:center;gap:18px}
-.eti.linea:before{content:"";width:36px;border-top:1px solid var(--rosa)}
-.oscuro .eti{color:var(--rosa)}
-.serif{font-family:var(--serif)}
-.gris{color:var(--cocoa2)}
-.num{font:italic 400 1em/1 var(--serif);font-feature-settings:"lnum"}
-
-/* la brocha de la marca y los íconos de línea */
-.marca{color:var(--cocoa)}
-.ilu{fill:none;stroke:currentColor;stroke-width:1.2px;stroke-linecap:round;stroke-linejoin:round;color:var(--cocoa)}
-.ilu *{vector-effect:non-scaling-stroke}
-.ilu .fina{stroke-width:.8px}
-
-/* botones: rectángulos, versalitas espaciadas */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:58px;padding:0 36px;border:1px solid var(--cocoa);background:var(--cocoa);color:var(--crema);font:500 13px/1.2 var(--sans);letter-spacing:.26em;text-transform:uppercase;border-radius:0;text-decoration:none;text-align:center;transition:background var(--t),color var(--t),border-color var(--t)}
-.btn:hover{background:var(--vino);border-color:var(--vino);color:var(--crema)}
-.btn.linea{background:transparent;color:var(--cocoa)}
-.btn.linea:hover{background:var(--cocoa);border-color:var(--cocoa);color:var(--crema)}
-.btn.vino{background:var(--vino);border-color:var(--vino)}
-.btn.vino:hover{background:var(--cocoa);border-color:var(--cocoa)}
-.btn.claro{background:transparent;color:var(--crema);border-color:var(--crema)}
-.btn.claro:hover{background:var(--crema);color:var(--vino)}
-.btn.lleno-claro{background:var(--crema);color:var(--vino);border-color:var(--crema)}
-.btn.lleno-claro:hover{background:var(--nude);border-color:var(--nude);color:var(--vino)}
-.btn.ancho{display:flex;width:100%}
-.btn[disabled]{opacity:.5;cursor:default}
-.mas{width:46px;height:46px;border:1px solid var(--cocoa);background:transparent;color:var(--cocoa);border-radius:50%;display:grid;place-items:center;padding:0;flex:none;transition:background var(--t),color var(--t),transform var(--t)}
-.mas:hover{background:var(--cocoa);color:var(--crema)}
-.mas svg{width:14px;height:14px;stroke:currentColor;stroke-width:1.2;fill:none}
-.link{background:none;border:0;padding:6px 0;font:500 13px/1.5 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--cocoa);text-decoration:none;border-bottom:1px solid var(--rosa);cursor:pointer;transition:border-color var(--t)}
-.link:hover{border-bottom-color:var(--cocoa)}
-.msg{min-height:20px;font-size:16px;line-height:1.5;color:var(--cocoa2);margin-top:12px}
-.msg.err{color:var(--vino)}
-
-/* campos: subrayado nude, sin cajas */
-.campo{display:block;margin-bottom:22px;min-width:0}
-.campo>span{display:block;font:500 13px/1.5 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--cocoa2)}
-.campo input,.campo textarea{width:100%;border:0;border-bottom:1px solid var(--nude);border-radius:0;background:transparent;padding:10px 0 9px;font:400 17px/1.4 var(--sans);color:var(--cocoa);outline:none;-webkit-appearance:none;appearance:none;margin:0;display:block;transition:border-color var(--t)}
-.campo textarea{min-height:76px;resize:vertical}
-.campo input::placeholder,.campo textarea::placeholder{color:var(--cocoa2);opacity:.6}
-.campo input:focus,.campo textarea:focus{border-bottom-color:var(--cocoa)}
-
-/* cabeceras de sección */
-.cab{text-align:center;max-width:760px;margin:0 auto 56px}
-.cab .eti{display:block;margin-bottom:22px}
-.cab h2{font-size:clamp(42px,9.6vw,72px)}
-.cab p:not(.eti){margin-top:22px;font-size:17px;line-height:1.7;color:var(--cocoa2);max-width:48ch;margin-left:auto;margin-right:auto}
-section{padding:88px 0;position:relative}
-.filete{border:0;border-top:1px solid var(--nude);margin:0}
-
-/* aparición al hacer scroll */
-.rev{opacity:0;transform:translateY(12px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
-.rev.in{opacity:1;transform:none}
-.rev.d1{transition-delay:.08s}.rev.d2{transition-delay:.16s}.rev.d3{transition-delay:.24s}
-
-/* fotos: zoom lento al pasar el cursor */
-.foto{position:relative;overflow:hidden;background:var(--nude)}
-.foto img{width:100%;height:100%;object-fit:cover;transition:transform 1.6s var(--ease)}
-.foto:hover img{transform:scale(1.045)}
-
-/* =========================================================
-   BARRA SUPERIOR · transparente sobre la portada, sólida al bajar
-   ========================================================= */
-.top{position:fixed;top:0;left:0;right:0;z-index:50;padding:calc(14px + env(safe-area-inset-top)) 0 14px;color:var(--cocoa);transition:background .45s var(--ease),padding .45s var(--ease),border-color .45s}
-.top:before{content:"";position:absolute;inset:0;background:rgba(246,241,236,0);backdrop-filter:blur(0);transition:background .45s var(--ease);border-bottom:1px solid transparent;pointer-events:none}
-.top.solida:before{background:rgba(246,241,236,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom-color:var(--nude)}
-.top.solida{padding:calc(8px + env(safe-area-inset-top)) 0 8px}
-.top .w{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:12px}
-.top nav{display:none;gap:26px;white-space:nowrap}
-.top nav a,.menu-btn,.bolsa,.top .ayuda-link{font:500 13px/1.5 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:inherit;text-decoration:none;padding:6px 0;border:0;border-bottom:1px solid transparent;background:none;transition:border-color var(--t)}
-.top nav a:hover,.top .ayuda-link:hover{border-bottom-color:currentColor}
-.menu-btn{display:inline-flex;align-items:center;gap:10px;justify-self:start;cursor:pointer}
-.menu-btn svg{width:22px;height:14px;stroke:currentColor;stroke-width:1.2;fill:none}
-.top .logo-a{justify-self:center;display:block}
-.top .logo{height:64px;width:auto;transition:height .45s var(--ease)}
-.top.solida .logo{height:50px}
-.top .der{justify-self:end;display:flex;align-items:center;gap:30px}
-.top .ayuda-link{display:none;cursor:pointer}
-.bolsa{display:inline-flex;align-items:center;gap:10px;cursor:pointer}
-.bolsa svg{width:20px;height:22px;stroke:currentColor;stroke-width:1.2;fill:none}
-.bolsa .cnt{min-width:1.2em;text-align:left;letter-spacing:.05em}
-.bolsa .txt{display:none}
-.menu{position:fixed;left:0;right:0;top:0;bottom:0;overflow:auto;z-index:49;padding-top:calc(96px + env(safe-area-inset-top));background:var(--crema);border-bottom:1px solid var(--nude);transform:translateY(-8px);opacity:0;visibility:hidden;transition:opacity .3s,transform .3s,visibility 0s .3s}
-.menu.on{opacity:1;transform:none;visibility:visible;transition:opacity .3s,transform .3s}
-.menu a{display:block;padding:18px var(--pad);font:400 26px/1.2 var(--serif);text-decoration:none;border-top:1px solid var(--nude2)}
-.menu a small{display:block;font:500 13px/1.5 var(--sans);letter-spacing:.26em;text-transform:uppercase;color:var(--cocoa2);margin-top:2px}
-.menu .pie{padding:22px var(--pad) 30px;font-size:16px;color:var(--cocoa2);border-top:1px solid var(--nude)}
-
-/* =========================================================
-   PORTADA · a sangre completa
-   ========================================================= */
-.hero{position:relative;padding:0;height:100vh;height:100svh;min-height:640px;max-height:1100px;overflow:hidden;display:flex;align-items:flex-end;color:var(--cocoa)}
-.hero .fondo{position:absolute;inset:-14% 0;z-index:0}
-.hero .fondo img{width:100%;height:100%;object-fit:cover;object-position:38% 78%;transform:scaleX(-1)}
-.hero .fondo{will-change:transform}
-.hero .velo{position:absolute;inset:0;z-index:1;pointer-events:none;background:
-  linear-gradient(180deg,rgba(246,241,236,.62) 0%,rgba(246,241,236,.1) 16%,rgba(246,241,236,.5) 30%,rgba(246,241,236,.86) 46%,rgba(246,241,236,.97) 100%)}
-.hero .w{position:relative;z-index:2;width:100%;padding-bottom:calc(44px + env(safe-area-inset-bottom))}
-.hero{align-items:flex-end}
-.hero .texto{max-width:640px}
-.hero .eti{display:block;margin-bottom:22px;color:var(--cocoa)}
-.hero h1{font-size:clamp(58px,15.4vw,120px);line-height:.96;letter-spacing:-.015em;max-width:9.5ch}
-.hero h1 em{font-weight:300}
-.hero .lead{margin-top:26px;max-width:38ch;font-size:18px;line-height:1.65}
-.hero .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
-.hero .cta .btn{flex:1 1 100%}
-.hero .pie-h{display:none;position:absolute;left:var(--pad);bottom:40px;z-index:2;align-items:center;gap:16px;font:500 13px/1.5 var(--sans);letter-spacing:.28em;text-transform:uppercase;color:var(--cocoa)}
-.hero .pie-h:before{content:"";width:48px;border-top:1px solid var(--cocoa)}
-.hero .scroll{display:none;position:absolute;right:var(--pad);bottom:40px;z-index:2;width:1px;height:64px;background:linear-gradient(var(--cocoa),transparent);opacity:.7}
-
-/* =========================================================
-   CINTA DE ARGUMENTOS
-   ========================================================= */
-.args{padding:0;background:var(--nude3);border-top:1px solid var(--nude);border-bottom:1px solid var(--nude)}
-.args ul{display:grid;grid-template-columns:1fr}
-.args li{display:grid;grid-template-columns:44px 1fr;gap:2px 22px;align-items:start;padding:26px 0;border-bottom:1px solid var(--nude)}
-.args li:last-child{border-bottom:0}
-.args .ilu{width:44px;height:44px;grid-row:1/3;margin-top:2px}
-.args h3{font:500 13px/1.6 var(--sans);letter-spacing:.28em;text-transform:uppercase;color:var(--cocoa)}
-.args p{font-size:17px;line-height:1.6;color:var(--cocoa2)}
-
-/* =========================================================
-   LA COLECCIÓN · tarjetas con fotografía
-   ========================================================= */
-.coleccion{padding-top:96px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:28px 14px}
-.tar{display:flex;flex-direction:column;min-width:0;position:relative;background:var(--nude2)}
-.tar .lam{position:relative;aspect-ratio:4/5;background:var(--nude);overflow:hidden;cursor:pointer;border:0;padding:0;width:100%;display:block}
-.tar .lam img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.6s var(--ease)}
-.tar:hover .lam img{transform:scale(1.045)}
-.tar .lam .sello{position:absolute;top:18px;left:18px;z-index:2;font:500 13px/1.5 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--cocoa);background:rgba(246,241,236,.9);padding:6px 12px}
-.tar .lam .no{position:absolute;right:16px;top:12px;z-index:2;font:italic 400 26px/1 var(--serif);color:var(--cocoa)}
-.tar .lam .no:before{content:"N°";font-size:13px;font-style:normal;vertical-align:.4em;margin-right:1px}
-.tar.destacada{grid-column:span 2}
-.tar.destacada .lam{aspect-ratio:4/3}
-.tar .mas{width:40px;height:40px}
-.tar .cuerpo{padding:18px 16px 18px;display:flex;flex-direction:column;flex:1}
-.tar h3{font-size:22px;line-height:1.12;font-weight:400}
-.tar h3 button{background:none;border:0;padding:0;font:inherit;color:inherit;text-align:left;cursor:pointer;transition:color var(--t)}
-.tar h3 button:hover{color:var(--vino)}
-.tar .sub{margin-top:5px;font-size:15px;line-height:1.5;color:var(--cocoa2)}
-.tar .pie{padding-top:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--nude);margin-top:auto}
-.tar .pie{padding-top:14px}
-.tar .cuerpo>.pie{margin-top:16px}
-.tar .precio{font:400 19px/1 var(--sans);color:var(--cocoa);font-variant-numeric:tabular-nums;letter-spacing:.04em}
-.tar .precio small{font-size:13px;letter-spacing:.14em;color:var(--cocoa2);margin-left:8px}
-.vacio{padding:24px 0;font-size:17px;color:var(--cocoa2);text-align:center;grid-column:1/-1}
-
-/* =========================================================
-   EDITORIAL · el ritual de las diez brochas
-   ========================================================= */
-.ritual{padding:0 0 96px}
-.ritual .w{display:grid;gap:56px}
-.ritual .fotos{position:relative}
-.ritual .fotos .grande{aspect-ratio:4/5;width:84%}
-.ritual .fotos .chica{position:absolute;right:0;bottom:-40px;width:46%;aspect-ratio:3/4;border:8px solid var(--crema)}
-.ritual .fotos .marca-agua{position:absolute;left:-6px;top:-30px;width:80px;height:auto;color:var(--rosa);opacity:.9}
-.ritual .texto .eti{display:block;margin-bottom:22px}
-.ritual h2{font-size:clamp(42px,9.6vw,64px);max-width:13ch}
-.ritual .intro{margin-top:22px;font-size:17px;line-height:1.7;color:var(--cocoa2);max-width:46ch}
-.ritual .grupo{margin-top:40px}
-.ritual .grupo>.eti{margin-bottom:6px}
-.ritual ol li{display:grid;grid-template-columns:58px 1fr;gap:0 18px;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--nude)}
-.ritual ol .n{font:italic 400 24px/1 var(--serif);color:var(--rosa);letter-spacing:0}
-.ritual ol .n:before{content:"N°";font-size:14px;font-style:normal;vertical-align:.32em;margin-right:2px;letter-spacing:.04em}
-.ritual ol b{display:block;font:400 26px/1.15 var(--serif);color:var(--cocoa)}
-.ritual ol small{display:block;font-size:16px;line-height:1.55;color:var(--cocoa2);margin-top:3px}
-.ritual .acciones{margin-top:36px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
-
-/* =========================================================
-   FICHA DEL KIT (en página) y ficha de producto (vista completa)
-   ========================================================= */
-.ficha-kit{background:var(--nude3);border-top:1px solid var(--nude);border-bottom:1px solid var(--nude);overflow:hidden}
-.f-cuerpo{display:grid;gap:48px}
-.f-escena{position:relative;width:min(100%,520px);margin:0 auto;padding-bottom:26px}
-.f-escena .arco{position:relative;aspect-ratio:4/5;border-radius:999px 999px 0 0;overflow:hidden;background:var(--nude);z-index:1}
-.f-escena .arco img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.8s var(--ease)}
-.f-escena:hover .arco img{transform:scale(1.04)}
-.f-escena .pedestal{position:absolute;left:4%;right:4%;bottom:0;height:26px;background:var(--nude);z-index:0;box-shadow:0 18px 40px -18px rgba(107,66,47,.35)}
-.f-escena .pedestal:before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--rosa2)}
-.f-escena .anillo{position:absolute;right:2%;top:7%;width:34%;aspect-ratio:1;border-radius:50%;border:1px solid var(--rosa);z-index:2;pointer-events:none}
-.f-escena .cifra{position:absolute;left:-2%;bottom:34px;z-index:2;font:italic 300 clamp(90px,20vw,150px)/1 var(--serif);color:var(--cocoa);opacity:.9}
-.f-escena .cifra small{font-size:.26em;font-style:normal;vertical-align:.62em;letter-spacing:.08em;margin-right:.06em}
-.f-info .eti{display:block;margin-bottom:18px}
-.f-info h2{font-size:clamp(46px,10vw,68px);line-height:1;max-width:12ch}
-.f-info .precio{margin-top:22px;font:300 34px/1 var(--serif);font-variant-numeric:tabular-nums}
-.f-info .precio small{font:500 13px/1 var(--sans);letter-spacing:.2em;color:var(--cocoa2);margin-left:10px;vertical-align:.5em}
-.f-info .desc{margin-top:26px;font-size:18px;line-height:1.7;max-width:48ch}
-.f-info .acciones{display:grid;gap:10px;margin-top:32px;max-width:440px}
-.f-info .nota{margin-top:16px;font-size:16px;color:var(--cocoa2);line-height:1.6}
-.micro{display:grid;grid-template-columns:1fr;gap:14px 24px;margin-top:36px;padding-top:28px;border-top:1px solid var(--nude)}
-.micro li{display:grid;grid-template-columns:32px 1fr;gap:14px;align-items:center;font-size:16px;line-height:1.4}
-.micro .ilu{width:32px;height:32px}
-.micro b{display:block;font:500 13px/1.5 var(--sans);letter-spacing:.24em;text-transform:uppercase}
-.bloques{display:grid;grid-template-columns:1fr;gap:34px;margin-top:64px;padding-top:56px;border-top:1px solid var(--nude)}
-.bloques .foto{aspect-ratio:4/3}
-.bloques h4{font:500 13px/1.5 var(--sans);letter-spacing:.28em;text-transform:uppercase;color:var(--cocoa2);margin-top:22px;display:flex;align-items:center;gap:12px}
-.bloques h4 .marca{width:12px;height:auto}
-.bloques ul{margin-top:12px}
-.bloques li{font-size:17px;line-height:1.6;padding:6px 0;display:grid;grid-template-columns:20px 1fr;gap:10px;align-items:baseline}
-.bloques li .vi{width:9px;height:auto;color:var(--rosa);transform:translateY(1px)}
-.bloques p{margin-top:12px;font-size:17px;line-height:1.7}
-.bloques .diez{grid-column:1/-1;margin-top:8px;padding-top:36px;border-top:1px solid var(--nude)}
-.bloques .diez ol{display:grid;grid-template-columns:1fr 1fr;gap:18px 20px;margin-top:20px}
-.bloques .diez li{display:block;padding:0}
-.bloques .diez .n{font:italic 400 22px/1 var(--serif);color:var(--rosa)}
-.bloques .diez b{display:block;font:400 22px/1.15 var(--serif);margin-top:4px}
-.bloques .diez small{display:block;font-size:15px;color:var(--cocoa2);margin-top:2px}
-
-/* =========================================================
-   FRANJA DE TEXTURA · foto a sangre con una frase de la marca
-   ========================================================= */
-.textura{padding:0;position:relative;height:min(78vh,760px);min-height:520px;overflow:hidden;display:grid;place-items:center;text-align:center;color:var(--crema)}
-.textura .fondo{position:absolute;inset:-12% 0;z-index:0}
-.textura .fondo img{width:100%;height:100%;object-fit:cover;object-position:50% 45%;will-change:transform}
-.textura .velo{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(106,44,47,.18),rgba(107,66,47,.5))}
-.textura .w{position:relative;z-index:2}
-.textura .marca{width:30px;height:auto;margin:0 auto 26px;color:var(--crema)}
-.textura blockquote{margin:0;font:italic 300 clamp(34px,7.6vw,72px)/1.15 var(--serif);max-width:20ch;margin-inline:auto;text-shadow:0 1px 18px rgba(106,44,47,.22)}
-.textura .firma{margin-top:26px;font:500 13px/1.5 var(--sans);letter-spacing:.32em;text-transform:uppercase;color:var(--crema)}
-
-/* =========================================================
-   GARANTÍA · franja burgundy con la cifra grande y la marca de agua
-   ========================================================= */
-.garantia{background:var(--vino);color:var(--crema);overflow:hidden;--fondo:var(--vino)}
-.garantia .agua{position:absolute;right:-8%;bottom:-6%;width:min(70vw,640px);height:auto;color:var(--crema);opacity:.055;pointer-events:none}
-.garantia .w{position:relative;display:grid;gap:44px}
-.garantia .cifra{font:300 clamp(150px,36vw,300px)/.85 var(--serif);letter-spacing:-.04em;color:var(--crema)}
-.garantia .cifra span{display:block;padding-bottom:.2em}
-.garantia .cifra small{display:block;font:500 13px/1.5 var(--sans);letter-spacing:.36em;text-transform:uppercase;color:var(--rosa);margin-top:18px;letter-spacing:.36em}
-.garantia .eti{color:var(--rosa);display:block;margin-bottom:22px}
-.garantia h2{font-size:clamp(38px,8.6vw,60px);color:var(--crema);max-width:16ch}
-.garantia .paso{display:grid;grid-template-columns:44px 1fr;gap:16px;padding:22px 0;border-top:1px solid rgba(231,216,204,.25);font-size:17px;line-height:1.65;color:var(--nude)}
-.garantia .paso:last-of-type{border-bottom:1px solid rgba(231,216,204,.25)}
-.garantia .paso .n{font:italic 400 30px/1 var(--serif);color:var(--rosa)}
-.garantia .paso b{display:block;font:400 24px/1.2 var(--serif);color:var(--crema);margin-bottom:4px}
-.garantia .pasos{margin-top:30px}
-.garantia .acciones{margin-top:34px;display:flex;flex-wrap:wrap;gap:12px}
-.garantia .btn.claro{color:var(--crema);border-color:rgba(246,241,236,.7)}
-
-/* =========================================================
-   QUIÉNES SOMOS
-   ========================================================= */
-.somos{background:var(--nude);overflow:hidden}
-.somos .w{display:grid;gap:48px}
-.somos .foto{aspect-ratio:4/5;width:100%}
-.somos .foto img{filter:sepia(.18) saturate(.92)}
-.somos .foto:after{content:"";position:absolute;inset:0;background:rgba(207,165,155,.22);mix-blend-mode:multiply;pointer-events:none}
-.somos .texto .eti{display:block;margin-bottom:22px}
-.somos h2{font-size:clamp(40px,9vw,64px);max-width:14ch}
-.somos .txt{margin-top:22px;font-size:18px;line-height:1.75;max-width:50ch}
-.somos .txt+.txt{margin-top:16px}
-.somos .origen{margin-top:34px;padding-top:26px;border-top:1px solid var(--rosa2);max-width:50ch}
-.somos .origen .eti{margin-bottom:12px}
-.somos .origen p:not(.eti){font:300 clamp(22px,5vw,27px)/1.35 var(--serif)}
-.somos .firma{margin-top:34px;font:italic 400 34px/1.1 var(--serif)}
-.somos .firma span{display:block;font:500 13px/1.5 var(--sans);letter-spacing:.3em;text-transform:uppercase;color:var(--cocoa2);margin-top:12px;font-style:normal}
-
-/* =========================================================
-   PIE
-   ========================================================= */
-footer{border-top:1px solid var(--nude);padding:80px 0 calc(110px + env(safe-area-inset-bottom));position:relative;overflow:hidden}
-footer .w{position:relative;z-index:1}
-footer .arriba{display:grid;gap:44px}
-footer .logo{height:150px;width:auto}
-footer .tag{margin:22px 0 0;font-size:17px;color:var(--cocoa2);max-width:32ch;line-height:1.65}
-footer .cols{display:grid;grid-template-columns:1fr 1fr;gap:34px 24px;font-size:16px;line-height:1.9}
-footer .cols b{display:block;font:500 13px/1.5 var(--sans);letter-spacing:.3em;text-transform:uppercase;color:var(--cocoa2);margin-bottom:10px}
-footer .cols a{text-decoration:none;border-bottom:1px solid var(--rosa);transition:border-color var(--t)}
-footer .cols a:hover{border-bottom-color:var(--cocoa)}
-footer .cols a.plain,footer .cols button{border:0;background:none;padding:0;font:inherit;color:inherit;cursor:pointer;border-bottom:1px solid var(--rosa)}
-footer .pie{display:flex;justify-content:space-between;gap:16px 32px;flex-wrap:wrap;border-top:1px solid var(--nude);margin-top:60px;padding-top:24px;font-size:14px;color:var(--cocoa2);letter-spacing:.03em;line-height:1.6}
-footer .pie .marca{width:12px;height:auto;display:inline-block;vertical-align:-2px;margin-right:8px;color:var(--rosa)}
-
-/* =========================================================
-   FICHA DE PRODUCTO · vista completa
-   ========================================================= */
-.ficha{position:fixed;inset:0;z-index:60;background:var(--nude3);overflow:auto;overflow-x:hidden;visibility:hidden;opacity:0;transition:opacity var(--t),visibility 0s var(--t);-webkit-overflow-scrolling:touch}
-.ficha.on{visibility:visible;opacity:1;transition:opacity var(--t)}
-.ficha .top{position:sticky;top:0;padding:calc(10px + env(safe-area-inset-top)) 0 10px}
-.ficha .top:before{background:rgba(243,236,230,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom-color:var(--nude)}
-.ficha .top .logo{height:50px}
-.ficha .volver{justify-self:start;display:inline-flex;align-items:center;gap:10px;background:none;border:0;padding:6px 0;font:500 13px/1.5 var(--sans);letter-spacing:.26em;text-transform:uppercase;color:var(--cocoa);cursor:pointer}
-.ficha .volver svg{width:18px;height:12px;stroke:currentColor;stroke-width:1.2;fill:none}
-.ficha .cuerpo{padding:120px 0 calc(90px + env(safe-area-inset-bottom))}
-
-/* =========================================================
-   BOLSA · panel lateral
-   ========================================================= */
-.panel{position:fixed;inset:0;z-index:70;overflow:hidden;background:rgba(107,66,47,.38);visibility:hidden;opacity:0;transition:opacity var(--t),visibility 0s var(--t)}
-.panel.on{visibility:visible;opacity:1;transition:opacity var(--t)}
-.box{position:absolute;right:0;top:0;bottom:0;width:min(500px,100%);background:var(--crema);border-left:1px solid var(--nude);display:flex;flex-direction:column;transform:translateX(28px);transition:transform .32s var(--ease);overflow:hidden}
-.panel.on .box{transform:none}
-.box .cabeza{padding:calc(24px + env(safe-area-inset-top)) 30px 20px;border-bottom:1px solid var(--nude);display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
-.box .cabeza h2{font-size:44px;line-height:1;font-weight:300}
-.box .cabeza .eti{display:block;margin-bottom:12px}
-.cerrar{background:none;border:0;padding:6px 0;font:500 13px/1.5 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--cocoa);border-bottom:1px solid var(--rosa);cursor:pointer;white-space:nowrap;transition:border-color var(--t)}
-.cerrar:hover{border-bottom-color:var(--cocoa)}
-.box .cuerpo{flex:1;overflow:auto;padding:8px 30px calc(34px + env(safe-area-inset-bottom))}
-.li{display:grid;grid-template-columns:64px 1fr auto;gap:16px;align-items:center;padding:18px 0;border-bottom:1px solid var(--nude)}
-.li .mini{width:64px;height:80px;background:var(--nude);overflow:hidden}
-.li .mini img{width:100%;height:100%;object-fit:cover}
-.li .nom{font:400 21px/1.15 var(--serif);min-width:0}
-.li .nom small{display:block;font:400 14px/1.5 var(--sans);color:var(--cocoa2);margin-top:4px}
-.li .q{display:inline-flex;align-items:center;border:1px solid var(--nude);margin-top:10px}
-.li .q button{width:32px;height:32px;border:0;background:transparent;font:400 17px/1 var(--sans);padding:0;color:var(--cocoa)}
-.li .q span{font:400 15px/1 var(--sans);min-width:30px;text-align:center;height:32px;display:grid;place-items:center;border-left:1px solid var(--nude);border-right:1px solid var(--nude)}
-.li .der{text-align:right}
-.li .imp{font:400 17px/1 var(--sans);font-variant-numeric:tabular-nums;white-space:nowrap}
-.li .x{display:block;margin:10px 0 0 auto;background:none;border:0;padding:0;font:500 13px/1.5 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--cocoa2);border-bottom:1px solid var(--nude);cursor:pointer}
-.box .vacio{padding:32px 0 16px;text-align:left}
-.tot{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--cocoa);margin-top:8px;padding:22px 0 8px}
-.tot .l{font:500 13px/1.5 var(--sans);letter-spacing:.28em;text-transform:uppercase;color:var(--cocoa2)}
-.tot .v{font:300 46px/1 var(--serif);font-variant-numeric:tabular-nums}
-.tot small{display:block;font-size:14px;color:var(--cocoa2);margin-top:6px}
-.datos{margin-top:30px}
-.datos .eti{display:block;margin-bottom:22px}
-.nota{font-size:16px;line-height:1.6;color:var(--cocoa2);margin-top:14px}
-
-/* =========================================================
-   ¿TE AYUDO A ELEGIR? · tarjeta con tres preguntas
-   ========================================================= */
-.ayuda-btn{opacity:0;pointer-events:none;transform:translateY(8px);position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:40;min-height:54px;padding:0 22px;border:1px solid var(--cocoa);background:var(--crema);color:var(--cocoa);font:500 13px/1.5 var(--sans);letter-spacing:.24em;text-transform:uppercase;box-shadow:0 14px 36px rgba(107,66,47,.14);transition:background var(--t),color var(--t),opacity .3s;display:inline-flex;align-items:center;gap:12px;cursor:pointer}
-.ayuda-btn .marca{width:11px;height:auto}
-.ayuda-btn.ver{opacity:1;pointer-events:auto;transform:none}
-.ayuda-btn:hover{background:var(--cocoa);color:var(--crema)}
-.ayuda{position:fixed;inset:0;z-index:80;background:rgba(107,66,47,.38);visibility:hidden;opacity:0;transition:opacity var(--t),visibility 0s var(--t);display:grid;align-items:end}
-.ayuda.on{visibility:visible;opacity:1;transition:opacity var(--t)}
-.hoja{position:relative;width:100%;max-height:92dvh;overflow:auto;background:var(--crema);border-top:1px solid var(--nude);padding:26px var(--pad) calc(30px + env(safe-area-inset-bottom));transform:translateY(24px);transition:transform .32s var(--ease)}
-.ayuda.on .hoja{transform:none}
-.hoja .arriba{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:26px}
-.hoja .paso{font:500 13px/1.5 var(--sans);letter-spacing:.3em;text-transform:uppercase;color:var(--cocoa2);display:inline-flex;align-items:center;gap:12px}
-.hoja .paso .marca{width:11px;height:auto}
-.hoja h3{font-size:clamp(34px,8vw,44px);line-height:1.06;max-width:18ch;font-weight:300}
-.hoja .nota-a{margin-top:14px;font-size:16px;line-height:1.6;color:var(--cocoa2);max-width:40ch}
-.opcs{display:grid;margin-top:26px;border-top:1px solid var(--nude)}
-.opc{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:64px;padding:0 4px;border:0;border-bottom:1px solid var(--nude);background:transparent;color:var(--cocoa);font:400 22px/1.2 var(--serif);text-align:left;transition:padding var(--t),color var(--t);cursor:pointer}
-.opc:after{content:"";width:9px;height:9px;border-right:1px solid var(--cocoa);border-bottom:1px solid var(--cocoa);transform:rotate(-45deg);flex:none;opacity:.7;transition:transform var(--t)}
-.opc:hover{padding-left:12px;color:var(--vino)}
-.opc:hover:after{transform:rotate(-45deg) translate(2px,2px)}
-.hoja .link{margin-top:24px}
-.reco .eti{display:block;margin-bottom:12px}
-.reco .prod{display:grid;grid-template-columns:84px 1fr auto;align-items:center;gap:18px;border-top:1px solid var(--nude);border-bottom:1px solid var(--nude);padding:18px 0;margin-top:24px}
-.reco .prod .lamina{width:84px;height:104px;background:var(--nude);overflow:hidden}
-.reco .prod .lamina img{width:100%;height:100%;object-fit:cover}
-.reco .prod b{font:400 24px/1.1 var(--serif);min-width:0}
-.reco .prod b small{display:block;font:400 15px/1.4 var(--sans);color:var(--cocoa2);margin-top:5px}
-.reco .prod .precio{font:400 19px/1 var(--sans);font-variant-numeric:tabular-nums;white-space:nowrap}
-.reco .razon{margin-top:20px;font-size:17px;line-height:1.7;max-width:46ch}
-.reco .acciones{display:grid;gap:10px;margin-top:26px}
-
-/* =========================================================
-   ESCRITORIO
-   ========================================================= */
-@media(min-width:760px){
-  body{font-size:18px}
-  .hero .cta .btn{flex:0 0 auto}
-  .hero .lead{font-size:19px}
-  .args ul{grid-template-columns:repeat(4,1fr)}
-  .args li{display:block;border-bottom:0;border-right:1px solid var(--nude);padding:44px 30px 46px}
-  .args li:last-child{border-right:0}
-  .args .ilu{margin:0 0 20px}
-  .args p{margin-top:8px}
-  .grid{grid-template-columns:repeat(2,1fr);gap:40px 28px}
-  .tar.destacada .lam{aspect-ratio:16/10}
-  .tar .cuerpo{padding:22px 22px 22px}
-  .tar h3{font-size:26px}
-  .tar .sub{font-size:16px}
-  .tar .mas{width:46px;height:46px}
-  .ritual .w{grid-template-columns:1fr 1fr;gap:72px;align-items:start}
-  .ritual .fotos{position:sticky;top:110px}
-  .f-cuerpo{grid-template-columns:1fr 1fr;gap:64px;align-items:center}
-  .f-escena{margin:0}
-  .f-escena .anillo{right:-9%;top:9%}
-  .micro{grid-template-columns:repeat(3,1fr)}
-  .micro li{display:block}
-  .micro .ilu{margin-bottom:10px}
-  .bloques{grid-template-columns:repeat(3,1fr);gap:40px}
-  .bloques .diez ol{grid-template-columns:repeat(5,1fr)}
-  .garantia .w{grid-template-columns:5fr 6fr;gap:80px;align-items:center}
-  .somos .w{grid-template-columns:5fr 6fr;gap:80px;align-items:center}
-  footer .arriba{grid-template-columns:1fr 1.4fr;gap:64px}
-  footer .cols{grid-template-columns:repeat(3,1fr)}
-  .ayuda{align-items:center;justify-items:center;padding:24px}
-  .hoja{width:560px;border:1px solid var(--nude);max-height:min(760px,92dvh);padding:36px 44px 40px;box-shadow:0 30px 80px rgba(107,66,47,.18)}
-  .ayuda-btn{right:32px;bottom:32px}
-}
-@media(min-width:1080px){
-  :root{--pad:64px}
-  body{font-size:18px}
-  section{padding:140px 0}
-  .coleccion{padding-top:150px}
-  .top{padding:calc(22px + env(safe-area-inset-top)) 0 18px}
-  .top nav{display:flex}
-  .menu-btn{display:none}
-  .top .logo{height:82px}
-  .top.solida .logo{height:54px}
-  .top .ayuda-link{display:inline-block}
-  .bolsa .txt{display:inline}
-  .cab{margin-bottom:80px}
-  .cab h2{font-size:72px}
-  .hero{align-items:center}
-  .hero .w{display:grid;grid-template-columns:minmax(0,680px) 1fr;padding-top:90px;padding-bottom:0}
-  .hero .texto{grid-column:1;max-width:none}
-  .hero .velo{background:
-    linear-gradient(180deg,rgba(246,241,236,.78) 0%,rgba(246,241,236,.3) 16%,rgba(246,241,236,0) 30%),
-    linear-gradient(90deg,rgba(246,241,236,.9) 0%,rgba(246,241,236,.72) 30%,rgba(246,241,236,.28) 52%,rgba(246,241,236,0) 68%)}
-  .hero .fondo img{object-position:50% 50%}
-  .hero h1{font-size:clamp(76px,7.1vw,120px)}
-  .hero .lead{margin-top:32px;max-width:36ch}
-  .hero .cta{margin-top:44px;gap:14px}
-  .hero .pie-h{display:flex}
-  .hero .scroll{display:block}
-  .args li{padding:56px 36px 58px}
-  .grid{grid-template-columns:repeat(3,1fr);gap:64px 32px}
-  .tar.destacada .lam{aspect-ratio:auto;height:100%}
-  .tar.destacada{grid-row:span 1}
-  .tar h3{font-size:28px}
-  .ritual{padding-bottom:150px}
-  .ritual .w{grid-template-columns:6fr 5fr;gap:110px}
-  .ritual .fotos .chica{bottom:-56px;width:44%}
-  .ritual ol b{font-size:28px}
-  .ritual h2{max-width:none;font-size:62px}
-  .f-cuerpo{grid-template-columns:6fr 5fr;gap:110px}
-  .f-escena{width:100%}
-  .f-info h2{font-size:66px}
-  .bloques{margin-top:110px;padding-top:80px;gap:48px}
-  .garantia .w{gap:110px}
-  .somos .w{gap:110px}
-  .somos h2{font-size:64px}
-  footer{padding:110px 0 130px}
-  footer .logo{height:180px}
-  footer .arriba{grid-template-columns:1fr 1.6fr;gap:100px}
-  .ficha .cuerpo{padding:130px 0 120px}
-}
-@media(min-width:1080px) and (max-width:1339px){
-  .top nav{gap:22px}
-  .top nav a{letter-spacing:.18em}
-  .top nav a[href="#kit"]{display:none}
-  .top .der{gap:22px}
-}
-@media(prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  *,*:before,*:after{transition:none!important;animation:none!important}
-  .rev{opacity:1;transform:none}
-  .foto:hover img,.tar:hover .lam img,.f-escena:hover .arco img{transform:none}
-}
-</style>
+<link rel="preconnect" href="https://jjtlkneoxmgcyrifckdf.supabase.co" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/tienda.css">
+<script>document.documentElement.className=document.documentElement.className.replace('no-js','js')</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"nixa BEAUTY","url":"https://nixa.mx/","description":"Brochas y esponjas de maquillaje armadas y enviadas desde Guadalajara, México.","areaServed":"MX","address":{"@type":"PostalAddress","addressLocality":"Guadalajara","addressRegion":"Jalisco","addressCountry":"MX"}}
+</script>
 </head>
 <body>
 
-<!-- Marca: la brocha y el lockup, en una sola tinta (currentColor); el pelo en el color de fondo con opacidad -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs><linearGradient id="nxpelo" x1="0" y1="88.0" x2="0" y2="31.0" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="var(--fondo,#F6F1EC)" stop-opacity=".46"/><stop offset=".55" stop-color="var(--fondo,#F6F1EC)" stop-opacity=".30"/><stop offset="1" stop-color="var(--fondo,#F6F1EC)" stop-opacity="0"/></linearGradient></defs>
-  <symbol id="brocha" viewBox="12 27 76 66"><g fill="currentColor"><path d="M22.0 88.0 C 20.0 76, 15.5 62, 16.5 52 C 19.0 39, 34 31.0, 50 31.0 C 66 31.0, 81.0 39, 83.5 52 C 84.5 62, 80.0 76, 78.0 88.0 Z"/></g><g fill="none" stroke="url(#nxpelo)" stroke-linecap="round"><path d="M23.9 88.0 Q16.2 71.2 16.2 59.0" stroke-width="1.0"/>
-    <path d="M27.0 88.0 Q20.2 69.9 20.2 56.8" stroke-width="1.0"/>
-    <path d="M29.8 88.0 Q23.8 66.9 23.7 51.6" stroke-width="1.0"/>
-    <path d="M32.4 88.0 Q27.1 64.8 27.0 48.0" stroke-width="1.0"/>
-    <path d="M35.3 88.0 Q30.9 64.0 30.8 46.5" stroke-width="1.0"/>
-    <path d="M38.2 88.0 Q34.7 65.1 34.7 48.5" stroke-width="1.0"/>
-    <path d="M41.3 88.0 Q38.6 59.1 38.5 38.2" stroke-width="1.0"/>
-    <path d="M44.0 88.0 Q42.2 62.6 42.2 44.3" stroke-width="1.0"/>
-    <path d="M47.2 88.0 Q46.3 56.9 46.3 34.4" stroke-width="1.0"/>
-    <path d="M50.0 88.0 Q50.1 60.7 50.1 40.8" stroke-width="1.0"/>
-    <path d="M53.2 88.0 Q54.1 63.4 54.1 45.6" stroke-width="1.0"/>
-    <path d="M56.0 88.0 Q57.8 62.2 57.8 43.5" stroke-width="1.0"/>
-    <path d="M58.4 88.0 Q60.9 64.0 60.9 46.5" stroke-width="1.0"/>
-    <path d="M61.4 88.0 Q64.9 60.2 65.1 40.0" stroke-width="1.0"/>
-    <path d="M64.2 88.0 Q68.5 62.8 68.6 44.6" stroke-width="1.0"/>
-    <path d="M67.4 88.0 Q72.6 65.5 72.7 49.2" stroke-width="1.0"/>
-    <path d="M70.3 88.0 Q76.2 68.6 76.2 54.6" stroke-width="1.0"/>
-    <path d="M72.8 88.0 Q79.6 69.1 79.6 55.4" stroke-width="1.0"/>
-    <path d="M76.1 88.0 Q83.9 69.9 84.1 56.7" stroke-width="1.0"/>
-    <path d="M25.3 88.0 Q18.3 75.2 18.7 66.0" stroke-width="0.75"/>
-    <path d="M28.3 88.0 Q22.3 75.8 22.7 67.0" stroke-width="0.75"/>
-    <path d="M31.5 88.0 Q26.2 72.3 26.4 60.9" stroke-width="0.75"/>
-    <path d="M33.9 88.0 Q29.4 72.3 29.6 61.0" stroke-width="0.75"/>
-    <path d="M37.0 88.0 Q33.3 69.3 33.4 55.8" stroke-width="0.75"/>
-    <path d="M40.1 88.0 Q37.3 72.9 37.5 62.0" stroke-width="0.75"/>
-    <path d="M43.2 88.0 Q41.3 73.7 41.4 63.3" stroke-width="0.75"/>
-    <path d="M45.6 88.0 Q44.4 68.4 44.4 54.3" stroke-width="0.75"/>
-    <path d="M48.3 88.0 Q47.8 70.3 47.8 57.5" stroke-width="0.75"/>
-    <path d="M51.1 88.0 Q51.4 68.8 51.4 55.0" stroke-width="0.75"/>
-    <path d="M54.5 88.0 Q55.8 69.9 55.8 56.8" stroke-width="0.75"/>
-    <path d="M57.5 88.0 Q59.6 72.3 59.5 60.9" stroke-width="0.75"/>
-    <path d="M60.3 88.0 Q63.2 70.7 63.0 58.2" stroke-width="0.75"/>
-    <path d="M63.1 88.0 Q66.7 72.3 66.5 61.0" stroke-width="0.75"/>
-    <path d="M66.2 88.0 Q70.8 69.9 70.7 56.7" stroke-width="0.75"/>
-    <path d="M68.8 88.0 Q74.1 72.6 73.8 61.4" stroke-width="0.75"/>
-    <path d="M71.3 88.0 Q77.4 73.3 77.1 62.6" stroke-width="0.75"/>
-    <path d="M74.7 88.0 Q81.8 73.0 81.6 62.1" stroke-width="0.75"/>
-    <path d="M25.3 88.0 Q18.8 83.2 19.8 79.7" stroke-width="0.6"/>
-    <path d="M26.5 88.0 Q20.3 81.4 21.1 76.6" stroke-width="0.6"/>
-    <path d="M27.9 88.0 Q22.0 82.0 22.9 77.7" stroke-width="0.6"/>
-    <path d="M29.7 88.0 Q24.4 83.3 25.3 80.0" stroke-width="0.6"/>
-    <path d="M31.3 88.0 Q26.3 80.1 26.9 74.3" stroke-width="0.6"/>
-    <path d="M33.1 88.0 Q28.6 82.3 29.3 78.3" stroke-width="0.6"/>
-    <path d="M35.0 88.0 Q31.0 78.9 31.5 72.3" stroke-width="0.6"/>
-    <path d="M36.4 88.0 Q32.8 80.9 33.4 75.8" stroke-width="0.6"/>
-    <path d="M38.6 88.0 Q35.5 78.3 35.9 71.3" stroke-width="0.6"/>
-    <path d="M40.6 88.0 Q38.0 78.2 38.3 71.1" stroke-width="0.6"/>
-    <path d="M41.7 88.0 Q39.5 80.6 39.8 75.3" stroke-width="0.6"/>
-    <path d="M43.5 88.0 Q41.7 77.8 42.0 70.4" stroke-width="0.6"/>
-    <path d="M45.8 88.0 Q44.7 81.9 44.9 77.5" stroke-width="0.6"/>
-    <path d="M46.7 88.0 Q45.8 81.4 46.0 76.6" stroke-width="0.6"/>
-    <path d="M48.5 88.0 Q48.0 79.8 48.1 73.9" stroke-width="0.6"/>
-    <path d="M50.5 88.0 Q50.7 81.1 50.6 76.2" stroke-width="0.6"/>
-    <path d="M51.6 88.0 Q52.0 80.2 52.0 74.6" stroke-width="0.6"/>
-    <path d="M53.7 88.0 Q54.7 79.4 54.5 73.3" stroke-width="0.6"/>
-    <path d="M56.0 88.0 Q57.6 78.9 57.4 72.2" stroke-width="0.6"/>
-    <path d="M57.2 88.0 Q59.2 79.4 58.9 73.1" stroke-width="0.6"/>
-    <path d="M59.1 88.0 Q61.5 82.7 61.1 78.9" stroke-width="0.6"/>
-    <path d="M61.0 88.0 Q64.0 78.9 63.6 72.2" stroke-width="0.6"/>
-    <path d="M62.7 88.0 Q66.1 79.0 65.7 72.4" stroke-width="0.6"/>
-    <path d="M63.9 88.0 Q67.6 81.2 67.0 76.3" stroke-width="0.6"/>
-    <path d="M65.3 88.0 Q69.4 80.2 68.8 74.5" stroke-width="0.6"/>
-    <path d="M67.0 88.0 Q71.4 83.2 70.6 79.8" stroke-width="0.6"/>
-    <path d="M68.8 88.0 Q73.7 83.0 72.9 79.3" stroke-width="0.6"/>
-    <path d="M70.6 88.0 Q76.0 83.7 75.1 80.6" stroke-width="0.6"/>
-    <path d="M72.0 88.0 Q77.7 83.4 76.8 80.1" stroke-width="0.6"/>
-    <path d="M73.8 88.0 Q80.1 82.7 79.1 78.9" stroke-width="0.6"/></g><g fill="none" stroke="var(--fondo,#F6F1EC)" stroke-opacity=".38" stroke-linecap="round"></g></symbol>
-  <symbol id="lockup" viewBox="0 24 176.9 113.74"><g transform="translate(6.000 92.344)"><path fill="currentColor" d="M31.200000000000003 0.0Q30.900000000000002 0.0 30.900000000000002 -0.6000000000000001Q30.900000000000002 -1.2000000000000002 31.200000000000003 -1.2000000000000002Q34.800000000000004 -1.2000000000000002 35.95 -2.5500000000000003Q37.1 -3.9000000000000004 37.1 -8.1V-23.8Q37.1 -29.5 35.0 -32.25Q32.9 -35.0 28.3 -35.0Q24.8 -35.0 21.25 -32.95Q17.7 -30.900000000000002 15.200000000000001 -27.3L14.8 -28.5Q18.900000000000002 -34.1 23.25 -37.0Q27.6 -39.900000000000006 32.4 -39.900000000000006Q37.9 -39.900000000000006 40.95 -36.7Q44.0 -33.5 44.0 -27.6V-8.1Q44.0 -3.9000000000000004 45.150000000000006 -2.5500000000000003Q46.300000000000004 -1.2000000000000002 50.0 -1.2000000000000002Q50.300000000000004 -1.2000000000000002 50.300000000000004 -0.6000000000000001Q50.300000000000004 0.0 50.0 0.0Q48.1 0.0 45.7 -0.1Q43.300000000000004 -0.2 40.6 -0.2Q37.9 -0.2 35.45 -0.1Q33.0 0.0 31.200000000000003 0.0ZM4.3 0.0Q4.0 0.0 4.0 -0.6000000000000001Q4.0 -1.2000000000000002 4.3 -1.2000000000000002Q7.9 -1.2000000000000002 9.05 -2.5500000000000003Q10.200000000000001 -3.9000000000000004 10.200000000000001 -8.1V-27.6Q10.200000000000001 -30.8 9.450000000000001 -32.300000000000004Q8.700000000000001 -33.800000000000004 6.9 -33.800000000000004Q5.9 -33.800000000000004 4.6000000000000005 -33.45Q3.3000000000000003 -33.1 1.6 -32.4Q1.2000000000000002 -32.2 1.0 -32.75Q0.8 -33.300000000000004 1.1 -33.5L13.4 -39.400000000000006Q13.8 -39.5 14.0 -39.5Q14.9 -39.5 16.0 -37.3Q17.1 -35.1 17.1 -31.0V-8.1Q17.1 -3.9000000000000004 18.25 -2.5500000000000003Q19.400000000000002 -1.2000000000000002 23.1 -1.2000000000000002Q23.400000000000002 -1.2000000000000002 23.400000000000002 -0.6000000000000001Q23.400000000000002 0.0 23.1 0.0Q21.200000000000003 0.0 18.800000000000004 -0.1Q16.400000000000002 -0.2 13.700000000000001 -0.2Q11.0 -0.2 8.55 -0.1Q6.1000000000000005 0.0 4.3 0.0Z M56.9 0.0Q56.6 0.0 56.6 -0.6000000000000001Q56.6 -1.2000000000000002 56.9 -1.2000000000000002Q60.5 -1.2000000000000002 61.7 -2.5500000000000003Q62.9 -3.9000000000000004 62.9 -8.1V-26.5Q62.9 -30.0 62.2 -31.6Q61.5 -33.2 59.7 -33.2Q58.9 -33.2 57.849999999999994 -32.900000000000006Q56.8 -32.6 55.4 -31.900000000000002Q55.0 -31.8 54.75 -32.35Q54.5 -32.9 54.9 -33.1L68.5 -39.400000000000006Q68.8 -39.5 68.9 -39.5Q69.2 -39.5 69.55000000000001 -39.2Q69.9 -38.900000000000006 69.9 -38.5Q69.9 -37.6 69.80000000000001 -34.6Q69.7 -31.6 69.7 -26.700000000000003V-8.1Q69.7 -3.9000000000000004 70.85 -2.5500000000000003Q72.0 -1.2000000000000002 75.7 -1.2000000000000002Q76.0 -1.2000000000000002 76.0 -0.6000000000000001Q76.0 0.0 75.7 0.0Q73.9 0.0 71.45 -0.1Q69.0 -0.2 66.3 -0.2Q63.6 -0.2 61.2 -0.1Q58.8 0.0 56.9 0.0Z M104.6 0.0Q104.3 0.0 104.3 -0.6000000000000001Q104.3 -1.2000000000000002 104.6 -1.2000000000000002Q107.2 -1.2000000000000002 107.5 -2.0500000000000003Q107.8 -2.9000000000000004 106.4 -5.1000000000000005L89.6 -30.3Q87.1 -34.0 84.69999999999999 -35.7Q82.3 -37.4 80.5 -37.4Q80.3 -37.4 80.3 -38.0Q80.3 -38.6 80.5 -38.6Q82.0 -38.6 83.6 -38.5Q85.2 -38.400000000000006 86.7 -38.400000000000006Q90.1 -38.400000000000006 92.69999999999999 -38.5Q95.3 -38.6 97.4 -38.6Q97.6 -38.6 97.6 -38.0Q97.6 -37.4 97.4 -37.4Q95.0 -37.4 94.55 -36.6Q94.1 -35.800000000000004 95.6 -33.5L112.30000000000001 -8.3Q115.0 -4.3 117.6 -2.75Q120.2 -1.2000000000000002 122.0 -1.2000000000000002Q122.2 -1.2000000000000002 122.2 -0.6000000000000001Q122.2 0.0 122.0 0.0Q120.4 0.0 118.60000000000001 -0.1Q116.80000000000001 -0.2 115.30000000000001 -0.2Q111.9 -0.2 109.30000000000001 -0.1Q106.7 0.0 104.6 0.0ZM80.0 0.0Q79.8 0.0 79.8 -0.6000000000000001Q79.8 -1.2000000000000002 80.0 -1.2000000000000002Q82.8 -1.2000000000000002 85.94999999999999 -3.3000000000000003Q89.1 -5.4 91.9 -9.200000000000001L99.5 -19.700000000000003L100.8 -18.5L93.9 -8.5Q92.3 -6.2 91.9 -4.550000000000001Q91.5 -2.9000000000000004 92.7 -2.0500000000000003Q93.9 -1.2000000000000002 97.1 -1.2000000000000002Q97.4 -1.2000000000000002 97.4 -0.6000000000000001Q97.4 0.0 97.1 0.0Q94.8 0.0 92.65 -0.1Q90.5 -0.2 87.1 -0.2Q84.8 -0.2 83.4 -0.1Q82.0 0.0 80.0 0.0ZM101.2 -19.200000000000003 100.1 -20.3 106.6 -30.1Q109.2 -33.800000000000004 108.7 -35.6Q108.2 -37.4 103.4 -37.4Q103.2 -37.4 103.2 -38.0Q103.2 -38.6 103.4 -38.6Q105.8 -38.6 107.94999999999999 -38.5Q110.1 -38.400000000000006 113.5 -38.400000000000006Q115.80000000000001 -38.400000000000006 117.2 -38.5Q118.6 -38.6 120.6 -38.6Q120.80000000000001 -38.6 120.80000000000001 -38.0Q120.80000000000001 -37.4 120.6 -37.4Q117.9 -37.4 114.75 -35.4Q111.6 -33.4 108.7 -29.400000000000002Z M154.5 0.6000000000000001Q154.10000000000002 0.8 153.60000000000002 0.8Q152.10000000000002 0.8 150.75 -1.4500000000000002Q149.4 -3.7 149.4 -7.9V-26.200000000000003Q149.4 -32.4 147.85000000000002 -35.05Q146.3 -37.7 143.60000000000002 -37.7Q141.1 -37.7 139.6 -36.35Q138.1 -35.0 137.45 -33.25Q136.8 -31.5 136.5 -30.0Q136.3 -28.1 135.35000000000002 -26.8Q134.4 -25.5 132.20000000000002 -25.5Q130.20000000000002 -25.5 129.3 -26.5Q128.4 -27.5 128.4 -28.700000000000003Q128.4 -30.8 130.35000000000002 -32.7Q132.3 -34.6 135.3 -36.2Q138.3 -37.800000000000004 141.55 -38.7Q144.8 -39.6 147.4 -39.6Q151.5 -39.6 153.85000000000002 -36.95Q156.20000000000002 -34.300000000000004 156.20000000000002 -29.200000000000003V-10.8Q156.20000000000002 -7.5 157.10000000000002 -5.9Q158.0 -4.3 160.0 -4.3Q161.70000000000002 -4.3 164.4 -5.4Q164.8 -5.6000000000000005 165.05 -5.050000000000001Q165.3 -4.5 164.8 -4.3ZM136.1 0.7000000000000001Q132.1 0.7000000000000001 130.05 -1.3Q128.0 -3.3000000000000003 128.0 -6.300000000000001Q128.0 -8.700000000000001 129.3 -10.350000000000001Q130.6 -12.0 133.05 -13.3Q135.5 -14.600000000000001 139.0 -15.9L150.4 -20.1L150.70000000000002 -18.8L141.6 -15.100000000000001Q140.1 -14.5 138.85 -13.7Q137.6 -12.9 136.8 -11.75Q136.0 -10.600000000000001 136.0 -9.0Q136.0 -6.6000000000000005 137.60000000000002 -5.050000000000001Q139.20000000000002 -3.5 141.5 -3.5Q142.4 -3.5 143.4 -3.8000000000000003Q144.4 -4.1000000000000005 145.8 -4.9L151.70000000000002 -8.6L151.9 -7.2L144.60000000000002 -2.4000000000000004Q142.3 -0.7000000000000001 140.35000000000002 0.0Q138.4 0.7000000000000001 136.1 0.7000000000000001Z"/><path fill="currentColor" transform="translate(32.137 35.400)" d="M2.5725000000000002 -6.4750000000000005H4.550000000000001Q5.652500000000001 -6.4750000000000005 6.4662500000000005 -6.790000000000001Q7.280000000000001 -7.105 7.735000000000001 -7.7175Q8.190000000000001 -8.33 8.190000000000001 -9.1875Q8.190000000000001 -10.2375 7.735000000000001 -10.91125Q7.280000000000001 -11.585 6.4662500000000005 -11.9175Q5.652500000000001 -12.250000000000002 4.550000000000001 -12.250000000000002H1.4000000000000001V0.0H4.7250000000000005Q5.915000000000001 0.0 6.85125 -0.39375000000000004Q7.7875000000000005 -0.7875000000000001 8.338750000000001 -1.5837500000000002Q8.89 -2.3800000000000003 8.89 -3.5875000000000004Q8.89 -4.4275 8.575000000000001 -5.040000000000001Q8.260000000000002 -5.652500000000001 7.691250000000001 -6.046250000000001Q7.1225000000000005 -6.44 6.370000000000001 -6.6325Q5.617500000000001 -6.825000000000001 4.7250000000000005 -6.825000000000001H2.5725000000000002V-6.0025H4.7250000000000005Q5.32 -6.0025 5.8100000000000005 -5.853750000000001Q6.300000000000001 -5.705000000000001 6.658750000000001 -5.407500000000001Q7.017500000000001 -5.11 7.210000000000001 -4.6725Q7.402500000000001 -4.235 7.402500000000001 -3.6750000000000003Q7.402500000000001 -2.9225000000000003 7.061250000000001 -2.3975000000000004Q6.720000000000001 -1.8725000000000003 6.116250000000001 -1.5925000000000002Q5.5125 -1.3125000000000002 4.7250000000000005 -1.3125000000000002H2.8875V-10.937500000000002H4.550000000000001Q5.477500000000001 -10.937500000000002 6.090000000000001 -10.45625Q6.702500000000001 -9.975000000000001 6.702500000000001 -9.100000000000001Q6.702500000000001 -8.5225 6.422500000000001 -8.120000000000001Q6.142500000000001 -7.717500000000001 5.652500000000001 -7.5075Q5.1625000000000005 -7.2975 4.550000000000001 -7.2975H2.5725000000000002Z M20.0375 0.0H26.215000000000003V-1.4000000000000001H20.0375ZM20.0375 -10.850000000000001H26.215000000000003V-12.250000000000002H20.0375ZM20.0375 -5.95H25.865000000000002V-7.3500000000000005H20.0375ZM19.215 -12.250000000000002V0.0H20.7025V-12.250000000000002Z M38.06250000000001 -3.6750000000000003H44.53750000000001L44.01250000000001 -5.075H38.587500000000006ZM41.26500000000001 -9.485000000000001 43.36500000000001 -4.550000000000001 43.50500000000001 -4.2 45.290000000000006 0.0H46.95250000000001L41.26500000000001 -12.8625L35.57750000000001 0.0H37.24000000000001L39.06000000000001 -4.305000000000001L39.20000000000001 -4.62Z M56.40250000000001 -12.250000000000002V-4.025Q56.40250000000001 -3.115 56.69125000000001 -2.345Q56.98000000000001 -1.5750000000000002 57.531250000000014 -1.0150000000000001Q58.08250000000001 -0.45500000000000007 58.852500000000006 -0.14Q59.62250000000001 0.17500000000000002 60.56750000000001 0.17500000000000002Q61.51250000000001 0.17500000000000002 62.28250000000001 -0.14Q63.05250000000001 -0.45500000000000007 63.60375000000001 -1.0150000000000001Q64.15500000000002 -1.5750000000000002 64.44375000000002 -2.345Q64.73250000000002 -3.115 64.73250000000002 -4.025V-12.250000000000002H63.24500000000001V-4.025Q63.24500000000001 -2.765 62.562500000000014 -1.995Q61.88000000000001 -1.225 60.56750000000001 -1.225Q59.25500000000001 -1.225 58.572500000000005 -1.995Q57.89000000000001 -2.765 57.89000000000001 -4.025V-12.250000000000002Z M74.27000000000001 -10.850000000000001H77.42000000000002V0.0H78.90750000000001V-10.850000000000001H82.05750000000002V-12.250000000000002H74.27000000000001Z M98.87500000000001 -12.250000000000002 95.70750000000002 -6.580000000000001 92.55750000000002 -12.250000000000002H90.89500000000002L94.97250000000003 -5.2675V0.0H96.46000000000002V-5.285L100.53750000000002 -12.250000000000002Z"/><g transform="translate(51.292 -68.600) scale(0.2807)"><g fill="currentColor"><path d="M22.0 88.0 C 20.0 76, 15.5 62, 16.5 52 C 19.0 39, 34 31.0, 50 31.0 C 66 31.0, 81.0 39, 83.5 52 C 84.5 62, 80.0 76, 78.0 88.0 Z"/></g><g fill="none" stroke="url(#nxpelo)" stroke-linecap="round"><path d="M23.9 88.0 Q16.2 71.2 16.2 59.0" stroke-width="1.0"/>
-    <path d="M27.0 88.0 Q20.2 69.9 20.2 56.8" stroke-width="1.0"/>
-    <path d="M29.8 88.0 Q23.8 66.9 23.7 51.6" stroke-width="1.0"/>
-    <path d="M32.4 88.0 Q27.1 64.8 27.0 48.0" stroke-width="1.0"/>
-    <path d="M35.3 88.0 Q30.9 64.0 30.8 46.5" stroke-width="1.0"/>
-    <path d="M38.2 88.0 Q34.7 65.1 34.7 48.5" stroke-width="1.0"/>
-    <path d="M41.3 88.0 Q38.6 59.1 38.5 38.2" stroke-width="1.0"/>
-    <path d="M44.0 88.0 Q42.2 62.6 42.2 44.3" stroke-width="1.0"/>
-    <path d="M47.2 88.0 Q46.3 56.9 46.3 34.4" stroke-width="1.0"/>
-    <path d="M50.0 88.0 Q50.1 60.7 50.1 40.8" stroke-width="1.0"/>
-    <path d="M53.2 88.0 Q54.1 63.4 54.1 45.6" stroke-width="1.0"/>
-    <path d="M56.0 88.0 Q57.8 62.2 57.8 43.5" stroke-width="1.0"/>
-    <path d="M58.4 88.0 Q60.9 64.0 60.9 46.5" stroke-width="1.0"/>
-    <path d="M61.4 88.0 Q64.9 60.2 65.1 40.0" stroke-width="1.0"/>
-    <path d="M64.2 88.0 Q68.5 62.8 68.6 44.6" stroke-width="1.0"/>
-    <path d="M67.4 88.0 Q72.6 65.5 72.7 49.2" stroke-width="1.0"/>
-    <path d="M70.3 88.0 Q76.2 68.6 76.2 54.6" stroke-width="1.0"/>
-    <path d="M72.8 88.0 Q79.6 69.1 79.6 55.4" stroke-width="1.0"/>
-    <path d="M76.1 88.0 Q83.9 69.9 84.1 56.7" stroke-width="1.0"/>
-    <path d="M25.3 88.0 Q18.3 75.2 18.7 66.0" stroke-width="0.75"/>
-    <path d="M28.3 88.0 Q22.3 75.8 22.7 67.0" stroke-width="0.75"/>
-    <path d="M31.5 88.0 Q26.2 72.3 26.4 60.9" stroke-width="0.75"/>
-    <path d="M33.9 88.0 Q29.4 72.3 29.6 61.0" stroke-width="0.75"/>
-    <path d="M37.0 88.0 Q33.3 69.3 33.4 55.8" stroke-width="0.75"/>
-    <path d="M40.1 88.0 Q37.3 72.9 37.5 62.0" stroke-width="0.75"/>
-    <path d="M43.2 88.0 Q41.3 73.7 41.4 63.3" stroke-width="0.75"/>
-    <path d="M45.6 88.0 Q44.4 68.4 44.4 54.3" stroke-width="0.75"/>
-    <path d="M48.3 88.0 Q47.8 70.3 47.8 57.5" stroke-width="0.75"/>
-    <path d="M51.1 88.0 Q51.4 68.8 51.4 55.0" stroke-width="0.75"/>
-    <path d="M54.5 88.0 Q55.8 69.9 55.8 56.8" stroke-width="0.75"/>
-    <path d="M57.5 88.0 Q59.6 72.3 59.5 60.9" stroke-width="0.75"/>
-    <path d="M60.3 88.0 Q63.2 70.7 63.0 58.2" stroke-width="0.75"/>
-    <path d="M63.1 88.0 Q66.7 72.3 66.5 61.0" stroke-width="0.75"/>
-    <path d="M66.2 88.0 Q70.8 69.9 70.7 56.7" stroke-width="0.75"/>
-    <path d="M68.8 88.0 Q74.1 72.6 73.8 61.4" stroke-width="0.75"/>
-    <path d="M71.3 88.0 Q77.4 73.3 77.1 62.6" stroke-width="0.75"/>
-    <path d="M74.7 88.0 Q81.8 73.0 81.6 62.1" stroke-width="0.75"/>
-    <path d="M25.3 88.0 Q18.8 83.2 19.8 79.7" stroke-width="0.6"/>
-    <path d="M26.5 88.0 Q20.3 81.4 21.1 76.6" stroke-width="0.6"/>
-    <path d="M27.9 88.0 Q22.0 82.0 22.9 77.7" stroke-width="0.6"/>
-    <path d="M29.7 88.0 Q24.4 83.3 25.3 80.0" stroke-width="0.6"/>
-    <path d="M31.3 88.0 Q26.3 80.1 26.9 74.3" stroke-width="0.6"/>
-    <path d="M33.1 88.0 Q28.6 82.3 29.3 78.3" stroke-width="0.6"/>
-    <path d="M35.0 88.0 Q31.0 78.9 31.5 72.3" stroke-width="0.6"/>
-    <path d="M36.4 88.0 Q32.8 80.9 33.4 75.8" stroke-width="0.6"/>
-    <path d="M38.6 88.0 Q35.5 78.3 35.9 71.3" stroke-width="0.6"/>
-    <path d="M40.6 88.0 Q38.0 78.2 38.3 71.1" stroke-width="0.6"/>
-    <path d="M41.7 88.0 Q39.5 80.6 39.8 75.3" stroke-width="0.6"/>
-    <path d="M43.5 88.0 Q41.7 77.8 42.0 70.4" stroke-width="0.6"/>
-    <path d="M45.8 88.0 Q44.7 81.9 44.9 77.5" stroke-width="0.6"/>
-    <path d="M46.7 88.0 Q45.8 81.4 46.0 76.6" stroke-width="0.6"/>
-    <path d="M48.5 88.0 Q48.0 79.8 48.1 73.9" stroke-width="0.6"/>
-    <path d="M50.5 88.0 Q50.7 81.1 50.6 76.2" stroke-width="0.6"/>
-    <path d="M51.6 88.0 Q52.0 80.2 52.0 74.6" stroke-width="0.6"/>
-    <path d="M53.7 88.0 Q54.7 79.4 54.5 73.3" stroke-width="0.6"/>
-    <path d="M56.0 88.0 Q57.6 78.9 57.4 72.2" stroke-width="0.6"/>
-    <path d="M57.2 88.0 Q59.2 79.4 58.9 73.1" stroke-width="0.6"/>
-    <path d="M59.1 88.0 Q61.5 82.7 61.1 78.9" stroke-width="0.6"/>
-    <path d="M61.0 88.0 Q64.0 78.9 63.6 72.2" stroke-width="0.6"/>
-    <path d="M62.7 88.0 Q66.1 79.0 65.7 72.4" stroke-width="0.6"/>
-    <path d="M63.9 88.0 Q67.6 81.2 67.0 76.3" stroke-width="0.6"/>
-    <path d="M65.3 88.0 Q69.4 80.2 68.8 74.5" stroke-width="0.6"/>
-    <path d="M67.0 88.0 Q71.4 83.2 70.6 79.8" stroke-width="0.6"/>
-    <path d="M68.8 88.0 Q73.7 83.0 72.9 79.3" stroke-width="0.6"/>
-    <path d="M70.6 88.0 Q76.0 83.7 75.1 80.6" stroke-width="0.6"/>
-    <path d="M72.0 88.0 Q77.7 83.4 76.8 80.1" stroke-width="0.6"/>
-    <path d="M73.8 88.0 Q80.1 82.7 79.1 78.9" stroke-width="0.6"/></g><g fill="none" stroke="var(--fondo,#F6F1EC)" stroke-opacity=".38" stroke-linecap="round"></g></g></g></symbol>
-  <!-- Íconos de línea de la cinta de argumentos: brocha, gota, escudo, ubicación -->
-  <symbol id="ico-brocha" viewBox="0 0 44 44"><path d="M13 22c0-8 3-14 9-16 6 2 9 8 9 16Z"/><path d="M17.5 21c0-5 1.5-9 4.5-11M26.5 21c0-5-1.5-9-4.5-11M22 21V10.5" class="fina"/><path d="M14 23.5h16l-1.2 6.5H15.2Z"/><path d="M18.5 32h7v7.5h-7Z"/><path d="M14.4 26h15.2" class="fina"/></symbol>
-  <symbol id="ico-gota" viewBox="0 0 44 44"><path d="M22 6c6 8.5 11.5 15 11.5 22a11.5 11.5 0 0 1-23 0C10.5 21 16 14.5 22 6Z"/><path d="M15.5 28.5c0 3 1.8 5.5 4.5 6.5" class="fina"/></symbol>
-  <symbol id="ico-escudo" viewBox="0 0 44 44"><path d="M22 5.5 35 10v11c0 8.5-5.6 15.3-13 18-7.4-2.7-13-9.5-13-18V10Z"/><path d="M16 22.5l4.2 4.2L28.5 18" class="fina"/></symbol>
-  <symbol id="ico-ubic" viewBox="0 0 44 44"><path d="M22 39s-11-11.5-11-20a11 11 0 0 1 22 0c0 8.5-11 20-11 20Z"/><circle cx="22" cy="19" r="4"/></symbol>
-</svg>
+<div id="sprite" hidden></div>
 
-<!-- ============ BARRA SUPERIOR ============ -->
+<!-- ============ AVISO ============ -->
+<div class="aviso" aria-label="Avisos de la tienda">
+  <ul>
+    <li>Envío gratis desde $599</li>
+    <li>Garantía de 90 días, sin ticket</li>
+    <li>Armadas a mano en Guadalajara</li>
+    <li>Envío gratis desde $599</li>
+  </ul>
+</div>
+
+<!-- ============ CABECERA ============ -->
 <header class="top" id="top">
   <div class="w">
-    <button class="menu-btn" id="btnMenu" type="button" aria-expanded="false" aria-controls="menu"><svg viewBox="0 0 22 14" aria-hidden="true"><path d="M0 1h22M0 7h22M0 13h22"/></svg>Menú</button>
+    <button class="hamb" id="btnMenu" type="button" aria-expanded="false" aria-controls="menu">
+      <svg viewBox="0 0 18 10" aria-hidden="true"><path d="M0 1h18M0 9h18"/></svg>Índice
+    </button>
     <nav aria-label="Secciones">
       <a href="#coleccion">Colección</a>
       <a href="#ritual">El ritual</a>
@@ -650,197 +59,221 @@ footer .pie .marca{width:12px;height:auto;display:inline-block;vertical-align:-2
       <a href="#garantia">Garantía</a>
       <a href="#somos">Nosotros</a>
     </nav>
-    <a class="logo-a" href="#portada" aria-label="nixa BEAUTY, inicio"><svg class="logo marca" viewBox="0 24 176.9 113.74" role="img" aria-label="nixa BEAUTY"><use href="#lockup"/></svg></a>
+    <a class="marca-top" href="#portada" aria-label="nixa BEAUTY, inicio">
+      <svg viewBox="0 24 176.9 113.74" role="img" aria-label="nixa BEAUTY"><use href="#lockup"/></svg>
+    </a>
     <div class="der">
-      <button class="ayuda-link" id="btnAyudaTop" type="button">¿Te ayudo a elegir?</button>
-      <button class="bolsa" id="btnCarrito" type="button" aria-label="Abrir la bolsa"><svg viewBox="0 0 20 22" aria-hidden="true"><path d="M3 7h14l1 14H2L3 7zM6.5 7V5.5a3.5 3.5 0 0 1 7 0V7"/></svg><span class="txt">Bolsa</span><span class="cnt">(<span id="nCarrito">0</span>)</span></button>
+      <button class="ayuda-top" id="btnAyudaTop" type="button">¿Te ayudo a elegir?</button>
+      <button class="bolsa-btn" id="btnBolsa" type="button" aria-label="Abrir la bolsa">
+        <svg viewBox="0 0 20 22" aria-hidden="true"><path d="M3 7h14l1 14H2L3 7zM6.5 7V5.5a3.5 3.5 0 0 1 7 0V7"/></svg>
+        <span class="txt">Bolsa</span><span class="n" id="nBolsa">0</span>
+      </button>
     </div>
   </div>
 </header>
+
 <div class="menu" id="menu">
-  <a href="#coleccion">La colección<small>Cinco piezas</small></a>
-  <a href="#ritual">El ritual<small>Diez brochas con oficio</small></a>
-  <a href="#kit">Kit N°1<small>Por aquí empezaríamos</small></a>
-  <a href="#garantia">Garantía<small>Noventa días</small></a>
-  <a href="#somos">Nosotros<small>Alan y Majo · Guadalajara</small></a>
-  <p class="pie">Escríbenos por WhatsApp. Te contesta uno de los dos.</p>
+  <a href="#coleccion">La colección<span class="ced">Cinco piezas</span></a>
+  <a href="#ritual">El ritual<span class="ced">Diez brochas</span></a>
+  <a href="#kit">Kit N°1<span class="ced">Empieza aquí</span></a>
+  <a href="#garantia">Garantía<span class="ced">90 días</span></a>
+  <a href="#somos">Nosotros<span class="ced">Alan y Majo</span></a>
+  <p class="pie">Escríbenos por WhatsApp. Te contesta uno de los dos, el mismo día.</p>
 </div>
 
 <main>
 
 <!-- ============ PORTADA ============ -->
 <section class="hero" id="portada" aria-label="Portada">
-  <div class="fondo" id="heroFondo"><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/hero-brochas-marmol.jpg" alt="Brochas nixa de mango marmoleado sobre papel beige, con ramas secas" fetchpriority="high"></div>
-  <div class="velo" aria-hidden="true"></div>
+  <div class="hero__halo" aria-hidden="true"></div>
+  <div class="hero__foto" id="heroFoto">
+    <img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/hero-piel.jpg" alt="Piel luminosa bajo la luz de la tarde" fetchpriority="high">
+  </div>
   <div class="w">
-    <div class="texto">
-      <p class="eti">Brochas de maquillaje · Guadalajara</p>
-      <h1>Difuminar <em>bien,</em> todos los días.</h1>
-      <p class="lead">Diez brochas numeradas por oficio, esponjas que dejan la base sin marcas y un tapete para lavarlas. Las armamos nosotros, una por una.</p>
-      <div class="cta">
-        <a class="btn" href="#coleccion" id="irKit">Ver la colección</a>
-        <a class="btn linea" href="#kit">El Kit N°1</a>
+    <div class="hero__texto">
+      <span class="ced">Brochas de maquillaje</span>
+      <h1 id="heroTitulo">Difuminar <em>bien,</em><br>todos los días.</h1>
+      <div class="hero__pie">
+        <a class="btn" href="#coleccion">Ver la colección
+          <svg class="flecha" viewBox="0 0 13 9" aria-hidden="true"><path d="M0 4.5h11M8 1l3.5 3.5L8 8"/></svg></a>
+        <a class="link" href="#kit">El Kit N°1</a>
       </div>
     </div>
+    <aside class="vidrio">
+      <div class="vidrio__fila">
+        <span class="ced">Diez brochas numeradas</span>
+        <span class="ced num">01 — 10</span>
+      </div>
+      <p>Esponjas que dejan la base sin marcas, un tapete para lavarlas y el mapa del rostro. Las armamos nosotros, una por una.</p>
+      <div class="vidrio__fila">
+        <span class="ced">Kit N°1 desde</span>
+        <span class="precio" id="precioHero">$298 <span>MXN</span></span>
+      </div>
+    </aside>
   </div>
-  <p class="pie-h">Kit N°1 · Diez brochas, estuche y dos esponjas</p>
-  <span class="scroll" aria-hidden="true"></span>
 </section>
 
-<!-- ============ CINTA DE ARGUMENTOS ============ -->
-<section class="args" aria-label="Lo que le prometemos a tu piel">
+<!-- ============ CIFRAS ============ -->
+<section class="cifras" aria-label="La marca en tres cifras">
   <div class="w">
-    <ul>
-      <li class="rev"><svg class="ilu" aria-hidden="true"><use href="#ico-brocha"/></svg><h3>Suaves en la piel</h3><p>Fibra densa de punta fina que difumina sin rayar y no se bebe la base.</p></li>
-      <li class="rev d1"><svg class="ilu" aria-hidden="true"><use href="#ico-gota"/></svg><h3>Se lavan y duran</h3><p>Agua tibia y jabón neutro. Aguantan cientos de lavadas sin soltar pelo.</p></li>
-      <li class="rev d2"><svg class="ilu" aria-hidden="true"><use href="#ico-escudo"/></svg><h3>Garantía de 90 días</h3><p>Si una brocha suelta pelo, te llega la de reemplazo. Sin ticket.</p></li>
-      <li class="rev d3"><svg class="ilu" aria-hidden="true"><use href="#ico-ubic"/></svg><h3>Armadas en Guadalajara</h3><p>Cada pedido lo armamos nosotros. En la ciudad, entrega el mismo día.</p></li>
-    </ul>
+    <div class="cifras__grid">
+      <article class="cifras__c rev">
+        <p class="cifras__n">10<sup>brochas</sup></p>
+        <p>Numeradas en el orden en que una se maquilla. El oficio va grabado en el mango: no hay que adivinar.</p>
+      </article>
+      <article class="cifras__c rev">
+        <p class="cifras__n">90<sup>días</sup></p>
+        <p>Si una brocha suelta pelo, te llega la de reemplazo. Sin ticket, sin formulario y sin regresar nada.</p>
+      </article>
+      <article class="cifras__c rev">
+        <p class="cifras__n">2<sup>personas</sup></p>
+        <p>Alan y Majo. Armamos cada pedido a mano en Guadalajara y contestamos nosotros el mismo día.</p>
+      </article>
+    </div>
   </div>
 </section>
 
-<!-- ============ LA COLECCIÓN ============ -->
+<!-- ============ COLECCIÓN ============ -->
 <section class="coleccion" id="coleccion">
   <div class="w">
     <div class="cab rev">
-      <p class="eti">La colección</p>
+      <span class="ced ced--linea">La colección</span>
       <h2>Cinco piezas para toda la rutina.</h2>
-      <p>Del polvo a las pestañas. Precios en pesos mexicanos; lo armamos y lo enviamos nosotros.</p>
+      <p>Del polvo a las pestañas. Lo armamos y lo enviamos nosotros.</p>
     </div>
-    <div class="grid" id="prods" aria-live="polite"><p class="vacio">Cargando la colección…</p></div>
+    <div class="rejilla" id="prods" aria-live="polite" aria-busy="true"></div>
   </div>
 </section>
 
-<!-- ============ EDITORIAL · EL RITUAL ============ -->
+<!-- ============ EL RITUAL ============ -->
 <section class="ritual" id="ritual">
   <div class="w">
-    <div class="fotos rev">
-      <svg class="marca-agua marca" viewBox="12 27 76 66" aria-hidden="true"><use href="#brocha"/></svg>
-      <figure class="foto grande"><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/rostro-beige.jpg" alt="Rostro con la piel difuminada, sobre fondo beige" loading="lazy" style="object-position:50% 12%"></figure>
-      <figure class="foto chica"><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/ojos-cerrados.jpg" alt="Ojos cerrados, pestañas y párpado" loading="lazy"></figure>
+    <div class="ritual__fotos rev">
+      <figure class="ritual__grande"><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/rostro-beige.jpg" alt="Rostro con la piel difuminada" loading="lazy" style="object-position:50% 12%"></figure>
+      <figure class="ritual__chica"><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/ojos-cerrados.jpg" alt="Ojos cerrados, pestañas y párpado" loading="lazy"></figure>
     </div>
-    <div class="texto">
-      <p class="eti linea rev">El Kit N°1 · el ritual completo</p>
+    <div class="ritual__texto">
+      <span class="ced ced--linea rev">El ritual completo</span>
       <h2 class="rev">Del rostro a los ojos, <em>diez</em> brochas con oficio.</h2>
-      <p class="intro rev">Van numeradas en el orden en que una se maquilla por la mañana. Primero la piel, después la mirada. El número y el oficio van grabados en el mango: no hay que adivinar.</p>
+      <p class="ritual__intro rev">Van numeradas en el orden en que una se maquilla por la mañana. Primero la piel, después la mirada.</p>
       <div class="grupo rev">
-        <p class="eti">Rostro</p>
-        <ol id="listaRostro">
-          <li><span class="n">01</span><div><b>Polvo</b><small>Sella la base y matiza el brillo con un velo ligero.</small></div></li>
-          <li><span class="n">02</span><div><b>Base</b><small>Empareja el tono del rostro sin dejar marcas.</small></div></li>
-          <li><span class="n">03</span><div><b>Rubor</b><small>Color en las mejillas, justo donde sube la sonrisa.</small></div></li>
-          <li><span class="n">04</span><div><b>Difuminar</b><small>Funde los bordes para que nada se vea cortado.</small></div></li>
-          <li><span class="n">05</span><div><b>Contorno</b><small>Da forma al pómulo y a la mandíbula, en ángulo.</small></div></li>
+        <span class="ced">Rostro</span>
+        <ol>
+          <li><span class="n">01</span><div><b>Polvo</b><small>Sella la base y matiza el brillo.</small></div></li>
+          <li><span class="n">02</span><div><b>Base</b><small>Empareja el tono sin dejar marcas.</small></div></li>
+          <li><span class="n">03</span><div><b>Rubor</b><small>Color donde sube la sonrisa.</small></div></li>
+          <li><span class="n">04</span><div><b>Difuminar</b><small>Funde los bordes, nada cortado.</small></div></li>
+          <li><span class="n">05</span><div><b>Contorno</b><small>Da forma al pómulo, en ángulo.</small></div></li>
         </ol>
       </div>
       <div class="grupo rev">
-        <p class="eti">Ojos</p>
-        <ol id="listaOjos">
-          <li><span class="n">06</span><div><b>Sombra</b><small>Deposita el color en el párpado móvil.</small></div></li>
-          <li><span class="n">07</span><div><b>Cuenca</b><small>Profundidad en la cuenca del ojo, con punta fina.</small></div></li>
-          <li><span class="n">08</span><div><b>Corrector</b><small>Cubre ojeras y detalles con precisión.</small></div></li>
-          <li><span class="n">09</span><div><b>Delinear</b><small>Trazo fino en la línea de las pestañas.</small></div></li>
+        <span class="ced">Ojos</span>
+        <ol>
+          <li><span class="n">06</span><div><b>Sombra</b><small>Deposita color en el párpado móvil.</small></div></li>
+          <li><span class="n">07</span><div><b>Cuenca</b><small>Profundidad con punta fina.</small></div></li>
+          <li><span class="n">08</span><div><b>Corrector</b><small>Ojeras y detalles, con precisión.</small></div></li>
+          <li><span class="n">09</span><div><b>Delinear</b><small>Trazo fino en la línea de pestañas.</small></div></li>
           <li><span class="n">10</span><div><b>Cejas y pestañas</b><small>Peina, ordena y separa.</small></div></li>
         </ol>
       </div>
-      <div class="acciones rev"><button class="btn" type="button" id="verKit">Ver el Kit N°1</button><a class="link" href="#kit">Leer la ficha completa</a></div>
+      <div class="rev" style="margin-top:34px"><button class="link" type="button" id="verKit">Ver el Kit N°1
+        <svg viewBox="0 0 13 9" aria-hidden="true"><path d="M0 4.5h11M8 1l3.5 3.5L8 8"/></svg></button></div>
     </div>
   </div>
 </section>
 
-<!-- ============ FICHA DEL KIT N°1 ============ -->
-<section class="ficha-kit" id="kit">
+<!-- ============ FICHA DEL KIT ============ -->
+<section class="ficha-sec" id="kit">
   <div class="w">
-    <div class="f-cuerpo">
+    <div class="f-grid">
       <div class="f-escena rev">
-        <span class="anillo" aria-hidden="true"></span>
-        <figure class="arco"><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/hero-brochas-marmol.jpg" alt="Las diez brochas del Kit N°1 con mango marmoleado" loading="lazy" style="object-position:62% 42%"></figure>
-        <span class="pedestal" aria-hidden="true"></span>
-        <span class="cifra" aria-hidden="true"><small>N°</small>1</span>
+        <figure class="f-escena__foto"><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/hero-brochas-marmol.jpg" alt="Las diez brochas del Kit N°1" loading="lazy" style="object-position:62% 42%"></figure>
+        <span class="ced f-escena__ced">Fig. 01 · Kit N°1 completo</span>
       </div>
-      <div class="f-info rev d1">
-        <p class="eti linea">Por aquí empezaríamos</p>
+      <div class="f-info rev">
+        <span class="ced ced--linea">Por aquí empezaríamos</span>
         <h2>Kit N°1, la rutina completa.</h2>
-        <p class="precio"><span id="precioKit">$298</span><small>MXN</small></p>
-        <p class="desc">Diez brochas numeradas, del polvo a las cejas, en un estuche rígido con dos esponjas de maquillaje y el mapa del rostro. La piel primero, la mirada después, y ninguna brocha que se quede en el cajón.</p>
-        <div class="acciones">
-          <button class="btn" type="button" id="agregaKit">Agregar a la bolsa</button>
-          <a class="btn linea" id="waKit" href="#" target="_blank" rel="noopener">Preguntar por WhatsApp</a>
+        <div class="f-precio">
+          <span class="v" id="precioKit">$298</span><span class="ced">MXN · Envío gratis desde $599</span>
         </div>
-        <p class="nota">Envío en Guadalajara el mismo día. El pago se confirma por WhatsApp; aquí no se cobra nada.</p>
-        <ul class="micro">
-          <li><svg class="ilu" aria-hidden="true"><use href="#ico-brocha"/></svg><div><b>Suaves</b>Fibra densa, sin rayar.</div></li>
-          <li><svg class="ilu" aria-hidden="true"><use href="#ico-gota"/></svg><div><b>Se lavan</b>Agua tibia, jabón neutro.</div></li>
-          <li><svg class="ilu" aria-hidden="true"><use href="#ico-escudo"/></svg><div><b>90 días</b>Reemplazo sin ticket.</div></li>
+        <p class="f-desc">Diez brochas numeradas, del polvo a las cejas, en un estuche rígido con dos esponjas de maquillaje y el mapa del rostro. La piel primero, la mirada después, y ninguna brocha que se quede en el cajón.</p>
+        <div class="f-acciones">
+          <button class="btn" type="button" id="agregaKit">Agregar a la bolsa
+            <svg class="flecha" viewBox="0 0 13 9" aria-hidden="true"><path d="M0 4.5h11M8 1l3.5 3.5L8 8"/></svg></button>
+          <a class="btn btn--linea" id="waKit" href="#" target="_blank" rel="noopener">Preguntar por WhatsApp</a>
+        </div>
+        <ul class="confia">
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5.5"/></svg><span><b>Envío gratis</b> desde $599. En Guadalajara, el mismo día.</span></li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5.5"/></svg><span><b>90 días de garantía.</b> Si suelta pelo, te llega la de reemplazo sin ticket.</span></li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5.5"/></svg><span><b>Aquí no se cobra nada.</b> Confirmas pago y entrega por WhatsApp, con Alan o con Majo.</span></li>
         </ul>
       </div>
     </div>
-    <div class="bloques">
+    <div class="f-bloques">
       <div class="rev">
         <figure class="foto"><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/kit-rollo.jpg" alt="Estuche con brochas ordenadas" loading="lazy"></figure>
-        <h4><svg class="marca" viewBox="12 27 76 66" aria-hidden="true"><use href="#brocha"/></svg>Qué incluye</h4>
+        <h4>Qué incluye</h4>
         <ul>
-          <li><svg class="vi" viewBox="12 27 76 66" aria-hidden="true"><use href="#brocha"/></svg>Diez brochas numeradas, del 01 al 10</li>
-          <li><svg class="vi" viewBox="12 27 76 66" aria-hidden="true"><use href="#brocha"/></svg>Estuche rígido con cierre</li>
-          <li><svg class="vi" viewBox="12 27 76 66" aria-hidden="true"><use href="#brocha"/></svg>Dos esponjas de maquillaje</li>
-          <li><svg class="vi" viewBox="12 27 76 66" aria-hidden="true"><use href="#brocha"/></svg>El mapa del rostro impreso</li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5.5"/></svg>Diez brochas numeradas, del 01 al 10</li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5.5"/></svg>Estuche rígido con cierre</li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5.5"/></svg>Dos esponjas de maquillaje</li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5.5"/></svg>El mapa del rostro impreso</li>
         </ul>
       </div>
-      <div class="rev d1">
-        <figure class="foto"><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/brocha-sola.jpg" alt="Una brocha de polvo limpia, sobre fondo claro" loading="lazy" style="object-position:50% 30%"></figure>
-        <h4><svg class="marca" viewBox="12 27 76 66" aria-hidden="true"><use href="#brocha"/></svg>Cómo se cuida</h4>
-        <p>Agua tibia y jabón neutro, una vez a la semana. Se secan acostadas, con la cabeza fuera de la mesa, y quedan como el primer día. El tapete lavador de brochas lo hace en dos pasadas.</p>
+      <div class="rev">
+        <figure class="foto"><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/brocha-sola.jpg" alt="Una brocha limpia" loading="lazy" style="object-position:50% 30%"></figure>
+        <h4>Cómo se cuida</h4>
+        <p>Agua tibia y jabón neutro, una vez a la semana. Se secan acostadas, con la cabeza fuera de la mesa, y quedan como el primer día. El tapete lo hace en dos pasadas.</p>
       </div>
-      <div class="rev d2">
-        <figure class="foto"><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/brochas-calidas.jpg" alt="Brochas de maquillaje a contraluz cálido" loading="lazy" style="object-position:50% 40%"></figure>
-        <h4><svg class="marca" viewBox="12 27 76 66" aria-hidden="true"><use href="#brocha"/></svg>La promesa nixa</h4>
+      <div class="rev">
+        <figure class="foto"><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/brochas-calidas.jpg" alt="Brochas a contraluz cálido" loading="lazy" style="object-position:50% 40%"></figure>
+        <h4>La promesa nixa</h4>
         <p>Antes de enviar un set, frotamos cada brocha contra la palma. Si suelta un solo pelo, no sale de aquí. Y si en sus primeros noventa días falla, la reponemos sin preguntar.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ FRANJA DE TEXTURA ============ -->
-<section class="textura" aria-label="Una frase de la marca">
-  <div class="fondo" id="texturaFondo"><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/brocha-rubor.jpg" alt="Brocha sobre un rubor en polvo" loading="lazy"></div>
-  <div class="velo" aria-hidden="true"></div>
-  <div class="w rev">
-    <svg class="marca" viewBox="12 27 76 66" aria-hidden="true" style="--fondo:#6A2C2F"><use href="#brocha"/></svg>
-    <blockquote>Una brocha buena no se nota en la brocha. Se nota en la piel.</blockquote>
-    <p class="firma">nixa BEAUTY</p>
-  </div>
-</section>
-
-<!-- ============ GARANTÍA ============ -->
-<section class="garantia oscuro" id="garantia">
-  <svg class="agua" viewBox="0 24 176.9 113.74" aria-hidden="true"><use href="#lockup"/></svg>
-  <div class="w">
+<!-- ============ BANDA OSCURA · la garantía ============ -->
+<section class="noche" id="garantia">
+  <div class="w noche__grid">
     <div class="rev">
-      <p class="eti">La garantía, como es</p>
-      <p class="cifra"><span>90</span><small>días, contados desde que te llega</small></p>
+      <span class="ced">La garantía, como es</span>
+      <p class="noche__cifra">90<small>días desde que te llega</small></p>
     </div>
-    <div class="rev d1">
+    <div class="rev">
       <h2>Si una brocha suelta pelo, la reponemos. <em>Así de corto.</em></h2>
-      <ol class="pasos">
-        <li class="paso"><span class="n">1</span><div><b>Nos escribes por WhatsApp</b>Con una foto de la brocha. Te contesta Majo o te contesta Alan, el mismo día.</div></li>
-        <li class="paso"><span class="n">2</span><div><b>Te mandamos la de reemplazo</b>No pedimos ticket ni formulario, y no te hacemos regresar nada.</div></li>
-        <li class="paso"><span class="n">3</span><div><b>Y ya</b>Si además nos dices cómo la lavabas, mejor: así seguimos afinando la fibra.</div></li>
+      <ol class="noche__lista">
+        <li><span class="n">1</span><div><b>Nos escribes por WhatsApp</b>Con una foto de la brocha. Te contesta Majo o Alan, el mismo día.</div></li>
+        <li><span class="n">2</span><div><b>Te mandamos la de reemplazo</b>No pedimos ticket ni formulario, y no te hacemos regresar nada.</div></li>
+        <li><span class="n">3</span><div><b>Y ya</b>Si nos dices cómo la lavabas, mejor: así seguimos afinando la fibra.</div></li>
       </ol>
-      <div class="acciones"><a class="btn lleno-claro" id="waGarantia" href="#" target="_blank" rel="noopener">Escribirnos por WhatsApp</a></div>
+      <div class="noche__acciones">
+        <a class="btn btn--noche" id="waGarantia" href="#" target="_blank" rel="noopener">Escribirnos por WhatsApp
+          <svg class="flecha" viewBox="0 0 13 9" aria-hidden="true"><path d="M0 4.5h11M8 1l3.5 3.5L8 8"/></svg></a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ============ QUIÉNES SOMOS ============ -->
+<!-- ============ FRASE ============ -->
+<section class="frase" aria-label="Una frase de la marca">
+  <div class="w rev">
+    <blockquote>Una brocha buena no se nota en la brocha. Se nota en la piel.</blockquote>
+    <span class="ced">nixa BEAUTY · Guadalajara</span>
+  </div>
+</section>
+
+<!-- ============ NOSOTROS ============ -->
 <section class="somos" id="somos">
   <div class="w">
-    <figure class="foto rev"><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/aplicando-esponja.jpg" alt="Aplicando la base con una esponja de maquillaje" loading="lazy" style="object-position:50% 25%"></figure>
-    <div class="texto rev d1">
-      <p class="eti linea">Quiénes somos</p>
+    <figure class="somos__foto rev"><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/aplicando-esponja.jpg" alt="Aplicando la base con una esponja" loading="lazy" style="object-position:50% 25%"></figure>
+    <div class="rev">
+      <span class="ced ced--linea">Quiénes somos</span>
       <h2>Somos dos, y probamos <em>cada</em> brocha.</h2>
       <p class="txt">nixa existe porque nos cansamos de brochas que rayaban la piel, se bebían la base y soltaban pelo a la segunda lavada. Las buenas costaban lo de un mes de despensa.</p>
       <p class="txt">Así que hicimos las nuestras: pocas piezas, suaves, probadas una por una, a un precio que se puede pagar. Lo que prometemos es corto: si algo falla, lo reponemos; si nos escribes, te contesta uno de los dos.</p>
-      <p class="firma">Alan y Majo<span>Guadalajara, Jalisco</span></p>
+      <p class="firma">Alan y Majo<span class="ced">Guadalajara, Jalisco</span></p>
     </div>
   </div>
 </section>
@@ -851,358 +284,119 @@ footer .pie .marca{width:12px;height:auto;display:inline-block;vertical-align:-2
 <footer>
   <div class="w">
     <div class="arriba">
-      <div class="rev">
-        <svg class="logo marca" viewBox="0 24 176.9 113.74" role="img" aria-label="nixa BEAUTY"><use href="#lockup"/></svg>
-        <p class="tag">Brochas y esponjas de maquillaje. Armadas y enviadas desde Guadalajara.</p>
+      <div>
+        <div class="marca"><svg viewBox="0 24 176.9 113.74" role="img" aria-label="nixa BEAUTY"><use href="#lockup"/></svg></div>
+        <p class="tag">Brochas y esponjas de maquillaje. Armadas y enviadas desde Guadalajara, Jalisco.</p>
+        <div class="pagos" aria-label="Formas de pago que aceptamos">
+          <span>Transferencia</span><span>Efectivo</span><span>Depósito OXXO</span><span>Mercado Pago</span>
+        </div>
       </div>
-      <div class="cols rev d1">
-        <div><b>Tienda</b><a href="#coleccion">La colección</a><br><a href="#kit">Kit N°1</a><br><a href="#ritual">El ritual</a><br><button type="button" id="btnAyudaPie">¿Te ayudo a elegir?</button></div>
-        <div><b>Ayuda</b><a id="waPie" href="#" target="_blank" rel="noopener">WhatsApp</a><br><a href="mailto:hola@nixa.mx" id="correoPie">hola@nixa.mx</a><br><a href="#garantia">Garantía de 90 días</a><br><span>Envíos: en Guadalajara el mismo día; al resto de México, por paquetería.</span></div>
-        <div><b>Nosotros</b><a href="#somos">Alan y Majo</a><br><span>Guadalajara, Jalisco, México</span><br><span>El pago se confirma por WhatsApp. Aquí no se cobra nada.</span></div>
+      <div class="cols">
+        <div>
+          <b>Tienda</b>
+          <a href="#coleccion">La colección</a>
+          <a href="#kit">Kit N°1</a>
+          <a href="#ritual">El ritual</a>
+          <button type="button" id="btnAyudaPie">¿Te ayudo a elegir?</button>
+        </div>
+        <div>
+          <b>Ayuda</b>
+          <a id="waPie" href="#" target="_blank" rel="noopener">WhatsApp</a>
+          <a href="mailto:hola@nixa.mx">hola@nixa.mx</a>
+          <a href="#garantia">Garantía de 90 días</a>
+          <span>Envíos: mismo día en Guadalajara; al resto de México por paquetería.</span>
+        </div>
+        <div>
+          <b>Nosotros</b>
+          <a href="#somos">Alan y Majo</a>
+          <span>Guadalajara, Jalisco, México</span>
+          <span>El pago se confirma por WhatsApp. Aquí no se cobra nada.</span>
+        </div>
       </div>
     </div>
-    <div class="pie">
-      <span><svg class="marca" viewBox="12 27 76 66" aria-hidden="true"><use href="#brocha"/></svg>nixa BEAUTY · Guadalajara, México · 2026</span>
-      <span>Fotografía provisional: Pexels y Unsplash, licencia libre</span>
+    <div class="legal">
+      <span>nixa BEAUTY · 2026</span>
+      <span>Fotografía provisional · Pexels y Unsplash</span>
     </div>
   </div>
 </footer>
 
-<!-- ============ FICHA DE PRODUCTO ============ -->
-<div class="ficha" id="ficha" role="dialog" aria-modal="true" aria-labelledby="tituloFicha">
-  <header class="top solida">
+<!-- ============ FICHA MODAL ============ -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="tituloModal">
+  <div class="modal__cab">
     <div class="w">
-      <button class="volver" id="cerrarFicha" type="button"><svg viewBox="0 0 18 12" aria-hidden="true"><path d="M17 6H1M6 1L1 6l5 5"/></svg><span>Volver</span></button>
-      <svg class="logo marca" viewBox="0 24 176.9 113.74" role="img" aria-label="nixa BEAUTY"><use href="#lockup"/></svg>
-      <div class="der"><button class="bolsa" id="btnCarritoFicha" type="button" aria-label="Abrir la bolsa"><svg viewBox="0 0 20 22" aria-hidden="true"><path d="M3 7h14l1 14H2L3 7zM6.5 7V5.5a3.5 3.5 0 0 1 7 0V7"/></svg><span class="txt">Bolsa</span><span class="cnt">(<span id="nCarritoFicha">0</span>)</span></button></div>
+      <button class="volver" id="cerrarModal" type="button">
+        <svg viewBox="0 0 15 10" aria-hidden="true"><path d="M14 5H1M5 1L1 5l4 4"/></svg>Volver
+      </button>
+      <span class="marca-top"><svg viewBox="0 24 176.9 113.74" role="img" aria-label="nixa BEAUTY" style="height:32px"><use href="#lockup"/></svg></span>
+      <span></span>
     </div>
-  </header>
-  <div class="cuerpo"><div class="w" id="cuerpoFicha"></div></div>
+  </div>
+  <div class="modal__cuerpo"><div class="w" id="cuerpoModal"></div></div>
 </div>
 
 <!-- ============ BOLSA ============ -->
-<div class="panel" id="panel" role="dialog" aria-modal="true" aria-labelledby="tituloBolsa">
-  <div class="box">
-    <div class="cabeza">
-      <div><p class="eti">Pedido por WhatsApp</p><h2 id="tituloBolsa">Tu bolsa</h2></div>
-      <button class="cerrar" id="cerrar" type="button">Seguir viendo</button>
+<div class="telon" id="telon"></div>
+<aside class="bolsa" id="bolsa" role="dialog" aria-modal="true" aria-labelledby="tituloBolsa" aria-hidden="true">
+  <div class="bolsa__cab">
+    <div>
+      <span class="ced">Pedido por WhatsApp</span>
+      <h3 id="tituloBolsa">Tu bolsa</h3>
     </div>
-    <div class="cuerpo">
-      <div id="items"></div>
-      <div class="tot">
-        <div><p class="l">Total</p><small>El envío te lo cotizamos al confirmar</small></div>
-        <span class="v" id="total">$0</span>
-      </div>
-      <div class="datos">
-        <p class="eti">Para entregarlo</p>
-        <label class="campo"><span>Tu nombre</span><input id="nom" autocomplete="name" placeholder="Nombre y apellido"></label>
-        <label class="campo"><span>WhatsApp a 10 dígitos</span><input id="tel" inputmode="tel" autocomplete="tel" placeholder="33 0000 0000"></label>
-        <label class="campo"><span>Dirección de entrega</span><textarea id="dir" autocomplete="street-address" placeholder="Calle, número, colonia, CP"></textarea></label>
-        <button class="btn ancho" id="pedir" type="button">Enviar pedido por WhatsApp</button>
-        <p class="msg" id="msgPedido"></p>
-        <p class="nota">Te contestamos para confirmar el pago y la entrega. Aquí no se cobra nada.</p>
-      </div>
+    <button class="link" id="cerrarBolsa" type="button">Seguir viendo</button>
+  </div>
+  <div class="bolsa__cuerpo">
+    <div class="envio" id="envioBarra" hidden>
+      <p id="envioTexto"></p>
+      <div class="riel"><i id="envioRiel"></i></div>
+    </div>
+    <div id="items"></div>
+    <div class="total">
+      <div class="l">Total<small>El envío te lo confirmamos al cerrar el pedido</small></div>
+      <span class="v" id="total">$0</span>
+    </div>
+    <div id="datos">
+      <span class="ced" style="display:block;margin-top:30px">Para entregarlo</span>
+      <label class="campo" id="cNom"><span>Tu nombre</span>
+        <input id="nom" autocomplete="name" placeholder="Nombre y apellido">
+        <span class="err">Necesitamos tu nombre para el pedido.</span></label>
+      <label class="campo" id="cTel"><span>WhatsApp a 10 dígitos</span>
+        <input id="tel" inputmode="numeric" autocomplete="tel" placeholder="33 0000 0000" maxlength="14">
+        <span class="err">Escribe los 10 dígitos de tu WhatsApp.</span></label>
+      <label class="campo" id="cDir"><span>Dirección de entrega</span>
+        <textarea id="dir" autocomplete="street-address" placeholder="Calle, número, colonia, CP"></textarea>
+        <span class="err">Nos falta la dirección.</span></label>
+      <button class="btn btn--ancho" id="pedir" type="button" style="margin-top:22px">Enviar pedido por WhatsApp
+        <svg class="flecha" viewBox="0 0 13 9" aria-hidden="true"><path d="M0 4.5h11M8 1l3.5 3.5L8 8"/></svg></button>
+      <p class="msj" id="msjPedido" role="status"></p>
+      <ul class="confia">
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5.5"/></svg><span><b>Aquí no se cobra nada.</b> Se abre WhatsApp con tu pedido y ahí confirmamos pago y entrega.</span></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5.5"/></svg><span><b>Te contesta una persona.</b> Alan o Majo, el mismo día.</span></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5.5"/></svg><span><b>90 días de garantía</b> en todo lo que te llegue.</span></li>
+      </ul>
     </div>
   </div>
-</div>
+</aside>
 
-<!-- ============ ¿TE AYUDO A ELEGIR? ============ -->
-<button class="ayuda-btn" id="btnAyuda" type="button" aria-haspopup="dialog"><svg class="marca" viewBox="12 27 76 66" aria-hidden="true"><use href="#brocha"/></svg>¿Te ayudo a elegir?</button>
-<div class="ayuda" id="ayuda" role="dialog" aria-modal="true" aria-labelledby="tituloAyuda">
+<!-- ============ AYUDANTE ============ -->
+<button class="ayuda-fab" id="btnAyuda" type="button" aria-haspopup="dialog">
+  <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 7.5a3 3 0 1 1 4 2.8V13"/><circle cx="10" cy="16" r=".6" fill="currentColor" stroke="none"/></svg>
+  <span>¿Te ayudo a elegir?</span>
+</button>
+<div class="hoja-tel" id="ayuda" role="dialog" aria-modal="true" aria-labelledby="tituloAyuda">
   <div class="hoja">
-    <div class="arriba"><span class="paso" id="pasoAyuda">Pregunta 1 de 3</span><button class="cerrar" id="cerrarAyuda" type="button">Cerrar</button></div>
+    <div class="hoja__cab">
+      <span class="ced" id="pasoAyuda">Pregunta 1 de 3</span>
+      <button class="link" id="cerrarAyuda" type="button">Cerrar</button>
+    </div>
     <div id="cuerpoAyuda"></div>
   </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-<script>
-const URL_SB="https://jjtlkneoxmgcyrifckdf.supabase.co";
-const KEY_SB="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpqdGxrbmVveG1nY3lyaWZja2RmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgzNjQ0ODcsImV4cCI6MjEwMzk0MDQ4N30.Ty2qZduVwcIfWuVAzb-judCXVIIpyBq2_D3bE2GsY7g";
-const WA="523300000000"; // <-- AQUÍ VA EL WHATSAPP REAL DE NIXA (52 + 10 dígitos, sin espacios). Es la única línea que hay que cambiar.
-
-// FOTOS por pieza. Hoy son fotografías provisionales de stock (Pexels/Unsplash, licencia libre);
-// cuando lleguen las reales, se cambia la ruta aquí y no hay que tocar nada más.
-const FOTOS={
-  KIT1:{src:"https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/brochas-marmol-blanco.jpg",pos:"50% 50%",alt:"Brochas del Kit N°1 sobre mármol blanco"},
-  ESP4:{src:"https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/esponja-rosa.jpg",pos:"50% 60%",alt:"Esponja de maquillaje sobre un pedestal rosa"},
-  LAV1:{src:"https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/brocha-sola.jpg",pos:"50% 40%",alt:"Brocha limpia, lista para lavarse"},
-  RIZ1:{src:"https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/ojos-cerrados.jpg",pos:"50% 35%",alt:"Pestañas y párpado, ojos cerrados"},
-  SIS1:{src:"https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/abanico-brochas.jpg",pos:"40% 50%",alt:"Abanico de brochas de maquillaje"}
-};
-const FOTO_FICHA={KIT1:{src:"https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/hero-brochas-marmol.jpg",pos:"62% 42%"},SIS1:{src:"https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/kit-rollo.jpg",pos:"50% 50%"}};
-
-const sb=supabase.createClient(URL_SB,KEY_SB);
-const $=s=>document.querySelector(s);
-const money=n=>'$'+Number(n||0).toLocaleString('es-MX',{maximumFractionDigits:0});
-const esc=s=>(s??'').toString().replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]));
-let PROD=[], bolsa={};
-
-// Texto de venta por SKU, escrito por nosotros. El nombre y el precio salen de la base.
-const COPY={
-  KIT1:{tag:'Por aquí empezaríamos',desc:'Diez brochas numeradas, del polvo a las cejas, en un estuche rígido con dos esponjas de maquillaje y el mapa del rostro. Es la rutina completa: la piel primero, la mirada después, y ninguna brocha que se quede en el cajón.',
-    incluye:['Diez brochas numeradas, del 01 al 10','Estuche rígido con cierre','Dos esponjas de maquillaje','El mapa del rostro impreso'],
-    cuidado:'Agua tibia y jabón neutro, una vez a la semana. Se secan acostadas, con la cabeza fuera de la mesa, y quedan como el primer día.'},
-  ESP4:{tag:'',desc:'Cuatro esponjas de maquillaje que se usan húmedas: crecen con el agua, no se beben la base y la dejan pareja, sin marcas ni rayas. Nosotros las cambiamos cada tres meses; por eso van de a cuatro, para que te duren el año.',
-    incluye:['Cuatro esponjas de maquillaje','Se usan húmedas; crecen con el agua','Punta fina para ojeras y nariz; base plana para mejillas'],
-    cuidado:'Se lavan con jabón neutro después de cada uso y se cambian cada tres meses. Por eso van de a cuatro.'},
-  LAV1:{tag:'',desc:'Tapete lavador de brochas, de silicón, que se pega al lavabo con ventosas. Es con el que lavamos las nuestras: agua tibia, jabón neutro, dos pasadas por los relieves, y la fibra suelta el rubor y la base sin maltratarse.',
-    incluye:['Tapete de silicón con relieves de tres texturas','Ventosas que lo fijan al lavabo'],
-    cuidado:'Se enjuaga y se deja secar. No se deforma ni guarda olor.'},
-  RIZ1:{tag:'',desc:'Rizador de pestañas de acero con almohadilla suave, y trae repuestos. Abre la mirada sin pellizcar: lo probamos en cada pedido antes de cerrarlo. Si quieres algo chico para conocernos, es este.',
-    incluye:['Rizador de pestañas de acero','Almohadilla suave','Repuestos de almohadilla'],
-    cuidado:'La almohadilla se cambia cuando se marca. Los repuestos vienen en la caja.'},
-  SIS1:{tag:'Todo junto',desc:'La rutina completa: el kit de diez brochas, las esponjas de maquillaje, el tapete para lavarlas y el rizador. Es lo que regalamos nosotros cuando queremos quedar bien. {AHORRO}',
-    incluye:['Kit N°1: diez brochas, estuche y dos esponjas','Esponjas de maquillaje, pack de 4','Tapete lavador de brochas','Rizador de pestañas'],
-    cuidado:'Cada pieza trae su cuidado escrito. En resumen: agua tibia, jabón neutro y paciencia.'}
-};
-const PROMESA='Antes de enviar un set, probamos cada pieza con las manos. Si en sus primeros noventa días algo falla, nos escribes por WhatsApp con una foto y te mandamos el reemplazo. Sin ticket, sin formulario.';
-const DIEZ=[['01','Polvo','Rostro'],['02','Base','Rostro'],['03','Rubor','Mejillas'],['04','Difuminar','Párpado'],['05','Contorno','Pómulo'],['06','Sombra','Párpado'],['07','Cuenca','Ojo'],['08','Corrector','Ojeras'],['09','Delinear','Pestañas'],['10','Cejas y pestañas','Cejas']];
-const NUM={KIT1:'01',ESP4:'02',LAV1:'03',RIZ1:'04',SIS1:'05'};
-
-const vi='<svg class="vi" viewBox="12 27 76 66" aria-hidden="true"><use href="#brocha"/></svg>';
-const brochaMini='<svg class="marca" viewBox="12 27 76 66" aria-hidden="true"><use href="#brocha"/></svg>';
-function fotoDe(sku,ficha){
-  const f=(ficha&&FOTO_FICHA[sku])||FOTOS[sku]||FOTOS.KIT1;
-  return `<img src="${esc(f.src)}" alt="${esc((FOTOS[sku]||f).alt||'')}" loading="lazy" style="object-position:${esc(f.pos||'50% 50%')}">`;
-}
-function tituloDe(p){const [tit,...resto]=p.nombre.split(' · ');return {tit,sub:resto.join(' · ')};}
-function ahorroSistema(){
-  const sis=PROD.find(p=>p.sku==='SIS1');
-  const sueltas=PROD.filter(p=>p.sku!=='SIS1').reduce((a,p)=>a+Number(p.precio),0);
-  return sis&&sueltas>sis.precio?`Sale ${money(sueltas-sis.precio)} menos que comprar las piezas por separado.`:'';
-}
-function descDe(p){const c=COPY[p.sku]||{desc:''};return c.desc.replace('{AHORRO}',ahorroSistema()).trim();}
-
-// Una sola función para meter a la bolsa: la usan las tarjetas, la ficha y el ayudante.
-function agrega(sku){bolsa[sku]=(bolsa[sku]||0)+1;pinta();abre();}
-
-/* ---- aparición al hacer scroll ---- */
-const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-const io=('IntersectionObserver' in window)&&!reduce?new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px',threshold:.08}):null;
-function observa(root){(root||document).querySelectorAll('.rev:not(.in)').forEach(el=>{if(io)io.observe(el);else el.classList.add('in');});}
-
-async function cargar(){
-  const {data}=await sb.from('productos').select('*').eq('activo',true).order('precio',{ascending:false});
-  PROD=data||[];
-  // El Kit N°1 va primero y destacado; luego las piezas sueltas; la rutina completa cierra.
-  const ORDEN=['KIT1','ESP4','LAV1','RIZ1','SIS1'];
-  const pos=s=>{const i=ORDEN.indexOf(s);return i<0?99:i;};
-  const orden=[...PROD].sort((a,b)=>pos(a.sku)-pos(b.sku));
-  $('#prods').innerHTML=orden.map((p,i)=>{
-    const c=COPY[p.sku]||{tag:''};
-    const {tit,sub}=tituloDe(p);
-    return `<article class="tar rev${p.sku==='KIT1'?' destacada':''}${i%3===1?' d1':i%3===2?' d2':''}" id="tar-${esc(p.sku)}">
-      <button class="lam" type="button" data-ficha="${esc(p.sku)}" aria-label="Ver ${esc(tit)}">${c.tag?`<span class="sello">${esc(c.tag)}</span>`:''}${fotoDe(p.sku)}<span class="no" aria-hidden="true">${NUM[p.sku]||''}</span></button>
-      <div class="cuerpo">
-        <h3><button type="button" data-ficha="${esc(p.sku)}">${esc(tit)}</button></h3>
-        ${sub?`<p class="sub">${esc(sub)}</p>`:''}
-        <div class="pie">
-          <span class="precio">${money(p.precio)}<small>MXN</small></span>
-          <button class="mas" type="button" data-sku="${esc(p.sku)}" aria-label="Agregar ${esc(tit)} a la bolsa"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1v14M1 8h14"/></svg></button>
-        </div>
-      </div>
-    </article>`;
-  }).join('')||'<p class="vacio">Estamos armando la colección. Vuelve en un rato o escríbenos por WhatsApp.</p>';
-  document.querySelectorAll('.tar .mas[data-sku]').forEach(b=>b.onclick=()=>agrega(b.dataset.sku));
-  document.querySelectorAll('[data-ficha]').forEach(b=>b.onclick=()=>abreFicha(b.dataset.ficha));
-  const kit=PROD.find(p=>p.sku==='KIT1'); if(kit) $('#precioKit').textContent=money(kit.precio);
-  observa($('#prods'));
-}
-
-/* ---- ficha de producto (vista completa) ---- */
-function abreFicha(sku){
-  const p=PROD.find(x=>x.sku===sku); if(!p) return;
-  const c=COPY[sku]||{incluye:[],cuidado:''};
-  const {tit,sub}=tituloDe(p);
-  const waTxt=encodeURIComponent(`Hola nixa, tengo una duda sobre ${p.nombre}.`);
-  $('#cuerpoFicha').innerHTML=`
-    <div class="f-cuerpo">
-      <div class="f-escena">
-        <span class="anillo" aria-hidden="true"></span>
-        <figure class="arco">${fotoDe(sku,true)}</figure>
-        <span class="pedestal" aria-hidden="true"></span>
-        <span class="cifra" aria-hidden="true"><small>N°</small>${(NUM[sku]||'').replace(/^0/,'')}</span>
-      </div>
-      <div class="f-info">
-        <p class="eti linea">${esc(c.tag||sub||'nixa BEAUTY')}</p>
-        <h2 id="tituloFicha">${esc(tit)}</h2>
-        <p class="precio">${money(p.precio)}<small>MXN</small></p>
-        <p class="desc">${esc(descDe(p))}</p>
-        <div class="acciones">
-          <button class="btn" type="button" id="agregaFicha">Agregar a la bolsa</button>
-          <a class="btn linea" href="https://wa.me/${WA}?text=${waTxt}" target="_blank" rel="noopener">Preguntar por WhatsApp</a>
-        </div>
-        <p class="nota">Envío en Guadalajara el mismo día. El pago se confirma por WhatsApp; aquí no se cobra nada.</p>
-        <ul class="micro">
-          <li><svg class="ilu" aria-hidden="true"><use href="#ico-brocha"/></svg><div><b>Suaves</b>Probadas una por una.</div></li>
-          <li><svg class="ilu" aria-hidden="true"><use href="#ico-gota"/></svg><div><b>Se lavan</b>Agua tibia, jabón neutro.</div></li>
-          <li><svg class="ilu" aria-hidden="true"><use href="#ico-escudo"/></svg><div><b>90 días</b>Reemplazo sin ticket.</div></li>
-        </ul>
-      </div>
-    </div>
-    <div class="bloques">
-      <div><figure class="foto">${sku==='KIT1'?'<img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/kit-rollo.jpg" alt="" loading="lazy">':fotoDe(sku)}</figure><h4>${brochaMini}Qué incluye</h4><ul>${(c.incluye||[]).map(i=>`<li>${vi}${esc(i)}</li>`).join('')}</ul></div>
-      <div><figure class="foto"><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/brocha-sola.jpg" alt="" loading="lazy" style="object-position:50% 30%"></figure><h4>${brochaMini}Cómo se cuida</h4><p>${esc(c.cuidado||'')}</p></div>
-      <div><figure class="foto"><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/brochas-calidas.jpg" alt="" loading="lazy" style="object-position:50% 40%"></figure><h4>${brochaMini}La promesa nixa</h4><p>${esc(PROMESA)}</p></div>
-      ${sku==='KIT1'||sku==='SIS1'?`<div class="diez"><h4>${brochaMini}Las diez brochas</h4><ol>${DIEZ.map(([n,b,z])=>`<li><span class="n">${n}</span><b>${esc(b)}</b><small>${esc(z)}</small></li>`).join('')}</ol></div>`:''}
-    </div>`;
-  $('#agregaFicha').onclick=()=>agrega(sku);
-  $('#ficha').classList.add('on');
-  $('#ficha').scrollTop=0;
-  document.body.style.overflow='hidden';
-  $('#cerrarFicha').focus({preventScroll:true});
-}
-const cierraFicha=()=>{if(!$('#ficha').classList.contains('on'))return;$('#ficha').classList.remove('on');document.body.style.overflow='';};
-$('#cerrarFicha').onclick=cierraFicha;
-$('#verKit').onclick=()=>abreFicha('KIT1');
-$('#agregaKit').onclick=()=>agrega('KIT1');
-
-function pinta(){
-  const n=Object.values(bolsa).reduce((a,b)=>a+b,0);
-  $('#nCarrito').textContent=n;
-  $('#nCarritoFicha').textContent=n;
-  let t=0;
-  $('#items').innerHTML=Object.entries(bolsa).map(([sku,q])=>{
-    const p=PROD.find(x=>x.sku===sku); if(!p) return '';
-    t+=p.precio*q;
-    const {tit,sub}=tituloDe(p);
-    return `<div class="li">
-      <span class="mini">${fotoDe(sku)}</span>
-      <span><span class="nom">${esc(tit)}${sub?`<small>${esc(sub)}</small>`:''}</span>
-        <span class="q"><button type="button" data-menos="${esc(sku)}" aria-label="Quitar uno">−</button><span>${q}</span><button type="button" data-mas="${esc(sku)}" aria-label="Agregar uno">+</button></span></span>
-      <span class="der"><span class="imp">${money(p.precio*q)}</span><button class="x" type="button" data-q="${esc(sku)}">Quitar</button></span>
-    </div>`;
-  }).join('')||'<p class="vacio">Tu bolsa está vacía. Si no sabes por dónde empezar, el Kit N°1 es buen lugar.</p>';
-  $('#total').textContent=money(t);
-  document.querySelectorAll('.x').forEach(b=>b.onclick=()=>{delete bolsa[b.dataset.q];pinta();});
-  document.querySelectorAll('[data-mas]').forEach(b=>b.onclick=()=>{bolsa[b.dataset.mas]++;pinta();});
-  document.querySelectorAll('[data-menos]').forEach(b=>b.onclick=()=>{const k=b.dataset.menos;bolsa[k]--;if(bolsa[k]<1)delete bolsa[k];pinta();});
-}
-
-const abre=()=>{$('#panel').classList.add('on');document.body.style.overflow='hidden';};
-const cierra=()=>{$('#panel').classList.remove('on');if(!$('#ficha').classList.contains('on'))document.body.style.overflow='';};
-$('#btnCarrito').onclick=()=>{pinta();abre();};
-$('#btnCarritoFicha').onclick=()=>{pinta();abre();};
-$('#cerrar').onclick=cierra;
-$('#panel').onclick=e=>{if(e.target.id==='panel')cierra()};
-
-// Menú en móvil
-$('#btnMenu').onclick=()=>{const m=$('#menu');const on=m.classList.toggle('on');$('#btnMenu').setAttribute('aria-expanded',on);$('#top').classList.toggle('solida',on||scrollY>40);};
-document.querySelectorAll('#menu a').forEach(a=>a.onclick=()=>{$('#menu').classList.remove('on');$('#btnMenu').setAttribute('aria-expanded','false');});
-
-// Enlaces de WhatsApp fuera de la bolsa (garantía, kit y pie) usan el mismo número.
-$('#waGarantia').href=`https://wa.me/${WA}?text=${encodeURIComponent('Hola nixa, tengo una duda sobre la garantía.')}`;
-$('#waKit').href=`https://wa.me/${WA}?text=${encodeURIComponent('Hola nixa, tengo una duda sobre el Kit N°1.')}`;
-$('#waPie').href=`https://wa.me/${WA}`;
-
-// Barra sólida al bajar; parallax muy leve en la portada y en la franja de textura.
-const barra=$('#top'), heroFondo=$('#heroFondo'), texFondo=$('#texturaFondo'), tex=texFondo.parentElement;
-let tick=false;
-function alScroll(){
-  const y=scrollY;
-  barra.classList.toggle('solida',y>40||$('#menu').classList.contains('on'));
-  $('#btnAyuda').classList.toggle('ver',y>innerHeight*.7);
-  if(!reduce){
-    if(y<innerHeight*1.2) heroFondo.style.transform=`translate3d(0,${y*0.16}px,0)`;
-    const r=tex.getBoundingClientRect();
-    if(r.bottom>0&&r.top<innerHeight){const c=(r.top+r.height/2-innerHeight/2)/innerHeight;texFondo.style.transform=`translate3d(0,${-c*48}px,0)`;}
-  }
-  tick=false;
-}
-addEventListener('scroll',()=>{if(!tick){requestAnimationFrame(alScroll);tick=true;}},{passive:true});
-alScroll();
-observa();
-
-$('#pedir').onclick=async()=>{
-  const nom=$('#nom').value.trim(), tel=$('#tel').value.trim(), dir=$('#dir').value.trim();
-  const items=Object.entries(bolsa);
-  const msg=$('#msgPedido');
-  if(!items.length||!nom||!tel){msg.className='msg err';msg.textContent='Nos falta tu nombre, tu WhatsApp o algo en la bolsa.';return;}
-  msg.className='msg';msg.textContent='Preparando tu pedido…';
-  $('#pedir').disabled=true;
-  let total=0; const lineas=items.map(([sku,q])=>{const p=PROD.find(x=>x.sku===sku);total+=p.precio*q;return `${q} × ${p.nombre} — ${money(p.precio*q)}`;});
-  const {error}=await sb.from('pedidos').insert({canal:'Tienda Nixa',comprador:nom,sku:items.map(i=>i[0]).join('+'),cantidad:items.reduce((a,b)=>a+b[1],0),total,estado:'nuevo',datos:{telefono:tel,direccion:dir,items:Object.fromEntries(items)}});
-  const txt=encodeURIComponent(`Hola Nixa, quiero este pedido:\n\n${lineas.join('\n')}\n\nTotal: ${money(total)}\n\nNombre: ${nom}\nTeléfono: ${tel}\nDirección: ${dir}`);
-  const url=`https://wa.me/${WA}?text=${txt}`;
-  const win=window.open(url,'_blank'); if(!win) location.href=url;
-  $('#pedir').disabled=false;
-  msg.textContent=error?'Se abrió WhatsApp con tu pedido. Si no se abrió, escríbenos directo.':'Listo. Se abrió WhatsApp con tu pedido; ahí confirmamos pago y entrega.';
-};
-
-/* =========================================================
-   ¿TE AYUDO A ELEGIR? · tres preguntas, una recomendación.
-   Sin IA, sin servicios externos: reglas fijas del negocio.
-   ========================================================= */
-const PREG=[
-  {q:'¿Empiezas de cero o ya tienes brochas?',nota:'Con esto sabemos si te conviene el kit o una pieza suelta.',
-   o:[['cero','Empiezo de cero'],['tengo','Ya tengo brochas'],['chico','Quiero algo chico para probar']]},
-  {q:'¿Te maquillas diario o para salir?',nota:'Si es regalo, piensa en quien lo va a usar.',
-   o:[['diario','Diario, o casi'],['salir','Para salir']]},
-  {q:'¿Es para ti o de regalo?',nota:'',
-   o:[['mi','Para mí'],['regalo','De regalo'],['todo','Lo quiero todo']]}
-];
-let resp=[];
-
-// Reglas: regalo o "lo quiero todo" → rutina completa; algo chico → rizador;
-// de cero → Kit N°1; ya tiene y se maquilla diario → esponjas; ya tiene y sale → tapete.
-function recomienda(r){
-  const [inicio,uso,quien]=r;
-  if(quien==='regalo') return {sku:'SIS1',razon:'Para regalar, la rutina completa: no falta nada, del polvo a las pestañas, y sale más barato que las piezas por separado.'};
-  if(quien==='todo') return {sku:'SIS1',razon:'Si lo quieres todo, junto sale más barato. Es lo que regalamos nosotros cuando queremos quedar bien.'};
-  if(inicio==='chico') return {sku:'RIZ1',razon:'Para probar sin gastar mucho, el rizador: abre la mirada sin pellizcar. Si te gusta cómo hacemos las cosas, después vienes por el kit.'};
-  if(inicio==='cero') return {sku:'KIT1',razon:uso==='diario'
-    ?'Empiezas de cero y te maquillas diario: con el Kit N°1 tienes las diez que se usan, de la base a las cejas, y ninguna que sobre.'
-    :'Empiezas de cero: el Kit N°1 trae las diez que se usan, con el número y el oficio en el mango para no adivinar.'};
-  if(uso==='diario') return {sku:'ESP4',razon:'Ya tienes brochas y te maquillas diario: lo que se gasta son las esponjas. Cuatro te duran el año y la base queda sin marcas.'};
-  return {sku:'LAV1',razon:'Ya tienes brochas; lo que las acaba es lavarlas mal. Con el tapete sueltan el producto sin maltratarse y te duran años.'};
-}
-
-function pintaAyuda(){
-  const c=$('#cuerpoAyuda'), i=resp.length;
-  if(i<PREG.length){
-    const q=PREG[i];
-    $('#pasoAyuda').innerHTML=`${brochaMini}Pregunta ${i+1} de ${PREG.length}`;
-    c.innerHTML=`<h3 id="tituloAyuda">${q.q}</h3>${q.nota?`<p class="nota-a">${q.nota}</p>`:''}
-      <div class="opcs">${q.o.map(([v,t])=>`<button class="opc" type="button" data-v="${v}">${t}</button>`).join('')}</div>
-      ${i?'<button class="link" type="button" id="atrasAyuda">Pregunta anterior</button>':''}`;
-    c.querySelectorAll('.opc').forEach(b=>b.onclick=()=>{resp.push(b.dataset.v);pintaAyuda();});
-    const a=$('#atrasAyuda'); if(a) a.onclick=()=>{resp.pop();pintaAyuda();};
-    c.querySelector('.opc').focus({preventScroll:true});
-    return;
-  }
-  const {sku,razon}=recomienda(resp);
-  const p=PROD.find(x=>x.sku===sku);
-  $('#pasoAyuda').innerHTML=`${brochaMini}Nuestra recomendación`;
-  const waTxt=encodeURIComponent(p?`Hola nixa, me recomendaron ${p.nombre} y tengo una duda.`:'Hola nixa, quiero que me ayuden a elegir.');
-  if(!p){
-    c.innerHTML=`<div class="reco"><h3 id="tituloAyuda">Casi.</h3><p class="razon">Todavía no carga la colección, o esa pieza está pausada. Escríbenos y te decimos en el momento.</p>
-      <div class="acciones"><a class="btn ancho" href="https://wa.me/${WA}?text=${waTxt}" target="_blank" rel="noopener">Preguntarnos por WhatsApp</a></div>
-      <button class="link" type="button" id="otraVez">Empezar de nuevo</button></div>`;
-  } else {
-    const {tit,sub}=tituloDe(p);
-    c.innerHTML=`<div class="reco"><p class="eti">Nosotros te diríamos</p><h3 id="tituloAyuda">Empieza por aquí.</h3>
-      <div class="prod"><span class="lamina">${fotoDe(sku)}</span><b>${esc(tit)}${sub?`<small>${esc(sub)}</small>`:''}</b><span class="precio">${money(p.precio)}</span></div>
-      <p class="razon">${esc(razon)}</p>
-      <div class="acciones">
-        <button class="btn ancho" type="button" id="agregaReco">Agregarlo a la bolsa</button>
-        <a class="btn linea ancho" href="https://wa.me/${WA}?text=${waTxt}" target="_blank" rel="noopener">Preguntarnos por WhatsApp</a>
-      </div>
-      <button class="link" type="button" id="otraVez">Volver a empezar</button></div>`;
-    $('#agregaReco').onclick=()=>{cierraAyuda();agrega(sku);};
-  }
-  $('#otraVez').onclick=()=>{resp=[];pintaAyuda();};
-}
-const abreAyuda=()=>{resp=[];pintaAyuda();$('#ayuda').classList.add('on');document.body.style.overflow='hidden';};
-const cierraAyuda=()=>{if(!$('#ayuda').classList.contains('on'))return;$('#ayuda').classList.remove('on');if(!$('#ficha').classList.contains('on'))document.body.style.overflow='';$('#btnAyuda').focus({preventScroll:true});};
-$('#btnAyuda').onclick=abreAyuda;
-$('#btnAyudaTop').onclick=abreAyuda;
-$('#btnAyudaPie').onclick=abreAyuda;
-$('#cerrarAyuda').onclick=cierraAyuda;
-$('#ayuda').onclick=e=>{if(e.target.id==='ayuda')cierraAyuda()};
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){if($('#ayuda').classList.contains('on'))return cierraAyuda();if($('#panel').classList.contains('on'))return cierra();cierraFicha();}});
-
-cargar();
-</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js"></script>
+<script src="js/tienda.js"></script>
 </body>
 </html>
