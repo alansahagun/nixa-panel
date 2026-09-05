@@ -1,8 +1,8 @@
 /* =========================================================
-   nixa BEAUTY · tienda
+   nixa BEAUTY · tienda v3 · "El tocador"
    Un solo archivo de comportamiento. Orden:
    1) config  2) datos  3) utilidades  4) marca  5) catálogo
-   6) ficha   7) bolsa  8) ayudante    9) movimiento
+   6) ficha   7) bolsa  8) ayudante    9) movimiento  10) arranque
    ========================================================= */
 (() => {
 'use strict';
@@ -11,27 +11,26 @@
 const SB_URL = "https://jjtlkneoxmgcyrifckdf.supabase.co";
 const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpqdGxrbmVveG1nY3lyaWZja2RmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgzNjQ0ODcsImV4cCI6MjEwMzk0MDQ4N30.Ty2qZduVwcIfWuVAzb-judCXVIIpyBq2_D3bE2GsY7g";
 
-// ⚠️ PENDIENTE: WhatsApp de prueba. Poner aquí el número real de nixa
-// (52 + 10 dígitos, sin espacios ni +). Es la única línea que hay que cambiar.
+// ⚠️ PENDIENTE: número real de WhatsApp de nixa (52 + 10 dígitos). Hoy es un número de prueba.
 const WA = "523300000000";
 
-const ENVIO_GRATIS = 599;          // umbral de envío gratis en MXN
-const MSI_DESDE    = 300;          // desde cuánto tiene sentido ofrecer meses
+const ENVIO_GRATIS = 599;          // umbral tentativo de envío gratis en MXN
+const MSI_DESDE    = 300;
 
 const IMG = "https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img";
 
 /* ---------- 2. DATOS DE PRESENTACIÓN ---------- */
-// Dos fotos por pieza: la segunda se ve al pasar el cursor.
+// Dos fotos por pieza: la primera en el escenario/tarjeta, la segunda en la ficha.
 const FOTOS = {
-  KIT1:{a:`${IMG}/brochas-marmol-blanco.jpg`, b:`${IMG}/kit-rollo.jpg`,        pos:"50% 50%", alt:"Brochas del Kit N°1 sobre mármol blanco"},
-  ESP4:{a:`${IMG}/esponja-rosa.jpg`,          b:`${IMG}/aplicando-esponja.jpg`,pos:"50% 60%", alt:"Esponja de maquillaje sobre un pedestal rosa"},
-  LAV1:{a:`${IMG}/brocha-sola.jpg`,           b:`${IMG}/brochas-calidas.jpg`,  pos:"50% 40%", alt:"Brocha limpia, lista para lavarse"},
-  RIZ1:{a:`${IMG}/ojos-cerrados.jpg`,         b:`${IMG}/rostro-beige.jpg`,     pos:"50% 35%", alt:"Pestañas y párpado, ojos cerrados"},
-  SIS1:{a:`${IMG}/abanico-brochas.jpg`,       b:`${IMG}/hero-brochas-marmol.jpg`,pos:"40% 50%",alt:"Abanico de brochas de maquillaje"}
+  KIT1:{a:`${IMG}/kit-brochas.jpg`,      b:`${IMG}/kit-abanico.jpg`,       pos:"50% 42%", alt:"Las brochas del Kit N°1 en su estuche"},
+  SIS1:{a:`${IMG}/sistema-abanico.jpg`,  b:`${IMG}/sistema-flatlay.jpg`,   pos:"50% 50%", alt:"Brochas y abanico del Sistema completo"},
+  ESP4:{a:`${IMG}/esponjas-beige.jpg`,   b:`${IMG}/esponja-terracota.jpg`, pos:"50% 55%", alt:"Esponjas de maquillaje sobre fondo beige"},
+  LAV1:{a:`${IMG}/brocha-polvo.jpg`,     b:`${IMG}/brocha-pote.jpg`,       pos:"50% 50%", alt:"Una brocha limpia, lista para lavarse"},
+  RIZ1:{a:`${IMG}/rizador.jpg`,          b:`${IMG}/swatches-terracota.jpg`,pos:"50% 60%", alt:"Rizador de pestañas sobre una superficie que refleja"}
 };
 const FOTO_FICHA = {
-  KIT1:{src:`${IMG}/hero-brochas-marmol.jpg`, pos:"62% 42%"},
-  SIS1:{src:`${IMG}/kit-rollo.jpg`,           pos:"50% 50%"}
+  KIT1:{src:`${IMG}/kit-abanico.jpg`,   pos:"50% 50%"},
+  SIS1:{src:`${IMG}/sistema-flatlay.jpg`,pos:"50% 45%"}
 };
 const ORDEN = ["KIT1","SIS1","ESP4","LAV1","RIZ1"];
 const NUM   = {KIT1:"01",SIS1:"02",ESP4:"03",LAV1:"04",RIZ1:"05"};
@@ -59,7 +58,20 @@ const COPY = {
     cuidado:"La almohadilla se cambia cuando se marca. Los repuestos vienen en la caja."}
 };
 const PROMESA = "Antes de enviar un set, probamos cada pieza con las manos. Si en sus primeros noventa días algo falla, nos escribes por WhatsApp con una foto y te mandamos el reemplazo. Sin ticket, sin formulario.";
-const DIEZ = [["01","Polvo","Rostro"],["02","Base","Rostro"],["03","Rubor","Mejillas"],["04","Difuminar","Párpado"],["05","Contorno","Pómulo"],["06","Sombra","Párpado"],["07","Cuenca","Ojo"],["08","Corrector","Ojeras"],["09","Delinear","Pestañas"],["10","Cejas y pestañas","Cejas"]];
+// [número, nombre, zona, para qué sirve]
+const DIEZ = [
+  ["01","Polvo","Rostro","La grande y esponjosa. Fija el maquillaje con un velo de polvo, sin cargar."],
+  ["02","Base","Rostro","Plana y densa. Difumina la base en círculos hasta que no se note dónde empieza."],
+  ["03","Rubor","Mejillas","Redonda y suave. Toma poco producto y lo lleva de la mejilla hacia la sien."],
+  ["04","Difuminar","Párpado","Pequeña y mullida. Borra los bordes de la sombra para que todo se vea como uno."],
+  ["05","Contorno","Pómulo","Angulada. Marca debajo del pómulo y difumina hacia arriba."],
+  ["06","Sombra","Párpado","La pala. Deposita el color en el párpado móvil, con presión ligera."],
+  ["07","Cuenca","Ojo","Lápiz cónico. Define la cuenca del ojo con un tono más oscuro."],
+  ["08","Corrector","Ojeras","Chica y plana. Coloca corrector en ojeras, nariz y comisuras."],
+  ["09","Delinear","Pestañas","Fina y angulada. Delinea pegado a las pestañas, con sombra o gel."],
+  ["10","Cejas y pestañas","Cejas","El cepillo en espiral. Peina cejas y separa pestañas después del rímel."]
+];
+const CINTA = ["Cada brocha sabe su lugar","Garantía de 90 días, sin ticket","Armado a mano en Guadalajara","Envío el mismo día en la ciudad","Te contesta una persona"];
 
 /* ---------- 3. UTILIDADES ---------- */
 const $  = s => document.querySelector(s);
@@ -80,89 +92,142 @@ let bolsa = guarda.leer();
 let sb = null;
 try { sb = window.supabase?.createClient(SB_URL, SB_KEY); } catch {}
 
-/* ---------- 4. MARCA (sprite svg) ---------- */
-fetch("img/marca.svg")
-  .then(r => r.ok ? r.text() : Promise.reject())
-  .then(t => { $("#sprite").innerHTML = t; $("#sprite").hidden = false;
-               $("#sprite").style.cssText = "position:absolute;width:0;height:0;overflow:hidden"; })
-  .catch(() => {});
+/* ---------- 4. MARCA (sprites svg) ---------- */
+Promise.all([`${IMG}/marca.svg`,`${IMG}/brochas.svg`].map(u => fetch(u).then(r => r.ok ? r.text() : "").catch(() => "")))
+  .then(ts => { const s = $("#sprite"); s.innerHTML = ts.join(""); s.hidden = false;
+                s.style.cssText = "position:absolute;width:0;height:0;overflow:hidden"; });
 
-/* ---------- 5. CATÁLOGO ---------- */
+// la cinta: se repite dos veces para que el bucle sea continuo
+$("#cinta").innerHTML = [...CINTA, ...CINTA].map(t =>
+  `<span>${esc(t)}<svg viewBox="12 27 76 66" aria-hidden="true"><use href="#brocha-marca"/></svg></span>`).join("");
+
+/* ---------- 5. CATÁLOGO: índice + escenario ---------- */
 function esqueleto(n = 5){
   return Array.from({length:n}, () =>
-    `<div class="esq" aria-hidden="true"><div class="esq__lam"></div><div class="esq__l"></div><div class="esq__l"></div></div>`
+    `<div class="esq" aria-hidden="true"><div class="esq__l" style="height:44px;width:60%"></div><div class="esq__l"></div></div>`
   ).join("");
 }
-
 function ahorroSistema(){
   const sis = PROD.find(p => p.sku === "SIS1");
   if (!sis) return "";
   const sueltas = PROD.filter(p => p.sku !== "SIS1").reduce((a,p) => a + Number(p.precio), 0);
-  return sueltas > sis.precio
-    ? `Sale ${money(sueltas - sis.precio)} menos que comprar las piezas por separado.`
-    : "";
+  return sueltas > sis.precio ? `Sale ${money(sueltas - sis.precio)} menos que comprar las piezas por separado.` : "";
 }
 const titulo = p => { const [tit, ...r] = p.nombre.split(" · "); return {tit, sub:r.join(" · ")}; };
 const descDe = p => (COPY[p.sku]?.desc || "").replace("{AHORRO}", ahorroSistema()).trim();
 
-function tarjeta(p, i){
-  const c = COPY[p.sku] || {};
-  const f = FOTOS[p.sku] || FOTOS.KIT1;
-  const {tit, sub} = titulo(p);
-  return `<article class="tar rev" id="tar-${esc(p.sku)}">
-  <button class="tar__lam" type="button" data-ficha="${esc(p.sku)}" aria-label="Ver ${esc(tit)}">
-    ${c.sello ? `<span class="sello${c.selloOro?"":" sello--claro"}">${esc(c.sello)}</span>` : ""}
-    <img class="a" src="${esc(f.a)}" alt="${esc(f.alt||tit)}" loading="lazy" style="object-position:${esc(f.pos)}">
-    <img class="b" src="${esc(f.b)}" alt="" loading="lazy" aria-hidden="true">
-  </button>
-  <div class="tar__cuerpo">
-    <span class="ced tar__no num">N° ${NUM[p.sku] || String(i+1).padStart(2,"0")}</span>
-    <h3><button type="button" data-ficha="${esc(p.sku)}">${esc(tit)}</button></h3>
-    ${sub ? `<p class="tar__sub">${esc(sub)}</p>` : ""}
-    <div class="tar__pie">
-      <span class="precio">${money(p.precio)} <span>MXN</span></span>
-      <button class="mas" type="button" data-sku="${esc(p.sku)}" aria-label="Agregar ${esc(tit)} a la bolsa">
-        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5v13M1.5 8h13"/></svg>
-      </button>
+function fila(p){
+  const c = COPY[p.sku] || {}; const {tit, sub} = titulo(p);
+  return `<article class="fila" data-sku="${esc(p.sku)}" tabindex="0" aria-label="${esc(tit)}">
+    <span class="fila__no num">N° ${NUM[p.sku]}</span>
+    <div>
+      ${c.sello ? `<span class="sello${c.selloOro?"":" sello--claro"}">${esc(c.sello)}</span>` : ""}
+      <h3><button type="button" data-ficha="${esc(p.sku)}">${esc(tit)}</button></h3>
+      ${sub ? `<p class="sub">${esc(sub)}</p>` : ""}
     </div>
-  </div>
-</article>`;
+    <span class="precio">${money(p.precio)}<span>MXN</span></span>
+    <button class="mas" type="button" data-sku="${esc(p.sku)}" aria-label="Agregar ${esc(tit)} a la bolsa">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5v13M1.5 8h13"/></svg></button>
+  </article>`;
+}
+function tarj(p){
+  const c = COPY[p.sku] || {}; const f = FOTOS[p.sku] || FOTOS.KIT1; const {tit, sub} = titulo(p);
+  return `<article class="tarj" id="tar-${esc(p.sku)}">
+    <button class="tarj__marco" type="button" data-ficha="${esc(p.sku)}" aria-label="Ver ${esc(tit)}">
+      <img src="${esc(f.a)}" alt="${esc(f.alt||tit)}" loading="lazy" style="object-position:${esc(f.pos)}">
+      ${c.sello ? `<span class="sello">${esc(c.sello)}</span>` : ""}
+    </button>
+    <span class="ced num">N° ${NUM[p.sku]}</span>
+    <h3><button type="button" data-ficha="${esc(p.sku)}">${esc(tit)}</button></h3>
+    ${sub ? `<p class="sub">${esc(sub)}</p>` : ""}
+    <div class="tarj__pie">
+      <span class="precio">${money(p.precio)}<span>MXN</span></span>
+      <button class="mas" type="button" data-sku="${esc(p.sku)}" aria-label="Agregar ${esc(tit)} a la bolsa">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5v13M1.5 8h13"/></svg></button>
+    </div>
+  </article>`;
+}
+
+function activa(sku){
+  $$(".fila").forEach(f => f.classList.toggle("activa", f.dataset.sku === sku));
+  $$("#escenario img").forEach(i => i.classList.toggle("activa", i.dataset.sku === sku));
+  $("#escenarioNum").textContent = NUM[sku] || "01";
+  const p = PROD.find(x => x.sku === sku);
+  if (p) $("#escenarioCed").textContent = `Fig. ${NUM[sku]} · ${titulo(p).tit}`;
 }
 
 async function cargar(){
-  const cont = $("#prods");
-  cont.innerHTML = esqueleto();
+  const lista = $("#prods");
+  lista.innerHTML = esqueleto();
   let data = null, error = null;
   try {
     if (!sb) throw new Error("sin cliente");
     ({data, error} = await sb.from("productos").select("*").eq("activo", true).order("precio",{ascending:false}));
   } catch (e) { error = e; }
-
-  cont.setAttribute("aria-busy","false");
+  lista.setAttribute("aria-busy","false");
 
   if (error || !data || !data.length){
-    cont.innerHTML = `<p class="vacio">No pudimos cargar la colección en este momento.
+    lista.innerHTML = `<p class="vacio">No pudimos cargar la colección en este momento.
       <br><a class="link" style="margin-top:14px" href="https://wa.me/${WA}" target="_blank" rel="noopener">Escríbenos por WhatsApp</a></p>`;
     return;
   }
-
   PROD = data;
   const pos = s => { const i = ORDEN.indexOf(s); return i < 0 ? 99 : i; };
-  cont.innerHTML = [...PROD].sort((a,b) => pos(a.sku) - pos(b.sku)).map(tarjeta).join("");
+  const ord = [...PROD].sort((a,b) => pos(a.sku) - pos(b.sku));
+
+  lista.innerHTML = ord.map(fila).join("");
+  $("#tarjs").innerHTML = ord.map(tarj).join("");
+  $("#escenario").innerHTML = ord.map(p => {
+    const f = FOTOS[p.sku] || FOTOS.KIT1;
+    return `<img src="${esc(f.a)}" alt="" data-sku="${esc(p.sku)}" loading="lazy" style="object-position:${esc(f.pos)}">`;
+  }).join("");
 
   $$(".mas[data-sku]").forEach(b => b.onclick = () => agrega(b.dataset.sku, b));
   $$("[data-ficha]").forEach(b => b.onclick = () => abreFicha(b.dataset.ficha));
+  $$(".fila").forEach(f => {
+    const on = () => activa(f.dataset.sku);
+    f.addEventListener("mouseenter", on);
+    f.addEventListener("focusin", on);
+    f.addEventListener("click", e => { if (!e.target.closest("button")) abreFicha(f.dataset.sku); });
+    f.addEventListener("keydown", e => { if (e.key === "Enter" && !e.target.closest("button")) abreFicha(f.dataset.sku); });
+  });
+  activa(ord[0].sku);
 
   const kit = PROD.find(p => p.sku === "KIT1");
   if (kit){
     $("#precioKit").textContent = money(kit.precio);
-    const ph = $("#precioHero");
-    if (ph) ph.innerHTML = `${money(kit.precio)} <span>MXN</span>`;
+    $("#precioHero").textContent = money(kit.precio);
+    $("#precioEtiqueta").innerHTML = `${money(kit.precio)}<span>MXN</span>`;
+    const pf = $("#precioFinal"); if (pf) pf.innerHTML = `${money(kit.precio)}<span>MXN</span>`;
   }
-  revela(cont);
+  revela(lista);
 }
 
-/* ---------- 6. FICHA ---------- */
+/* los diez pasos del ritual */
+function pintaRitual(){
+  const track = $("#ritualTrack");
+  const pasos = DIEZ.map(([n,b,z,q]) => `<article class="paso">
+      <span class="paso__no num">${n}</span>
+      <svg class="paso__brocha" viewBox="0 0 80 240" aria-hidden="true"><use href="#b${n}"/></svg>
+      <div class="paso__txt">
+        <span class="paso__zona">${esc(z)}</span>
+        <h3>${esc(b)}</h3>
+        <p>${esc(q)}</p>
+      </div>
+    </article>`).join("");
+  const fin = `<article class="paso paso--final">
+      <span class="paso__no num">10/10</span>
+      <div></div>
+      <div class="paso__txt">
+        <h3>Las diez, en el Kit N°1.</h3>
+        <p>Con estuche, dos esponjas y el mapa del rostro.</p>
+        <span class="precio" id="precioFinal">$298<span>MXN</span></span>
+        <div style="margin-top:14px"><button class="btn btn--claro" type="button" data-agrega="KIT1">Agregar a la bolsa</button></div>
+      </div>
+    </article>`;
+  track.insertAdjacentHTML("beforeend", pasos + fin);
+  $$("[data-agrega]").forEach(b => b.onclick = () => agrega(b.dataset.agrega, b));
+}
 function abreFicha(sku){
   const p = PROD.find(x => x.sku === sku); if (!p) return;
   const c = COPY[sku] || {incluye:[], cuidado:""};
@@ -202,9 +267,9 @@ function abreFicha(sku){
     <div><figure class="foto"><img src="${esc((FOTOS[sku]||FOTOS.KIT1).b)}" alt="" loading="lazy"></figure>
       <h4>Qué incluye</h4>
       <ul>${(c.incluye||[]).map(i => `<li>${palomita}${esc(i)}</li>`).join("")}</ul></div>
-    <div><figure class="foto"><img src="${IMG}/brocha-sola.jpg" alt="" loading="lazy" style="object-position:50% 30%"></figure>
+    <div><figure class="foto"><img src="${IMG}/brocha-polvo.jpg" alt="" loading="lazy" style="object-position:50% 50%"></figure>
       <h4>Cómo se cuida</h4><p>${esc(c.cuidado||"")}</p></div>
-    <div><figure class="foto"><img src="${IMG}/brochas-calidas.jpg" alt="" loading="lazy" style="object-position:50% 40%"></figure>
+    <div><figure class="foto"><img src="${IMG}/manos-brocha.jpg" alt="" loading="lazy" style="object-position:50% 40%"></figure>
       <h4>La promesa nixa</h4><p>${esc(PROMESA)}</p></div>
     ${(sku==="KIT1"||sku==="SIS1") ? `<div class="diez"><h4>Las diez brochas</h4><ol>${
       DIEZ.map(([n,b,z]) => `<li><span class="n">${n}</span><b>${esc(b)}</b><small>${esc(z)}</small></li>`).join("")
@@ -217,7 +282,6 @@ function abreFicha(sku){
   $("#cerrarModal").focus({preventScroll:true});
 }
 const cierraFicha = () => cierraCapa($("#modal"));
-
 /* ---------- 7. BOLSA ---------- */
 function agrega(sku, boton){
   bolsa[sku] = (bolsa[sku] || 0) + 1;
@@ -290,11 +354,12 @@ function abreCapa(el, clase = "abierto"){
   el.classList.add(clase);
   el.setAttribute("aria-hidden","false");
   document.body.style.overflow = "hidden";
+  if (window.__lenis) window.__lenis.stop();
 }
 function cierraCapa(el, clase = "abierto"){
   el.classList.remove(clase);
   el.setAttribute("aria-hidden","true");
-  if (!$(".bolsa.abierta") && !$(".modal.abierto") && !$(".hoja-tel.abierta")) document.body.style.overflow = "";
+  if (!$(".bolsa.abierta") && !$(".modal.abierto") && !$(".hoja-tel.abierta")){ document.body.style.overflow = ""; if (window.__lenis) window.__lenis.start(); }
   if (devuelveFoco) { try { devuelveFoco.focus({preventScroll:true}); } catch {} }
 }
 function abreBolsa(){
@@ -367,7 +432,6 @@ async function enviaPedido(){
   msj.className = "msj";
   msj.textContent = "Listo. Se abrió WhatsApp con tu pedido; ahí confirmamos pago y entrega.";
 }
-
 /* ---------- 8. AYUDANTE ---------- */
 const PREG = [
   {q:"¿Empiezas de cero o ya tienes brochas?", nota:"Con esto sabemos si te conviene el kit o una pieza suelta.",
@@ -438,67 +502,77 @@ const abreAyuda  = () => { resp = []; pintaAyuda(); abreCapa($("#ayuda"), "abier
 const cierraAyuda = () => cierraCapa($("#ayuda"), "abierta");
 
 /* ---------- 9. MOVIMIENTO ---------- */
-// Respaldo sin GSAP (o con movimiento reducido): IntersectionObserver.
+// Regla: todo entra una vez y se queda. Nada se mueve mientras lees.
 let io = null;
-if (!sinMovimiento && "IntersectionObserver" in window){
-  io = new IntersectionObserver(es => es.forEach(e => {
-    if (e.isIntersecting){ e.target.classList.add("visto"); io.unobserve(e.target); }
-  }), {rootMargin:"0px 0px -8% 0px", threshold:.06});
-}
 function revela(raiz){
-  (raiz || document).querySelectorAll(".rev:not(.visto)").forEach(el => {
-    if (io) io.observe(el); else el.classList.add("visto");
-  });
+  const els = (raiz || document).querySelectorAll(".rev:not(.visto)");
+  if (sinMovimiento){ els.forEach(e => e.classList.add("visto")); return; }
+  io = io || new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting){ e.target.classList.add("visto"); io.unobserve(e.target); }
+  }), {rootMargin:"0px 0px -10% 0px", threshold:.08});
+  els.forEach(el => io.observe(el));
 }
 if (sinMovimiento) document.documentElement.classList.add("sin-anim");
 
 function animaciones(){
   if (sinMovimiento || !window.gsap) return;
   gsap.registerPlugin(ScrollTrigger);
-  const conSplit = typeof SplitText !== "undefined";
 
-  // el titular se revela por líneas: es el gesto que más "cuesta" percibir
-  if (conSplit){
-    document.fonts.ready.then(() => {
-      try {
-        const s = new SplitText("#heroTitulo", {type:"lines", linesClass:"linea-int"});
-        s.lines.forEach(l => {
-          const m = document.createElement("span");
-          m.className = "linea-mask"; l.parentNode.insertBefore(m, l); m.appendChild(l);
-        });
-        gsap.from(".linea-int", {yPercent:112, duration:1, ease:"power3.out", stagger:.09, delay:.1});
-      } catch {}
-    });
+  // scroll suave (Lenis), atado al reloj de GSAP
+  if (window.Lenis){
+    const lenis = new Lenis({lerp:.1, wheelMultiplier:1, smoothWheel:true});
+    window.__lenis = lenis;
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
+    // anclas: que el scroll suave respete los enlaces internos
+    $$('a[href^="#"]').forEach(a => a.addEventListener("click", e => {
+      const id = a.getAttribute("href"); if (id.length < 2) return;
+      const el = document.querySelector(id); if (!el) return;
+      e.preventDefault(); lenis.scrollTo(el, {offset:-90, duration:1.2});
+    }));
   }
 
-  // el halo se aleja despacio: es el único movimiento de color de la página
-  gsap.to(".hero__halo", {yPercent:-14, scale:1.08, ease:"none",
-    scrollTrigger:{trigger:".hero", start:"top top", end:"bottom top", scrub:.8}});
-  gsap.to("#heroFoto", {yPercent:6, ease:"none",
-    scrollTrigger:{trigger:".hero", start:"top top", end:"bottom top", scrub:.6}});
+  // 1) el titular se revela por líneas, la foto del arco se asienta
+  const conSplit = typeof SplitText !== "undefined";
+  document.fonts.ready.then(() => {
+    try {
+      if (conSplit){
+        const s = new SplitText("#heroTitulo", {type:"lines", linesClass:"linea-int"});
+        s.lines.forEach(l => { const m = document.createElement("span"); m.className = "linea-mask"; l.parentNode.insertBefore(m, l); m.appendChild(l); });
+        gsap.from(".linea-int", {yPercent:110, duration:1.1, ease:"power3.out", stagger:.1, delay:.15});
+      }
+    } catch {}
+    $("#heroMarco").classList.add("asentada");
+  });
 
-  // las cifras cuentan hacia arriba cuando entran
-  gsap.utils.toArray(".cifras__n").forEach(el => {
-    const meta = parseInt(el.firstChild.textContent, 10);
-    if (!meta) return;
-    const obj = {v:0};
-    gsap.to(obj, {v:meta, duration:1.1, ease:"power2.out",
-      scrollTrigger:{trigger:el, start:"top 86%", once:true},
-      onUpdate(){ el.firstChild.textContent = Math.round(obj.v); }});
+  // 2) el halo se aleja despacio al bajar: el único movimiento de color
+  gsap.to(".hero__halo", {yPercent:-18, ease:"none", scrollTrigger:{trigger:".hero", start:"top top", end:"bottom top", scrub:.8}});
+  gsap.to("#heroFoto", {yPercent:7, ease:"none", scrollTrigger:{trigger:".hero", start:"top top", end:"bottom top", scrub:.6}});
+
+  // 3) el ritual corre horizontal mientras bajas (solo en pantallas anchas)
+  ScrollTrigger.matchMedia({
+    "(min-width: 1000px)": () => {
+      const track = $("#ritualTrack"), pin = $("#ritualPin");
+      const dist = () => track.scrollWidth - innerWidth;
+      gsap.to(track, {x:() => -dist(), ease:"none",
+        scrollTrigger:{trigger:pin, start:"top top", end:() => "+=" + dist(), pin:true, scrub:.9, invalidateOnRefresh:true, anticipatePin:1}});
+    }
+  });
+
+  // 4) las cifras cuentan hacia arriba cuando entran
+  $$("[data-cuenta]").forEach(el => {
+    const meta = parseInt(el.dataset.cuenta, 10), obj = {v:0};
+    gsap.to(obj, {v:meta, duration:1.4, ease:"power2.out", scrollTrigger:{trigger:el, start:"top 85%", once:true},
+      onUpdate(){ el.textContent = Math.round(obj.v); }});
   });
 }
 
 /* ---------- 10. ARRANQUE ---------- */
-$("#btnMenu").onclick = () => {
-  const m = $("#menu"), abierto = m.classList.toggle("abierto");
-  $("#btnMenu").setAttribute("aria-expanded", abierto);
-  document.body.style.overflow = abierto ? "hidden" : "";
-};
-$$("#menu a").forEach(a => a.onclick = () => {
-  $("#menu").classList.remove("abierto");
-  $("#btnMenu").setAttribute("aria-expanded","false");
-  document.body.style.overflow = "";
-});
+const abreMenu = () => { $("#menu").classList.add("abierto"); $("#btnMenu").setAttribute("aria-expanded","true"); document.body.style.overflow = "hidden"; };
+const cierraMenu = () => { $("#menu").classList.remove("abierto"); $("#btnMenu").setAttribute("aria-expanded","false"); document.body.style.overflow = ""; };
+$("#btnMenu").onclick = abreMenu;
+$$("[data-cierra-menu], #menu a").forEach(a => a.addEventListener("click", cierraMenu));
 
 $("#btnBolsa").onclick = abreBolsa;
 $("#cerrarBolsa").onclick = cierraBolsa;
@@ -507,13 +581,14 @@ $("#pedir").onclick = enviaPedido;
 $("#cerrarModal").onclick = cierraFicha;
 $("#verKit").onclick = () => abreFicha("KIT1");
 $("#agregaKit").onclick = () => agrega("KIT1", $("#agregaKit"));
+$("#agregaHero").onclick = () => agrega("KIT1", $("#agregaHero"));
 $("#btnAyuda").onclick = abreAyuda;
 $("#btnAyudaTop").onclick = abreAyuda;
 $("#btnAyudaPie").onclick = abreAyuda;
+$$("[data-abre-ayuda]").forEach(b => b.addEventListener("click", () => { cierraMenu(); abreAyuda(); }));
 $("#cerrarAyuda").onclick = cierraAyuda;
 $("#ayuda").onclick = e => { if (e.target.id === "ayuda") cierraAyuda(); };
 
-// limpia el error del campo en cuanto la persona lo corrige
 ["nom","tel","dir"].forEach(id => {
   const el = $("#"+id);
   el.addEventListener("input", () => el.closest(".campo").classList.remove("mal"));
@@ -524,25 +599,32 @@ document.addEventListener("keydown", e => {
   if ($("#ayuda").classList.contains("abierta")) return cierraAyuda();
   if ($("#bolsa").classList.contains("abierta")) return cierraBolsa();
   if ($("#modal").classList.contains("abierto")) return cierraFicha();
-  if ($("#menu").classList.contains("abierta")) $("#btnMenu").click();
+  if ($("#menu").classList.contains("abierto")) cierraMenu();
 });
 
 // WhatsApp fuera de la bolsa
 const waLink = (t) => `https://wa.me/${WA}?text=${encodeURIComponent(t)}`;
 $("#waGarantia").href = waLink("Hola nixa, tengo una duda sobre la garantía.");
 $("#waKit").href      = waLink("Hola nixa, tengo una duda sobre el Kit N°1.");
-$("#waPie").href      = `https://wa.me/${WA}`;
+$("#waFaq").href      = waLink("Hola nixa, tengo una pregunta antes de comprar.");
+["#waPie","#waMenu","#waBarra"].forEach(s => { const a = $(s); if (a) a.href = `https://wa.me/${WA}`; });
 
-// cabecera pegada + botón flotante
+// cabecera pegada, botón flotante y barra móvil
 let tic = false;
 function alScroll(){
   const y = scrollY;
   $("#top").classList.toggle("pegada", y > 24);
   $("#btnAyuda").classList.toggle("visible", y > innerHeight * .8);
+  $("#barraMov").classList.toggle("visible", y > innerHeight * .9);
+  // la cabecera se oscurece sobre las secciones de noche
+  const h = $("#top").offsetHeight + 38;
+  const oscuro = $$(".ritual,.noche,.pie").some(s => { const r = s.getBoundingClientRect(); return r.top <= h && r.bottom >= h; });
+  $("#top").classList.toggle("noche", oscuro);
   tic = false;
 }
 addEventListener("scroll", () => { if (!tic){ requestAnimationFrame(alScroll); tic = true; } }, {passive:true});
 
+pintaRitual();
 alScroll();
 revela();
 animaciones();
