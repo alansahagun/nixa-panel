@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#F4EFE7">
+<meta name="theme-color" content="#F6F1EC">
 <meta name="description" content="nixa BEAUTY. Brochas de maquillaje numeradas del 01 al 10, esponjas, tapete lavador y rizador. Las armamos y las probamos con las manos en Guadalajara. Garantía de 90 días, sin ticket.">
 <title>nixa BEAUTY — Brochas de maquillaje numeradas, hechas para durar</title>
 <link rel="canonical" href="https://nixa.mx/">
@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://jjtlkneoxmgcyrifckdf.supabase.co" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Instrument+Sans:wght@400;500;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/tienda.css">
 </head>
 <body>
@@ -47,7 +47,7 @@
       </nav>
     </div>
     <a class="marca-top" href="#portada" aria-label="nixa BEAUTY, inicio">
-      <svg viewBox="0 24 176.9 113.74" role="img" aria-label="nixa BEAUTY"><use href="#lockup"/></svg>
+      <svg viewBox="0 0 1380 615" role="img" aria-label="nixa BEAUTY"><use href="#nixa"/></svg>
     </a>
     <div class="top__der">
       <button class="ayudar" id="btnAyudaTop" type="button">¿Cuál es para mí?</button>
@@ -56,6 +56,7 @@
       </button>
     </div>
   </div>
+  <i class="top__progreso" id="progreso" aria-hidden="true"></i>
 </header>
 
 <nav class="menu" id="menu" aria-label="Menú">
@@ -96,10 +97,17 @@
     </div>
 
     <div class="hero__arco">
-      <figure class="hero__marco" id="heroMarco">
-        <img id="heroFoto" src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/hero-tocador.jpg" alt="Una brocha de polvo y una esponja de maquillaje sobre el tocador" fetchpriority="high">
-        <span class="hero__sello">N°01 · Kit de diez</span>
-      </figure>
+      <div class="marco-ext">
+        <i class="reg reg--tl"></i><i class="reg reg--tr"></i><i class="reg reg--bl"></i><i class="reg reg--br"></i>
+        <figure class="marco hero__marco" id="heroMarco">
+          <img id="heroFoto" src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/hero-tocador.jpg" alt="Una brocha de polvo y una esponja de maquillaje sobre el tocador" fetchpriority="high">
+        </figure>
+        <div class="sello-giro" aria-hidden="true">
+          <svg class="aro" viewBox="0 0 100 100"><defs><path id="aroPath" d="M50 50 m-38 0 a38 38 0 1 1 76 0 a38 38 0 1 1 -76 0"/></defs>
+            <text textLength="237" lengthAdjust="spacing"><textPath href="#aroPath">Enhance your ritual · nixa beauty · </textPath></text></svg>
+          <svg class="centro" viewBox="0 0 100 100"><use href="#abanico"/></svg>
+        </div>
+      </div>
       <aside class="etiqueta rev rev--3" aria-label="Producto destacado">
         <span class="ced"><span>Kit N°1</span><span class="num">01 — 10</span></span>
         <h3>Diez brochas, estuche y dos esponjas.</h3>
@@ -132,17 +140,21 @@
 
     <div class="indice__cuerpo">
       <div class="escenario rev" aria-hidden="true">
-        <div class="escenario__marco" id="escenario"></div>
+        <div class="marco-ext">
+          <i class="reg reg--tl"></i><i class="reg reg--tr"></i><i class="reg reg--bl"></i><i class="reg reg--br"></i>
+          <div class="marco escenario__marco" id="escenario"></div>
+        </div>
         <span class="escenario__num num" id="escenarioNum">01</span>
-        <span class="ced escenario__ced" id="escenarioCed">Fig. 01</span>
+        <span class="fig escenario__ced" id="escenarioCed">Fig. 01</span>
       </div>
       <div>
         <div class="lista" id="prods" aria-busy="true" aria-live="polite"></div>
         <div class="tarjs" id="tarjs"></div>
         <p class="desliza"><svg viewBox="0 0 22 8" aria-hidden="true"><path d="M0 4h20M17 1l3 3-3 3"/></svg>Desliza para ver las cinco</p>
         <div class="indice__nota rev">
-          <span class="ced">Cómo se compra</span>
-          <p>Aquí no se cobra nada. Armas tu bolsa, se abre WhatsApp con el pedido, y ahí confirmamos pago y entrega contigo. Transferencia, efectivo, OXXO o Mercado Pago.</p>
+          <svg viewBox="0 0 100 100" aria-hidden="true"><use href="#abanico"/></svg>
+          <div><span class="ced">Cómo se compra</span>
+          <p>Aquí no se cobra nada. Armas tu bolsa, se abre WhatsApp con el pedido, y ahí confirmamos pago y entrega contigo. Transferencia, efectivo, OXXO o Mercado Pago.</p></div>
         </div>
       </div>
     </div>
@@ -157,10 +169,12 @@
         <div>
           <span class="ced ced--linea">El ritual</span>
           <h2 id="ritualTitulo" style="margin-top:18px">Del <em>01</em> al <em>10</em>, en orden.</h2>
+          <p class="ritual__lema">Enhance your ritual.</p>
         </div>
         <div>
           <p>Cada brocha trae su número y su oficio en el mango. La piel primero, la mirada después. Nunca dudas cuál va, y ninguna se queda en el cajón.</p>
           <p class="desliza" style="margin-top:22px"><svg viewBox="0 0 22 8" aria-hidden="true"><path d="M0 4h20M17 1l3 3-3 3"/></svg><span class="solo-esc">Sigue bajando</span><span class="solo-mov">Desliza</span></p>
+          <div class="ritual__barra solo-esc" aria-hidden="true"><span>01</span><i id="ritualBarra"></i><span>10</span></div>
         </div>
       </div>
       <!-- los diez pasos los pinta el JS -->
@@ -190,16 +204,17 @@
       <p class="kit__nota rev rev--4">Envío gratis desde $599. En Guadalajara llega el mismo día; al resto del país, en 2 a 4 días.</p>
     </div>
     <div class="kit__fotos rev">
-      <figure class="grande"><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/kit-abanico.jpg" alt="Las brochas del Kit N°1 abiertas en abanico junto a su estuche" loading="lazy" style="object-position:50% 50%"></figure>
+      <div class="marco-ext grande"><i class="reg reg--tl"></i><i class="reg reg--tr"></i>
+        <figure class="marco" style="aspect-ratio:4/5"><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/kit-abanico.jpg" alt="Las brochas del Kit N°1 abiertas en abanico junto a su estuche" loading="lazy" style="object-position:50% 50%"></figure></div>
       <figure class="chica"><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/brocha-pote.jpg" alt="Brocha de rubor sobre el polvo" loading="lazy"></figure>
-      <figcaption>Fig. 01 · Kit N°1</figcaption>
+      <figcaption class="fig">Fig. 01 · Kit N°1</figcaption>
     </div>
   </div>
 </section>
 
 <!-- ============ GARANTÍA ============ -->
 <section class="noche" id="garantia">
-  <svg class="noche__marca" viewBox="12 27 76 66" aria-hidden="true"><use href="#brocha-marca"/></svg>
+  <svg class="noche__marca" viewBox="0 0 100 100" aria-hidden="true"><use href="#abanico"/></svg>
   <div class="w noche__grid">
     <div class="cifra rev" aria-label="Noventa días de garantía">
       <span class="n num" data-cuenta="90">0</span><span class="u">días</span>
@@ -247,7 +262,7 @@
 <!-- ============ NOSOTROS ============ -->
 <section class="somos" id="somos">
   <div class="w somos__grid">
-    <figure class="somos__foto rev"><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/manos-brocha.jpg" alt="Unas manos sostienen una brocha y un pote de polvo" loading="lazy" style="object-position:50% 40%"></figure>
+    <figure class="marco somos__foto rev"><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/manos-brocha.jpg" alt="Unas manos sostienen una brocha y un pote de polvo" loading="lazy" style="object-position:50% 40%"></figure>
     <div class="somos__txt">
       <span class="ced ced--linea rev">Quiénes somos</span>
       <h2 class="rev rev--2">Somos dos, y probamos <em>cada</em> brocha.</h2>
@@ -263,7 +278,7 @@
 <!-- ============ PIE ============ -->
 <footer class="pie">
   <div class="w">
-    <div class="pie__marca rev"><svg viewBox="0 24 176.9 113.74" role="img" aria-label="nixa BEAUTY"><use href="#lockup"/></svg></div>
+    <div class="pie__marca rev"><svg viewBox="0 0 1380 836" role="img" aria-label="nixa BEAUTY"><use href="#lockup"/></svg></div>
     <div class="pie__grid">
       <div>
         <h4>nixa BEAUTY</h4>
@@ -318,7 +333,7 @@
       <button class="volver" id="cerrarModal" type="button">
         <svg viewBox="0 0 15 10" aria-hidden="true"><path d="M14 5H1M5 1L1 5l4 4"/></svg>Volver
       </button>
-      <span class="marca-top"><svg viewBox="0 24 176.9 113.74" role="img" aria-label="nixa BEAUTY" style="height:36px"><use href="#lockup"/></svg></span>
+      <span class="marca-top"><svg viewBox="0 0 1380 615" role="img" aria-label="nixa BEAUTY" style="height:30px"><use href="#nixa"/></svg></span>
       <span></span>
     </div>
   </div>
