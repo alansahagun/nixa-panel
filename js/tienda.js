@@ -1,5 +1,5 @@
 /* =========================================================
-   nixa BEAUTY · tienda v3 · "El tocador"
+   nixa BEAUTY · tienda v4 · "El tocador"
    Un solo archivo de comportamiento. Orden:
    1) config  2) datos  3) utilidades  4) marca  5) catálogo
    6) ficha   7) bolsa  8) ayudante    9) movimiento  10) arranque
@@ -58,7 +58,8 @@ const COPY = {
     cuidado:"La almohadilla se cambia cuando se marca. Los repuestos vienen en la caja."}
 };
 const PROMESA = "Antes de enviar un set, probamos cada pieza con las manos. Si en sus primeros noventa días algo falla, nos escribes por WhatsApp con una foto y te mandamos el reemplazo. Sin ticket, sin formulario.";
-// [número, nombre, zona, para qué sirve]
+// [número, nombre, zona, para qué sirve]; ZONA: qué parte del rostro se ilumina en el dibujo
+const ZONA = {"01":"rostro","02":"rostro","03":"mejillas","04":"parpado","05":"pomulo","06":"parpado","07":"cuenca","08":"ojeras","09":"pestanas","10":"cejas"};
 const DIEZ = [
   ["01","Polvo","Rostro","La grande y esponjosa. Fija el maquillaje con un velo de polvo, sin cargar."],
   ["02","Base","Rostro","Plana y densa. Difumina la base en círculos hasta que no se note dónde empieza."],
@@ -93,13 +94,13 @@ let sb = null;
 try { sb = window.supabase?.createClient(SB_URL, SB_KEY); } catch {}
 
 /* ---------- 4. MARCA (sprites svg) ---------- */
-Promise.all([`${IMG}/marca.svg`,`${IMG}/brochas.svg`].map(u => fetch(u).then(r => r.ok ? r.text() : "").catch(() => "")))
+Promise.all([`${IMG}/marca-v4.svg`,`${IMG}/brochas-v4.svg`].map(u => fetch(u).then(r => r.ok ? r.text() : "").catch(() => "")))
   .then(ts => { const s = $("#sprite"); s.innerHTML = ts.join(""); s.hidden = false;
                 s.style.cssText = "position:absolute;width:0;height:0;overflow:hidden"; });
 
 // la cinta: se repite dos veces para que el bucle sea continuo
 $("#cinta").innerHTML = [...CINTA, ...CINTA].map(t =>
-  `<span>${esc(t)}<svg viewBox="12 27 76 66" aria-hidden="true"><use href="#brocha-marca"/></svg></span>`).join("");
+  `<span>${esc(t)}<svg viewBox="0 0 100 100" aria-hidden="true"><use href="#abanico"/></svg></span>`).join("");
 
 /* ---------- 5. CATÁLOGO: índice + escenario ---------- */
 function esqueleto(n = 5){
@@ -133,7 +134,7 @@ function fila(p){
 function tarj(p){
   const c = COPY[p.sku] || {}; const f = FOTOS[p.sku] || FOTOS.KIT1; const {tit, sub} = titulo(p);
   return `<article class="tarj" id="tar-${esc(p.sku)}">
-    <button class="tarj__marco" type="button" data-ficha="${esc(p.sku)}" aria-label="Ver ${esc(tit)}">
+    <button class="marco tarj__marco" type="button" data-ficha="${esc(p.sku)}" aria-label="Ver ${esc(tit)}">
       <img src="${esc(f.a)}" alt="${esc(f.alt||tit)}" loading="lazy" style="object-position:${esc(f.pos)}">
       ${c.sello ? `<span class="sello">${esc(c.sello)}</span>` : ""}
     </button>
@@ -203,12 +204,34 @@ async function cargar(){
   revela(lista);
 }
 
+/* el mapa del rostro: un dibujo, una zona encendida por paso */
+function rostro(zona){
+  const on = z => z === zona ? "z on" : "z";
+  return `<svg class="paso__rostro" viewBox="0 0 120 150" aria-hidden="true">
+    <ellipse class="${on("rostro")}" cx="60" cy="72" rx="36" ry="46"/>
+    <circle class="${on("mejillas")}" cx="38" cy="86" r="10"/><circle class="${on("mejillas")}" cx="82" cy="86" r="10"/>
+    <ellipse class="${on("pomulo")}" cx="36" cy="82" rx="12" ry="5" transform="rotate(-28 36 82)"/><ellipse class="${on("pomulo")}" cx="84" cy="82" rx="12" ry="5" transform="rotate(28 84 82)"/>
+    <ellipse class="${on("parpado")}" cx="44" cy="61" rx="10" ry="4"/><ellipse class="${on("parpado")}" cx="76" cy="61" rx="10" ry="4"/>
+    <path class="${on("cuenca")}" d="M33 58 Q44 50 55 58 Q44 55 33 58Z"/><path class="${on("cuenca")}" d="M65 58 Q76 50 87 58 Q76 55 65 58Z"/>
+    <path class="${on("ojeras")}" d="M34 68 Q44 76 54 68 Q44 72 34 68Z"/><path class="${on("ojeras")}" d="M66 68 Q76 76 86 68 Q76 72 66 68Z"/>
+    <path class="${on("pestanas")}" d="M34 64 Q44 59 54 64 Q44 62 34 64Z"/><path class="${on("pestanas")}" d="M66 64 Q76 59 86 64 Q76 62 66 64Z"/>
+    <path class="${on("cejas")}" d="M31 52 Q44 45 56 51 Q44 49 31 52Z"/><path class="${on("cejas")}" d="M64 51 Q76 45 89 52 Q76 49 64 51Z"/>
+    <path class="l" d="M60 26 C82 26 96 46 96 72 C96 96 80 118 60 118 C40 118 24 96 24 72 C24 46 38 26 60 26Z"/>
+    <path class="l" d="M46 118 L46 132 M74 118 L74 132 M30 146 Q60 132 90 146"/>
+    <path class="l" d="M32 52 Q44 46 55 51 M65 51 Q76 46 88 52"/>
+    <path class="l pest" d="M35 64 Q44 58 53 64 M67 64 Q76 58 85 64"/>
+    <path class="l" d="M35 64 Q44 70 53 64 M67 64 Q76 70 85 64"/>
+    <path class="l" d="M60 66 L58 86 Q60 90 64 88"/>
+    <path class="l" d="M50 102 Q60 98 70 102 Q60 108 50 102Z"/>
+  </svg>`;
+}
+
 /* los diez pasos del ritual */
 function pintaRitual(){
   const track = $("#ritualTrack");
   const pasos = DIEZ.map(([n,b,z,q]) => `<article class="paso">
-      <span class="paso__no num">${n}</span>
-      <svg class="paso__brocha" viewBox="0 0 80 240" aria-hidden="true"><use href="#b${n}"/></svg>
+      <div class="paso__cab"><span class="paso__no num">${n}</span>${rostro(ZONA[n])}</div>
+      <div class="paso__escena"><svg class="paso__brocha" viewBox="0 0 80 240" aria-hidden="true"><use href="#b${n}"/></svg></div>
       <div class="paso__txt">
         <span class="paso__zona">${esc(z)}</span>
         <h3>${esc(b)}</h3>
@@ -216,8 +239,8 @@ function pintaRitual(){
       </div>
     </article>`).join("");
   const fin = `<article class="paso paso--final">
-      <span class="paso__no num">10/10</span>
-      <div></div>
+      <div class="paso__cab"><span class="paso__no num">10/10</span></div>
+      <div class="paso__escena"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#abanico"/></svg></div>
       <div class="paso__txt">
         <h3>Las diez, en el Kit N°1.</h3>
         <p>Con estuche, dos esponjas y el mapa del rostro.</p>
@@ -238,10 +261,11 @@ function abreFicha(sku){
   $("#cuerpoModal").innerHTML = `
   <div class="f-grid">
     <div class="f-escena">
-      <figure class="f-escena__foto">
+      <div class="marco-ext"><i class="reg reg--tl"></i><i class="reg reg--tr"></i><i class="reg reg--bl"></i><i class="reg reg--br"></i>
+      <figure class="marco f-escena__foto">
         <img src="${esc(f.src)}" alt="${esc(tit)}" style="object-position:${esc(f.pos)}">
-      </figure>
-      <span class="ced f-escena__ced">Fig. ${NUM[sku] || "01"} · ${esc(tit)}</span>
+      </figure></div>
+      <span class="fig f-escena__ced">Fig. ${NUM[sku] || "01"} · ${esc(tit)}</span>
     </div>
     <div class="f-info">
       <span class="ced ced--linea">${esc(c.sello || sub || "nixa BEAUTY")}</span>
@@ -555,8 +579,10 @@ function animaciones(){
     "(min-width: 1000px)": () => {
       const track = $("#ritualTrack"), pin = $("#ritualPin");
       const dist = () => track.scrollWidth - innerWidth;
+      const barra = $("#ritualBarra");
       gsap.to(track, {x:() => -dist(), ease:"none",
-        scrollTrigger:{trigger:pin, start:"top top", end:() => "+=" + dist(), pin:true, scrub:.9, invalidateOnRefresh:true, anticipatePin:1}});
+        scrollTrigger:{trigger:pin, start:"top top", end:() => "+=" + dist(), pin:true, scrub:.9, invalidateOnRefresh:true, anticipatePin:1,
+          onUpdate(st){ if (barra) barra.style.setProperty("--p", st.progress.toFixed(3)); }}});
     }
   });
 
@@ -614,6 +640,8 @@ let tic = false;
 function alScroll(){
   const y = scrollY;
   $("#top").classList.toggle("pegada", y > 24);
+  const alto = document.documentElement.scrollHeight - innerHeight;
+  $("#progreso").style.transform = `scaleX(${alto > 0 ? Math.min(1, y / alto) : 0})`;
   $("#btnAyuda").classList.toggle("visible", y > innerHeight * .8);
   $("#barraMov").classList.toggle("visible", y > innerHeight * .9);
   // la cabecera se oscurece sobre las secciones de noche
