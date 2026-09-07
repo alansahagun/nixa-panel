@@ -976,20 +976,39 @@ $("#waFaq").href      = waLink("Hola NIXA, tengo una pregunta antes de comprar."
 $("#certFolio").textContent = "NX-" + String(new Date().getFullYear()).slice(2) + "-" + String(Math.floor(Math.random()*900+100));
 
 let tic = false;
+/* alScroll corre en CADA cuadro del scroll. Antes pedía offsetHeight dos veces,
+   scrollHeight una y volvía a buscar las secciones oscuras en el DOM, o sea cuatro
+   cálculos de layout forzados por cuadro. Ahora todo eso se mide una vez y solo se
+   vuelve a medir al cambiar de tamaño la ventana. */
+const elTop = $("#top"), elPie = $(".pie"), elProg = $("#progreso"),
+      elAyuda = $("#btnAyuda"), elBarra = $("#barraMov"), elPortada = $(".portada");
+const oscuras = $$(".noche,.pie");
+let altoPortada = 0, altoTop = 84, largoScroll = 1, esNoche = false;
+function mide(){
+  altoPortada = elPortada.offsetHeight;
+  altoTop = elTop.offsetHeight;
+  largoScroll = document.documentElement.scrollHeight - innerHeight;
+}
+mide();
+addEventListener("resize", mide, {passive:true});
+document.fonts && document.fonts.ready.then(mide);
+
 function alScroll(){
   const y = scrollY;
-  const portada = $(".portada").offsetHeight;
-  document.body.classList.toggle("arriba", y < portada - 90);
-  $("#top").classList.toggle("pegada", y > 24);
-  const alto = document.documentElement.scrollHeight - innerHeight;
-  $("#progreso").style.transform = `scaleX(${alto > 0 ? Math.min(1, y / alto) : 0})`;
-  // el botón flotante se quita al llegar al pie: ahí se encimaba con el texto
-  const pie = $(".pie").getBoundingClientRect();
-  $("#btnAyuda").classList.toggle("visible", y > innerHeight * .8 && pie.top > innerHeight - 40);
-  $("#barraMov").classList.toggle("visible", y > innerHeight * .9);
-  const h = $("#top").offsetHeight + 38;
-  const oscuro = $$(".noche,.pie").some(s => { const r = s.getBoundingClientRect(); return r.top <= h && r.bottom >= h; });
-  $("#top").classList.toggle("noche", oscuro);
+  document.body.classList.toggle("arriba", y < altoPortada - 90);
+  elTop.classList.toggle("pegada", y > 24);
+  elProg.style.transform = `scaleX(${largoScroll > 0 ? Math.min(1, y / largoScroll) : 0})`;
+  const pie = elPie.getBoundingClientRect();
+  elAyuda.classList.toggle("visible", y > innerHeight * .8 && pie.top > innerHeight - 40);
+  elBarra.classList.toggle("visible", y > innerHeight * .9);
+  /* histéresis: una vez oscura, la cabecera necesita 30px de más para volver a
+     aclararse. Sin esto parpadeaba en el borde exacto de la garantía y del pie,
+     y cada parpadeo arrastraba medio segundo de transición. */
+  const h = altoTop + 38, m = esNoche ? 30 : 0;
+  const oscuro = oscuras.some(s => { const r = s.getBoundingClientRect(); return r.top <= h + m && r.bottom >= h - m; });
+  // "top--noche", NO "noche": `.noche` es la clase de las secciones oscuras y le
+  // metía a la cabecera su padding y su position:relative, rompiéndole el sticky.
+  if (oscuro !== esNoche){ esNoche = oscuro; elTop.classList.toggle("top--noche", oscuro); }
   tic = false;
 }
 addEventListener("scroll", () => { if (!tic){ requestAnimationFrame(alScroll); tic = true; } }, {passive:true});
@@ -1002,6 +1021,6 @@ animaciones();
 document.fonts.ready.then(titulosPorLineas);
 vePaso(1);
 pinta();
-cargar().then(revisaVuelta);
+cargar().then(() => { mide(); revisaVuelta(); });
 
 })();
