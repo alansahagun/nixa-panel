@@ -919,6 +919,28 @@ function animaciones(){
     });
   }
 
+  /* El certificado se inclina como una tarjeta que traes en la mano. La perspectiva
+     ya estaba puesta en .cert y no la usaba nadie.
+     REGLA DE ORO: el giro vive en .cert__hoja, NO en .cert — .cert ya usa transform
+     para su entrada, y dos animaciones nunca escriben la misma propiedad del mismo
+     elemento (ese fue el bug de la portada). */
+  const cert = $(".cert"), hoja = $(".cert__hoja");
+  if (conRaton && cert && hoja){
+    const rx = gsap.quickTo(hoja, "rotationX", {duration:.9, ease:"power3"}),
+          ry = gsap.quickTo(hoja, "rotationY", {duration:.9, ease:"power3"});
+    cert.addEventListener("pointermove", e => {
+      if (e.pointerType && e.pointerType !== "mouse") return;
+      const r = cert.getBoundingClientRect();
+      ry(((e.clientX - (r.left + r.width/2)) / r.width) * 9);
+      rx(((e.clientY - (r.top + r.height/2)) / r.height) * -6);
+    });
+    const plano = () => { rx(0); ry(0); };
+    cert.addEventListener("pointerleave", plano);
+    document.addEventListener("mouseleave", plano);
+    addEventListener("blur", plano);
+    document.addEventListener("visibilitychange", () => { if (document.hidden) plano(); });
+  }
+
   $$("[data-cuenta]").forEach(el => {
     // odometro: siempre la misma cantidad de digitos, para que lo de al lado no brinque
     const meta = parseInt(el.dataset.cuenta, 10), digitos = String(meta).length, obj = {v:0};
