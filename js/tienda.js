@@ -1,7 +1,7 @@
 /* =========================================================
-   nixa BEAUTY · tienda v4 · "El tocador"
+   nixa BEAUTY · tienda v6 · "El tocador abierto"
    Un solo archivo de comportamiento. Orden:
-   1) config  2) datos  3) utilidades  4) marca  5) catálogo
+   1) config  2) datos  3) utilidades  4) marca  5) vitrina
    6) ficha   7) bolsa  8) ayudante    9) movimiento  10) arranque
    ========================================================= */
 (() => {
@@ -18,20 +18,20 @@ const ENVIO_GRATIS = 599;          // umbral tentativo de envío gratis en MXN
 const MSI_DESDE    = 300;
 
 const IMG = "https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img";
+const OBJ = `${IMG}/obj`;
 
 /* ---------- 2. DATOS DE PRESENTACIÓN ---------- */
-// Dos fotos por pieza: la primera en el escenario/tarjeta, la segunda en la ficha.
-const FOTOS = {
-  KIT1:{a:`${IMG}/kit-brochas.jpg`,      b:`${IMG}/kit-abanico.jpg`,       pos:"50% 42%", alt:"Las brochas del Kit N°1 en su estuche"},
-  SIS1:{a:`${IMG}/sistema-abanico.jpg`,  b:`${IMG}/sistema-flatlay.jpg`,   pos:"50% 50%", alt:"Brochas y abanico del Sistema completo"},
-  ESP4:{a:`${IMG}/esponjas-beige.jpg`,   b:`${IMG}/esponja-terracota.jpg`, pos:"50% 55%", alt:"Esponjas de maquillaje sobre fondo beige"},
-  LAV1:{a:`${IMG}/brocha-polvo.jpg`,     b:`${IMG}/brocha-pote.jpg`,       pos:"50% 50%", alt:"Una brocha limpia, lista para lavarse"},
-  RIZ1:{a:`${IMG}/rizador.jpg`,          b:`${IMG}/swatches-terracota.jpg`,pos:"50% 60%", alt:"Rizador de pestañas sobre una superficie que refleja"}
+// Cada pieza vive sobre una placa de color, como objeto recortado.
+const PIEZAS = {
+  KIT1:{obj:"kit",            placa:"arena", ancho:"86%", giro:0, dy:"-4%", grande:true, foto:`${IMG}/kit-abanico.jpg`},
+  SIS1:{obj:"abanico-brochas",placa:"rosa",  ancho:"58%", giro:0, dy:"-10%",   foto:`${IMG}/sistema-flatlay.jpg`},
+  ESP4:{obj:"esponja",        placa:"hueso", ancho:"44%", giro:16, dy:"-8%",  foto:`${IMG}/esponja-terracota.jpg`},
+  LAV1:{obj:"brocha-polvo",   placa:"cafe",  ancho:"19%", giro:-12, dy:"-10%", foto:`${IMG}/brocha-pote.jpg`},
+  RIZ1:{obj:"rizador",        placa:"noche", ancho:"62%", giro:6, dy:"-8%",  foto:`${IMG}/swatches-terracota.jpg`}
 };
-const FOTO_FICHA = {
-  KIT1:{src:`${IMG}/kit-abanico.jpg`,   pos:"50% 50%"},
-  SIS1:{src:`${IMG}/sistema-flatlay.jpg`,pos:"50% 45%"}
-};
+const objHTML = (nombre, alt = "", extra = "") =>
+  `<figure class="obj" ${extra}><img class="sombra" src="${OBJ}/${nombre}-sombra.webp" alt=""><img src="${OBJ}/${nombre}.webp" alt="${esc(alt)}" loading="lazy"></figure>`;
+
 const ORDEN = ["KIT1","SIS1","ESP4","LAV1","RIZ1"];
 const NUM   = {KIT1:"01",SIS1:"02",ESP4:"03",LAV1:"04",RIZ1:"05"};
 
@@ -58,6 +58,7 @@ const COPY = {
     cuidado:"La almohadilla se cambia cuando se marca. Los repuestos vienen en la caja."}
 };
 const PROMESA = "Antes de enviar un set, probamos cada pieza con las manos. Si en sus primeros noventa días algo falla, nos escribes por WhatsApp con una foto y te mandamos el reemplazo. Sin ticket, sin formulario.";
+
 // [número, nombre, zona, para qué sirve]; ZONA: qué parte del rostro se ilumina en el dibujo
 const ZONA = {"01":"rostro","02":"rostro","03":"mejillas","04":"parpado","05":"pomulo","06":"parpado","07":"cuenca","08":"ojeras","09":"pestanas","10":"cejas"};
 const DIEZ = [
@@ -72,17 +73,30 @@ const DIEZ = [
   ["09","Delinear","Pestañas","Fina y angulada. Delinea pegado a las pestañas, con sombra o gel."],
   ["10","Cejas y pestañas","Cejas","El cepillo en espiral. Peina cejas y separa pestañas después del rímel."]
 ];
+// la silueta de cada cabeza (mismo dibujo que el sprite) y el ancho de su virola
+const CABEZAS = {
+  "01":["M29 113 C16 96, 15 62, 30 44 C35 38, 45 38, 50 44 C65 62, 64 96, 51 113 Z",22],
+  "02":["M28 113 C27 96, 28 76, 30 62 Q40 58 50 62 C52 76, 53 96, 52 113 Z",24],
+  "03":["M31 113 C22 98, 22 72, 33 58 C37 53, 43 53, 47 58 C58 72, 58 98, 49 113 Z",18],
+  "04":["M32 113 C27 100, 29 78, 36 68 C38 65, 42 65, 44 68 C51 78, 53 100, 48 113 Z",16],
+  "05":["M29 113 C27 98, 27 84, 30 74 L52 58 C54 76, 54 98, 51 113 Z",22],
+  "06":["M32 113 C31 100, 32 84, 34 74 Q40 71 46 74 C48 84, 49 100, 48 113 Z",16],
+  "07":["M33 113 C32 100, 34 84, 40 66 C46 84, 48 100, 47 113 Z",14],
+  "08":["M33 113 C32 102, 33 88, 36 80 C38 77, 42 77, 44 80 C47 88, 48 102, 47 113 Z",14],
+  "09":["M35 113 C34 104, 35 96, 36 90 L46 82 C46 96, 46 104, 45 113 Z",10],
+  "10":["M38.6 113 C38.6 100, 38.6 80, 38.6 64 L41.4 64 C41.4 80, 41.4 100, 41.4 113 Z",14]
+};
 const CINTA = ["Cada brocha sabe su lugar","Garantía de 90 días, sin ticket","Armado a mano en Guadalajara","Envío el mismo día en la ciudad","Te contesta una persona"];
 
 /* ---------- 3. UTILIDADES ---------- */
 const $  = s => document.querySelector(s);
 const $$ = s => Array.from(document.querySelectorAll(s));
 const money = n => "$" + Number(n||0).toLocaleString("es-MX",{maximumFractionDigits:0});
-const esc = s => (s ?? "").toString().replace(/[<>&"']/g, c => ({"<":"&lt;",">":"&gt;","&":"&amp;",'"':"&quot;","'":"&#39;"}[c]));
+function esc(s){ return (s ?? "").toString().replace(/[<>&"']/g, c => ({"<":"&lt;",">":"&gt;","&":"&amp;",'"':"&quot;","'":"&#39;"}[c])); }
 const sinMovimiento = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const conRaton = matchMedia("(pointer:fine)").matches;
 const palomita = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5.5"/></svg>';
 
-// guardado suave de la bolsa: si el navegador no deja, seguimos sin drama
 const guarda = {
   leer(){ try { return JSON.parse(localStorage.getItem("nixa.bolsa") || "{}"); } catch { return {}; } },
   escribir(v){ try { localStorage.setItem("nixa.bolsa", JSON.stringify(v)); } catch {} }
@@ -94,120 +108,17 @@ let sb = null;
 try { sb = window.supabase?.createClient(SB_URL, SB_KEY); } catch {}
 
 /* ---------- 4. MARCA (sprites svg) ---------- */
-Promise.all([`${IMG}/marca-v4.svg`,`${IMG}/brochas-v4.svg`].map(u => fetch(u).then(r => r.ok ? r.text() : "").catch(() => "")))
+const spritesListos = Promise.all([`${IMG}/marca-v4.svg`,`${IMG}/brochas-v4.svg`].map(u => fetch(u).then(r => r.ok ? r.text() : "").catch(() => "")))
   .then(ts => { const s = $("#sprite"); s.innerHTML = ts.join(""); s.hidden = false;
                 s.style.cssText = "position:absolute;width:0;height:0;overflow:hidden"; });
 
-// la cinta: se repite dos veces para que el bucle sea continuo
 $("#cinta").innerHTML = [...CINTA, ...CINTA].map(t =>
   `<span>${esc(t)}<svg viewBox="0 0 100 100" aria-hidden="true"><use href="#abanico"/></svg></span>`).join("");
 
-/* ---------- 5. CATÁLOGO: índice + escenario ---------- */
-function esqueleto(n = 5){
-  return Array.from({length:n}, () =>
-    `<div class="esq" aria-hidden="true"><div class="esq__l" style="height:44px;width:60%"></div><div class="esq__l"></div></div>`
-  ).join("");
-}
-function ahorroSistema(){
-  const sis = PROD.find(p => p.sku === "SIS1");
-  if (!sis) return "";
-  const sueltas = PROD.filter(p => p.sku !== "SIS1").reduce((a,p) => a + Number(p.precio), 0);
-  return sueltas > sis.precio ? `Sale ${money(sueltas - sis.precio)} menos que comprar las piezas por separado.` : "";
-}
-const titulo = p => { const [tit, ...r] = p.nombre.split(" · "); return {tit, sub:r.join(" · ")}; };
-const descDe = p => (COPY[p.sku]?.desc || "").replace("{AHORRO}", ahorroSistema()).trim();
-
-function fila(p){
-  const c = COPY[p.sku] || {}; const {tit, sub} = titulo(p);
-  return `<article class="fila" data-sku="${esc(p.sku)}" tabindex="0" aria-label="${esc(tit)}">
-    <span class="fila__no num">N° ${NUM[p.sku]}</span>
-    <div>
-      ${c.sello ? `<span class="sello${c.selloOro?"":" sello--claro"}">${esc(c.sello)}</span>` : ""}
-      <h3><button type="button" data-ficha="${esc(p.sku)}">${esc(tit)}</button></h3>
-      ${sub ? `<p class="sub">${esc(sub)}</p>` : ""}
-    </div>
-    <span class="precio">${money(p.precio)}<span>MXN</span></span>
-    <button class="mas" type="button" data-sku="${esc(p.sku)}" aria-label="Agregar ${esc(tit)} a la bolsa">
-      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5v13M1.5 8h13"/></svg></button>
-  </article>`;
-}
-function tarj(p){
-  const c = COPY[p.sku] || {}; const f = FOTOS[p.sku] || FOTOS.KIT1; const {tit, sub} = titulo(p);
-  return `<article class="tarj" id="tar-${esc(p.sku)}">
-    <button class="marco tarj__marco" type="button" data-ficha="${esc(p.sku)}" aria-label="Ver ${esc(tit)}">
-      <img src="${esc(f.a)}" alt="${esc(f.alt||tit)}" loading="lazy" style="object-position:${esc(f.pos)}">
-      ${c.sello ? `<span class="sello">${esc(c.sello)}</span>` : ""}
-    </button>
-    <span class="ced num">N° ${NUM[p.sku]}</span>
-    <h3><button type="button" data-ficha="${esc(p.sku)}">${esc(tit)}</button></h3>
-    ${sub ? `<p class="sub">${esc(sub)}</p>` : ""}
-    <div class="tarj__pie">
-      <span class="precio">${money(p.precio)}<span>MXN</span></span>
-      <button class="mas" type="button" data-sku="${esc(p.sku)}" aria-label="Agregar ${esc(tit)} a la bolsa">
-        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5v13M1.5 8h13"/></svg></button>
-    </div>
-  </article>`;
-}
-
-function activa(sku){
-  $$(".fila").forEach(f => f.classList.toggle("activa", f.dataset.sku === sku));
-  $$("#escenario img").forEach(i => i.classList.toggle("activa", i.dataset.sku === sku));
-  $("#escenarioNum").textContent = NUM[sku] || "01";
-  const p = PROD.find(x => x.sku === sku);
-  if (p) $("#escenarioCed").textContent = `Fig. ${NUM[sku]} · ${titulo(p).tit}`;
-}
-
-async function cargar(){
-  const lista = $("#prods");
-  lista.innerHTML = esqueleto();
-  let data = null, error = null;
-  try {
-    if (!sb) throw new Error("sin cliente");
-    ({data, error} = await sb.from("productos").select("*").eq("activo", true).order("precio",{ascending:false}));
-  } catch (e) { error = e; }
-  lista.setAttribute("aria-busy","false");
-
-  if (error || !data || !data.length){
-    lista.innerHTML = `<p class="vacio">No pudimos cargar la colección en este momento.
-      <br><a class="link" style="margin-top:14px" href="https://wa.me/${WA}" target="_blank" rel="noopener">Escríbenos por WhatsApp</a></p>`;
-    return;
-  }
-  PROD = data;
-  const pos = s => { const i = ORDEN.indexOf(s); return i < 0 ? 99 : i; };
-  const ord = [...PROD].sort((a,b) => pos(a.sku) - pos(b.sku));
-
-  lista.innerHTML = ord.map(fila).join("");
-  $("#tarjs").innerHTML = ord.map(tarj).join("");
-  $("#escenario").innerHTML = ord.map(p => {
-    const f = FOTOS[p.sku] || FOTOS.KIT1;
-    return `<img src="${esc(f.a)}" alt="" data-sku="${esc(p.sku)}" loading="lazy" style="object-position:${esc(f.pos)}">`;
-  }).join("");
-
-  $$(".mas[data-sku]").forEach(b => b.onclick = () => agrega(b.dataset.sku, b));
-  $$("[data-ficha]").forEach(b => b.onclick = () => abreFicha(b.dataset.ficha));
-  $$(".fila").forEach(f => {
-    const on = () => activa(f.dataset.sku);
-    f.addEventListener("mouseenter", on);
-    f.addEventListener("focusin", on);
-    f.addEventListener("click", e => { if (!e.target.closest("button")) abreFicha(f.dataset.sku); });
-    f.addEventListener("keydown", e => { if (e.key === "Enter" && !e.target.closest("button")) abreFicha(f.dataset.sku); });
-  });
-  activa(ord[0].sku);
-
-  const kit = PROD.find(p => p.sku === "KIT1");
-  if (kit){
-    $("#precioKit").textContent = money(kit.precio);
-    $("#precioHero").textContent = money(kit.precio);
-    $("#precioEtiqueta").innerHTML = `${money(kit.precio)}<span>MXN</span>`;
-    const pf = $("#precioFinal"); if (pf) pf.innerHTML = `${money(kit.precio)}<span>MXN</span>`;
-  }
-  revela(lista);
-}
-
-/* el mapa del rostro: un dibujo, una zona encendida por paso */
-function rostro(zona){
+/* el mapa del rostro: un dibujo, una zona encendida */
+function rostro(zona, clase = "rostro-svg"){
   const on = z => z === zona ? "z on" : "z";
-  return `<svg class="paso__rostro" viewBox="0 0 120 150" aria-hidden="true">
+  return `<svg class="${clase}" viewBox="0 0 120 150" aria-hidden="true">
     <ellipse class="${on("rostro")}" cx="60" cy="72" rx="36" ry="46"/>
     <circle class="${on("mejillas")}" cx="38" cy="86" r="10"/><circle class="${on("mejillas")}" cx="82" cy="86" r="10"/>
     <ellipse class="${on("pomulo")}" cx="36" cy="82" rx="12" ry="5" transform="rotate(-28 36 82)"/><ellipse class="${on("pomulo")}" cx="84" cy="82" rx="12" ry="5" transform="rotate(28 84 82)"/>
@@ -226,46 +137,108 @@ function rostro(zona){
   </svg>`;
 }
 
-/* los diez pasos del ritual */
-function pintaRitual(){
-  const track = $("#ritualTrack");
-  const pasos = DIEZ.map(([n,b,z,q]) => `<article class="paso">
-      <div class="paso__cab"><span class="paso__no num">${n}</span>${rostro(ZONA[n])}</div>
-      <div class="paso__escena"><svg class="paso__brocha" viewBox="0 0 80 240" aria-hidden="true"><use href="#b${n}"/></svg></div>
-      <div class="paso__txt">
-        <span class="paso__zona">${esc(z)}</span>
-        <h3>${esc(b)}</h3>
-        <p>${esc(q)}</p>
-      </div>
-    </article>`).join("");
-  const fin = `<article class="paso paso--final">
-      <div class="paso__cab"><span class="paso__no num">10/10</span></div>
-      <div class="paso__escena"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#abanico"/></svg></div>
-      <div class="paso__txt">
-        <h3>Las diez, en el Kit N°1.</h3>
-        <p>Con estuche, dos esponjas y el mapa del rostro.</p>
-        <span class="precio" id="precioFinal">$298<span>MXN</span></span>
-        <div style="margin-top:14px"><button class="btn btn--claro" type="button" data-agrega="KIT1">Agregar a la bolsa</button></div>
-      </div>
-    </article>`;
-  track.insertAdjacentHTML("beforeend", pasos + fin);
-  $$("[data-agrega]").forEach(b => b.onclick = () => agrega(b.dataset.agrega, b));
+/* ---------- 5. LA VITRINA ---------- */
+function esqueleto(n = 5){
+  return Array.from({length:n}, () => `<div class="esq" aria-hidden="true"><div class="esq__l" style="height:44px;width:60%"></div><div class="esq__l"></div></div>`).join("");
 }
+function ahorroSistema(){
+  const sis = PROD.find(p => p.sku === "SIS1");
+  if (!sis) return "";
+  const sueltas = PROD.filter(p => p.sku !== "SIS1").reduce((a,p) => a + Number(p.precio), 0);
+  return sueltas > sis.precio ? `Sale ${money(sueltas - sis.precio)} menos que comprar las piezas por separado.` : "";
+}
+const titulo = p => { const [tit, ...r] = p.nombre.split(" · "); return {tit, sub:r.join(" · ")}; };
+const descDe = p => (COPY[p.sku]?.desc || "").replace("{AHORRO}", ahorroSistema()).trim();
+
+function placa(p){
+  const c = COPY[p.sku] || {}; const z = PIEZAS[p.sku] || PIEZAS.KIT1; const {tit, sub} = titulo(p);
+  return `<article class="placa placa-p placa--${z.placa}" data-sku="${esc(p.sku)}" ${z.grande ? 'data-grande' : ''}>
+    <div class="placa__cab">
+      <span class="placa__no num">N° ${NUM[p.sku]}</span>
+      ${c.sello ? `<span class="sello">${esc(c.sello)}</span>` : ""}
+    </div>
+    <button class="placa__esc" type="button" data-ficha="${esc(p.sku)}" aria-label="Ver ${esc(tit)}">
+      ${objHTML(z.obj, tit, `style="--ancho:${z.ancho};--giro:${z.giro}deg;--dy:${z.dy||"0%"}"`)}
+    </button>
+    <div class="placa__txt">
+      <div>
+        <h3><button type="button" data-ficha="${esc(p.sku)}">${esc(tit)}</button></h3>
+        ${sub ? `<p class="sub">${esc(sub)}</p>` : ""}
+        <span class="precio">${money(p.precio)}<span>MXN</span></span>
+      </div>
+      <button class="mas" type="button" data-sku="${esc(p.sku)}" aria-label="Agregar ${esc(tit)} a la bolsa">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5v13M1.5 8h13"/></svg></button>
+    </div>
+  </article>`;
+}
+
+async function cargar(){
+  const lista = $("#placas");
+  lista.innerHTML = esqueleto();
+  let data = null, error = null;
+  try {
+    if (!sb) throw new Error("sin cliente");
+    ({data, error} = await sb.from("productos").select("*").eq("activo", true).order("precio",{ascending:false}));
+  } catch (e) { error = e; }
+  lista.setAttribute("aria-busy","false");
+
+  if (error || !data || !data.length){
+    lista.innerHTML = `<p class="vacio">No pudimos cargar la colección en este momento.
+      <br><a class="link" style="margin-top:14px" href="https://wa.me/${WA}" target="_blank" rel="noopener">Escríbenos por WhatsApp</a></p>`;
+    return;
+  }
+  PROD = data;
+  const pos = s => { const i = ORDEN.indexOf(s); return i < 0 ? 99 : i; };
+  const ord = [...PROD].sort((a,b) => pos(a.sku) - pos(b.sku));
+  lista.innerHTML = ord.map(placa).join("");
+
+  $$(".mas[data-sku]").forEach(b => b.onclick = () => agrega(b.dataset.sku, b));
+  $$("[data-ficha]").forEach(b => b.onclick = () => abreFicha(b.dataset.ficha));
+  inclinaPlacas();
+
+  const kit = PROD.find(p => p.sku === "KIT1");
+  if (kit){
+    $("#precioKit").textContent = money(kit.precio);
+    $("#precioHero").textContent = money(kit.precio);
+    const pf = $("#precioFinal"); if (pf) pf.textContent = money(kit.precio);
+  }
+  revela(lista);
+  if (window.gsap && !sinMovimiento){
+    gsap.from(".placa-p", {y:40, opacity:0, duration:1, ease:"power3.out", stagger:.08, scrollTrigger:{trigger:lista, start:"top 82%", once:true}});
+  }
+}
+
+/* las placas se inclinan apenas hacia el cursor; la pieza flota encima */
+function inclinaPlacas(){
+  if (!conRaton || sinMovimiento || !window.gsap) return;
+  $$(".placa-p").forEach(pl => {
+    const obj = pl.querySelector(".obj");
+    const rx = gsap.quickTo(pl, "rotationX", {duration:.7, ease:"power3"}), ry = gsap.quickTo(pl, "rotationY", {duration:.7, ease:"power3"});
+    const ox = gsap.quickTo(obj, "x", {duration:.9, ease:"power3"}), oy = gsap.quickTo(obj, "y", {duration:.9, ease:"power3"});
+    gsap.set(pl, {transformPerspective:1100});
+    pl.addEventListener("pointermove", e => {
+      const r = pl.getBoundingClientRect(); const px = (e.clientX - r.left)/r.width - .5, py = (e.clientY - r.top)/r.height - .5;
+      rx(-py * 5); ry(px * 6); ox(px * 16); oy(py * 12);
+    });
+    pl.addEventListener("pointerleave", () => { rx(0); ry(0); ox(0); oy(0); });
+  });
+}
+
+/* ---------- 6. FICHA ---------- */
 function abreFicha(sku){
   const p = PROD.find(x => x.sku === sku); if (!p) return;
   const c = COPY[sku] || {incluye:[], cuidado:""};
+  const z = PIEZAS[sku] || PIEZAS.KIT1;
   const {tit, sub} = titulo(p);
-  const f = FOTO_FICHA[sku] || {src:(FOTOS[sku]||FOTOS.KIT1).a, pos:(FOTOS[sku]||FOTOS.KIT1).pos};
   const waTxt = encodeURIComponent(`Hola nixa, tengo una duda sobre ${p.nombre}.`);
 
   $("#cuerpoModal").innerHTML = `
   <div class="f-grid">
     <div class="f-escena">
-      <div class="marco-ext"><i class="reg reg--tl"></i><i class="reg reg--tr"></i><i class="reg reg--bl"></i><i class="reg reg--br"></i>
-      <figure class="marco f-escena__foto">
-        <img src="${esc(f.src)}" alt="${esc(tit)}" style="object-position:${esc(f.pos)}">
-      </figure></div>
-      <span class="fig f-escena__ced">Fig. ${NUM[sku] || "01"} · ${esc(tit)}</span>
+      <div class="placa placa--${z.placa}">
+        ${objHTML(z.obj, tit, `style="--ancho:${z.ancho};--giro:${z.giro}deg"`)}
+        <span class="fig placa__fig">Fig. ${NUM[sku] || "01"} · ${esc(tit)}</span>
+      </div>
     </div>
     <div class="f-info">
       <span class="ced ced--linea">${esc(c.sello || sub || "nixa BEAUTY")}</span>
@@ -288,7 +261,7 @@ function abreFicha(sku){
     </div>
   </div>
   <div class="f-bloques">
-    <div><figure class="foto"><img src="${esc((FOTOS[sku]||FOTOS.KIT1).b)}" alt="" loading="lazy"></figure>
+    <div><figure class="foto"><img src="${esc(z.foto)}" alt="" loading="lazy"></figure>
       <h4>Qué incluye</h4>
       <ul>${(c.incluye||[]).map(i => `<li>${palomita}${esc(i)}</li>`).join("")}</ul></div>
     <div><figure class="foto"><img src="${IMG}/brocha-polvo.jpg" alt="" loading="lazy" style="object-position:50% 50%"></figure>
@@ -296,7 +269,7 @@ function abreFicha(sku){
     <div><figure class="foto"><img src="${IMG}/manos-brocha.jpg" alt="" loading="lazy" style="object-position:50% 40%"></figure>
       <h4>La promesa nixa</h4><p>${esc(PROMESA)}</p></div>
     ${(sku==="KIT1"||sku==="SIS1") ? `<div class="diez"><h4>Las diez brochas</h4><ol>${
-      DIEZ.map(([n,b,z]) => `<li><span class="n">${n}</span><b>${esc(b)}</b><small>${esc(z)}</small></li>`).join("")
+      DIEZ.map(([n,b,zz]) => `<li><span class="n">${n}</span><b>${esc(b)}</b><small>${esc(zz)}</small></li>`).join("")
     }</ol></div>` : ""}
   </div>`;
 
@@ -328,8 +301,8 @@ function pinta(){
     const p = PROD.find(x => x.sku === sku); if (!p) return "";
     t += p.precio * q;
     const {tit, sub} = titulo(p);
-    const f = FOTOS[sku] || FOTOS.KIT1;
-    return `<div class="item">
+    const f = {a:`${OBJ}/${(PIEZAS[sku]||PIEZAS.KIT1).obj}.webp`};
+    return `<div class="item" style="--i:${Object.keys(bolsa).indexOf(sku)}">
       <span class="item__mini"><img src="${esc(f.a)}" alt="" loading="lazy"></span>
       <div>
         <p class="item__nom">${esc(tit)}${sub?`<small>${esc(sub)}</small>`:""}</p>
@@ -485,7 +458,7 @@ function pintaAyuda(){
     $("#pasoAyuda").textContent = `Pregunta ${i+1} de ${PREG.length}`;
     c.innerHTML = `<h3 id="tituloAyuda">${q.q}</h3>
       ${q.nota ? `<p class="nota">${q.nota}</p>` : ""}
-      <div class="opcs">${q.o.map(([v,t]) => `<button class="opc" type="button" data-v="${v}">${t}</button>`).join("")}</div>
+      <div class="opcs">${q.o.map(([v,t],k) => `<button class="opc" type="button" data-v="${v}" style="--i:${k}">${t}</button>`).join("")}</div>
       ${i ? '<button class="link" type="button" id="atras" style="margin-top:18px">Pregunta anterior</button>' : ""}`;
     c.querySelectorAll(".opc").forEach(b => b.onclick = () => { resp.push(b.dataset.v); pintaAyuda(); });
     const a = $("#atras"); if (a) a.onclick = () => { resp.pop(); pintaAyuda(); };
@@ -503,7 +476,7 @@ function pintaAyuda(){
       <button class="link" type="button" id="otraVez" style="margin-top:18px">Empezar de nuevo</button></div>`;
   } else {
     const {tit, sub} = titulo(p);
-    const f = FOTOS[sku] || FOTOS.KIT1;
+    const f = {a:`${OBJ}/${(PIEZAS[sku]||PIEZAS.KIT1).obj}.webp`};
     c.innerHTML = `<div class="reco">
       <span class="ced">Nosotros te diríamos</span>
       <h3 id="tituloAyuda">Empieza por aquí.</h3>
@@ -529,18 +502,81 @@ const cierraAyuda = () => cierraCapa($("#ayuda"), "abierta");
 // Regla: todo entra una vez y se queda. Nada se mueve mientras lees.
 let io = null;
 function revela(raiz){
-  const els = (raiz || document).querySelectorAll(".rev:not(.visto)");
+  const els = (raiz || document).querySelectorAll(".rev:not(.visto), .rev-marca:not(.visto), .sep:not(.visto)");
   if (sinMovimiento){ els.forEach(e => e.classList.add("visto")); return; }
   io = io || new IntersectionObserver(es => es.forEach(e => {
     if (e.isIntersecting){ e.target.classList.add("visto"); io.unobserve(e.target); }
   }), {rootMargin:"0px 0px -10% 0px", threshold:.08});
   els.forEach(el => io.observe(el));
 }
+function titulosPorLineas(){
+  if (sinMovimiento || !window.gsap || typeof SplitText === "undefined") return;
+  $$("h2.rev").forEach(h => {
+    try {
+      const s = new SplitText(h, {type:"lines", linesClass:"linea-int"});
+      s.lines.forEach(l => { const m = document.createElement("span"); m.className = "linea-mask"; l.parentNode.insertBefore(m, l); m.appendChild(l); });
+      h.classList.add("lineas");
+      gsap.from(s.lines, {yPercent:110, duration:1, ease:"power3.out", stagger:.09, scrollTrigger:{trigger:h, start:"top 88%", once:true}});
+    } catch {}
+  });
+}
 if (sinMovimiento) document.documentElement.classList.add("sin-anim");
+
+/* ----- el ritual: una sola brocha que se transforma ----- */
+let pasoActual = -1;
+function pintaRitual(){
+  $("#pasos").innerHTML = DIEZ.map(([n,b,z,q], i) => `<article class="paso${i===0?" activo":""}" data-i="${i}">
+      <span class="paso__zona">${esc(z)}</span>
+      <h3><small>Brocha ${n} de 10</small>${esc(b)}</h3>
+      <p>${esc(q)}</p>
+      ${i === 9 ? `<div class="paso__cta"><button class="btn btn--claro" type="button" data-agrega="KIT1">Las diez, en el Kit N°1 · <span id="precioFinal">$298</span></button></div>` : ""}
+    </article>`).join("");
+  $("#ritualNav").innerHTML = DIEZ.map(([n,b], i) => `<button type="button" data-i="${i}" class="${i===0?"activo":""}"><b class="num">${n}</b><span>${esc(b)}</span><i></i></button>`).join("");
+  $("#ritualRostro").innerHTML = rostro(ZONA["01"]);
+  $$("[data-agrega]").forEach(b => b.onclick = () => agrega(b.dataset.agrega, b));
+  // pelos de la brocha viva: trazos fijos que la cabeza recorta
+  const pelos = []; let seed = 7;
+  const rnd = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+  for (let i = 0; i < 34; i++){
+    const t = (i + .5) / 34, xb = 40 + (t - .5) * 22, xt = 40 + (t - .5) * 40;
+    const claro = rnd() < .55, op = (rnd() * .34 + .28) * (claro ? 1 : .45);
+    pelos.push(`<path d="M${xb.toFixed(1)} 113 Q${((xb+xt)/2 + rnd()*2 - 1).toFixed(1)} 80 ${xt.toFixed(1)} 36" stroke="${claro ? "#EAD5C8" : "#2A1417"}" stroke-opacity="${op.toFixed(2)}" stroke-width="${(rnd()*.4+.55).toFixed(2)}"/>`);
+  }
+  $("#bvPelos").innerHTML = pelos.join("");
+  // el cepillo en espiral del paso 10
+  const cerdas = [];
+  for (let i = 0; i < 30; i++){ const y = 68 + i * 1.5, L = 6.5 + 2.2 * Math.sin(i * .55) + (i > 3 ? 0 : -1.5 * (4 - i));
+    cerdas.push(`<path d="M40 ${y.toFixed(1)} L${(40+L).toFixed(1)} ${(y-1.2).toFixed(1)}" stroke-opacity="${(.5 + .25*(i%3===0)).toFixed(2)}"/><path d="M40 ${y.toFixed(1)} L${(40-L).toFixed(1)} ${(y-1.2).toFixed(1)}" stroke-opacity="${(.5 + .25*(i%3===0)).toFixed(2)}"/>`); }
+  $("#bvCepillo").innerHTML = cerdas.join("");
+  irAPaso(0, true);
+}
+function irAPaso(i, sinAnim){
+  i = Math.max(0, Math.min(9, i));
+  if (i === pasoActual) return;
+  const antes = pasoActual; pasoActual = i;
+  const n = DIEZ[i][0], [d, virola] = CABEZAS[n];
+  $$(".paso").forEach(p => p.classList.toggle("activo", +p.dataset.i === i));
+  $$("#ritualNav button").forEach(b => { const k = +b.dataset.i; b.classList.toggle("activo", k === i); b.classList.toggle("hecho", k < i); });
+  $("#ritualNum").textContent = n;
+  $("#ritualRostro").innerHTML = rostro(ZONA[n]);
+  const fx = 40 - virola/2, dur = sinAnim ? 0 : .9;
+  if (window.gsap && window.MorphSVGPlugin){
+    gsap.to("#bvCabeza", {duration:dur, ease:"power2.inOut", morphSVG:{shape:d, shapeIndex:"auto"}});
+  } else { $("#bvCabeza").setAttribute("d", d); }
+  if (window.gsap){
+    gsap.to("#bvVirola", {duration:dur, ease:"power2.inOut", attr:{x:fx, width:virola}});
+    gsap.to("#bvAro1, #bvAro2", {duration:dur, ease:"power2.inOut", attr:{x:fx, width:virola}});
+    gsap.to("#bvMango", {duration:dur, ease:"power2.inOut", morphSVG:`M${fx+1} 134 L${fx+virola-1} 134 L46 226 Q40 236 34 226 Z`});
+    gsap.to("#bvCepillo", {duration:dur*.6, opacity: n === "10" ? 1 : 0, delay: n === "10" ? dur*.4 : 0});
+    gsap.to("#bvPelos", {duration:dur*.5, opacity: n === "10" ? 0 : 1});
+    if (!sinAnim){ gsap.fromTo("#brochaViva", {rotation: antes < i ? -2 : 2, transformOrigin:"50% 95%"}, {rotation:0, duration:1.1, ease:"elastic.out(1,.6)"}); }
+  }
+}
 
 function animaciones(){
   if (sinMovimiento || !window.gsap) return;
   gsap.registerPlugin(ScrollTrigger);
+  if (window.MorphSVGPlugin) gsap.registerPlugin(MorphSVGPlugin);
 
   // scroll suave (Lenis), atado al reloj de GSAP
   if (window.Lenis){
@@ -549,48 +585,90 @@ function animaciones(){
     lenis.on("scroll", ScrollTrigger.update);
     gsap.ticker.add(t => lenis.raf(t * 1000));
     gsap.ticker.lagSmoothing(0);
-    // anclas: que el scroll suave respete los enlaces internos
     $$('a[href^="#"]').forEach(a => a.addEventListener("click", e => {
       const id = a.getAttribute("href"); if (id.length < 2) return;
       const el = document.querySelector(id); if (!el) return;
-      e.preventDefault(); lenis.scrollTo(el, {offset:-90, duration:1.2});
+      e.preventDefault(); lenis.scrollTo(el, {offset:-70, duration:1.2});
     }));
   }
 
-  // 1) el titular se revela por líneas, la foto del arco se asienta
-  const conSplit = typeof SplitText !== "undefined";
+  // 1) entrada: el telón se abre, las piezas del tocador caen a su lugar, el titular sube por líneas
+  const telon = $("#telonEntrada"), yaVisto = (() => { try { return sessionStorage.getItem("nixa.telon"); } catch { return null; } })();
+  const tl = gsap.timeline({defaults:{ease:"power3.out"}});
+  if (telon && !yaVisto){
+    try { sessionStorage.setItem("nixa.telon", "1"); } catch {}
+    tl.to(telon.querySelector("svg"), {opacity:1, duration:.5, ease:"power1.inOut"})
+      .to(telon.querySelector("svg"), {scale:1.15, opacity:0, duration:.55, ease:"power2.in"}, "+=.25")
+      .to(telon, {yPercent:-100, duration:.9, ease:"power4.inOut"}, "-=.3")
+      .set(telon, {display:"none"});
+  } else if (telon){ telon.style.display = "none"; }
+  const objs = $$(".escena .obj");
+  tl.from(objs, {y:90, opacity:0, rotation:(i, el) => +el.dataset.giro + 10, duration:1.4, stagger:.1, ease:"power4.out"}, telon && !yaVisto ? "-=.55" : 0)
+    .from(".escena .sello-giro", {scale:.6, opacity:0, duration:1, ease:"back.out(1.6)"}, "-=1");
   document.fonts.ready.then(() => {
     try {
-      if (conSplit){
+      if (typeof SplitText !== "undefined"){
         const s = new SplitText("#heroTitulo", {type:"lines", linesClass:"linea-int"});
         s.lines.forEach(l => { const m = document.createElement("span"); m.className = "linea-mask"; l.parentNode.insertBefore(m, l); m.appendChild(l); });
-        gsap.from(".linea-int", {yPercent:110, duration:1.1, ease:"power3.out", stagger:.1, delay:.15});
+        tl.from(".linea-int", {yPercent:110, duration:1.1, ease:"power3.out", stagger:.1}, telon && !yaVisto ? 1.4 : .15);
       }
     } catch {}
-    $("#heroMarco").classList.add("asentada");
   });
 
-  // 2) el halo se aleja despacio al bajar: el único movimiento de color
-  gsap.to(".hero__halo", {yPercent:-18, ease:"none", scrollTrigger:{trigger:".hero", start:"top top", end:"bottom top", scrub:.8}});
-  gsap.to("#heroFoto", {yPercent:7, ease:"none", scrollTrigger:{trigger:".hero", start:"top top", end:"bottom top", scrub:.6}});
-
-  // 3) el ritual corre horizontal mientras bajas (solo en pantallas anchas)
-  ScrollTrigger.matchMedia({
-    "(min-width: 1000px)": () => {
-      const track = $("#ritualTrack"), pin = $("#ritualPin");
-      const dist = () => track.scrollWidth - innerWidth;
-      const barra = $("#ritualBarra");
-      gsap.to(track, {x:() => -dist(), ease:"none",
-        scrollTrigger:{trigger:pin, start:"top top", end:() => "+=" + dist(), pin:true, scrub:.9, invalidateOnRefresh:true, anticipatePin:1,
-          onUpdate(st){ if (barra) barra.style.setProperty("--p", st.progress.toFixed(3)); }}});
-    }
+  // 2) las piezas flotan despacio y siguen al cursor según su profundidad
+  objs.forEach((o, i) => {
+    gsap.to(o, {y:"+=" + (8 + i*3), rotation:"+=" + (i%2 ? 1.5 : -1.5), duration:3.2 + i*.6, yoyo:true, repeat:-1, ease:"sine.inOut", delay:i*.4});
   });
+  if (conRaton){
+    const esc = $("#escena");
+    const qs = objs.map(o => ({x:gsap.quickTo(o, "x", {duration:1.2, ease:"power3"}), y:gsap.quickTo(o, "y", {duration:1.2, ease:"power3"}), p:+o.dataset.prof}));
+    $(".portada").addEventListener("pointermove", e => {
+      const r = esc.getBoundingClientRect(); const px = (e.clientX - (r.left + r.width/2)) / r.width, py = (e.clientY - (r.top + r.height/2)) / r.height;
+      qs.forEach(q => { q.x(px * 40 * q.p); q.y(py * 26 * q.p); });
+    });
+    $(".portada").addEventListener("pointerleave", () => qs.forEach(q => { q.x(0); q.y(0); }));
+  }
+  // al bajar, la escena se queda un poco atrás (profundidad) y el halo sube
+  gsap.to("#escena", {yPercent:14, ease:"none", scrollTrigger:{trigger:".portada", start:"top top", end:"bottom top", scrub:.6}});
+  gsap.to(".portada__txt", {yPercent:-6, opacity:.2, ease:"none", scrollTrigger:{trigger:".portada", start:"top top", end:"bottom top", scrub:.6}});
 
-  // 4) las cifras cuentan hacia arriba cuando entran
+  // 3) el ritual: la sección se queda quieta y la brocha cambia diez veces mientras bajas
+  const pasosST = ScrollTrigger.create({
+    trigger:"#ritualPin", start:"top top", end:() => "+=" + Math.round(innerHeight * 5.5), pin:true, anticipatePin:1, scrub:false,
+    onUpdate(st){ irAPaso(Math.min(9, Math.floor(st.progress * 10))); }
+  });
+  $$("#ritualNav button").forEach(b => b.addEventListener("click", () => {
+    const i = +b.dataset.i, y = pasosST.start + (pasosST.end - pasosST.start) * ((i + .5) / 10);
+    if (window.__lenis) window.__lenis.scrollTo(y, {duration:1}); else scrollTo(0, y);
+  }));
+
+  // 4) el kit: los pins y la lista se señalan entre sí
+  const activaPin = k => { $$(".pin").forEach(p => p.classList.toggle("activo", p.dataset.pin === k)); $$("#incluye li").forEach(l => l.classList.toggle("activo", l.dataset.pin === k)); };
+  $$(".pin").forEach(p => { p.addEventListener("pointerenter", () => activaPin(p.dataset.pin)); p.addEventListener("click", () => activaPin(p.dataset.pin)); });
+  $$("#incluye li").forEach(l => l.addEventListener("pointerenter", () => activaPin(l.dataset.pin)));
+  $("#kitEscena").addEventListener("pointerleave", () => activaPin(null));
+  $("#mapaCard").innerHTML = rostro("mejillas") + "<b>Mapa del rostro</b>";
+  gsap.from(".kit__placa .obj, .kit__placa .mapa-card", {y:50, opacity:0, duration:1.2, stagger:.12, ease:"power3.out", scrollTrigger:{trigger:"#kitEscena", start:"top 78%", once:true}});
+  if (conRaton){
+    const esc2 = $(".kit__placa"), o1 = $(".obj--kit"), o2 = $(".obj--esp2"), o3 = $("#mapaCard");
+    const q = [o1,o2,o3].map((o,i) => ({x:gsap.quickTo(o,"x",{duration:1,ease:"power3"}), y:gsap.quickTo(o,"y",{duration:1,ease:"power3"}), p:[.5,1.2,.8][i]}));
+    esc2.addEventListener("pointermove", e => { const r = esc2.getBoundingClientRect(); const px=(e.clientX-(r.left+r.width/2))/r.width, py=(e.clientY-(r.top+r.height/2))/r.height; q.forEach(k => { k.x(px*22*k.p); k.y(py*16*k.p); }); });
+    esc2.addEventListener("pointerleave", () => q.forEach(k => { k.x(0); k.y(0); }));
+  }
+
+  // 5) botones magnéticos (solo con ratón)
+  if (conRaton){
+    $$(".btn, .mas").forEach(b => {
+      const qx = gsap.quickTo(b, "x", {duration:.5, ease:"power3"}), qy = gsap.quickTo(b, "y", {duration:.5, ease:"power3"});
+      b.addEventListener("pointermove", e => { const r = b.getBoundingClientRect(); qx((e.clientX - (r.left + r.width/2)) * .18); qy((e.clientY - (r.top + r.height/2)) * .28); });
+      b.addEventListener("pointerleave", () => { qx(0); qy(0); });
+    });
+  }
+
+  // 6) las cifras cuentan hacia arriba cuando entran
   $$("[data-cuenta]").forEach(el => {
     const meta = parseInt(el.dataset.cuenta, 10), obj = {v:0};
-    gsap.to(obj, {v:meta, duration:1.4, ease:"power2.out", scrollTrigger:{trigger:el, start:"top 85%", once:true},
-      onUpdate(){ el.textContent = Math.round(obj.v); }});
+    gsap.to(obj, {v:meta, duration:1.4, ease:"power2.out", scrollTrigger:{trigger:el, start:"top 85%", once:true}, onUpdate(){ el.textContent = Math.round(obj.v); }});
   });
 }
 
@@ -607,7 +685,6 @@ $("#pedir").onclick = enviaPedido;
 $("#cerrarModal").onclick = cierraFicha;
 $("#verKit").onclick = () => abreFicha("KIT1");
 $("#agregaKit").onclick = () => agrega("KIT1", $("#agregaKit"));
-$("#agregaHero").onclick = () => agrega("KIT1", $("#agregaHero"));
 $("#btnAyuda").onclick = abreAyuda;
 $("#btnAyudaTop").onclick = abreAyuda;
 $("#btnAyudaPie").onclick = abreAyuda;
@@ -615,10 +692,22 @@ $$("[data-abre-ayuda]").forEach(b => b.addEventListener("click", () => { cierraM
 $("#cerrarAyuda").onclick = cierraAyuda;
 $("#ayuda").onclick = e => { if (e.target.id === "ayuda") cierraAyuda(); };
 
-["nom","tel","dir"].forEach(id => {
-  const el = $("#"+id);
-  el.addEventListener("input", () => el.closest(".campo").classList.remove("mal"));
+// preguntas: la respuesta se despliega con suavidad
+$$(".preg details").forEach(d => {
+  const resp = d.querySelector(".resp");
+  d.querySelector("summary").addEventListener("click", e => {
+    if (sinMovimiento || !window.gsap) return;
+    e.preventDefault();
+    if (d.open){
+      gsap.to(resp, {height:0, opacity:0, duration:.45, ease:"power2.inOut", onComplete(){ d.open = false; gsap.set(resp, {clearProps:"height,opacity"}); }});
+    } else {
+      d.open = true;
+      gsap.from(resp, {height:0, opacity:0, duration:.6, ease:"power3.out", onComplete(){ gsap.set(resp, {clearProps:"height,opacity"}); }});
+    }
+  });
 });
+
+["nom","tel","dir"].forEach(id => { const el = $("#"+id); el.addEventListener("input", () => el.closest(".campo").classList.remove("mal")); });
 
 document.addEventListener("keydown", e => {
   if (e.key !== "Escape") return;
@@ -635,16 +724,17 @@ $("#waKit").href      = waLink("Hola nixa, tengo una duda sobre el Kit N°1.");
 $("#waFaq").href      = waLink("Hola nixa, tengo una pregunta antes de comprar.");
 ["#waPie","#waMenu","#waBarra"].forEach(s => { const a = $(s); if (a) a.href = `https://wa.me/${WA}`; });
 
-// cabecera pegada, botón flotante y barra móvil
+// cabecera: transparente sobre la portada, oscura sobre las secciones de noche, con línea de avance
 let tic = false;
 function alScroll(){
   const y = scrollY;
+  const portada = $(".portada").offsetHeight;
+  document.body.classList.toggle("arriba", y < portada - 90);
   $("#top").classList.toggle("pegada", y > 24);
   const alto = document.documentElement.scrollHeight - innerHeight;
   $("#progreso").style.transform = `scaleX(${alto > 0 ? Math.min(1, y / alto) : 0})`;
   $("#btnAyuda").classList.toggle("visible", y > innerHeight * .8);
   $("#barraMov").classList.toggle("visible", y > innerHeight * .9);
-  // la cabecera se oscurece sobre las secciones de noche
   const h = $("#top").offsetHeight + 38;
   const oscuro = $$(".ritual,.noche,.pie").some(s => { const r = s.getBoundingClientRect(); return r.top <= h && r.bottom >= h; });
   $("#top").classList.toggle("noche", oscuro);
@@ -656,6 +746,7 @@ pintaRitual();
 alScroll();
 revela();
 animaciones();
+document.fonts.ready.then(titulosPorLineas);
 pinta();
 cargar();
 
