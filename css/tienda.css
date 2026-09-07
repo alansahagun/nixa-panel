@@ -298,6 +298,7 @@ body.arriba .bolsa-btn .chip{background:var(--marfil-noche);color:var(--noche)}
 .noche__grid{display:grid;gap:clamp(36px,5vw,72px);position:relative;z-index:1;align-items:center}
 @media(min-width:1000px){.noche__grid{grid-template-columns:.92fr 1.08fr}}
 .cert{perspective:1200px}
+.cert__hoja{transform-style:preserve-3d;will-change:transform}
 .cert__hoja{background:var(--marfil);color:var(--texto);border-radius:6px;padding:clamp(24px,3vw,40px);
   box-shadow:0 50px 80px -50px rgba(0,0,0,.7);position:relative;overflow:hidden;
   background-image:repeating-linear-gradient(135deg,rgba(207,165,155,.06) 0 2px,transparent 2px 9px)}
@@ -570,11 +571,19 @@ section[id]{scroll-margin-top:96px}
 .menu__pie{margin-top:auto;display:grid;gap:10px;padding-top:30px}
 
 /* ---------- cinta ---------- */
-.cinta{border-top:1px solid var(--filete);border-bottom:1px solid var(--filete);overflow:hidden;height:56px;display:flex;align-items:center;background:var(--hueso)}
-.cinta__riel{display:flex;width:max-content;animation:cinta 54s linear infinite}
+/* La cinta pesaba porque iba en serif grande, en café fuerte, encajonada entre dos
+   filetes y con las frases cortadas a filo en las orillas. Ahora: cursiva más chica
+   en gris, mucho más aire entre frases, un solo filete arriba y las orillas que se
+   desvanecen, para que las palabras entren y salgan en vez de cortarse de golpe. */
+.cinta{border-top:1px solid var(--filete);overflow:hidden;height:64px;display:flex;align-items:center;background:transparent;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 13%,#000 87%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 13%,#000 87%,transparent)}
+.cinta__riel{display:flex;width:max-content;animation:cinta 60s linear infinite;will-change:transform}
 .cinta:hover .cinta__riel{animation-play-state:paused}
-.cinta__riel span{display:inline-flex;align-items:center;gap:30px;padding-right:30px;font-family:var(--serif);font-weight:500;font-size:1.2rem;color:var(--cafe);white-space:nowrap;font-variation-settings:"opsz" 18}
-.cinta__riel svg{width:16px;height:16px;color:var(--rosa-3)}
+.cinta__riel span{display:inline-flex;align-items:center;gap:46px;padding-right:46px;
+  font-family:var(--serif);font-style:italic;font-weight:400;font-size:1.02rem;color:var(--gris);
+  white-space:nowrap;font-variation-settings:"opsz" 18}
+.cinta__riel svg{width:10px;height:10px;color:var(--rosa);opacity:.55}
 @keyframes cinta{to{transform:translateX(-50%)}}
 
 /* ---------- garantía (vino) ---------- */
@@ -596,11 +605,19 @@ section[id]{scroll-margin-top:96px}
 
 /* ---------- pie ---------- */
 .pie{background:var(--noche);color:var(--gris-noche);padding:var(--seccion) 0 40px;position:relative;overflow:clip;contain:paint}
-.pie__marca{color:var(--marfil-noche);margin-bottom:clamp(40px,6vw,90px);position:relative;overflow:hidden}
-.pie__marca::after{content:"";position:absolute;inset:0;background:var(--noche);transform:translateX(0);
-  transition:transform 1.25s var(--ease);will-change:transform;pointer-events:none}
-.pie__marca.visto::after{transform:translateX(101%)}
-.pie__marca svg{width:min(100%,760px);height:auto;margin-inline:auto}
+/* La entrada del pie: primero se traza el filete de lado a lado, luego el logo
+   SUBE desde detrás de él. Todo con transform y opacidad — el vector se dibuja una
+   vez y de ahí en adelante solo se desliza, así que no hay nada que repintar.
+   (La cortina anterior recortaba el logo cuadro por cuadro; esta no toca el pixel.) */
+.pie__marca{color:var(--marfil-noche);margin-bottom:clamp(40px,6vw,90px)}
+.pie__filo{display:block;height:1px;background:var(--filete-noche);margin-bottom:clamp(26px,4vw,48px);
+  transform:scaleX(0);transform-origin:center;transition:transform 1.3s var(--ease);will-change:transform}
+.pie__marca.visto .pie__filo{transform:scaleX(1)}
+.pie__mascara{display:block;overflow:hidden}
+.pie__mascara svg{display:block;width:min(100%,760px);height:auto;margin-inline:auto;
+  transform:translateY(38%);opacity:0;will-change:transform,opacity;
+  transition:transform 1.2s cubic-bezier(.16,1,.3,1) .2s,opacity .8s var(--ease) .2s}
+.pie__marca.visto .pie__mascara svg{transform:none;opacity:1}
 .pie__grid{display:grid;gap:36px;border-top:1px solid var(--filete-noche);padding-top:44px}
 .pie h4{font:400 10.5px/1 var(--label);letter-spacing:.26em;text-transform:uppercase;color:var(--marfil-noche);margin-bottom:18px}
 .pie ul{display:grid;gap:10px}
@@ -732,7 +749,8 @@ section[id]{scroll-margin-top:96px}
 .razon{margin-top:16px;color:var(--gris)}
 
 /* ---------- movimiento ---------- */
-.sin-anim .pie__marca::after{display:none}
+.sin-anim .pie__filo{transform:none;transition:none}
+.sin-anim .pie__mascara svg{transform:none;opacity:1;transition:none}
 /* títulos por líneas */
 .linea-mask{display:block;overflow:hidden;padding-bottom:.12em;margin-bottom:-.12em}
 h2.rev.lineas{opacity:1;transform:none}
