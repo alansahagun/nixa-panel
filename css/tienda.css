@@ -11,6 +11,8 @@
       dos animaciones nunca escriban la misma propiedad. Ese era el bug
       de la portada al soltar el ratón.
    4. Nada de secciones fijadas al scroll: el abanico se maneja solo.
+   5. Nada de animar clip-path ni filtros sobre vectores grandes: se
+      mueve una capa con transform y el compositor hace el resto.
    ===================================================================== */
 
 :root{
@@ -556,7 +558,7 @@ section[id]{scroll-margin-top:96px}
 @keyframes cinta{to{transform:translateX(-50%)}}
 
 /* ---------- garantía (vino) ---------- */
-.noche{background:var(--vino);color:var(--marfil-noche);padding-block:var(--seccion);position:relative;overflow:clip}
+.noche{background:var(--vino);color:var(--marfil-noche);padding-block:var(--seccion);position:relative;overflow:clip;contain:paint}
 .noche h2{color:var(--marfil-noche)}
 .noche .ced{color:var(--rosa-2)}
 .noche__txt{display:flex;flex-direction:column;gap:26px}
@@ -573,8 +575,11 @@ section[id]{scroll-margin-top:96px}
 .sep.visto svg{opacity:1;transform:none}
 
 /* ---------- pie ---------- */
-.pie{background:var(--noche);color:var(--gris-noche);padding:var(--seccion) 0 40px;position:relative;overflow:clip}
-.pie__marca{color:var(--marfil-noche);margin-bottom:clamp(40px,6vw,90px)}
+.pie{background:var(--noche);color:var(--gris-noche);padding:var(--seccion) 0 40px;position:relative;overflow:clip;contain:paint}
+.pie__marca{color:var(--marfil-noche);margin-bottom:clamp(40px,6vw,90px);position:relative;overflow:hidden}
+.pie__marca::after{content:"";position:absolute;inset:0;background:var(--noche);transform:translateX(0);
+  transition:transform 1.25s var(--ease);will-change:transform;pointer-events:none}
+.pie__marca.visto::after{transform:translateX(101%)}
 .pie__marca svg{width:min(100%,760px);height:auto;margin-inline:auto}
 .pie__grid{display:grid;gap:36px;border-top:1px solid var(--filete-noche);padding-top:44px}
 .pie h4{font:400 10.5px/1 var(--label);letter-spacing:.26em;text-transform:uppercase;color:var(--marfil-noche);margin-bottom:18px}
@@ -706,9 +711,7 @@ section[id]{scroll-margin-top:96px}
 .razon{margin-top:16px;color:var(--gris)}
 
 /* ---------- movimiento ---------- */
-.rev-marca svg{clip-path:inset(0 100% 0 0);transition:clip-path 1.6s var(--ease)}
-.rev-marca.visto svg{clip-path:inset(0 0 0 0)}
-.sin-anim .rev-marca svg{clip-path:none;transition:none}
+.sin-anim .pie__marca::after{display:none}
 /* títulos por líneas */
 .linea-mask{display:block;overflow:hidden;padding-bottom:.12em;margin-bottom:-.12em}
 h2.rev.lineas{opacity:1;transform:none}
