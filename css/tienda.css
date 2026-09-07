@@ -11,8 +11,6 @@
       dos animaciones nunca escriban la misma propiedad. Ese era el bug
       de la portada al soltar el ratón.
    4. Nada de secciones fijadas al scroll: el abanico se maneja solo.
-   5. Nada de animar clip-path ni filtros sobre vectores grandes: se
-      mueve una capa con transform y el compositor hace el resto.
    ===================================================================== */
 
 :root{
@@ -106,9 +104,8 @@ body.sin-telon .telon-entrada{display:none}
 .obj--brocha{width:23%;left:26%;top:14%}
 .obj--esponja{width:15%;left:60%;top:44%}
 .obj--rizador{width:26%;left:74%;top:6%}
-.sello-giro{position:absolute;right:2%;bottom:2%;width:clamp(76px,9vw,124px);color:var(--rosa);animation:gira 34s linear infinite}
+.sello-giro{position:absolute;right:2%;bottom:2%;width:clamp(76px,9vw,124px);color:var(--rosa)}
 .sello-giro svg{width:100%;height:auto}
-@keyframes gira{to{transform:rotate(360deg)}}
 @media(min-width:1000px){
   .portada__w{grid-template-columns:1fr 1.05fr;gap:clamp(30px,4vw,70px)}
   .escena{height:clamp(420px,40vw,580px)}
@@ -311,7 +308,9 @@ body.arriba .bolsa-btn .chip{background:var(--marfil-noche);color:var(--noche)}
 .cert__folio b{display:block;color:var(--cafe);font-weight:500;letter-spacing:.1em}
 .cert .ced{color:var(--vino)}
 .cert__n{display:flex;align-items:baseline;gap:14px;line-height:.82;margin:8px 0 16px}
-.cert__n .num{font-family:var(--serif);font-weight:500;font-size:clamp(4.2rem,10vw,7rem);color:var(--cafe);font-variation-settings:"opsz" 96;letter-spacing:-.02em}
+.cert__n .num{font-family:var(--serif);font-weight:500;font-size:clamp(4.2rem,10vw,7rem);color:var(--cafe);font-variation-settings:"opsz" 96;letter-spacing:-.02em;
+  /* ancho reservado: si no, al pasar de 9 a 10 la palabra "dias" da un brinco */
+  display:inline-block;min-width:2ch;text-align:center;font-variant-numeric:tabular-nums}
 .cert__n span:last-child{font-family:var(--serif);font-style:italic;font-size:clamp(1.2rem,2vw,1.7rem);color:var(--rosa-3)}
 .cert__txt{color:var(--gris);font-size:.98rem;max-width:42ch}
 .cert__lista{display:grid;gap:9px;margin:20px 0;padding:18px 0;border-top:1px solid var(--filete);border-bottom:1px solid var(--filete)}
@@ -416,7 +415,6 @@ body.arriba .bolsa-btn .chip{background:var(--marfil-noche);color:var(--noche)}
 .bolsa-btn__ico>svg:first-child{width:100%;height:100%;fill:none;stroke:currentColor}
 .bolsa-btn__ico .cuerpo{stroke-width:1.6;stroke-linejoin:round}
 .bolsa-btn__ico .asa{stroke-width:1.6;stroke-linecap:round}
-.bolsa-btn__marca{position:absolute;left:50%;top:58%;width:11px;height:auto;transform:translate(-50%,-50%);opacity:.92}
 
 
 /* ============ base heredada de la v6, ya probada ============ */
@@ -539,9 +537,13 @@ section[id]{scroll-margin-top:96px}
   .bolsa-btn .chip{min-width:38px;height:38px}
 }
 /* menú móvil */
-.menu{position:fixed;inset:0;z-index:70;background:var(--marfil);transform:translateY(-100%);transition:transform .6s var(--ease);
+/* El menu cerrado NO puede pintar nada. Antes su contenido se desbordaba por
+   abajo y aterrizaba encima del logo del pie: eso era lo que se veia "bugeado". */
+.menu{position:fixed;inset:0;z-index:70;background:var(--marfil);transform:translateY(-100%);
+  transition:transform .6s var(--ease),visibility 0s linear .6s;visibility:hidden;
+  overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
   display:flex;flex-direction:column;padding:calc(var(--pad) + 30px) var(--pad) var(--pad)}
-.menu.abierto{transform:none}
+.menu.abierto{transform:none;visibility:visible;transition:transform .6s var(--ease),visibility 0s}
 .menu a{font-family:var(--serif);font-weight:500;font-size:clamp(2.4rem,9vw,4rem);line-height:1.08;color:var(--cafe);text-decoration:none;
   padding:10px 0;border-bottom:1px solid var(--filete);display:flex;justify-content:space-between;align-items:baseline}
 .menu a small{font:400 10.5px/1 var(--label);letter-spacing:.26em;color:var(--tenue)}
@@ -646,9 +648,9 @@ section[id]{scroll-margin-top:96px}
 /* ---------- bolsa ---------- */
 .telon{position:fixed;inset:0;z-index:85;background:rgba(42,20,23,.42);opacity:0;pointer-events:none;transition:opacity .5s}
 .telon.abierto{opacity:1;pointer-events:auto}
-.bolsa{position:fixed;top:0;right:0;bottom:0;z-index:90;width:min(100%,480px);background:var(--marfil);transform:translateX(100%);
+.bolsa{position:fixed;top:0;right:0;bottom:0;z-index:90;width:min(100%,480px);background:var(--marfil);transform:translateX(100%);visibility:hidden;
   transition:transform .65s var(--ease);display:flex;flex-direction:column;border-left:1px solid var(--filete)}
-.bolsa.abierta{transform:none}
+.bolsa.abierta{transform:none;visibility:visible}
 .bolsa__cab{display:flex;justify-content:space-between;align-items:flex-end;padding:28px 28px 20px;border-bottom:1px solid var(--filete)}
 .bolsa__cab h3{font-size:2rem;margin-top:6px}
 .bolsa__cuerpo{overflow-y:auto;padding:22px 28px 40px;flex:1}
