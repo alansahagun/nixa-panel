@@ -329,7 +329,7 @@ function pinta(){
     t += p.precio * q;
     const {tit, sub} = titulo(p);
     const f = FOTOS[sku] || FOTOS.KIT1;
-    return `<div class="item">
+    return `<div class="item" style="--i:${Object.keys(bolsa).indexOf(sku)}">
       <span class="item__mini"><img src="${esc(f.a)}" alt="" loading="lazy"></span>
       <div>
         <p class="item__nom">${esc(tit)}${sub?`<small>${esc(sub)}</small>`:""}</p>
@@ -485,7 +485,7 @@ function pintaAyuda(){
     $("#pasoAyuda").textContent = `Pregunta ${i+1} de ${PREG.length}`;
     c.innerHTML = `<h3 id="tituloAyuda">${q.q}</h3>
       ${q.nota ? `<p class="nota">${q.nota}</p>` : ""}
-      <div class="opcs">${q.o.map(([v,t]) => `<button class="opc" type="button" data-v="${v}">${t}</button>`).join("")}</div>
+      <div class="opcs">${q.o.map(([v,t],k) => `<button class="opc" type="button" data-v="${v}" style="--i:${k}">${t}</button>`).join("")}</div>
       ${i ? '<button class="link" type="button" id="atras" style="margin-top:18px">Pregunta anterior</button>' : ""}`;
     c.querySelectorAll(".opc").forEach(b => b.onclick = () => { resp.push(b.dataset.v); pintaAyuda(); });
     const a = $("#atras"); if (a) a.onclick = () => { resp.pop(); pintaAyuda(); };
@@ -529,12 +529,25 @@ const cierraAyuda = () => cierraCapa($("#ayuda"), "abierta");
 // Regla: todo entra una vez y se queda. Nada se mueve mientras lees.
 let io = null;
 function revela(raiz){
-  const els = (raiz || document).querySelectorAll(".rev:not(.visto)");
+  const els = (raiz || document).querySelectorAll(".rev:not(.visto), .rev-foto:not(.visto), .rev-marca:not(.visto), .sep:not(.visto)");
   if (sinMovimiento){ els.forEach(e => e.classList.add("visto")); return; }
   io = io || new IntersectionObserver(es => es.forEach(e => {
     if (e.isIntersecting){ e.target.classList.add("visto"); io.unobserve(e.target); }
   }), {rootMargin:"0px 0px -10% 0px", threshold:.08});
   els.forEach(el => io.observe(el));
+}
+/* los títulos de sección entran línea por línea, una sola vez */
+function titulosPorLineas(){
+  if (sinMovimiento || !window.gsap || typeof SplitText === "undefined") return;
+  $$("h2.rev").forEach(h => {
+    try {
+      const s = new SplitText(h, {type:"lines", linesClass:"linea-int"});
+      s.lines.forEach(l => { const m = document.createElement("span"); m.className = "linea-mask"; l.parentNode.insertBefore(m, l); m.appendChild(l); });
+      h.classList.add("lineas");
+      gsap.from(s.lines, {yPercent:110, duration:1, ease:"power3.out", stagger:.09,
+        scrollTrigger:{trigger:h, start:"top 88%", once:true}});
+    } catch {}
+  });
 }
 if (sinMovimiento) document.documentElement.classList.add("sin-anim");
 
@@ -580,11 +593,48 @@ function animaciones(){
       const track = $("#ritualTrack"), pin = $("#ritualPin");
       const dist = () => track.scrollWidth - innerWidth;
       const barra = $("#ritualBarra");
-      gsap.to(track, {x:() => -dist(), ease:"none",
-        scrollTrigger:{trigger:pin, start:"top top", end:() => "+=" + dist(), pin:true, scrub:.9, invalidateOnRefresh:true, anticipatePin:1,
+      const tw = gsap.to(track, {x:() => -dist(), ease:"none",
+        scrollTrigger:{trigger:pin, start:"top top", end:() => "+=" + dist(), pin:true, scrub:1, invalidateOnRefresh:true, anticipatePin:1,
           onUpdate(st){ if (barra) barra.style.setProperty("--p", st.progress.toFixed(3)); }}});
+      // cada paso entra desde abajo al asomarse, y se "enfoca" al pasar por el centro
+      $$(".paso").forEach(p => {
+        gsap.from(p, {y:36, opacity:0, duration:.9, ease:"power3.out",
+          scrollTrigger:{trigger:p, containerAnimation:tw, start:"left 92%", once:true}});
+        ScrollTrigger.create({trigger:p, containerAnimation:tw, start:"left 62%", end:"right 38%", toggleClass:{targets:p, className:"foco"}});
+      });
     }
   });
+
+  // 3b) en móvil, el paso enfocado se detecta con el scroll nativo de la pista
+  if (innerWidth < 1000){
+    const track = $("#ritualTrack");
+    const ioP = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle("foco", e.intersectionRatio > .7)),
+      {root:track, threshold:[.7]});
+    $$(".paso").forEach(p => ioP.observe(p));
+  }
+
+  // 3c) la foto del escenario sigue al cursor, apenas
+  const esc = $(".escenario"), cuerpo = $(".indice__cuerpo");
+  if (esc && cuerpo && matchMedia("(pointer:fine)").matches){
+    const qx = gsap.quickTo(esc, "x", {duration:.9, ease:"power3"}), qy = gsap.quickTo(esc, "y", {duration:.9, ease:"power3"});
+    cuerpo.addEventListener("pointermove", e => {
+      const r = cuerpo.getBoundingClientRect();
+      qx(((e.clientX - r.left) / r.width - .5) * 14); qy(((e.clientY - r.top) / r.height - .5) * 10);
+    });
+    cuerpo.addEventListener("pointerleave", () => { qx(0); qy(0); });
+  }
+
+  // 3d) botones magnéticos (solo con ratón)
+  if (matchMedia("(pointer:fine)").matches){
+    $$(".btn, .mas").forEach(b => {
+      const qx = gsap.quickTo(b, "x", {duration:.5, ease:"power3"}), qy = gsap.quickTo(b, "y", {duration:.5, ease:"power3"});
+      b.addEventListener("pointermove", e => {
+        const r = b.getBoundingClientRect();
+        qx((e.clientX - (r.left + r.width/2)) * .18); qy((e.clientY - (r.top + r.height/2)) * .28);
+      });
+      b.addEventListener("pointerleave", () => { qx(0); qy(0); });
+    });
+  }
 
   // 4) las cifras cuentan hacia arriba cuando entran
   $$("[data-cuenta]").forEach(el => {
@@ -614,6 +664,21 @@ $("#btnAyudaPie").onclick = abreAyuda;
 $$("[data-abre-ayuda]").forEach(b => b.addEventListener("click", () => { cierraMenu(); abreAyuda(); }));
 $("#cerrarAyuda").onclick = cierraAyuda;
 $("#ayuda").onclick = e => { if (e.target.id === "ayuda") cierraAyuda(); };
+
+// preguntas: la respuesta se despliega con suavidad
+$$(".preg details").forEach(d => {
+  const resp = d.querySelector(".resp");
+  d.querySelector("summary").addEventListener("click", e => {
+    if (sinMovimiento || !window.gsap) return;
+    e.preventDefault();
+    if (d.open){
+      gsap.to(resp, {height:0, opacity:0, duration:.45, ease:"power2.inOut", onComplete(){ d.open = false; gsap.set(resp, {clearProps:"height,opacity"}); }});
+    } else {
+      d.open = true;
+      gsap.from(resp, {height:0, opacity:0, duration:.6, ease:"power3.out", onComplete(){ gsap.set(resp, {clearProps:"height,opacity"}); }});
+    }
+  });
+});
 
 ["nom","tel","dir"].forEach(id => {
   const el = $("#"+id);
@@ -656,6 +721,7 @@ pintaRitual();
 alScroll();
 revela();
 animaciones();
+document.fonts.ready.then(titulosPorLineas);
 pinta();
 cargar();
 
