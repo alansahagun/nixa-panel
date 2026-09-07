@@ -4,16 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#2A1417">
-<meta name="description" content="nixa BEAUTY. Brochas de maquillaje numeradas del 01 al 10, esponjas, tapete lavador y rizador. Armado y probado a mano en Guadalajara. Garantía de 90 días, sin ticket.">
-<title>nixa BEAUTY — Brochas de maquillaje numeradas, hechas para durar</title>
+<meta name="description" content="NIXA BEAUTY. Diez brochas de maquillaje numeradas del 01 al 10, esponjas, tapete lavador y rizador. Armadas y probadas a mano en Guadalajara. Garantía de 90 días, sin ticket.">
+<title>NIXA BEAUTY — Diez brochas numeradas, hechas para durar</title>
 <link rel="canonical" href="https://nixa.mx/">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon.png">
 <link rel="manifest" href="manifest.webmanifest">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="nixa BEAUTY">
-<meta property="og:title" content="nixa BEAUTY — Cada brocha sabe su lugar">
-<meta property="og:description" content="Diez brochas numeradas, esponjas, tapete y rizador. Armado y probado a mano en Guadalajara. Garantía de 90 días sin ticket.">
+<meta property="og:site_name" content="NIXA BEAUTY">
+<meta property="og:title" content="NIXA BEAUTY — Cada brocha sabe su lugar">
+<meta property="og:description" content="Diez brochas numeradas, esponjas, tapete y rizador. Armadas y probadas a mano en Guadalajara. Garantía de 90 días, sin ticket.">
 <meta property="og:url" content="https://nixa.mx/">
 <meta property="og:image" content="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/hero-tocador.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -29,36 +29,42 @@
 
 <div id="sprite" hidden></div>
 
-<!-- telón de entrada: el abanico se dibuja y se abre -->
 <div class="telon-entrada" id="telonEntrada" aria-hidden="true">
-  <svg viewBox="0 0 100 100"><use href="#abanico"/></svg>
+  <svg viewBox="0 0 885.8 955.7"><use href="#abanico"/></svg>
 </div>
 
 <div class="aviso" role="note">
-  <span><b>Garantía de 90 días, sin ticket</b> <i></i> <b>Envío el mismo día en Guadalajara</b> <i></i> <b>Te contesta una persona</b></span>
+  <span><b>Garantía de 90 días, sin ticket</b> <i></i> <b>Envío el mismo día en Guadalajara</b> <i></i> <b>Pagas aquí, seguro</b></span>
 </div>
 
 <header class="top" id="top">
   <div class="w">
-    <div>
+    <div class="top__izq">
       <button class="hamb" id="btnMenu" type="button" aria-label="Abrir menú" aria-controls="menu" aria-expanded="false">
         <svg viewBox="0 0 22 12" aria-hidden="true"><path d="M0 1h22M0 11h22"/></svg>
       </button>
       <nav class="nav" aria-label="Secciones">
-        <a href="#coleccion">Colección</a>
-        <a href="#ritual">El ritual</a>
+        <a href="#abanico">El abanico</a>
         <a href="#kit">Kit N°1</a>
+        <a href="#tienda">Tienda</a>
         <a href="#garantia">Garantía</a>
         <a href="#preguntas">Preguntas</a>
       </nav>
     </div>
-    <a class="marca-top" href="#portada" aria-label="nixa BEAUTY, inicio">
-      <svg viewBox="0 0 1380 615" role="img" aria-label="nixa BEAUTY"><use href="#nixa"/></svg>
+    <a class="marca-top" href="#portada" aria-label="NIXA BEAUTY, inicio">
+      <svg viewBox="0 0 1368 608" role="img" aria-label="NIXA BEAUTY"><use href="#nixa"/></svg>
     </a>
     <div class="top__der">
       <button class="ayudar" id="btnAyudaTop" type="button">¿Cuál es para mí?</button>
       <button class="bolsa-btn" id="btnBolsa" type="button" aria-label="Abrir la bolsa">
-        <span class="txt">Bolsa</span><span class="chip" id="nBolsa">0</span>
+        <span class="bolsa-btn__ico" aria-hidden="true">
+          <svg viewBox="0 0 30 32">
+            <path class="asa" d="M10.4 9.4V7.2a4.6 4.6 0 0 1 9.2 0v2.2"/>
+            <path class="cuerpo" d="M2.6 9.4h24.8l1.4 20.2a1.6 1.6 0 0 1-1.6 1.7H2.8a1.6 1.6 0 0 1-1.6-1.7Z"/>
+          </svg>
+          <svg class="bolsa-btn__marca" viewBox="0 0 885.8 955.7" aria-hidden="true"><use href="#abanico"/></svg>
+        </span>
+        <span class="chip" id="nBolsa">0</span>
       </button>
     </div>
   </div>
@@ -69,62 +75,154 @@
   <button class="cerrar" type="button" aria-label="Cerrar menú" data-cierra-menu>
     <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M1 1l16 16M17 1L1 17"/></svg>
   </button>
-  <a href="#coleccion">La colección<small>05 piezas</small></a>
-  <a href="#ritual">El ritual<small>01 — 10</small></a>
+  <a href="#abanico">El abanico<small>Las diez, en orden</small></a>
   <a href="#kit">Kit N°1<small>Empieza aquí</small></a>
+  <a href="#tienda">Tienda<small>05 piezas</small></a>
   <a href="#garantia">Garantía<small>90 días</small></a>
   <a href="#preguntas">Preguntas<small>Envíos y pagos</small></a>
   <div class="menu__pie">
     <button class="btn btn--ancho" type="button" data-abre-ayuda>¿Cuál es para mí?</button>
-    <a class="btn btn--linea btn--ancho" id="waMenu" href="#" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+    <a class="btn btn--linea btn--ancho" id="waMenu" href="#" target="_blank" rel="noopener">Dudas por WhatsApp</a>
   </div>
 </nav>
 
 <main>
 
-<!-- ============ PORTADA: el tocador abierto ============ -->
+<!-- ============ 1. PORTADA ============ -->
 <section class="portada" id="portada">
   <div class="portada__halo" aria-hidden="true"></div>
-  <svg class="portada__marca" viewBox="0 0 100 100" aria-hidden="true"><use href="#abanico"/></svg>
+  <svg class="portada__marca" viewBox="0 0 885.8 955.7" aria-hidden="true"><use href="#abanico"/></svg>
   <div class="w portada__w">
     <div class="portada__txt">
       <span class="ced ced--linea rev">Brochas de maquillaje · Guadalajara</span>
       <h1 id="heroTitulo">Cada brocha sabe <em>su lugar.</em></h1>
-      <p class="lede rev rev--2">Diez brochas numeradas del 01 al 10, esponjas, tapete y rizador. Armado y probado con las manos. Si algo falla en noventa días, lo reponemos sin ticket.</p>
+      <p class="lede rev rev--2">Diez brochas numeradas del 01 al 10, esponjas, tapete y rizador. Armadas y probadas con las manos. Si algo falla en noventa días, lo reponemos sin ticket.</p>
       <div class="portada__cta rev rev--3">
-        <a class="btn btn--rosa" href="#coleccion">Ver la colección
+        <a class="btn btn--rosa" href="#abanico">Conoce las diez
           <svg class="flecha" viewBox="0 0 13 9" aria-hidden="true"><path d="M0 4.5h11M8 1l3.5 3.5L8 8"/></svg></a>
         <button class="link link--claro" type="button" id="verKit">El Kit N°1 · <span id="precioHero">$298</span></button>
       </div>
     </div>
 
     <div class="escena" id="escena" aria-hidden="true">
-      <figure class="obj obj--dorada" data-prof="1.35" data-giro="-8"><img class="sombra" src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/obj/brocha-dorada-sombra.webp" alt=""><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/obj/brocha-dorada.webp" alt=""></figure>
-      <figure class="obj obj--brocha" data-prof="1" data-giro="-14"><img class="sombra" src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/obj/brocha-rosa-sombra.webp" alt=""><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/obj/brocha-rosa.webp" alt="Brocha de polvo rosa de nixa" fetchpriority="high"></figure>
-      <figure class="obj obj--esponja" data-prof=".55" data-giro="18"><img class="sombra" src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/obj/esponja-sombra.webp" alt=""><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/obj/esponja.webp" alt="Esponja de maquillaje"></figure>
-      <figure class="obj obj--rizador" data-prof=".35" data-giro="-24"><img class="sombra" src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/obj/rizador-sombra.webp" alt=""><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/obj/rizador.webp" alt="Rizador de pestañas"></figure>
-      <div class="sello-giro">
-        <svg class="aro" viewBox="0 0 100 100"><defs><path id="aroPath" d="M50 50 m-38 0 a38 38 0 1 1 76 0 a38 38 0 1 1 -76 0"/></defs>
-          <text textLength="237" lengthAdjust="spacing"><textPath href="#aroPath">Enhance your ritual · nixa beauty · </textPath></text></svg>
-        <svg class="centro" viewBox="0 0 100 100"><use href="#abanico"/></svg>
-      </div>
+      <figure class="obj obj--dorada" data-prof="1.35" data-giro="-8"><span class="obj__flota"><span class="obj__in"><img class="sombra" src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/obj/brocha-dorada-sombra.webp" alt=""><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/obj/brocha-dorada.webp" alt=""></span></span></figure>
+      <figure class="obj obj--brocha" data-prof="1" data-giro="-14"><span class="obj__flota"><span class="obj__in"><img class="sombra" src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/obj/brocha-rosa-sombra.webp" alt=""><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/obj/brocha-rosa.webp" alt="Brocha de polvo rosa de NIXA" fetchpriority="high"></span></span></figure>
+      <figure class="obj obj--esponja" data-prof=".55" data-giro="18"><span class="obj__flota"><span class="obj__in"><img class="sombra" src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/obj/esponja-sombra.webp" alt=""><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/obj/esponja.webp" alt="Esponja de maquillaje"></span></span></figure>
+      <figure class="obj obj--rizador" data-prof=".35" data-giro="-24"><span class="obj__flota"><span class="obj__in"><img class="sombra" src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/obj/rizador-sombra.webp" alt=""><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/obj/rizador.webp" alt="Rizador de pestañas"></span></span></figure>
+      <div class="sello-giro"><svg viewBox="0 0 1410 1410"><use href="#sello"/></svg></div>
     </div>
   </div>
   <ul class="portada__confia rev rev--4" aria-label="Lo que prometemos">
     <li><span class="num">01</span>Garantía de 90 días, sin ticket</li>
     <li><span class="num">02</span>Mismo día en Guadalajara</li>
-    <li><span class="num">03</span>Te contesta una persona</li>
+    <li><span class="num">03</span>Pago seguro en la página</li>
     <li class="cue"><i></i>Baja</li>
   </ul>
 </section>
 
-<!-- ============ CINTA ============ -->
+<!-- ============ 2. CINTA ============ -->
 <div class="cinta" aria-hidden="true">
   <div class="cinta__riel" id="cinta"></div>
 </div>
 
-<!-- ============ LA VITRINA ============ -->
-<section class="vitrina" id="coleccion">
+<!-- ============ 3. EL ABANICO — las diez, en orden ============ -->
+<section class="aba" id="abanico" aria-labelledby="abaTitulo">
+  <div class="w">
+    <div class="aba__cab">
+      <div>
+        <span class="ced ced--linea rev">El abanico</span>
+        <h2 id="abaTitulo" class="rev rev--2">Diez brochas. <em>Ninguna</em> de adorno.</h2>
+      </div>
+      <p class="lede rev rev--3">Cada una lleva su número y su oficio en el mango. Ábrelo y mira qué hace cada una: de la piel a las cejas, en el orden en que se usan.</p>
+    </div>
+
+    <div class="aba__caja rev">
+      <!-- el abanico -->
+      <div class="aba__esc" id="abaEsc" tabindex="0" role="group" aria-label="Las diez brochas. Usa las flechas para moverte.">
+        <span class="aba__no num" id="abaNum" aria-hidden="true">01</span>
+        <div class="aba__fan" id="abaFan"></div>
+        <span class="aba__pista" aria-hidden="true"><i></i>Arrastra o toca una brocha</span>
+        <div class="aba__piso" aria-hidden="true"></div>
+      </div>
+
+      <!-- la ficha de la brocha activa -->
+      <div class="aba__info">
+        <div class="aba__rostro" id="abaRostro" aria-hidden="true"></div>
+        <div class="aba__txt">
+          <span class="ced" id="abaZona">Rostro</span>
+          <h3 id="abaNombre">Polvo</h3>
+          <p id="abaDesc">La grande y esponjosa. Fija el maquillaje con un velo de polvo, sin cargar.</p>
+          <p class="aba__tip"><b>El truco:</b> <span id="abaTip">sacude el exceso antes de tocar la cara.</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- riel de números -->
+    <div class="aba__pie rev">
+      <button class="aba__flecha" id="abaAnt" type="button" aria-label="Brocha anterior">
+        <svg viewBox="0 0 15 10" aria-hidden="true"><path d="M14 5H1M5 1L1 5l4 4"/></svg></button>
+      <div class="aba__riel" id="abaRiel" role="tablist" aria-label="Elige una brocha"></div>
+      <button class="aba__flecha" id="abaSig" type="button" aria-label="Brocha siguiente">
+        <svg viewBox="0 0 15 10" aria-hidden="true"><path d="M1 5h13M10 1l4 4-4 4"/></svg></button>
+    </div>
+    <p class="aba__cierre rev">Las diez vienen juntas en el <button class="link" type="button" id="abaAlKit">Kit N°1</button>, con el mapa del rostro impreso.</p>
+  </div>
+</section>
+
+<!-- ============ 4. KIT N°1 — primero se enseña, al final se vende ============ -->
+<section class="kit" id="kit">
+  <div class="w">
+    <div class="kit__cab">
+      <div>
+        <span class="ced ced--linea rev">N°01 · El kit</span>
+        <h2 class="rev rev--2">Todo lo que necesitas para empezar, <em>en una caja.</em></h2>
+      </div>
+      <p class="lede rev rev--3">Para quien empieza de cero o quiere dejar de adivinar. Diez brochas, ni una más.</p>
+    </div>
+
+    <div class="kit__grid">
+      <div class="kit__escena rev" id="kitEscena">
+        <div class="placa placa--arena kit__placa">
+          <figure class="obj obj--kit"><span class="obj__flota"><span class="obj__in"><img class="sombra" src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/obj/kit-sombra.webp" alt=""><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/obj/kit.webp" alt="Las diez brochas del Kit N°1 abiertas en abanico sobre su estuche" loading="lazy"></span></span></figure>
+          <figure class="obj obj--esp2"><span class="obj__flota"><span class="obj__in"><img class="sombra" src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/obj/esponja-sombra.webp" alt=""><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/obj/esponja.webp" alt="" loading="lazy"></span></span></figure>
+          <div class="mapa-card" id="mapaCard"></div>
+          <button class="pin" type="button" data-pin="1" style="--x:52%;--y:26%" aria-label="Diez brochas numeradas"><span>01</span></button>
+          <button class="pin" type="button" data-pin="2" style="--x:56%;--y:70%" aria-label="Estuche rígido"><span>02</span></button>
+          <button class="pin" type="button" data-pin="3" style="--x:86%;--y:64%" aria-label="Dos esponjas"><span>03</span></button>
+          <button class="pin" type="button" data-pin="4" style="--x:16%;--y:78%" aria-label="Mapa del rostro"><span>04</span></button>
+          <span class="fig placa__fig">Fig. 01 · Kit N°1</span>
+        </div>
+      </div>
+
+      <div class="kit__txt">
+        <span class="ced rev">Lo que abres</span>
+        <ol class="incluye rev rev--2" id="incluye">
+          <li data-pin="1"><span class="n num">01</span><span><b>Diez brochas numeradas</b>Con el oficio grabado en el mango. No vuelves a adivinar cuál era.</span></li>
+          <li data-pin="2"><span class="n num">02</span><span><b>Estuche rígido con cierre</b>Para que viajen sin doblarse ni soltar pelo.</span></li>
+          <li data-pin="3"><span class="n num">03</span><span><b>Dos esponjas de maquillaje</b>Para la base y el corrector, sin marcas.</span></li>
+          <li data-pin="4"><span class="n num">04</span><span><b>El mapa del rostro impreso</b>Qué brocha va en qué zona, en una tarjeta.</span></li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- y hasta aquí, el precio -->
+    <div class="kit__compra rev" id="kitCompra">
+      <div class="kit__compra__l">
+        <span class="ced">Kit N°1 · las diez</span>
+        <span class="kit__precio"><span id="precioKit">$298</span><small>MXN</small></span>
+        <span class="kit__envio">Envío gratis desde $599 · en Guadalajara, el mismo día</span>
+      </div>
+      <div class="kit__compra__r">
+        <button class="btn btn--grande" id="agregaKit" type="button">Agregar a la bolsa
+          <svg class="flecha" viewBox="0 0 13 9" aria-hidden="true"><path d="M0 4.5h11M8 1l3.5 3.5L8 8"/></svg></button>
+        <button class="link" type="button" id="verKit2">Ver todo lo que trae</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. LA TIENDA ============ -->
+<section class="vitrina" id="tienda">
   <div class="w">
     <div class="cab">
       <div>
@@ -133,160 +231,101 @@
       </div>
       <p class="lede rev rev--3">Del polvo a las pestañas. Cada pieza se elige, se prueba y se envía desde Guadalajara.</p>
     </div>
+
+    <!-- recompra rápida: solo aparece si ya compraste -->
+    <div class="otravez" id="otraVez" hidden>
+      <div class="otravez__cab"><span class="ced">Lo tuyo, otra vez</span><button class="link link--min" type="button" id="olvidaHist">Ocultar</button></div>
+      <div class="otravez__fila" id="otraVezFila"></div>
+    </div>
+
     <div class="placas" id="placas" aria-busy="true" aria-live="polite"></div>
+
     <div class="vitrina__pie rev">
       <div class="nota">
-        <svg viewBox="0 0 100 100" aria-hidden="true"><use href="#abanico"/></svg>
+        <svg viewBox="0 0 885.8 955.7" aria-hidden="true"><use href="#abanico"/></svg>
         <div><span class="ced">Cómo se compra</span>
-        <p>Aquí no se cobra nada. Armas tu bolsa, se abre WhatsApp con el pedido y ahí confirmamos pago y entrega. Transferencia, efectivo, OXXO o Mercado Pago.</p></div>
+        <p>Pagas aquí mismo, con tarjeta, meses sin intereses, transferencia u OXXO. Te llega el correo de confirmación y, si prefieres, seguimos el envío por WhatsApp.</p></div>
       </div>
       <button class="btn btn--linea" type="button" data-abre-ayuda>¿Cuál es para mí? · 3 preguntas</button>
     </div>
   </div>
 </section>
 
-<!-- ============ EL RITUAL: una brocha que se transforma ============ -->
-<section class="ritual" id="ritual" aria-labelledby="ritualTitulo">
-  <div class="ritual__pin" id="ritualPin">
-    <span class="ritual__fondo num" id="ritualNum" aria-hidden="true">01</span>
-    <div class="w ritual__w">
-      <div class="ritual__cab">
-        <div><span class="ced ced--linea">El ritual</span>
-        <h2 id="ritualTitulo">Del <em>01</em> al <em>10</em>, en orden.</h2></div>
-        <p class="ritual__lema">Enhance your ritual.</p>
-      </div>
-
-      <div class="ritual__esc">
-        <!-- la brocha grande: sus piezas se transforman de un paso al siguiente -->
-        <svg class="brocha-viva" id="brochaViva" viewBox="0 0 80 240" aria-hidden="true">
-          <defs>
-            <linearGradient id="bv-mango" x1="0" x2="1"><stop offset="0" stop-color="#5A3628"/><stop offset=".45" stop-color="#7E5340"/><stop offset="1" stop-color="#5A3628"/></linearGradient>
-            <linearGradient id="bv-metal" x1="0" x2="1"><stop offset="0" stop-color="#B08A78"/><stop offset=".3" stop-color="#EBD6CA"/><stop offset=".6" stop-color="#B08A78"/><stop offset="1" stop-color="#7E5B4C"/></linearGradient>
-            <linearGradient id="bv-pelo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EAD5C8"/><stop offset=".55" stop-color="#C9A08C"/><stop offset="1" stop-color="#8E6A58"/></linearGradient>
-            <clipPath id="bv-clip"><use href="#bvCabeza"/></clipPath>
-          </defs>
-          <ellipse class="bv-sombra" cx="40" cy="234" rx="26" ry="4"/>
-          <path class="bv-mango" id="bvMango" fill="url(#bv-mango)" d="M33 134 L47 134 L46 226 Q40 236 34 226 Z"/>
-          <path fill="#EAD5C8" opacity=".16" d="M35 136 L38 136 L37.5 224 L35.5 224 Z"/>
-          <rect id="bvVirola" fill="url(#bv-metal)" x="33" y="112" width="14" height="22" rx="1.4"/>
-          <rect id="bvAro1" fill="#2A1417" opacity=".35" x="33" y="118" width="14" height=".9"/>
-          <rect id="bvAro2" fill="#2A1417" opacity=".35" x="33" y="128" width="14" height=".9"/>
-          <path id="bvCabeza" fill="url(#bv-pelo)" d="M29 113 C16 96, 15 62, 30 44 C35 38, 45 38, 50 44 C65 62, 64 96, 51 113 Z"/>
-          <g id="bvPelos" clip-path="url(#bv-clip)" fill="none" stroke-linecap="round"></g>
-          <g id="bvCepillo" opacity="0" fill="none" stroke="#EAD5C8" stroke-linecap="round" stroke-width=".8"></g>
-        </svg>
-
-        <div class="ritual__lado">
-          <div class="pasos" id="pasos"></div>
-          <div class="ritual__rostro" id="ritualRostro"></div>
+<!-- ============ 6. GARANTÍA — el certificado ============ -->
+<section class="noche" id="garantia">
+  <svg class="noche__marca" viewBox="0 0 885.8 955.7" aria-hidden="true"><use href="#abanico"/></svg>
+  <div class="w noche__grid">
+    <div class="cert rev" id="cert">
+      <div class="cert__hoja">
+        <div class="cert__cab">
+          <svg class="cert__logo" viewBox="0 0 1368 826" aria-hidden="true"><use href="#lockup"/></svg>
+          <span class="cert__folio num">FOLIO <b id="certFolio">—</b></span>
+        </div>
+        <span class="ced">Certificado de garantía</span>
+        <p class="cert__n"><span class="num" data-cuenta="90">0</span><span>días</span></p>
+        <p class="cert__txt">Cubre pelo suelto, virola floja y cerdas que rayen, en cualquier pieza NIXA, desde el día que te llega.</p>
+        <ul class="cert__lista">
+          <li><i></i>Sin ticket ni caja original</li>
+          <li><i></i>Sin devolver la pieza vieja</li>
+          <li><i></i>Reemplazo, no vale de descuento</li>
+        </ul>
+        <div class="cert__firma">
+          <span>Armado y probado a mano<br>Guadalajara, Jalisco</span>
+          <svg class="cert__sello" viewBox="0 0 1410 1410" aria-hidden="true"><use href="#sello"/></svg>
         </div>
       </div>
-
-      <div class="ritual__nav" id="ritualNav" aria-label="Pasos del ritual"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ KIT N°1: lo que trae la caja ============ -->
-<section class="kit" id="kit">
-  <div class="w kit__grid">
-    <div class="kit__txt">
-      <span class="ced ced--linea rev">N°01 · El kit</span>
-      <h2 class="rev rev--2">Todo lo que necesitas para empezar, <em>en una caja.</em></h2>
-      <p class="lede rev rev--3">Para quien empieza de cero o quiere dejar de adivinar. Diez brochas, ni una más.</p>
-      <ol class="incluye rev rev--3" id="incluye">
-        <li data-pin="1"><span class="n num">01</span><span>Diez brochas numeradas, con el oficio grabado en el mango</span></li>
-        <li data-pin="2"><span class="n num">02</span><span>Estuche rígido con cierre, para que viajen sin doblarse</span></li>
-        <li data-pin="3"><span class="n num">03</span><span>Dos esponjas de maquillaje, para la base y el corrector</span></li>
-        <li data-pin="4"><span class="n num">04</span><span>El mapa del rostro impreso: qué brocha va en qué zona</span></li>
-      </ol>
-      <div class="kit__compra rev rev--4">
-        <span class="kit__precio"><span id="precioKit">$298</span><span>MXN</span></span>
-        <button class="btn" id="agregaKit" type="button">Agregar a la bolsa
-          <svg class="flecha" viewBox="0 0 13 9" aria-hidden="true"><path d="M0 4.5h11M8 1l3.5 3.5L8 8"/></svg></button>
-        <a class="link" id="waKit" href="#" target="_blank" rel="noopener">Preguntar por WhatsApp</a>
-      </div>
-      <p class="kit__nota rev rev--4">Envío gratis desde $599. En Guadalajara llega el mismo día; al resto del país, en 2 a 4 días.</p>
     </div>
 
-    <div class="kit__escena rev" id="kitEscena">
-      <div class="placa placa--arena kit__placa">
-        <figure class="obj obj--kit"><img class="sombra" src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/obj/kit-sombra.webp" alt=""><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/obj/kit.webp" alt="Las diez brochas del Kit N°1 abiertas en abanico sobre su estuche" loading="lazy"></figure>
-        <figure class="obj obj--esp2"><img class="sombra" src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/obj/esponja-sombra.webp" alt=""><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/obj/esponja.webp" alt="" loading="lazy"></figure>
-        <div class="mapa-card" id="mapaCard"></div>
-        <button class="pin" type="button" data-pin="1" style="--x:52%;--y:26%" aria-label="Diez brochas numeradas"><span>01</span></button>
-        <button class="pin" type="button" data-pin="2" style="--x:56%;--y:70%" aria-label="Estuche rígido"><span>02</span></button>
-        <button class="pin" type="button" data-pin="3" style="--x:86%;--y:64%" aria-label="Dos esponjas"><span>03</span></button>
-        <button class="pin" type="button" data-pin="4" style="--x:16%;--y:78%" aria-label="Mapa del rostro"><span>04</span></button>
-        <span class="fig placa__fig">Fig. 01 · Kit N°1</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ GARANTÍA ============ -->
-<section class="noche" id="garantia">
-  <svg class="noche__marca" viewBox="0 0 100 100" aria-hidden="true"><use href="#abanico"/></svg>
-  <div class="w noche__grid">
-    <div class="cifra rev" aria-label="Noventa días de garantía">
-      <span class="n num" data-cuenta="90">0</span><span class="u">días</span>
-    </div>
     <div class="noche__txt">
       <span class="ced ced--linea rev">La garantía</span>
       <h2 class="rev rev--2">Si suelta pelo, la reponemos. <em>Sin ticket.</em></h2>
-      <p class="rev rev--3">Antes de enviar un set, probamos cada pieza con las manos. Si en sus primeros noventa días algo falla, nos escribes por WhatsApp con una foto y te mandamos el reemplazo. Sin ticket, sin formulario, sin explicaciones largas.</p>
-      <ol class="promesas rev rev--3">
-        <li><span class="n num">01</span><div><b>Probada antes de salir</b><span>Cada brocha se pasa por la mano. Si raya o suelta, no se envía.</span></div></li>
-        <li><span class="n num">02</span><div><b>Reemplazo, no reembolso a medias</b><span>Te llega la pieza nueva. La vieja te la quedas.</span></div></li>
-        <li><span class="n num">03</span><div><b>Una persona del otro lado</b><span>Escribes y te contesta alguien de nixa, el mismo día. Sin bots.</span></div></li>
+      <p class="rev rev--3">Antes de que un set salga, cada pieza se pasa por la mano. Si raya, si se afloja o si suelta, no se envía. Y si algo se nos va, lo arreglamos nosotros, no tú.</p>
+      <ol class="pasos3 rev rev--3">
+        <li><span class="n num">01</span><div><b>Nos mandas una foto</b><span>Por WhatsApp, sin formulario. Contesta una persona el mismo día.</span></div></li>
+        <li><span class="n num">02</span><div><b>Confirmamos y sale</b><span>Sin peritajes ni preguntas raras. Nos basta con verlo.</span></div></li>
+        <li><span class="n num">03</span><div><b>Te llega la nueva</b><span>La vieja te la quedas. Sirve para prácticas o para el neceser de viaje.</span></div></li>
       </ol>
       <div class="rev rev--4"><a class="btn btn--claro" id="waGarantia" href="#" target="_blank" rel="noopener">Tengo una duda sobre la garantía</a></div>
     </div>
   </div>
 </section>
 
-<div class="sep" aria-hidden="true"><i></i><svg viewBox="0 0 100 100"><use href="#abanico"/></svg><i></i></div>
-<!-- ============ PREGUNTAS ============ -->
+<div class="sep" aria-hidden="true"><i></i><svg viewBox="0 0 885.8 955.7"><use href="#abanico"/></svg><i></i></div>
+
+<!-- ============ 7. PREGUNTAS ============ -->
 <section class="faq" id="preguntas">
-  <div class="w faq__grid">
-    <div class="faq__txt">
-      <span class="ced ced--linea rev">Antes de comprar</span>
-      <h2 class="rev rev--2">Lo que siempre <em>preguntan.</em></h2>
-      <p class="lede rev rev--3">Y si la tuya no está, escríbenos. Contestamos el mismo día.</p>
-      <div class="rev rev--3"><a class="link" id="waFaq" href="#" target="_blank" rel="noopener">Preguntar por WhatsApp</a></div>
+  <div class="w">
+    <div class="faq__cab">
+      <div>
+        <span class="ced ced--linea rev">Antes de comprar</span>
+        <h2 class="rev rev--2">Lo que siempre <em>preguntan.</em></h2>
+      </div>
+      <div class="faq__filtros rev rev--3" id="faqFiltros" role="tablist" aria-label="Filtrar preguntas"></div>
     </div>
-    <div class="preg rev">
-      <details><summary>¿Cómo pago?<i><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12"/></svg></i></summary>
-        <p class="resp">Aquí en la página no se cobra nada. Armas tu bolsa, se abre WhatsApp con tu pedido y ahí eliges: transferencia, efectivo contra entrega en Guadalajara, depósito en OXXO o Mercado Pago.</p></details>
-      <details><summary>¿Cuánto tarda en llegar?<i><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12"/></svg></i></summary>
-        <p class="resp">En Guadalajara y zona metropolitana, el mismo día si pides antes de las dos de la tarde. Al resto del país, de dos a cuatro días hábiles por paquetería, con guía para rastrear.</p></details>
-      <details><summary>¿Cuánto cuesta el envío?<i><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12"/></svg></i></summary>
-        <p class="resp">Gratis desde $599. Por debajo de eso te decimos el costo exacto por WhatsApp antes de que confirmes, según tu código postal. Nunca se agrega nada sin avisarte.</p></details>
-      <details><summary>¿Cómo funciona la garantía?<i><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12"/></svg></i></summary>
-        <p class="resp">Noventa días desde que te llega. Si una brocha suelta pelo, se afloja o raya, nos mandas una foto por WhatsApp y te enviamos la de reemplazo. Sin ticket, sin devolver la vieja.</p></details>
-      <details><summary>¿Cómo lavo las brochas?<i><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12"/></svg></i></summary>
-        <p class="resp">Agua tibia y jabón neutro, una vez a la semana. Dos pasadas por el tapete, se enjuagan hasta que el agua salga clara y se secan acostadas con la cabeza fuera de la mesa. Así no se deforman ni entra agua al mango.</p></details>
-      <details><summary>¿Cuál me conviene si empiezo de cero?<i><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12"/></svg></i></summary>
-        <p class="resp">El Kit N°1. Trae las diez que de verdad se usan, con el número y la zona en el mango, y el mapa del rostro. Si quieres algo chico para conocernos, el rizador. Y si tienes dudas, el botón <button class="link" type="button" data-abre-ayuda>¿cuál es para mí?</button> te lo dice en tres preguntas.</p></details>
+    <div class="preg rev" id="preg"></div>
+    <div class="faq__mas rev">
+      <div><span class="ced">¿No está la tuya?</span><p>Escríbenos y contestamos el mismo día. Del otro lado hay una persona.</p></div>
+      <a class="btn btn--linea" id="waFaq" href="#" target="_blank" rel="noopener">Preguntar por WhatsApp</a>
     </div>
   </div>
 </section>
 
-<!-- ============ NOSOTROS ============ -->
+<!-- ============ 8. NIXA ============ -->
 <section class="somos" id="somos">
   <div class="w somos__grid">
     <div class="somos__esc rev">
       <div class="placa placa--rosa somos__placa">
-        <figure class="obj obj--pote"><img class="sombra" src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/obj/brocha-pote-sombra.webp" alt=""><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/obj/brocha-pote.webp" alt="Brocha sobre un pote de polvo" loading="lazy"></figure>
+        <figure class="obj obj--pote"><span class="obj__flota"><span class="obj__in"><img class="sombra" src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/obj/brocha-pote-sombra.webp" alt=""><img src="https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img/obj/brocha-pote.webp" alt="Brocha sobre un pote de polvo" loading="lazy"></span></span></figure>
         <span class="fig placa__fig">Fig. 02 · El polvo</span>
       </div>
     </div>
     <div class="somos__txt">
       <span class="ced ced--linea rev">Quiénes somos</span>
       <h2 class="rev rev--2">Un taller chico que prueba <em>cada</em> brocha.</h2>
-      <p class="rev rev--3">nixa existe porque nos cansamos de brochas que rayaban la piel, se bebían la base y soltaban pelo a la segunda lavada. Las buenas costaban lo de un mes de despensa.</p>
-      <p class="rev rev--3">Así que hicimos las nuestras: pocas piezas, suaves, probadas una por una, a un precio que se puede pagar. Lo que prometemos es corto: si algo falla, lo reponemos; si nos escribes, te contesta una persona.</p>
-      <p class="firma rev rev--4">Hecho con calma <span class="ced" style="margin-left:14px;font-style:normal">Guadalajara, Jalisco</span></p>
+      <p class="rev rev--3">NIXA nació de una molestia muy concreta: gastas en brochas, te duran dos meses y acabas usando los dedos. Las que sí servían costaban lo de una despensa, y ni así te decían cuál era para qué.</p>
+      <p class="rev rev--3">Así que hicimos las nuestras. Pocas piezas y buenas: suaves, con la virola bien prensada, numeradas para que nadie tenga que adivinar. Las armamos y las probamos una por una antes de que salgan, aquí en Guadalajara.</p>
+      <p class="rev rev--3">No somos una fábrica ni queremos serlo. Somos dos personas que contestan sus propios mensajes y que prefieren reponerte una brocha antes que discutir contigo por una.</p>
+      <p class="firma rev rev--4">Hecho con calma <span class="ced">Guadalajara, Jalisco</span></p>
     </div>
   </div>
 </section>
@@ -296,31 +335,31 @@
 <!-- ============ PIE ============ -->
 <footer class="pie">
   <div class="w">
-    <div class="pie__marca rev-marca"><svg viewBox="0 0 1380 836" role="img" aria-label="nixa BEAUTY"><use href="#lockup"/></svg></div>
+    <div class="pie__marca rev-marca"><svg viewBox="0 0 1368 826" role="img" aria-label="NIXA BEAUTY"><use href="#lockup"/></svg></div>
     <div class="pie__grid">
-      <div>
-        <h4>nixa BEAUTY</h4>
+      <div class="pie__col pie__col--ancha">
+        <h4>NIXA BEAUTY</h4>
         <p class="grande">Brochas y esponjas de maquillaje, armadas y enviadas desde Guadalajara.</p>
       </div>
-      <div>
+      <div class="pie__col">
         <h4>Tienda</h4>
         <ul>
-          <li><a href="#coleccion">La colección</a></li>
+          <li><a href="#tienda">La colección</a></li>
           <li><a href="#kit">Kit N°1</a></li>
-          <li><a href="#ritual">El ritual</a></li>
+          <li><a href="#abanico">El abanico</a></li>
           <li><a href="#garantia">Garantía</a></li>
-          <li><button type="button" id="btnAyudaPie" style="color:inherit">¿Cuál es para mí?</button></li>
+          <li><button type="button" id="btnAyudaPie">¿Cuál es para mí?</button></li>
         </ul>
       </div>
-      <div>
+      <div class="pie__col">
         <h4>Escríbenos</h4>
         <ul>
           <li><a id="waPie" href="#" target="_blank" rel="noopener">WhatsApp</a></li>
           <li><a href="mailto:contacto@nixa.mx">contacto@nixa.mx</a></li>
-          <li>Lunes a sábado, 10 a 19 h</li>
+          <li><span>Lunes a sábado, 10 a 19 h</span></li>
         </ul>
       </div>
-      <div>
+      <div class="pie__col">
         <h4>Síguenos</h4>
         <ul>
           <li><a href="https://www.tiktok.com/@nixa.mx" target="_blank" rel="noopener">TikTok</a></li>
@@ -330,74 +369,120 @@
       </div>
     </div>
     <div class="pie__bajo">
-      <span>© 2026 nixa BEAUTY · Guadalajara, Jalisco, México</span>
-      <span>Hecho a mano, con calma.</span>
+      <span>© 2026 NIXA BEAUTY · Guadalajara, Jalisco, México</span>
+      <span class="pie__pagos">Tarjeta · Meses sin intereses · OXXO · Transferencia</span>
     </div>
   </div>
 </footer>
 
 <!-- barra móvil -->
 <div class="barra-mov" id="barraMov">
-  <a class="btn" href="#coleccion">Ver la colección</a>
-  <a class="wa" id="waBarra" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <button class="btn" type="button" id="barraComprar">Comprar el Kit N°1 · <span id="precioBarra">$298</span></button>
+  <a class="wa" id="waBarra" href="#" target="_blank" rel="noopener" aria-label="Dudas por WhatsApp">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.9 11.9 0 0 0 4.5 4c.6.3 1.1.4 1.5.5a3.6 3.6 0 0 0 1.6.1 2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3Z"/></svg>
   </a>
 </div>
 
-<!-- ============ FICHA MODAL ============ -->
+<!-- ============ FICHA ============ -->
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="tituloModal">
   <div class="modal__cab">
     <div class="w">
       <button class="volver" id="cerrarModal" type="button">
         <svg viewBox="0 0 15 10" aria-hidden="true"><path d="M14 5H1M5 1L1 5l4 4"/></svg>Volver
       </button>
-      <span class="marca-top"><svg viewBox="0 0 1380 615" role="img" aria-label="nixa BEAUTY" style="height:30px"><use href="#nixa"/></svg></span>
+      <span class="marca-top"><svg viewBox="0 0 1368 608" role="img" aria-label="NIXA BEAUTY" style="height:28px"><use href="#nixa"/></svg></span>
       <span></span>
     </div>
   </div>
   <div class="modal__cuerpo"><div class="w" id="cuerpoModal"></div></div>
 </div>
 
-<!-- ============ BOLSA ============ -->
+<!-- ============ BOLSA + CAJA ============ -->
 <div class="telon" id="telon"></div>
 <aside class="bolsa" id="bolsa" role="dialog" aria-modal="true" aria-labelledby="tituloBolsa" aria-hidden="true">
   <div class="bolsa__cab">
     <div>
-      <span class="ced">Pedido por WhatsApp</span>
+      <span class="ced" id="cajaCed">Tu bolsa</span>
       <h3 id="tituloBolsa">Tu bolsa</h3>
     </div>
     <button class="link" id="cerrarBolsa" type="button">Seguir viendo</button>
   </div>
+
+  <ol class="caja__pasos" id="cajaPasos" aria-label="Pasos de la compra">
+    <li data-p="1" class="activo"><i>1</i><span>Bolsa</span></li>
+    <li data-p="2"><i>2</i><span>Entrega</span></li>
+    <li data-p="3"><i>3</i><span>Pago</span></li>
+  </ol>
+
   <div class="bolsa__cuerpo">
-    <div class="envio" id="envioBarra" hidden>
-      <p id="envioTexto"></p>
-      <div class="riel"><i id="envioRiel"></i></div>
-    </div>
-    <div id="items"></div>
-    <div class="total">
-      <div class="l">Total<small>El envío te lo confirmamos al cerrar el pedido</small></div>
-      <span class="v" id="total">$0</span>
-    </div>
-    <div id="datos">
-      <span class="ced" style="display:block;margin-top:30px">Para entregarlo</span>
+
+    <!-- PASO 1 -->
+    <section class="caja__paso" data-paso="1">
+      <div class="envio" id="envioBarra" hidden>
+        <p id="envioTexto"></p>
+        <div class="riel"><i id="envioRiel"></i></div>
+      </div>
+      <div id="items"></div>
+      <div class="total">
+        <div class="l">Subtotal<small>El envío se calcula en el siguiente paso</small></div>
+        <span class="v" id="total">$0</span>
+      </div>
+      <button class="btn btn--ancho" id="aPaso2" type="button">Continuar
+        <svg class="flecha" viewBox="0 0 13 9" aria-hidden="true"><path d="M0 4.5h11M8 1l3.5 3.5L8 8"/></svg></button>
+      <ul class="confia">
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5.5"/></svg><span><b>Pago seguro.</b> Nosotros nunca vemos los datos de tu tarjeta.</span></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5.5"/></svg><span><b>90 días de garantía</b> en todo lo que te llegue.</span></li>
+      </ul>
+    </section>
+
+    <!-- PASO 2 -->
+    <section class="caja__paso" data-paso="2" hidden>
+      <span class="ced">A dónde va</span>
       <label class="campo" id="cNom"><span>Tu nombre</span>
         <input id="nom" autocomplete="name" placeholder="Nombre y apellido">
         <span class="err">Necesitamos tu nombre para el pedido.</span></label>
-      <label class="campo" id="cTel"><span>WhatsApp a 10 dígitos</span>
-        <input id="tel" inputmode="numeric" autocomplete="tel" placeholder="33 0000 0000" maxlength="14">
-        <span class="err">Escribe los 10 dígitos de tu WhatsApp.</span></label>
+      <div class="campo-par">
+        <label class="campo" id="cTel"><span>WhatsApp a 10 dígitos</span>
+          <input id="tel" inputmode="numeric" autocomplete="tel" placeholder="33 0000 0000" maxlength="14">
+          <span class="err">Escribe los 10 dígitos de tu WhatsApp.</span></label>
+        <label class="campo" id="cCp"><span>Código postal</span>
+          <input id="cp" inputmode="numeric" autocomplete="postal-code" placeholder="44160" maxlength="5">
+          <span class="err">Faltan los 5 dígitos del CP.</span></label>
+      </div>
+      <label class="campo" id="cMail"><span>Correo <small>para el comprobante</small></span>
+        <input id="mail" type="email" autocomplete="email" placeholder="tu@correo.com">
+        <span class="err">Revisa tu correo, algo no cuadra.</span></label>
       <label class="campo" id="cDir"><span>Dirección de entrega</span>
-        <textarea id="dir" autocomplete="street-address" placeholder="Calle, número, colonia, CP"></textarea>
+        <textarea id="dir" autocomplete="street-address" placeholder="Calle, número, colonia, ciudad"></textarea>
         <span class="err">Nos falta la dirección.</span></label>
-      <button class="btn btn--ancho" id="pedir" type="button" style="margin-top:22px">Enviar pedido por WhatsApp
+
+      <div class="envio-op" id="envioOp"></div>
+
+      <button class="btn btn--ancho" id="aPaso3" type="button">Ir a pagar
+        <svg class="flecha" viewBox="0 0 13 9" aria-hidden="true"><path d="M0 4.5h11M8 1l3.5 3.5L8 8"/></svg></button>
+      <button class="link link--min" id="aPaso1" type="button">Volver a la bolsa</button>
+    </section>
+
+    <!-- PASO 3 -->
+    <section class="caja__paso" data-paso="3" hidden>
+      <div class="resumen" id="resumen"></div>
+      <span class="ced">Cómo pagas</span>
+      <div class="pagos" id="pagos">
+        <label class="pago activo"><input type="radio" name="pago" value="mp" checked>
+          <span class="pago__t">Tarjeta, meses sin intereses, OXXO o transferencia</span>
+          <span class="pago__d">Te mandamos a la pantalla segura de Mercado Pago y regresas aquí. Nosotros no guardamos tu tarjeta.</span>
+        </label>
+      </div>
+      <button class="btn btn--ancho btn--grande" id="pagar" type="button">Pagar <span id="pagarTotal">$0</span>
         <svg class="flecha" viewBox="0 0 13 9" aria-hidden="true"><path d="M0 4.5h11M8 1l3.5 3.5L8 8"/></svg></button>
       <p class="msj" id="msjPedido" role="status"></p>
+      <button class="link link--min" id="aPaso2b" type="button">Volver a la entrega</button>
       <ul class="confia">
-        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5.5"/></svg><span><b>Aquí no se cobra nada.</b> Se abre WhatsApp con tu pedido y ahí confirmamos pago y entrega.</span></li>
-        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5.5"/></svg><span><b>Te contesta una persona.</b> El mismo día, sin bots.</span></li>
-        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5.5"/></svg><span><b>90 días de garantía</b> en todo lo que te llegue.</span></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5.5"/></svg><span><b>Conexión cifrada.</b> El cobro lo procesa Mercado Pago.</span></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5.5"/></svg><span><b>¿Algo salió mal?</b> Escríbenos y lo resolvemos el mismo día.</span></li>
       </ul>
-    </div>
+    </section>
+
   </div>
 </aside>
 
@@ -420,7 +505,6 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/MorphSVGPlugin.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
 <script src="js/tienda.js"></script>
 </body>
