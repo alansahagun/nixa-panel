@@ -218,6 +218,9 @@ body.arriba .bolsa-btn .chip{background:var(--marfil-noche);color:var(--noche)}
 .pin::before{content:"";position:absolute;inset:-6px;border-radius:50%;border:1px solid var(--rosa);opacity:0;transition:opacity .3s,scale .5s var(--ease)}
 .pin.activo,.pin:hover{background:var(--vino);color:var(--marfil);scale:1.1}
 .pin.activo::before{opacity:.8;scale:1.18}
+/* el pin del mapa se para arriba de la tarjeta, nunca encima de su texto */
+.pin[data-pin="4"]{left:13%;top:44%}
+@media(max-width:700px){.pin[data-pin="4"]{left:12%;top:38%}}
 .incluye{display:grid;border-top:1px solid var(--filete)}
 .incluye li{display:grid;grid-template-columns:auto 1fr;gap:18px;padding:20px 4px;border-bottom:1px solid var(--filete);
   transition:background .35s,padding-left .35s var(--ease);align-items:baseline}
