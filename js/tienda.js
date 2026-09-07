@@ -920,8 +920,11 @@ function animaciones(){
   }
 
   $$("[data-cuenta]").forEach(el => {
-    const meta = parseInt(el.dataset.cuenta, 10), obj = {v:0};
-    gsap.to(obj, {v:meta, duration:1.4, ease:"power2.out", scrollTrigger:{trigger:el, start:"top 85%", once:true}, onUpdate(){ el.textContent = Math.round(obj.v); }, onComplete(){ el.textContent = meta; }});
+    // odometro: siempre la misma cantidad de digitos, para que lo de al lado no brinque
+    const meta = parseInt(el.dataset.cuenta, 10), digitos = String(meta).length, obj = {v:0};
+    const pinta = n => String(n).padStart(digitos, "0");
+    el.textContent = pinta(0);
+    gsap.to(obj, {v:meta, duration:1.4, ease:"power2.out", scrollTrigger:{trigger:el, start:"top 85%", once:true}, onUpdate(){ el.textContent = pinta(Math.round(obj.v)); }, onComplete(){ el.textContent = String(meta); }});
   });
 }
 
@@ -980,7 +983,9 @@ function alScroll(){
   $("#top").classList.toggle("pegada", y > 24);
   const alto = document.documentElement.scrollHeight - innerHeight;
   $("#progreso").style.transform = `scaleX(${alto > 0 ? Math.min(1, y / alto) : 0})`;
-  $("#btnAyuda").classList.toggle("visible", y > innerHeight * .8);
+  // el botón flotante se quita al llegar al pie: ahí se encimaba con el texto
+  const pie = $(".pie").getBoundingClientRect();
+  $("#btnAyuda").classList.toggle("visible", y > innerHeight * .8 && pie.top > innerHeight - 40);
   $("#barraMov").classList.toggle("visible", y > innerHeight * .9);
   const h = $("#top").offsetHeight + 38;
   const oscuro = $$(".noche,.pie").some(s => { const r = s.getBoundingClientRect(); return r.top <= h && r.bottom >= h; });
