@@ -413,8 +413,11 @@ body.arriba .bolsa-btn .chip{background:var(--marfil-noche);color:var(--noche)}
 /* icono de bolsa con el abanico */
 .bolsa-btn__ico{position:relative;width:26px;height:28px;display:block;flex:none}
 .bolsa-btn__ico>svg:first-child{width:100%;height:100%;fill:none;stroke:currentColor}
-.bolsa-btn__ico .cuerpo{stroke-width:1.6;stroke-linejoin:round}
-.bolsa-btn__ico .asa{stroke-width:1.6;stroke-linecap:round}
+.bolsa-btn__ico .cuerpo{stroke-width:1.4;stroke-linejoin:round}
+.bolsa-btn__ico .asa{stroke-width:1.4;stroke-linecap:round}
+/* el abanico va macizo y grande: a 26px los trazos finos se hacen mancha */
+.bolsa-btn__marca{position:absolute;left:50%;top:61%;width:15.5px;height:auto;
+  transform:translate(-50%,-50%);fill:currentColor;stroke:none}
 
 
 /* ============ base heredada de la v6, ya probada ============ */
@@ -501,12 +504,27 @@ section[id]{scroll-margin-top:96px}
 .aviso i{width:4px;height:4px;border-radius:50%;background:var(--rosa)}
 
 .top{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--marfil) 84%,transparent);
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .4s,background .5s}
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .4s}
 .top.pegada{border-color:var(--filete)}
-.top.noche{background:color-mix(in srgb,var(--noche) 92%,transparent);border-color:var(--filete-noche)}
-.top.noche .nav a,.top.noche .marca-top,.top.noche .top__der .ayudar,.top.noche .hamb{color:var(--marfil-noche)}
-.top.noche .bolsa-btn{box-shadow:inset 0 0 0 1px var(--marfil-noche);color:var(--marfil-noche)}
-.top.noche .bolsa-btn .chip{background:var(--marfil-noche);color:var(--noche)}
+/* OJO con el nombre: el estado oscuro de la cabecera es `top--noche`, NO `noche`.
+   `.noche` es la clase de las SECCIONES oscuras (position:relative, padding-block,
+   overflow:clip). Cuando el JS se la ponía a la cabecera, la cabecera se volvía una
+   sección: crecía de 85 a 305 px, perdía el sticky y se iba con el scroll. Eso era
+   lo que se "bugeaba" al bajar por la garantía y por el pie.
+
+   Al entrar a una zona oscura, el color se cruza con OPACIDAD sobre una capa aparte.
+   Antes se animaba el background (un color-mix) debajo de un backdrop-filter: eso
+   obligaba a volver a desenfocar la franja entera cuadro por cuadro, justo al pasar
+   por la garantía y por el pie. Y sobre un fondo plano el desenfoque no se ve, así
+   que ahí se apaga. */
+.top::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--noche);opacity:0;
+  transition:opacity .45s var(--ease);pointer-events:none;will-change:opacity}
+.top--noche::before{opacity:.96}
+.top--noche{backdrop-filter:none;-webkit-backdrop-filter:none;border-color:var(--filete-noche)}
+.sin-anim .top::before{transition:none}
+.top--noche .nav a,.top--noche .marca-top,.top--noche .top__der .ayudar,.top--noche .hamb{color:var(--marfil-noche)}
+.top--noche .bolsa-btn{box-shadow:inset 0 0 0 1px var(--marfil-noche);color:var(--marfil-noche)}
+.top--noche .bolsa-btn .chip{background:var(--marfil-noche);color:var(--noche)}
 .top .w{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:84px}
 .top__progreso{position:absolute;left:0;bottom:-1px;height:1px;width:100%;background:var(--vino);transform:scaleX(0);transform-origin:left;pointer-events:none}
 .nav{display:flex;gap:30px}
@@ -588,7 +606,8 @@ section[id]{scroll-margin-top:96px}
 .pie ul{display:grid;gap:10px}
 .pie a{text-decoration:none;color:var(--gris-noche);transition:color .3s}
 .pie a:hover{color:var(--rosa)}
-.pie .grande{font-family:var(--serif);font-weight:500;font-size:1.3rem;color:var(--marfil-noche);font-variation-settings:"opsz" 24}
+.pie .grande{font-family:var(--sans);font-weight:400;font-size:1.02rem;line-height:1.6;
+  color:var(--marfil-noche);max-width:30ch;letter-spacing:.004em}
 .pie__bajo{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:60px;padding-top:24px;border-top:1px solid var(--filete-noche);font-size:.85rem;color:var(--gris-noche)}
 @media(min-width:760px){.pie__grid{grid-template-columns:1.4fr 1fr 1fr 1fr}}
 
