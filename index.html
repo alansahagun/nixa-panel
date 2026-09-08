@@ -9,7 +9,7 @@
 <link rel="canonical" href="https://nixa.mx/">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon.png">
-<link rel="manifest" href="manifest.webmanifest">
+<link rel="manifest" href="manifest-tienda.webmanifest">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="NIXA BEAUTY">
 <meta property="og:title" content="NIXA BEAUTY — Cada brocha sabe su lugar">
@@ -58,11 +58,18 @@
       <button class="ayudar" id="btnAyudaTop" type="button">¿Cuál es para mí?</button>
       <button class="bolsa-btn" id="btnBolsa" type="button" aria-label="Abrir la bolsa">
         <span class="bolsa-btn__ico" aria-hidden="true">
+          <!-- La bolsa va maciza y el abanico va CALADO: se ve el fondo a través de él.
+               Por eso el cuerpo lleva máscara y el abanico se pinta de negro dentro
+               de ella (negro = hueco). Si el sprite no cargara, la bolsa queda llena
+               y entera, que es una degradación decente. -->
           <svg viewBox="0 0 30 32">
+            <mask id="calaBolsa" maskUnits="userSpaceOnUse" x="0" y="0" width="30" height="32">
+              <rect width="30" height="32" fill="#fff"/>
+              <svg x="6.75" y="12.1" width="16.5" height="17.8" viewBox="0 0 885.8 955.7" style="color:#000"><use href="#abanico"/></svg>
+            </mask>
+            <path class="cuerpo" d="M2.6 9.4h24.8l1.4 20.2a1.6 1.6 0 0 1-1.6 1.7H2.8a1.6 1.6 0 0 1-1.6-1.7Z" mask="url(#calaBolsa)"/>
             <path class="asa" d="M10.4 9.4V7.2a4.6 4.6 0 0 1 9.2 0v2.2"/>
-            <path class="cuerpo" d="M2.6 9.4h24.8l1.4 20.2a1.6 1.6 0 0 1-1.6 1.7H2.8a1.6 1.6 0 0 1-1.6-1.7Z"/>
           </svg>
-          <svg class="bolsa-btn__marca" viewBox="0 0 885.8 955.7" aria-hidden="true"><use href="#abanico"/></svg>
         </span>
         <span class="chip" id="nBolsa">0</span>
       </button>
