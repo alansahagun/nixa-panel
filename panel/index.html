@@ -6,12 +6,12 @@
 <meta name="theme-color" content="#F4EEE8">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="nixa">
+<meta name="apple-mobile-web-app-title" content="NIXA">
 <meta name="robots" content="noindex">
-<title>nixa BEAUTY · Orquestador</title>
-<link rel="icon" href="../icon.png">
+<title>NIXA · Orquestador</title>
+<link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../icon.png">
-<link rel="manifest" href="../manifest.webmanifest">
+<link rel="manifest" href="manifest.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..700,0..100,0..1;1,9..144,400..700,0..100,0..1&family=DM+Sans:opsz,wght@9..40,400..700&display=swap" rel="stylesheet">
@@ -1384,75 +1384,7 @@ async function cargarBitacora() {
 
 /* refresco suave al volver a la pestaña */
 document.addEventListener('visibilitychange', () => { if (!document.hidden && YO) irA(vista); });
-
-/* ============================================================
-   LA PUERTA — agregada el 8-sep-2026.
-   Antes esto era público: cualquiera que supiera la dirección
-   veía caja, ventas, inventario y las cuentas entre los dos.
-   Ahora se entra con un enlace que llega al correo: sin
-   contraseñas que recordar, ni que perder, ni que compartir.
-   OJO: la cerradura de verdad está en la base (RLS por correo).
-   Esta pantalla es la comodidad, no la seguridad — si alguien
-   se saltara esta página, la base igual no le entrega nada.
-   ============================================================ */
-const EQUIPO = {
-  'alansahagunnavarro@gmail.com': 'Alan',
-  'majodiezm@outlook.com': 'Majo'
-};
-
-function pantallaEntrada(aviso) {
-  document.body.innerHTML =
-    '<div style="min-height:100dvh;display:grid;place-items:center;padding:40px 24px">'
-  + '<div style="width:100%;max-width:33ch;text-align:center">'
-  + '<svg viewBox="0 0 100 100" style="width:46px;height:46px;color:var(--cocoa);margin-bottom:20px" aria-hidden="true"><use href="#abanico"/></svg>'
-  + '<h1 style="font:600 clamp(26px,6.5vw,33px)/1.12 var(--serif);font-variation-settings:\'SOFT\' 70,\'WONK\' 1;color:var(--cocoa);margin:0">El Orquestador</h1>'
-  + '<p style="font:400 15px/1.55 var(--sans);color:var(--cocoa2);margin:10px 0 24px">Escribe tu correo y te llega un enlace para entrar. No hay contraseña.</p>'
-  + '<form id="fEntrar" style="display:grid;gap:11px">'
-  + '<input id="cCorreo" type="email" required autocomplete="email" inputmode="email" placeholder="tu@correo.com" '
-  + 'style="min-height:48px;padding:0 15px;border:1px solid var(--linea,#E4D8CF);border-radius:10px;background:#fff;'
-  + 'font:400 16px/1.2 var(--sans);color:var(--cocoa);text-align:center">'
-  + '<button type="submit" id="bEntrar" style="min-height:48px;border:0;border-radius:10px;background:var(--cocoa);'
-  + 'color:var(--crema);font:600 14.5px/1.2 var(--sans);cursor:pointer">Mándame el enlace</button>'
-  + '</form>'
-  + '<p id="mEntrar" style="font:400 13.5px/1.5 var(--sans);color:var(--cocoa2);margin:16px 0 0;min-height:1.5em">'
-  + (aviso ? aviso : '') + '</p>'
-  + '</div></div>';
-
-  const f = document.getElementById('fEntrar');
-  const m = document.getElementById('mEntrar');
-  const b = document.getElementById('bEntrar');
-  f.onsubmit = async (e) => {
-    e.preventDefault();
-    const correo = document.getElementById('cCorreo').value.trim().toLowerCase();
-    if (!correo) return;
-    b.disabled = true; b.textContent = 'Mandando…'; m.textContent = '';
-    const { error } = await sb.auth.signInWithOtp({
-      email: correo,
-      options: { emailRedirectTo: location.origin + location.pathname }
-    });
-    b.disabled = false; b.textContent = 'Mándame el enlace';
-    m.textContent = error
-      ? 'No se pudo mandar: ' + error.message
-      : 'Listo. Revisa tu correo y abre el enlace desde este mismo aparato.';
-  };
-}
-
-async function puerta() {
-  let sesion = null;
-  try { sesion = (await sb.auth.getSession()).data.session; } catch (e) {}
-  const correo = (sesion && sesion.user && sesion.user.email || '').toLowerCase();
-  if (!correo) return pantallaEntrada();
-  const quien = EQUIPO[correo];
-  if (!quien) {
-    try { await sb.auth.signOut(); } catch (e) {}
-    return pantallaEntrada('Ese correo no es del equipo de NIXA.');
-  }
-  guardaQuien(quien);
-  // se limpia el enlace de la barra para que no quede el token a la vista
-  if (location.hash.includes('access_token')) history.replaceState(null, '', location.pathname);
-  arranca(quien);
-}
-puerta();
 </script>
+<script src="puerta.js"></script>
 </body>
 </html>
