@@ -444,13 +444,64 @@ const cierraFicha = () => cierraCapa($("#modal"));
 /* ---------- 8. BOLSA Y CAJA ---------- */
 let paso = 1;
 
-function agrega(sku, boton){
+/* Agregar NO abre la bolsa: se queda uno comprando y solo avisa que ya
+   quedo adentro, con la salida a la bolsa a la mano. Solo el boton de
+   "Comprar" de la barra abre la bolsa, porque ahi la intencion es pagar. */
+function agrega(sku, boton, abrir){
   bolsa[sku] = (bolsa[sku] || 0) + 1;
   guarda.escribir("nixa.bolsa", bolsa);
   pinta();
   if (boton && !sinMovimiento && window.gsap) gsap.fromTo($("#nBolsa"), {scale:1.5}, {scale:1, duration:.45, ease:"back.out(3)"});
-  vePaso(1);
-  abreBolsa();
+  if (abrir) { vePaso(1); abreBolsa(); return; }
+  avisaAgregado(sku);
+}
+
+/* ---------- aviso de "ya quedo en la bolsa" ---------- */
+const AVISO_CSS = `
+.avisado{position:fixed;z-index:75;right:clamp(14px,3vw,28px);left:auto;display:flex;align-items:center;gap:14px;max-width:min(92vw,360px);padding:13px 14px 13px 16px;background:var(--hueso);border:1px solid var(--filete);border-radius:var(--r-caja);box-shadow:0 1px 2px rgba(42,20,23,.05),0 18px 34px -20px rgba(42,20,23,.35);opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .28s var(--ease-io),transform .28s var(--ease-io)}
+.avisado.entra{opacity:1;transform:none;pointer-events:auto}
+.avisado__tx{flex:1;min-width:0;font:400 13.5px/1.35 var(--sans);color:var(--texto)}
+.avisado__tx b{display:block;font:500 14px/1.3 var(--sans);color:var(--cafe);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.avisado__ver{flex:none;border:1px solid var(--arena);background:var(--marfil);color:var(--cafe);font:500 12.5px/1 var(--label);letter-spacing:.02em;padding:9px 13px;border-radius:var(--r-pill);cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+.avisado__ver:hover{background:var(--cafe);border-color:var(--cafe);color:var(--marfil)}
+.avisado__ver:focus-visible{outline:2px solid var(--cafe);outline-offset:2px}
+@media(max-width:560px){.avisado{right:12px;left:12px;max-width:none}}
+@media(prefers-reduced-motion:reduce){.avisado{transition:none}}`;
+
+let avisoReloj;
+function avisaAgregado(sku){
+  let a = $("#avisado");
+  if (!a){
+    const e = document.createElement("style");
+    e.id = "avisado-css"; e.textContent = AVISO_CSS;
+    document.head.appendChild(e);
+    a = document.createElement("div");
+    a.id = "avisado"; a.className = "avisado";
+    a.setAttribute("role","status"); a.setAttribute("aria-live","polite");
+    document.body.appendChild(a);
+  }
+  const p = PROD.find(x => x.sku === sku);
+  const n = Object.values(bolsa).reduce((x,y) => x+y, 0);
+  a.innerHTML =
+    '<span class="avisado__tx"><b></b>' + (n > 1 ? "Ya llevas " + n + " en la bolsa" : "Ya está en la bolsa") + '</span>'
+  + '<button class="avisado__ver" type="button">Ver bolsa</button>';
+  a.querySelector("b").textContent = p ? titulo(p).tit : "Listo";
+  /* cuelga del encabezado y alineado con la bolsa: se lee como que el
+     producto acaba de caer ahi. */
+  const cab = $("#top"), chip = $("#btnBolsa");
+  a.style.top = Math.max(12, (cab ? cab.getBoundingClientRect().bottom : 0) + 12) + "px";
+  if (chip && innerWidth > 560){
+    a.style.right = Math.max(12, Math.round(innerWidth - chip.getBoundingClientRect().right)) + "px";
+  } else { a.style.right = ""; }
+  a.querySelector(".avisado__ver").onclick = () => { escondeAviso(); vePaso(1); abreBolsa(); };
+  requestAnimationFrame(() => a.classList.add("entra"));
+  clearTimeout(avisoReloj);
+  avisoReloj = setTimeout(escondeAviso, 3600);
+}
+function escondeAviso(){
+  const a = $("#avisado");
+  if (a) a.classList.remove("entra");
+  clearTimeout(avisoReloj);
 }
 
 const subtotal = () => Object.entries(bolsa).reduce((a,[sku,q]) => {
@@ -578,6 +629,7 @@ function cierraCapa(el, clase = "abierto"){
   if (devuelveFoco) { try { devuelveFoco.focus({preventScroll:true}); } catch {} }
 }
 function abreBolsa(){
+  escondeAviso();
   pinta();
   $("#telon").classList.add("abierto");
   abreCapa($("#bolsa"), "abierta");
@@ -813,6 +865,22 @@ function titulosPorLineas(){
 }
 if (sinMovimiento) document.documentElement.classList.add("sin-anim");
 
+/* El telon de entrada es adorno, no contenido. Se levantaba solo dentro de
+   animaciones(), y esa funcion se sale antes si el telefono pide menos
+   movimiento o si GSAP no llego del CDN: la tienda se quedaba en negro.
+   Aqui se quita por las malas en esos dos casos, y hay un plazo por si la
+   animacion arranca y se atora a la mitad. */
+function quitaTelon(){
+  const t = document.getElementById("telonEntrada");
+  if (t) t.style.display = "none";
+  document.body.classList.add("sin-telon");
+}
+if (sinMovimiento || !window.gsap) quitaTelon();
+setTimeout(() => {
+  const t = document.getElementById("telonEntrada");
+  if (t && getComputedStyle(t).display !== "none") quitaTelon();
+}, 3500);
+
 function animaciones(){
   if (sinMovimiento || !window.gsap) return;
   gsap.registerPlugin(ScrollTrigger);
@@ -963,7 +1031,7 @@ $("#cerrarModal").onclick = cierraFicha;
 $("#verKit").onclick  = () => abreFicha("KIT1");
 $("#verKit2").onclick = () => abreFicha("KIT1");
 $("#agregaKit").onclick = () => agrega("KIT1", $("#agregaKit"));
-$("#barraComprar").onclick = () => agrega("KIT1", $("#barraComprar"));
+$("#barraComprar").onclick = () => agrega("KIT1", $("#barraComprar"), true);
 $("#btnAyuda").onclick = abreAyuda;
 $("#btnAyudaTop").onclick = abreAyuda;
 $("#btnAyudaPie").onclick = abreAyuda;
