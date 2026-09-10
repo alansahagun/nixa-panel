@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="NIXA">
 <meta name="robots" content="noindex">
-<title>NIXA · Orquestador</title>
+<title>Panel NIXA</title>
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../icon.png">
 <link rel="manifest" href="manifest.webmanifest">
@@ -32,6 +32,7 @@
   --rosa:#CFA59B; --rosa2:#E3C6BE; --cocoa:#6B422F; --cocoa2:#7A4F3B; --vino:#6A2C2F;
   /* tintes funcionales derivados de la paleta: el color trabaja */
   --verde:#4E6B49; --verde2:#E3EADD; --vino2:#F2E2E0; --rosa3:#F5E9E5;
+  --ambar:#8A6A2F; --ambar2:#F1E6D2;
   --pagina:#F4EEE8; --campo:#FDFBF9;
   --borde:rgba(231,216,204,.8); --linea:rgba(231,216,204,.6);
   --sombra:0 1px 2px rgba(107,66,47,.04),0 8px 24px -12px rgba(107,66,47,.10);
@@ -122,25 +123,6 @@ em{font-style:italic;font-weight:inherit}
 .forma .ancho{grid-column:1/-1}
 .filete{border:0;border-top:1px solid var(--linea);margin:0}
 
-/* =========================================================
-   ¿QUIÉN ERES? · la única puerta. Sin contraseña.
-   ========================================================= */
-.puerta{position:fixed;inset:0;z-index:100;background:radial-gradient(70% 45% at 50% 0%,rgba(231,216,204,.6),transparent 70%),var(--pagina);overflow:auto;display:grid;place-items:center;padding:calc(24px + env(safe-area-inset-top)) var(--pad) calc(24px + env(safe-area-inset-bottom));text-align:center}
-.puerta .q-in{width:min(100%,440px);padding:30px 24px 24px;box-shadow:var(--sombra2)}
-.puerta .logo{height:76px;width:auto;margin:0 auto 18px}
-.puerta .eti{display:inline-flex;align-items:center;background:var(--nude3);padding:4px 11px;border-radius:999px;margin-bottom:14px}
-.puerta h1{font-size:clamp(32px,8vw,40px);font-variation-settings:"SOFT" 80,"WONK" 1}
-.puerta .q-nota{margin:10px auto 0;font-size:14px;line-height:1.55;color:var(--cocoa2);max-width:34ch}
-.opcs{display:grid;gap:10px;margin-top:22px}
-.opc{display:flex;align-items:center;gap:14px;width:100%;padding:12px 14px;border:1px solid var(--nude);border-radius:14px;background:var(--crema2);color:var(--cocoa);text-align:left;cursor:pointer;transition:background var(--t),border-color var(--t),transform var(--t),box-shadow var(--t)}
-.opc:hover{background:var(--nude3);border-color:var(--rosa);transform:translateY(-1px);box-shadow:var(--sombra)}
-.opc .av{width:44px;height:44px;border-radius:50%;background:var(--nude2);display:grid;place-items:center;font:600 20px/1 var(--serif);font-variation-settings:"SOFT" 80,"WONK" 1;color:var(--cocoa);flex:none}
-.opc[data-quien=Majo] .av{background:var(--rosa2)}
-.opc .tx{flex:1;min-width:0;font:600 16px/1.2 var(--sans)}
-.opc small{display:block;font:400 13px/1.4 var(--sans);color:var(--cocoa2);margin-top:2px}
-.opc .flecha{width:18px;height:18px;color:var(--cocoa2);opacity:.7;transition:transform var(--t)}
-.opc:hover .flecha{transform:translateX(3px);opacity:1}
-.puerta .cerrar-q{margin-top:14px}
 
 /* =========================================================
    ESTRUCTURA · barra arriba (móvil), lateral (escritorio)
@@ -225,6 +207,7 @@ section{padding:0 0 32px}
 .tarea .ver:hover{color:var(--cocoa);text-decoration-color:var(--cocoa)}
 .tarea .det{margin-top:8px;padding:9px 12px;border-radius:var(--r3);background:var(--nude3);font-size:13.5px;line-height:1.5;color:var(--cocoa);white-space:pre-wrap;overflow-wrap:anywhere}
 .chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px 0 10px;-webkit-overflow-scrolling:touch}
+#mgCanales{flex-wrap:wrap;overflow:visible}
 .chips::-webkit-scrollbar{display:none}
 .chip{flex:none;border:1px solid transparent;background:var(--nude3);border-radius:999px;padding:0 12px;min-height:32px;font:500 13px/1 var(--sans);color:var(--cocoa2);cursor:pointer;white-space:nowrap;transition:background var(--t),color var(--t)}
 .chip:hover{background:var(--nude2);color:var(--cocoa)}
@@ -299,6 +282,7 @@ section{padding:0 0 32px}
 .prod .s{font-size:13px;line-height:1.45;color:var(--cocoa2);margin-top:2px}
 .prod .imp{font:600 15px/1.2 var(--sans);white-space:nowrap}
 .prod .mg{background:var(--verde2);color:var(--verde)}
+.prod .mg.media{background:var(--ambar2);color:var(--ambar)}
 .prod .mg.bajo{background:var(--vino2);color:var(--vino)}
 
 /* =========================================================
@@ -478,88 +462,39 @@ section{padding:0 0 32px}
 
 <!-- =========================================================
      MARCA · UN SOLO LUGAR.
-     Aquí vive todo el logo: #lockup (nixa + BEAUTY con la brocha en la i),
-     #brocha (la brocha sola) y #abanico (el isotipo). Todo en currentColor.
-     Cuando llegue la versión corregida de Majo, se cambia este bloque
-     de un jalón y el resto del panel no se toca (todo usa <use href="#...">).
-     Origen: marca/logo-nixa.svg · marca/icono-abanico.svg (mismos trazos que la tienda).
+     #lockup ya no se dibuja a mano aquí: se trae en vivo desde marca-v7.svg
+     (el mismo archivo que usa la tienda en tienda.js) y se inyecta SOLO ese
+     símbolo dentro de #sprite, más abajo, para no chocar con el #abanico
+     decorativo de este bloque (el de la tienda tiene su propio #abanico
+     con otro viewBox). #abanico y #paloma son del panel y se quedan igual.
      ========================================================= -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs><linearGradient id="nxpelo" x1="0" y1="88" x2="0" y2="31" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="var(--fondo,#F6F1EC)" stop-opacity=".46"/><stop offset=".55" stop-color="var(--fondo,#F6F1EC)" stop-opacity=".30"/><stop offset="1" stop-color="var(--fondo,#F6F1EC)" stop-opacity="0"/></linearGradient></defs>
-  <g id="brochaG"><g fill="currentColor"><path d="M22 88 C 20 76, 15.5 62, 16.5 52 C 19 39, 34 31, 50 31 C 66 31, 81 39, 83.5 52 C 84.5 62, 80 76, 78 88 Z"/></g><g fill="none" stroke="url(#nxpelo)" stroke-linecap="round"><path d="M23.9 88 Q16.2 71.2 16.2 59" stroke-width="1"/>
-    <path d="M27 88 Q20.2 69.9 20.2 56.8" stroke-width="1"/>
-    <path d="M29.8 88 Q23.8 66.9 23.7 51.6" stroke-width="1"/>
-    <path d="M32.4 88 Q27.1 64.8 27 48" stroke-width="1"/>
-    <path d="M35.3 88 Q30.9 64 30.8 46.5" stroke-width="1"/>
-    <path d="M38.2 88 Q34.7 65.1 34.7 48.5" stroke-width="1"/>
-    <path d="M41.3 88 Q38.6 59.1 38.5 38.2" stroke-width="1"/>
-    <path d="M44 88 Q42.2 62.6 42.2 44.3" stroke-width="1"/>
-    <path d="M47.2 88 Q46.3 56.9 46.3 34.4" stroke-width="1"/>
-    <path d="M50 88 Q50.1 60.7 50.1 40.8" stroke-width="1"/>
-    <path d="M53.2 88 Q54.1 63.4 54.1 45.6" stroke-width="1"/>
-    <path d="M56 88 Q57.8 62.2 57.8 43.5" stroke-width="1"/>
-    <path d="M58.4 88 Q60.9 64 60.9 46.5" stroke-width="1"/>
-    <path d="M61.4 88 Q64.9 60.2 65.1 40" stroke-width="1"/>
-    <path d="M64.2 88 Q68.5 62.8 68.6 44.6" stroke-width="1"/>
-    <path d="M67.4 88 Q72.6 65.5 72.7 49.2" stroke-width="1"/>
-    <path d="M70.3 88 Q76.2 68.6 76.2 54.6" stroke-width="1"/>
-    <path d="M72.8 88 Q79.6 69.1 79.6 55.4" stroke-width="1"/>
-    <path d="M76.1 88 Q83.9 69.9 84.1 56.7" stroke-width="1"/>
-    <path d="M25.3 88 Q18.3 75.2 18.7 66" stroke-width="0.75"/>
-    <path d="M28.3 88 Q22.3 75.8 22.7 67" stroke-width="0.75"/>
-    <path d="M31.5 88 Q26.2 72.3 26.4 60.9" stroke-width="0.75"/>
-    <path d="M33.9 88 Q29.4 72.3 29.6 61" stroke-width="0.75"/>
-    <path d="M37 88 Q33.3 69.3 33.4 55.8" stroke-width="0.75"/>
-    <path d="M40.1 88 Q37.3 72.9 37.5 62" stroke-width="0.75"/>
-    <path d="M43.2 88 Q41.3 73.7 41.4 63.3" stroke-width="0.75"/>
-    <path d="M45.6 88 Q44.4 68.4 44.4 54.3" stroke-width="0.75"/>
-    <path d="M48.3 88 Q47.8 70.3 47.8 57.5" stroke-width="0.75"/>
-    <path d="M51.1 88 Q51.4 68.8 51.4 55" stroke-width="0.75"/>
-    <path d="M54.5 88 Q55.8 69.9 55.8 56.8" stroke-width="0.75"/>
-    <path d="M57.5 88 Q59.6 72.3 59.5 60.9" stroke-width="0.75"/>
-    <path d="M60.3 88 Q63.2 70.7 63 58.2" stroke-width="0.75"/>
-    <path d="M63.1 88 Q66.7 72.3 66.5 61" stroke-width="0.75"/>
-    <path d="M66.2 88 Q70.8 69.9 70.7 56.7" stroke-width="0.75"/>
-    <path d="M68.8 88 Q74.1 72.6 73.8 61.4" stroke-width="0.75"/>
-    <path d="M71.3 88 Q77.4 73.3 77.1 62.6" stroke-width="0.75"/>
-    <path d="M74.7 88 Q81.8 73 81.6 62.1" stroke-width="0.75"/>
-    <path d="M25.3 88 Q18.8 83.2 19.8 79.7" stroke-width="0.6"/>
-    <path d="M26.5 88 Q20.3 81.4 21.1 76.6" stroke-width="0.6"/>
-    <path d="M27.9 88 Q22 82 22.9 77.7" stroke-width="0.6"/>
-    <path d="M29.7 88 Q24.4 83.3 25.3 80" stroke-width="0.6"/>
-    <path d="M31.3 88 Q26.3 80.1 26.9 74.3" stroke-width="0.6"/>
-    <path d="M33.1 88 Q28.6 82.3 29.3 78.3" stroke-width="0.6"/>
-    <path d="M35 88 Q31 78.9 31.5 72.3" stroke-width="0.6"/>
-    <path d="M36.4 88 Q32.8 80.9 33.4 75.8" stroke-width="0.6"/>
-    <path d="M38.6 88 Q35.5 78.3 35.9 71.3" stroke-width="0.6"/>
-    <path d="M40.6 88 Q38 78.2 38.3 71.1" stroke-width="0.6"/>
-    <path d="M41.7 88 Q39.5 80.6 39.8 75.3" stroke-width="0.6"/>
-    <path d="M43.5 88 Q41.7 77.8 42 70.4" stroke-width="0.6"/>
-    <path d="M45.8 88 Q44.7 81.9 44.9 77.5" stroke-width="0.6"/>
-    <path d="M46.7 88 Q45.8 81.4 46 76.6" stroke-width="0.6"/>
-    <path d="M48.5 88 Q48 79.8 48.1 73.9" stroke-width="0.6"/>
-    <path d="M50.5 88 Q50.7 81.1 50.6 76.2" stroke-width="0.6"/>
-    <path d="M51.6 88 Q52 80.2 52 74.6" stroke-width="0.6"/>
-    <path d="M53.7 88 Q54.7 79.4 54.5 73.3" stroke-width="0.6"/>
-    <path d="M56 88 Q57.6 78.9 57.4 72.2" stroke-width="0.6"/>
-    <path d="M57.2 88 Q59.2 79.4 58.9 73.1" stroke-width="0.6"/>
-    <path d="M59.1 88 Q61.5 82.7 61.1 78.9" stroke-width="0.6"/>
-    <path d="M61 88 Q64 78.9 63.6 72.2" stroke-width="0.6"/>
-    <path d="M62.7 88 Q66.1 79 65.7 72.4" stroke-width="0.6"/>
-    <path d="M63.9 88 Q67.6 81.2 67 76.3" stroke-width="0.6"/>
-    <path d="M65.3 88 Q69.4 80.2 68.8 74.5" stroke-width="0.6"/>
-    <path d="M67 88 Q71.4 83.2 70.6 79.8" stroke-width="0.6"/>
-    <path d="M68.8 88 Q73.7 83 72.9 79.3" stroke-width="0.6"/>
-    <path d="M70.6 88 Q76 83.7 75.1 80.6" stroke-width="0.6"/>
-    <path d="M72 88 Q77.7 83.4 76.8 80.1" stroke-width="0.6"/>
-    <path d="M73.8 88 Q80.1 82.7 79.1 78.9" stroke-width="0.6"/></g><g fill="none" stroke="var(--fondo,#F6F1EC)" stroke-opacity=".38" stroke-linecap="round"></g></g>
-  <symbol id="brocha" viewBox="12 27 76 66"><use href="#brochaG"/></symbol>
-  <symbol id="lockup" viewBox="0 24 176.9 113.74"><g transform="translate(6 92.34)"><path fill="currentColor" d="M31.2 0Q30.9 0 30.9 -0.6Q30.9 -1.2 31.2 -1.2Q34.8 -1.2 35.95 -2.55Q37.1 -3.9 37.1 -8.1V-23.8Q37.1 -29.5 35 -32.25Q32.9 -35 28.3 -35Q24.8 -35 21.25 -32.95Q17.7 -30.9 15.2 -27.3L14.8 -28.5Q18.9 -34.1 23.25 -37Q27.6 -39.9 32.4 -39.9Q37.9 -39.9 40.95 -36.7Q44 -33.5 44 -27.6V-8.1Q44 -3.9 45.15 -2.55Q46.3 -1.2 50 -1.2Q50.3 -1.2 50.3 -0.6Q50.3 0 50 0Q48.1 0 45.7 -0.1Q43.3 -0.2 40.6 -0.2Q37.9 -0.2 35.45 -0.1Q33 0 31.2 0ZM4.3 0Q4 0 4 -0.6Q4 -1.2 4.3 -1.2Q7.9 -1.2 9.05 -2.55Q10.2 -3.9 10.2 -8.1V-27.6Q10.2 -30.8 9.45 -32.3Q8.7 -33.8 6.9 -33.8Q5.9 -33.8 4.6 -33.45Q3.3 -33.1 1.6 -32.4Q1.2 -32.2 1 -32.75Q0.8 -33.3 1.1 -33.5L13.4 -39.4Q13.8 -39.5 14 -39.5Q14.9 -39.5 16 -37.3Q17.1 -35.1 17.1 -31V-8.1Q17.1 -3.9 18.25 -2.55Q19.4 -1.2 23.1 -1.2Q23.4 -1.2 23.4 -0.6Q23.4 0 23.1 0Q21.2 0 18.8 -0.1Q16.4 -0.2 13.7 -0.2Q11 -0.2 8.55 -0.1Q6.1 0 4.3 0Z M56.9 0Q56.6 0 56.6 -0.6Q56.6 -1.2 56.9 -1.2Q60.5 -1.2 61.7 -2.55Q62.9 -3.9 62.9 -8.1V-26.5Q62.9 -30 62.2 -31.6Q61.5 -33.2 59.7 -33.2Q58.9 -33.2 57.85 -32.9Q56.8 -32.6 55.4 -31.9Q55 -31.8 54.75 -32.35Q54.5 -32.9 54.9 -33.1L68.5 -39.4Q68.8 -39.5 68.9 -39.5Q69.2 -39.5 69.55 -39.2Q69.9 -38.9 69.9 -38.5Q69.9 -37.6 69.8 -34.6Q69.7 -31.6 69.7 -26.7V-8.1Q69.7 -3.9 70.85 -2.55Q72 -1.2 75.7 -1.2Q76 -1.2 76 -0.6Q76 0 75.7 0Q73.9 0 71.45 -0.1Q69 -0.2 66.3 -0.2Q63.6 -0.2 61.2 -0.1Q58.8 0 56.9 0Z M104.6 0Q104.3 0 104.3 -0.6Q104.3 -1.2 104.6 -1.2Q107.2 -1.2 107.5 -2.05Q107.8 -2.9 106.4 -5.1L89.6 -30.3Q87.1 -34 84.7 -35.7Q82.3 -37.4 80.5 -37.4Q80.3 -37.4 80.3 -38Q80.3 -38.6 80.5 -38.6Q82 -38.6 83.6 -38.5Q85.2 -38.4 86.7 -38.4Q90.1 -38.4 92.7 -38.5Q95.3 -38.6 97.4 -38.6Q97.6 -38.6 97.6 -38Q97.6 -37.4 97.4 -37.4Q95 -37.4 94.55 -36.6Q94.1 -35.8 95.6 -33.5L112.3 -8.3Q115 -4.3 117.6 -2.75Q120.2 -1.2 122 -1.2Q122.2 -1.2 122.2 -0.6Q122.2 0 122 0Q120.4 0 118.6 -0.1Q116.8 -0.2 115.3 -0.2Q111.9 -0.2 109.3 -0.1Q106.7 0 104.6 0ZM80 0Q79.8 0 79.8 -0.6Q79.8 -1.2 80 -1.2Q82.8 -1.2 85.95 -3.3Q89.1 -5.4 91.9 -9.2L99.5 -19.7L100.8 -18.5L93.9 -8.5Q92.3 -6.2 91.9 -4.55Q91.5 -2.9 92.7 -2.05Q93.9 -1.2 97.1 -1.2Q97.4 -1.2 97.4 -0.6Q97.4 0 97.1 0Q94.8 0 92.65 -0.1Q90.5 -0.2 87.1 -0.2Q84.8 -0.2 83.4 -0.1Q82 0 80 0ZM101.2 -19.2 100.1 -20.3 106.6 -30.1Q109.2 -33.8 108.7 -35.6Q108.2 -37.4 103.4 -37.4Q103.2 -37.4 103.2 -38Q103.2 -38.6 103.4 -38.6Q105.8 -38.6 107.95 -38.5Q110.1 -38.4 113.5 -38.4Q115.8 -38.4 117.2 -38.5Q118.6 -38.6 120.6 -38.6Q120.8 -38.6 120.8 -38Q120.8 -37.4 120.6 -37.4Q117.9 -37.4 114.75 -35.4Q111.6 -33.4 108.7 -29.4Z M154.5 0.6Q154.1 0.8 153.6 0.8Q152.1 0.8 150.75 -1.45Q149.4 -3.7 149.4 -7.9V-26.2Q149.4 -32.4 147.85 -35.05Q146.3 -37.7 143.6 -37.7Q141.1 -37.7 139.6 -36.35Q138.1 -35 137.45 -33.25Q136.8 -31.5 136.5 -30Q136.3 -28.1 135.35 -26.8Q134.4 -25.5 132.2 -25.5Q130.2 -25.5 129.3 -26.5Q128.4 -27.5 128.4 -28.7Q128.4 -30.8 130.35 -32.7Q132.3 -34.6 135.3 -36.2Q138.3 -37.8 141.55 -38.7Q144.8 -39.6 147.4 -39.6Q151.5 -39.6 153.85 -36.95Q156.2 -34.3 156.2 -29.2V-10.8Q156.2 -7.5 157.1 -5.9Q158 -4.3 160 -4.3Q161.7 -4.3 164.4 -5.4Q164.8 -5.6 165.05 -5.05Q165.3 -4.5 164.8 -4.3ZM136.1 0.7Q132.1 0.7 130.05 -1.3Q128 -3.3 128 -6.3Q128 -8.7 129.3 -10.35Q130.6 -12 133.05 -13.3Q135.5 -14.6 139 -15.9L150.4 -20.1L150.7 -18.8L141.6 -15.1Q140.1 -14.5 138.85 -13.7Q137.6 -12.9 136.8 -11.75Q136 -10.6 136 -9Q136 -6.6 137.6 -5.05Q139.2 -3.5 141.5 -3.5Q142.4 -3.5 143.4 -3.8Q144.4 -4.1 145.8 -4.9L151.7 -8.6L151.9 -7.2L144.6 -2.4Q142.3 -0.7 140.35 0Q138.4 0.7 136.1 0.7Z"/><path fill="currentColor" transform="translate(32.14 35.4)" d="M2.57 -6.48H4.55Q5.65 -6.48 6.47 -6.79Q7.28 -7.11 7.74 -7.72Q8.19 -8.33 8.19 -9.19Q8.19 -10.24 7.74 -10.91Q7.28 -11.59 6.47 -11.92Q5.65 -12.25 4.55 -12.25H1.4V0H4.73Q5.92 0 6.85 -0.39Q7.79 -0.79 8.34 -1.58Q8.89 -2.38 8.89 -3.59Q8.89 -4.43 8.58 -5.04Q8.26 -5.65 7.69 -6.05Q7.12 -6.44 6.37 -6.63Q5.62 -6.83 4.73 -6.83H2.57V-6H4.73Q5.32 -6 5.81 -5.85Q6.3 -5.71 6.66 -5.41Q7.02 -5.11 7.21 -4.67Q7.4 -4.24 7.4 -3.68Q7.4 -2.92 7.06 -2.4Q6.72 -1.87 6.12 -1.59Q5.51 -1.31 4.73 -1.31H2.89V-10.94H4.55Q5.48 -10.94 6.09 -10.46Q6.7 -9.98 6.7 -9.1Q6.7 -8.52 6.42 -8.12Q6.14 -7.72 5.65 -7.51Q5.16 -7.3 4.55 -7.3H2.57Z M20.04 0H26.22V-1.4H20.04ZM20.04 -10.85H26.22V-12.25H20.04ZM20.04 -5.95H25.87V-7.35H20.04ZM19.21 -12.25V0H20.7V-12.25Z M38.06 -3.68H44.54L44.01 -5.08H38.59ZM41.27 -9.49 43.37 -4.55 43.51 -4.2 45.29 0H46.95L41.27 -12.86L35.58 0H37.24L39.06 -4.31L39.2 -4.62Z M56.4 -12.25V-4.03Q56.4 -3.12 56.69 -2.35Q56.98 -1.58 57.53 -1.02Q58.08 -0.46 58.85 -0.14Q59.62 0.18 60.57 0.18Q61.51 0.18 62.28 -0.14Q63.05 -0.46 63.6 -1.02Q64.16 -1.58 64.44 -2.35Q64.73 -3.12 64.73 -4.03V-12.25H63.25V-4.03Q63.25 -2.77 62.56 -2Q61.88 -1.23 60.57 -1.23Q59.26 -1.23 58.57 -2Q57.89 -2.77 57.89 -4.03V-12.25Z M74.27 -10.85H77.42V0H78.91V-10.85H82.06V-12.25H74.27Z M98.88 -12.25 95.71 -6.58 92.56 -12.25H90.9L94.97 -5.27V0H96.46V-5.29L100.54 -12.25Z"/><g transform="translate(51.29 -68.6) scale(0.28)"><use href="#brochaG"/></g></g></symbol>
   <!-- Isotipo: la brocha de abanico, en trazo (marca/icono-abanico.svg) -->
   <symbol id="abanico" viewBox="0 0 100 100"><path d="M50 78 L0.29 56.9 A5.88 5.88 0 0 1 5.32 47.67 A5.88 5.88 0 0 1 12.04 39.59 A5.88 5.88 0 0 1 20.2 32.97 A5.88 5.88 0 0 1 29.48 28.05 A5.88 5.88 0 0 1 39.54 25.02 A5.88 5.88 0 0 1 50 24 A5.88 5.88 0 0 1 60.46 25.02 A5.88 5.88 0 0 1 70.52 28.05 A5.88 5.88 0 0 1 79.8 32.97 A5.88 5.88 0 0 1 87.96 39.59 A5.88 5.88 0 0 1 94.68 47.67 A5.88 5.88 0 0 1 99.71 56.9 Z"/><path d="M44.21 74.07L5.32 47.67 M45.08 73.02L12.04 39.59 M46.14 72.16L20.2 32.97 M47.34 71.53L29.48 28.05 M48.64 71.13L39.54 25.02 M50 71L50 24 M51.36 71.13L60.46 25.02 M52.66 71.53L70.52 28.05 M53.86 72.16L79.8 32.97 M54.92 73.02L87.96 39.59 M55.79 74.07L94.68 47.67"/><path d="M50 84.5c-3.1 3.6-3.4 8 0 8s3.1-4.4 0-8z" fill="currentColor" stroke="none"/></symbol>
   <!-- Ícono de línea: la palomita de las tareas -->
   <symbol id="paloma" viewBox="0 0 24 24"><path d="M4.5 12.8l4.6 4.4L19.5 6.6"/></symbol>
 </svg>
+<div id="sprite" hidden></div>
+<script>
+(function(){
+  var IMG = 'https://jjtlkneoxmgcyrifckdf.supabase.co/storage/v1/object/public/panel/img';
+  fetch(IMG + '/marca-v7.svg').then(function(r){ return r.ok ? r.text() : ''; }).then(function(t){
+    var m = t.match(/<symbol id="lockup"[\s\S]*?<\/symbol>/);
+    if (!m) return;
+    var simbolo = m[0];
+    // El símbolo trae sus letras como <use href="#..."> hacia formas que Illustrator
+    // guarda aparte en el archivo; hay que traerlas también o el logo sale vacío.
+    var ids = [], re = /href="#([^"]+)"/g, mm;
+    while ((mm = re.exec(simbolo))) if (ids.indexOf(mm[1]) === -1) ids.push(mm[1]);
+    var defs = ids.map(function(id){
+      var gm = t.match(new RegExp('<g id="' + id + '">[\\s\\S]*?</g>'));
+      return gm ? gm[0] : '';
+    }).join('');
+    var s = document.getElementById('sprite');
+    s.innerHTML = '<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>' + defs + '</defs>' + simbolo + '</svg>';
+  }).catch(function(){});
+})();
+</script>
 <!-- ===== fin de MARCA ===== -->
 
 <!-- Íconos de interfaz: una familia de línea propia (trazo 1.75, redondeado), uno por sección. -->
@@ -578,35 +513,22 @@ section{padding:0 0 32px}
   <symbol id="i-alerta" viewBox="0 0 24 24"><path d="M12 9v4.5M12 17h.01"/><path d="M10.3 4.3L2.9 17.2a2 2 0 0 0 1.7 3h14.8a2 2 0 0 0 1.7-3L13.7 4.3a2 2 0 0 0-3.4 0z"/></symbol>
   <symbol id="i-flecha" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
   <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-margen" viewBox="0 0 24 24"><path d="M13 3h5.5A2.5 2.5 0 0 1 21 5.5V11a2 2 0 0 1-.6 1.4l-7.9 7.9a2 2 0 0 1-2.8 0l-5.6-5.6a2 2 0 0 1 0-2.8l7.9-7.9A2 2 0 0 1 13 3z"/><circle cx="16.7" cy="7.3" r="1.3" fill="currentColor" stroke="none"/></symbol>
 </svg>
 
-<!-- ============ ¿QUIÉN ERES? ============ -->
-<div id="quien" class="puerta hide" role="dialog" aria-modal="true" aria-labelledby="tituloQuien">
-  <div class="q-in tarjeta">
-  <svg class="logo marca" viewBox="0 24 176.9 113.74" role="img" aria-label="nixa BEAUTY"><use href="#lockup"/></svg>
-  <p class="eti">Orquestador · uso interno</p>
-  <h1 id="tituloQuien">¿Quién eres?</h1>
-  <p class="q-nota">Se guarda en este aparato. Lo que anotes, lo que pongas en la caja y lo que cierres va a tu nombre.</p>
-  <div class="opcs">
-    <button class="opc" type="button" data-quien="Alan"><span class="av" aria-hidden="true">A</span><span class="tx">Alan<small>Números y tienda</small></span><svg class="ic flecha" aria-hidden="true"><use href="#i-flecha"/></svg></button>
-    <button class="opc" type="button" data-quien="Majo"><span class="av" aria-hidden="true">M</span><span class="tx">Majo<small>Proveedores y producto</small></span><svg class="ic flecha" aria-hidden="true"><use href="#i-flecha"/></svg></button>
-  </div>
-  <button class="link suave cerrar-q hide" id="cerrarQuien" type="button">Dejarlo como estaba</button>
-  </div>
-</div>
 
 <!-- ============ APP ============ -->
 <div id="app" class="hide">
 
   <!-- lateral (escritorio) -->
   <aside class="lado">
-    <svg class="logo marca" viewBox="0 24 176.9 113.74" role="img" aria-label="nixa BEAUTY"><use href="#lockup"/></svg>
+    <svg class="logo marca" viewBox="0 0 1368 826" role="img" aria-label="nixa BEAUTY"><use href="#lockup"/></svg>
     <span class="eti">Orquestador</span>
     <nav id="navDesk" aria-label="Secciones"></nav>
     <div class="pie">
       <span class="eti">Estás como</span>
       <span class="nombre nombreYo"></span>
-      <button class="link cambiaYo" type="button">Cambiar</button>
+      <button class="link cambiaYo" type="button">Cerrar sesión</button>
     </div>
   </aside>
 
@@ -614,8 +536,8 @@ section{padding:0 0 32px}
     <!-- barra superior (móvil) -->
     <header class="top">
       <span class="n sec" id="secTop" aria-hidden="true">01</span>
-      <svg class="logo marca" viewBox="0 24 176.9 113.74" role="img" aria-label="nixa BEAUTY"><use href="#lockup"/></svg>
-      <button class="link yo cambiaYo" type="button" aria-label="Cambiar de persona"><span class="nombreYo"></span></button>
+      <svg class="logo marca" viewBox="0 0 1368 826" role="img" aria-label="nixa BEAUTY"><use href="#lockup"/></svg>
+      <button class="link yo cambiaYo" type="button" aria-label="Cerrar sesión"><span class="nombreYo"></span></button>
     </header>
 
     <main class="wrap">
@@ -831,15 +753,37 @@ section{padding:0 0 32px}
         </div>
       </section>
 
+      <!-- N°09 MARGEN -->
+      <section id="v-margen" class="hide">
+        <header class="cab"><span class="ico"><svg class="ic" aria-hidden="true"><use href="#i-margen"/></svg></span><div class="cab-t"><h2>Margen</h2><span class="n">09</span></div><p class="res">Cuánto queda por pieza, antes de comprarla o de ponerle precio.</p></header>
+
+        <div class="dos forma-lista">
+          <div class="bloque pegado">
+            <div class="sub"><h3>Simular</h3><span class="eti">en vivo</span></div>
+            <div class="chips" id="mgCanales" role="group" aria-label="Canal de venta"></div>
+            <div class="forma">
+              <label class="campo"><span>Costo por pieza</span><input id="mgCosto" type="number" inputmode="decimal" step="0.01" placeholder="$"></label>
+              <label class="campo"><span>Precio de venta</span><input id="mgPrecio" type="number" inputmode="decimal" step="0.01" placeholder="$"></label>
+            </div>
+            <div class="calc vacia" id="mgCalc"><div><div class="l">Comisión y envío</div><div class="v" id="mgCom">—</div></div><div><div class="l">Margen para nixa</div><div class="v neto" id="mgNeto">—</div></div></div>
+            <p class="msg" id="mgRegla">Mercado Libre cobra 14% más $38 de envío por pieza. TikTok Shop, 8%. Amazon, 15%. En persona y WhatsApp, nada.</p>
+          </div>
+          <div class="bloque">
+            <div class="sub"><h3>El catálogo, en ese canal</h3><span class="eti" id="mgNCat"></span></div>
+            <div class="lista" id="listMargen"></div>
+          </div>
+        </div>
+      </section>
+
     </main>
   </div>
 
   <!-- barra inferior (móvil) -->
   <nav class="tabs" id="navTabs" aria-label="Secciones"></nav>
   <div class="indice" id="indice" role="dialog" aria-modal="true" aria-label="Índice del orquestador">
-    <div class="arriba"><svg class="logo marca" viewBox="0 24 176.9 113.74" aria-hidden="true"><use href="#lockup"/></svg><button class="cerrar" id="cerrarIndice" type="button">Cerrar</button></div>
+    <div class="arriba"><svg class="logo marca" viewBox="0 0 1368 826" aria-hidden="true"><use href="#lockup"/></svg><button class="cerrar" id="cerrarIndice" type="button">Cerrar</button></div>
     <div id="indiceLista"></div>
-    <p class="pie">Estás como <b class="nombreYo"></b>. <button class="link suave cambiaYo" type="button">Cambiar</button></p>
+    <p class="pie">Estás como <b class="nombreYo"></b>. <button class="link suave cambiaYo" type="button">Cerrar sesión</button></p>
   </div>
 </div>
 
@@ -885,7 +829,6 @@ const fechaMes = ts => new Date(ts).toLocaleDateString('es-MX', { timeZone: TZ, 
 const horaSola = ts => new Date(ts).toLocaleTimeString('es-MX', { timeZone: TZ, hour:'2-digit', minute:'2-digit', hour12:false });
 const PERSONAS = ['Majo', 'Alan', 'Jarvis'];
 const META_ML = 10;
-const LS_QUIEN = 'nixa_quien';
 let productos = [], YO = null, tareasCache = [], filtroTar = 'todas', filtroEnv = 'activos', filtroSop = 'pendientes';
 // Lo que ya se cargó, para que "Qué mejorar" calcule sobre datos reales sin volver a pedirlos.
 const D = { tareas: [], inv: [], ventas: [], compras: [], saldo: null, socios: null, mensajes: [], pedidos: [], listo: {} };
@@ -901,18 +844,18 @@ function toast(t) { const x = $('#toast'); $('#toastTxt').textContent = t; x.cla
 const msg = (sel, texto, cls = '') => { const m = $(sel); m.className = 'msg ' + cls; m.textContent = texto; };
 const anota = texto => sb.from('bitacora').insert({ autor: YO, texto, origen: 'panel' });
 
-/* ================= ¿quién eres? · sin sesión, se guarda en el aparato ================= */
-function leeQuien() { try { return localStorage.getItem(LS_QUIEN); } catch (e) { return null; } }
-function guardaQuien(n) { try { localStorage.setItem(LS_QUIEN, n); } catch (e) {} }
-function pideQuien(puedeCerrar) {
-  $('#quien').classList.remove('hide');
-  $('#cerrarQuien').classList.toggle('hide', !puedeCerrar);
-  document.body.style.overflow = 'hidden';
-}
-function cierraQuien() { $('#quien').classList.add('hide'); document.body.style.overflow = ''; }
-$$('.opc[data-quien]').forEach(b => b.onclick = () => { const n = b.dataset.quien; const cambio = YO && YO !== n; guardaQuien(n); cierraQuien(); if (!YO || cambio) arranca(n); });
-$('#cerrarQuien').onclick = cierraQuien;
-$$('.cambiaYo').forEach(b => b.onclick = () => { cierraIndice(); pideQuien(true); });
+/* ================= cambiar de persona · ahora es cerrar sesión de verdad =================
+   Antes cualquiera con el panel abierto podía "ponerse" el nombre del otro sin
+   contraseña (solo quedaba guardado en el aparato). Quién eres ahora lo dice
+   únicamente con quién iniciaste sesión en Supabase (ve puerta.js); para que
+   entre otra persona, tiene que cerrar esta sesión y entrar con su propia
+   cuenta y su propia contraseña. */
+$$('.cambiaYo').forEach(b => b.onclick = async () => {
+  cierraIndice();
+  b.disabled = true;
+  try { await sb.auth.signOut(); } catch (e) {}
+  location.reload();
+});
 
 function saludo() {
   const h = Number(new Intl.DateTimeFormat('en-US', { timeZone: TZ, hour: 'numeric', hour12: false }).format(new Date()));
@@ -941,9 +884,10 @@ const VISTAS = [
   ['sop', 'Soporte', 'Mensajes por atender', false],
   ['mej', 'Mejorar', 'Hallazgos sobre los datos', false],
   ['bit', 'Bitácora', 'Todo lo que pasó', false],
+  ['margen', 'Margen', 'Precio y margen por kit', false],
 ];
-const NOMBRE_LARGO = { inv: 'Inventario y compras', mej: 'Qué mejorar' };
-const CARGA = { hoy: () => cargarTareas(), caja: () => cargarCaja(), ven: () => cargarVentas(), inv: () => { cargarInv(); cargarCompras(); }, env: () => cargarPedidos(), sop: () => cargarMensajes(), mej: () => cargarTodo(), bit: () => cargarBitacora() };
+const NOMBRE_LARGO = { inv: 'Inventario y compras', mej: 'Qué mejorar', margen: 'Calculadora de margen' };
+const CARGA = { hoy: () => cargarTareas(), caja: () => cargarCaja(), ven: () => cargarVentas(), inv: () => { cargarInv(); cargarCompras(); }, env: () => cargarPedidos(), sop: () => cargarMensajes(), mej: () => cargarTodo(), bit: () => cargarBitacora(), margen: () => pintaMargen() };
 const LEGADO = { com: 'inv' };
 let vista = 'hoy';
 function buildNav() {
@@ -973,15 +917,15 @@ function irA(k) {
   CARGA[k]?.();
 }
 const abreIndice = () => { $('#indice').classList.add('on'); document.body.style.overflow = 'hidden'; };
-const cierraIndice = () => { $('#indice').classList.remove('on'); if ($('#quien').classList.contains('hide') && !$('#lightbox').classList.contains('on')) document.body.style.overflow = ''; };
+const cierraIndice = () => { $('#indice').classList.remove('on'); if (!$('#lightbox').classList.contains('on')) document.body.style.overflow = ''; };
 $('#cerrarIndice').onclick = cierraIndice;
 
 /* ---- visor de fotos: soporte y bitácora abren aquí, no en otra pestaña ---- */
 function abreLightbox(src) { if (!src) return; $('#lightboxImg').src = src; $('#lightbox').classList.add('on'); document.body.style.overflow = 'hidden'; }
-function cierraLightbox() { if (!$('#lightbox').classList.contains('on')) return; $('#lightbox').classList.remove('on'); $('#lightboxImg').src = ''; if ($('#quien').classList.contains('hide') && !$('#indice').classList.contains('on')) document.body.style.overflow = ''; }
+function cierraLightbox() { if (!$('#lightbox').classList.contains('on')) return; $('#lightbox').classList.remove('on'); $('#lightboxImg').src = ''; if (!$('#indice').classList.contains('on')) document.body.style.overflow = ''; }
 $('#cerrarLightbox').onclick = cierraLightbox;
 $('#lightbox').addEventListener('click', e => { if (e.target.id === 'lightbox') cierraLightbox(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') { cierraLightbox(); cierraIndice(); if (YO) cierraQuien(); } });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { cierraLightbox(); cierraIndice(); } });
 
 /* ================= datos ================= */
 async function cargarProductos() {
@@ -1189,6 +1133,46 @@ $('#btnVenta').onclick = async () => {
   msg('#vmsg', ''); $('#vprecio').value = ''; $('#vcant').value = 1; calcVenta(); toast('Venta guardada');
   cargarVentas(); cargarInv(); cargarBitacora();
 };
+/* ---- margen: simulador + catálogo por canal, con las mismas comisiones de arriba ---- */
+const CANALES_MARGEN = ['Mercado Libre', 'TikTok Shop', 'Amazon', 'En persona'];
+let mgCanal = 'Mercado Libre';
+function margenCon(costo, precio, canal) {
+  const com = COMISION[canal] ? COMISION[canal](precio) : 0;
+  const margen = precio - costo - com;
+  const pct = precio ? Math.round(margen / precio * 100) : 0;
+  return { com, margen, pct };
+}
+const claseMg = pct => pct < 15 ? 'bajo' : pct < 30 ? 'media' : '';
+function calcMargen() {
+  const costo = parseFloat($('#mgCosto').value || 0), precio = parseFloat($('#mgPrecio').value || 0);
+  const c = $('#mgCalc');
+  if (!precio) { c.classList.add('vacia'); $('#mgCom').textContent = '—'; $('#mgNeto').textContent = '—'; return; }
+  const { com, margen } = margenCon(costo, precio, mgCanal);
+  c.classList.remove('vacia'); $('#mgCom').textContent = money(com); $('#mgNeto').textContent = money(margen);
+}
+function pintaCatalogoMargen() {
+  const cont = $('#listMargen'); cont.innerHTML = '';
+  $('#mgNCat').textContent = productos.length ? `${productos.length} ${plural(productos.length, 'activo', 'activos')}` : '';
+  if (!productos.length) return cont.appendChild(el(vacio('Sin productos activos.', 'El catálogo se llena desde la base.')));
+  productos.forEach((p, i) => {
+    const { margen, pct } = margenCon(p.costo || 0, p.precio, mgCanal);
+    cont.appendChild(el(`<div class="prod"><span class="n">${idx(i)}</span><div><div class="t">${esc(nombreCorto(p.sku))}</div><div class="s">${nombreResto(p.sku) ? esc(nombreResto(p.sku)) + ' · ' : ''}${esc(p.sku)} · costo ${money(p.costo)}</div></div>
+      <div class="der"><div class="imp">${money(p.precio)}</div><div class="mg ${claseMg(pct)}">margen ${money(margen)} · ${pct}%</div></div></div>`));
+  });
+}
+function pintaMargen() {
+  const cont = $('#mgCanales');
+  if (!cont.children.length) {
+    CANALES_MARGEN.forEach(c => {
+      const b = el(`<button class="chip ${c === mgCanal ? 'on' : ''}" type="button">${esc(c)}</button>`);
+      b.onclick = () => { mgCanal = c; $$('#mgCanales .chip').forEach(x => x.classList.toggle('on', x.textContent === c)); calcMargen(); pintaCatalogoMargen(); };
+      cont.appendChild(b);
+    });
+    ['#mgCosto', '#mgPrecio'].forEach(s => $(s).addEventListener('input', calcMargen));
+  }
+  calcMargen();
+  pintaCatalogoMargen();
+}
 function pintaMeta(ml, n) {
   const ol = $('#casillas'); ol.innerHTML = '';
   for (let i = 0; i < META_ML; i++) ol.appendChild(el(`<li class="${i < ml ? 'ok' : ''}">${abanico}<span class="n">${idx(i)}</span></li>`));
