@@ -49,8 +49,6 @@ const PT_CSS  = `.pt-env{min-height:100dvh;display:grid;place-items:center;paddi
 .pt-entrar[disabled]{opacity:.5;cursor:default;transform:none}
 .pt-aviso{font:400 13px/1.45 var(--sans);color:var(--vino);margin:12px 0 0;min-height:1.2em}
 .pt-pie{font:400 12.5px/1.5 var(--sans);color:var(--cocoa2);opacity:.85;margin:23px 0 0;padding-top:17px;border-top:1px solid var(--linea)}
-.pt-salir{position:fixed;left:14px;bottom:14px;z-index:60;height:34px;padding:0 15px;border:1px solid var(--borde);border-radius:999px;background:var(--campo);color:var(--cocoa2);font:500 12.5px/1 var(--sans);cursor:pointer;box-shadow:0 1px 2px rgba(107,66,47,.05);transition:color .18s,border-color .18s}
-.pt-salir:hover{color:var(--cocoa);border-color:var(--rosa)}
 @media(prefers-reduced-motion:reduce){.pt-caja *,.pt-entrar{transition:none!important}}`;
 
 document.title = 'Panel NIXA';
@@ -129,14 +127,73 @@ function pantallaEntrada(aviso) {
   };
 }
 
-/* Boton discreto para salir, por si se comparte la computadora. */
-function ponSalir() {
-  if (document.getElementById('pt-salir')) return;
+/* Pantalla de "pon tu propia contraseña": aparece una sola vez por persona,
+   la primera vez que entra despues de que Jarvis les creo su cuenta con la
+   contraseña compartida "admin". La marca perfiles.debe_cambiar_password
+   es la que decide si toca, y se apaga sola en cuanto la cambian. */
+function pantallaNuevaContrasena(quien, userId) {
   ptEstilos();
-  const b = document.createElement('button');
-  b.id = 'pt-salir'; b.className = 'pt-salir'; b.type = 'button'; b.textContent = 'Salir';
-  b.onclick = async () => { try { await sb.auth.signOut(); } catch (e) {} location.reload(); };
-  document.body.appendChild(b);
+  document.body.innerHTML =
+    '<svg width="0" height="0" style="position:absolute" aria-hidden="true">'
+  + '<symbol id="pt-ab" viewBox="0 0 885.8 955.7">' + AB_D + '</symbol></svg>'
+  + '<div class="pt-env">'
+  + '<svg class="pt-fondo" viewBox="0 0 885.8 955.7" aria-hidden="true"><use href="#pt-ab"/></svg>'
+  + '<main class="pt-caja">'
+  + '<svg class="pt-ab" viewBox="0 0 885.8 955.7" role="img" aria-label="NIXA"><use href="#pt-ab"/></svg>'
+  + '<p class="pt-ceja">NIXA</p>'
+  + '<h1>Hola, ' + quien.nombre.split(' ')[0] + '</h1>'
+  + '<p class="pt-sub">Tu cuenta todavía tiene la contraseña genérica que te dio Jarvis. Antes de entrar, pon una que solo tú sepas.</p>'
+  + '<form id="pt-form" novalidate>'
+  + '<div class="pt-campo" id="pt-cp"><label for="pt-p">Nueva contraseña</label>'
+  + '<input id="pt-p" name="new-password" type="password" autocomplete="new-password" placeholder="mínimo 6 caracteres">'
+  + '<button class="pt-ojo" id="pt-ojo" type="button" aria-label="Ver la contraseña" aria-pressed="false">' + OJO_VER + '</button></div>'
+  + '<div class="pt-campo" id="pt-cp2"><label for="pt-p2">Repítela</label>'
+  + '<input id="pt-p2" name="new-password-2" type="password" autocomplete="new-password" placeholder="otra vez, igual"></div>'
+  + '<button class="pt-entrar" id="pt-entrar" type="submit">Guardar y entrar</button>'
+  + '<p class="pt-aviso" id="pt-aviso" role="status" aria-live="polite"></p>'
+  + '</form>'
+  + '<p class="pt-pie">Solo tú vas a saber esta contraseña; ni Jarvis ni ' + (quien.nombre.split(' ')[0] === 'Alan' ? 'Majo' : 'Alan') + ' la van a ver.</p>'
+  + '</main></div>';
+
+  const f = document.getElementById('pt-form');
+  const cp = document.getElementById('pt-cp'), cp2 = document.getElementById('pt-cp2');
+  const p = document.getElementById('pt-p'), p2 = document.getElementById('pt-p2');
+  const m = document.getElementById('pt-aviso'), b = document.getElementById('pt-entrar');
+  const ojo = document.getElementById('pt-ojo');
+
+  p.focus();
+  const limpia = () => { cp.classList.remove('mal'); cp2.classList.remove('mal'); m.textContent = ''; };
+  p.oninput = limpia; p2.oninput = limpia;
+
+  ojo.onclick = () => {
+    const oculta = p.type === 'password';
+    p.type = p2.type = oculta ? 'text' : 'password';
+    ojo.innerHTML = oculta ? OJO_NO : OJO_VER;
+    ojo.setAttribute('aria-label', oculta ? 'Ocultar la contraseña' : 'Ver la contraseña');
+    ojo.setAttribute('aria-pressed', String(oculta));
+    p.focus();
+  };
+
+  f.onsubmit = async (e) => {
+    e.preventDefault();
+    limpia();
+    if (p.value.length < 6) { cp.classList.add('mal'); m.textContent = 'Necesita al menos 6 caracteres.'; p.focus(); return; }
+    if (p.value !== p2.value) { cp2.classList.add('mal'); m.textContent = 'Las dos contraseñas no son iguales.'; p2.focus(); return; }
+    b.disabled = true; b.textContent = 'Guardando…';
+    let error = null;
+    try { error = (await sb.auth.updateUser({ password: p.value })).error; }
+    catch (err) { error = { message: 'sin conexion' }; }
+    if (error) {
+      b.disabled = false; b.textContent = 'Guardar y entrar';
+      cp.classList.add('mal');
+      m.textContent = /conexi/.test(error.message || '')
+        ? 'No hay conexión. Revisa tu internet y vuelve a intentar.'
+        : 'No se pudo guardar: ' + error.message;
+      return;
+    }
+    try { await sb.from('perfiles').update({ debe_cambiar_password: false }).eq('id', userId); } catch (err) {}
+    location.reload();
+  };
 }
 
 async function puerta() {
@@ -148,8 +205,12 @@ async function puerta() {
     if (correo) { try { await sb.auth.signOut(); } catch (e) {} }
     return pantallaEntrada(correo ? 'Esa cuenta no es del equipo de NIXA.' : '');
   }
-  guardaQuien(quien.nombre);
+  let debeCambiar = false;
+  try {
+    const r = await sb.from('perfiles').select('debe_cambiar_password').eq('id', sesion.user.id).maybeSingle();
+    debeCambiar = !!(r.data && r.data.debe_cambiar_password);
+  } catch (e) {}
+  if (debeCambiar) return pantallaNuevaContrasena(quien, sesion.user.id);
   arranca(quien.nombre);
-  ponSalir();
 }
 puerta();
