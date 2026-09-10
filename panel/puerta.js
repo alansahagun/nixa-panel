@@ -127,11 +127,10 @@ function pantallaEntrada(aviso) {
   };
 }
 
-/* Pantalla de "pon tu propia contraseña": aparece una sola vez por
-   persona, la primera vez que entra despues de que Jarvis les creo su
-   cuenta con la contraseña compartida "admin". La marca
-   perfiles.debe_cambiar_password es la que decide si toca, y se apaga
-   sola en cuanto la cambian. */
+/* Pantalla de "pon tu propia contraseña": aparece una sola vez por persona,
+   la primera vez que entra despues de que Jarvis les creo su cuenta con la
+   contraseña compartida "admin". La marca perfiles.debe_cambiar_password
+   es la que decide si toca, y se apaga sola en cuanto la cambian. */
 function pantallaNuevaContrasena(quien, userId) {
   ptEstilos();
   document.body.innerHTML =
