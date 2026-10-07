@@ -335,14 +335,16 @@ async function cargarCaja() {
   ]);
   D.saldo = s || { saldo: 0, puso_alan: 0, puso_majo: 0, gastado: 0 };
   D.socios = soc || { balance_alan: 0, puesto_alan: 0, puesto_majo: 0, total_puesto: 0 };
-  // Lo que cada quien PUSO = lo que aportó a la caja + lo que pagó de su bolsa.
-  // Casi todo se paga de la bolsa, así que el efectivo de la caja no es la cifra que importa.
-  const a = Number(soc?.puesto_alan || 0), m = Number(soc?.puesto_majo || 0), tot = a + m;
+  // Lo que cada quien PUSO = lo que aportó a la caja + lo que pagó de su bolsa, ya con lo que
+  // se pasaron entre ellos. Si Alan paga $1,749 y Majo le pasa $874.50, cada uno puso $874.50;
+  // sin restar ese pago, la tarjeta decía "Majo $0" aunque Majo ya había pagado su mitad.
+  const ra = Number(soc?.reembolsado_alan || 0), rm = Number(soc?.reembolsado_majo || 0);
+  const a = Number(soc?.puesto_alan || 0) + ra - rm, m = Number(soc?.puesto_majo || 0) + rm - ra, tot = a + m;
   $('#cSaldo').innerHTML = `${money(tot)}<small>entre los dos</small>`;
   $('#cGasto').textContent = money(s?.gastado); $('#cAlan').textContent = money(a); $('#cMajo').textContent = money(m);
   $('#kCaja').textContent = money(tot);
-  $('#reparto .alan').style.width = tot ? (a / tot * 100) + '%' : '0';
-  $('#reparto .majo').style.width = tot ? (m / tot * 100) + '%' : '0';
+  $('#reparto .alan').style.width = tot > 0 ? (Math.max(0, a) / tot * 100) + '%' : '0';
+  $('#reparto .majo').style.width = tot > 0 ? (Math.max(0, m) / tot * 100) + '%' : '0';
   // Reconciliación 50/50: balance_alan > 0 → Majo le debe a Alan; < 0 → Alan le debe a Majo.
   const bal = Number(soc?.balance_alan || 0), otro = otroDe(YO);
   const tit = $('#cuentasTit'), txt = $('#cuentasTxt'), acc = $('#cuentasAcc'); acc.innerHTML = '';
