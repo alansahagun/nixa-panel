@@ -52,6 +52,18 @@ const abanico = '<svg class="ilu" viewBox="0 0 100 100" aria-hidden="true"><use 
 const paloma = '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#paloma"/></svg>';
 const icono = k => `<svg class="ic" aria-hidden="true"><use href="#i-${k}"/></svg>`;
 const vacio = (b, s) => `<div class="vacio"><b>${b}</b>${s ? `<span>${s}</span>` : ''}</div>`;
+// Fotos del equipo (comprobantes, muestras): el bucket es privado. Se guarda la URL de siempre
+// y aquí se cambia por un link firmado que caduca en una hora; sin sesión, nadie las ve.
+const rutaFoto = u => { const m = String(u || '').match(/\/storage\/v1\/object\/(?:public|sign|authenticated)\/fotos\/([^?#]+)/); return m ? decodeURIComponent(m[1]) : null; };
+const imgFoto = u => { const r = rutaFoto(u); return r ? `<img data-foto="${esc(r)}" alt="" loading="lazy">` : `<img src="${esc(u)}" alt="" loading="lazy">`; };
+async function firmaFotos(cont) {
+  const imgs = [...cont.querySelectorAll('img[data-foto]')];
+  const rutas = [...new Set(imgs.map(i => i.dataset.foto))];
+  if (!rutas.length) return;
+  const { data } = await sb.storage.from('fotos').createSignedUrls(rutas, 3600);
+  const mapa = Object.fromEntries((data || []).filter(x => x.signedUrl && x.path).map(x => [x.path, x.signedUrl]));
+  imgs.forEach(i => { if (mapa[i.dataset.foto]) i.src = mapa[i.dataset.foto]; else i.alt = 'Foto no disponible'; });
+}
 
 function toast(t) { const x = $('#toast'); $('#toastTxt').textContent = t; x.classList.add('on'); clearTimeout(x._t); x._t = setTimeout(() => x.classList.remove('on'), 2400); }
 const msg = (sel, texto, cls = '') => { const m = $(sel); m.className = 'msg ' + cls; m.textContent = texto; };
@@ -623,12 +635,12 @@ async function cargarMensajes() {
   lista.forEach((m, i) => {
     const r = el(`<div class="msj ${m.atendido ? 'atendido' : ''}"><span class="n">${idx(i)}</span><div>
       <div class="cab-m"><div class="t">${esc(m.autor || 'Sin nombre')}</div><span class="cuando">${fechaDia(m.fecha)} ${fechaMes(m.fecha)} · ${horaSola(m.fecha)}</span></div>
-      ${m.foto_url ? `<img src="${esc(m.foto_url)}" alt="" loading="lazy">` : ''}
+      ${m.foto_url ? imgFoto(m.foto_url) : ''}
       ${m.texto ? `<div class="txt">${esc(m.texto)}</div>` : ''}
       <div class="pie-m">${m.necesita_jarvis ? '<span class="flag jarvis">Necesita a Jarvis</span>' : ''}<span class="flag ${m.atendido ? '' : 'pend'}">${m.atendido ? 'Atendido' : 'Sin atender'}</span>${m.atendido ? '' : '<button class="link" type="button" data-accion="atender">Marcar atendido</button>'}<button class="link peligro" type="button" data-accion="borrar">Borrar</button></div>
     </div></div>`);
     const foto = r.querySelector('img');
-    if (foto) foto.onclick = () => abreLightbox(m.foto_url);
+    if (foto) foto.onclick = () => abreLightbox(foto.src);
     const bAtender = r.querySelector('[data-accion=atender]');
     if (bAtender) bAtender.onclick = async () => {
       await sb.from('mensajes').update({ atendido: true }).eq('id', m.id);
@@ -640,10 +652,8 @@ async function cargarMensajes() {
       if (!confirm('¿Borrar este mensaje? No se puede deshacer.')) return;
       bBorrar.disabled = true;
       try {
-        if (m.foto_url) {
-          const marca = '/object/public/fotos/', i2 = m.foto_url.indexOf(marca);
-          if (i2 >= 0) await sb.storage.from('fotos').remove([decodeURIComponent(m.foto_url.slice(i2 + marca.length))]);
-        }
+        const ruta = rutaFoto(m.foto_url);
+        if (ruta) await sb.storage.from('fotos').remove([ruta]);
         await sb.from('mensajes').delete().eq('id', m.id);
         await anota(`Borró el mensaje ${m.id} de ${m.autor || 'Telegram'}${m.texto ? ': ' + m.texto.slice(0, 80) : ''}.`);
         toast('Mensaje borrado'); cargarMensajes(); cargarBitacora();
@@ -651,6 +661,7 @@ async function cargarMensajes() {
     };
     cont.appendChild(r);
   });
+  firmaFotos(cont);
 }
 
 /* ---- qué mejorar · reglas fijas sobre los datos que ya están cargados ---- */
@@ -970,11 +981,12 @@ async function cargarBitacora() {
   let diaPrev = '';
   data.forEach(b => { const dia = fechaDia(b.fecha) + fechaMes(b.fecha), mismo = dia === diaPrev; diaPrev = dia;
     const r = el(`<div class="nota${mismo ? ' mismo' : ''}"><div class="cuando">${mismo ? '' : `<b>${fechaDia(b.fecha)}</b><span>${fechaMes(b.fecha)}</span>`}<i>${horaSola(b.fecha)}</i></div>
-    <div>${b.foto_url ? `<img src="${esc(b.foto_url)}" alt="" loading="lazy">` : ''}
+    <div>${b.foto_url ? imgFoto(b.foto_url) : ''}
     <div class="txt">${esc(b.texto)}</div>
     <div class="firma">${esc(b.autor)}${b.origen && b.origen !== 'panel' ? ` · <span class="tg">${esc(b.origen)}</span>` : ''}</div></div></div>`);
-    const foto = r.querySelector('img'); if (foto) foto.onclick = () => abreLightbox(b.foto_url);
+    const foto = r.querySelector('img'); if (foto) foto.onclick = () => abreLightbox(foto.src);
     cont.appendChild(r); });
+  firmaFotos(cont);
 }
 
 /* refresco suave al volver a la pestaña */
