@@ -139,6 +139,11 @@ function rostro(zona, clase = "rostro-svg"){
 const objHTML = (nombre, alt = "", extra = "") =>
   `<figure class="obj" ${extra}><span class="obj__flota"><span class="obj__in"><img class="sombra" src="${OBJ}/${nombre}-sombra.webp" alt=""><img src="${OBJ}/${nombre}.webp" alt="${esc(alt)}" loading="lazy"></span></span></figure>`;
 
+/* Un producto del catálogo que todavía no tiene su presentación (foto, objeto
+   y textos en PIEZAS/COPY) se muestra con la marca, NUNCA con la foto de otro
+   producto: antes heredaba el objeto del Kit N°1 y un gua sha parecía kit. */
+const marcaHTML = () => `<div class="placa__vacia"><svg viewBox="0 0 885.8 955.7" aria-hidden="true"><use href="#abanico"/></svg><span>Foto próximamente</span></div>`;
+
 /* =========================================================
    5. EL ABANICO
    Diez brochas en abanico. La activa se endereza y sube.
@@ -282,14 +287,14 @@ const titulo = p => { const [tit, ...r] = p.nombre.split(" · "); return {tit, s
 const descDe = p => (COPY[p.sku]?.desc || "").replace("{AHORRO}", ahorroSistema()).trim();
 
 function placa(p){
-  const c = COPY[p.sku] || {}; const z = PIEZAS[p.sku] || PIEZAS.KIT1; const {tit, sub} = titulo(p);
+  const c = COPY[p.sku] || {}; const z = PIEZAS[p.sku] || null; const {tit, sub} = titulo(p);
   const sello = p.nuevo ? `<span class="sello sello--nuevo">Nuevo</span>` : (c.sello ? `<span class="sello">${esc(c.sello)}</span>` : "");
-  return `<article class="placa placa-p placa--${z.placa}" data-sku="${esc(p.sku)}" ${z.grande ? 'data-grande' : ''}>
+  return `<article class="placa placa-p placa--${z ? z.placa : "hueso"}" data-sku="${esc(p.sku)}" ${z && z.grande ? 'data-grande' : ''}>
     <div class="placa__cab">
       <span class="placa__no num">N° ${NUM[p.sku] || "—"}</span>${sello}
     </div>
     <button class="placa__esc" type="button" data-ficha="${esc(p.sku)}" aria-label="Ver ${esc(tit)}">
-      ${objHTML(z.obj, tit, `style="--ancho:${z.ancho};--giro:${z.giro}deg;--dy:${z.dy||"0%"}"`)}
+      ${z ? objHTML(z.obj, tit, `style="--ancho:${z.ancho};--giro:${z.giro}deg;--dy:${z.dy||"0%"}"`) : marcaHTML()}
     </button>
     <div class="placa__txt">
       <div>
@@ -358,9 +363,9 @@ function pintaOtraVez(){
   caja.hidden = false;
   $("#otraVezFila").innerHTML = skus.map(sku => {
     const p = PROD.find(x => x.sku === sku); const {tit} = titulo(p);
-    const z = PIEZAS[sku] || PIEZAS.KIT1;
+    const z = PIEZAS[sku] || null;
     return `<div class="ov">
-      <span class="ov__lam"><img src="${OBJ}/${z.obj}.webp" alt="" loading="lazy"></span>
+      <span class="ov__lam">${z ? `<img src="${OBJ}/${z.obj}.webp" alt="" loading="lazy">` : ""}</span>
       <div><b>${esc(tit)}</b><small>${money(p.precio)} · lo pediste antes</small></div>
       <button class="mas" type="button" data-sku="${esc(sku)}" aria-label="Volver a pedir ${esc(tit)}">
         <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5v13M1.5 8h13"/></svg></button>
@@ -389,16 +394,16 @@ function inclinaPlacas(){
 function abreFicha(sku){
   const p = PROD.find(x => x.sku === sku); if (!p) return;
   const c = COPY[sku] || {incluye:[], cuidado:""};
-  const z = PIEZAS[sku] || PIEZAS.KIT1;
+  const z = PIEZAS[sku] || null;
   const {tit, sub} = titulo(p);
   const waTxt = encodeURIComponent(`Hola NIXA, tengo una duda sobre ${p.nombre}.`);
 
   $("#cuerpoModal").innerHTML = `
   <div class="f-grid">
     <div class="f-escena">
-      <div class="placa placa--${z.placa}">
-        ${objHTML(z.obj, tit, `style="--ancho:${z.ancho};--giro:${z.giro}deg"`)}
-        <span class="fig placa__fig">Fig. ${NUM[sku] || "01"} · ${esc(tit)}</span>
+      <div class="placa placa--${z ? z.placa : "hueso"}">
+        ${z ? objHTML(z.obj, tit, `style="--ancho:${z.ancho};--giro:${z.giro}deg"`) : marcaHTML()}
+        <span class="fig placa__fig">Fig. ${NUM[sku] || "—"} · ${esc(tit)}</span>
       </div>
     </div>
     <div class="f-info">
@@ -408,7 +413,7 @@ function abreFicha(sku){
         <span class="v">${money(p.precio)}</span>
         <span class="ced">MXN · Envío gratis desde ${money(ENVIO.gratis_desde)}</span>
       </div>
-      <p class="f-desc">${esc(descDe(p))}</p>
+      ${descDe(p) ? `<p class="f-desc">${esc(descDe(p))}</p>` : ""}
       <div class="f-acciones">
         <button class="btn" type="button" id="agregaFicha">Agregar a la bolsa
           <svg class="flecha" viewBox="0 0 13 9" aria-hidden="true"><path d="M0 4.5h11M8 1l3.5 3.5L8 8"/></svg></button>
@@ -422,11 +427,11 @@ function abreFicha(sku){
     </div>
   </div>
   <div class="f-bloques">
-    <div><figure class="foto"><img src="${esc(z.foto)}" alt="" loading="lazy"></figure>
-      <h4>Qué incluye</h4>
-      <ul>${(c.incluye||[]).map(i => `<li>${palomita}${esc(i)}</li>`).join("")}</ul></div>
-    <div><figure class="foto"><img src="${IMG}/brocha-polvo.jpg" alt="" loading="lazy" style="object-position:50% 50%"></figure>
-      <h4>Cómo se cuida</h4><p>${esc(c.cuidado||"")}</p></div>
+    ${(z && z.foto) || (c.incluye||[]).length ? `<div>${z && z.foto ? `<figure class="foto"><img src="${esc(z.foto)}" alt="" loading="lazy"></figure>` : ""}
+      ${(c.incluye||[]).length ? `<h4>Qué incluye</h4>
+      <ul>${(c.incluye||[]).map(i => `<li>${palomita}${esc(i)}</li>`).join("")}</ul>` : ""}</div>` : ""}
+    ${c.cuidado ? `<div><figure class="foto"><img src="${IMG}/brocha-polvo.jpg" alt="" loading="lazy" style="object-position:50% 50%"></figure>
+      <h4>Cómo se cuida</h4><p>${esc(c.cuidado)}</p></div>` : ""}
     <div><figure class="foto"><img src="${IMG}/manos-brocha.jpg" alt="" loading="lazy" style="object-position:50% 40%"></figure>
       <h4>La promesa NIXA</h4><p>${esc(PROMESA)}</p></div>
     ${(sku==="KIT1"||sku==="SIS1") ? `<div class="diez"><h4>Las diez brochas</h4><ol>${
