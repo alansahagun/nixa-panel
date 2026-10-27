@@ -767,8 +767,21 @@ section{padding:0 0 32px}
             <div class="lista" id="listInv"></div>
           </div>
           <div class="bloque">
-            <div class="sub"><h3>Catálogo</h3><span class="eti">precio y margen</span></div>
+            <div class="sub"><h3>Catálogo</h3><span class="eti">precio y margen · editable</span></div>
             <div class="lista" id="listProd"></div>
+            <div class="bloque pegado hide" id="prodForm">
+              <div class="sub"><h3 id="prodFormTit">Editar producto</h3></div>
+              <div class="forma">
+                <label class="campo" id="pfSkuWrap"><span>SKU</span><input id="pfSku" disabled></label>
+                <label class="campo ancho"><span>Nombre (como lo ven en la tienda)</span><input id="pfNombre" placeholder="Gua sha de cuarzo · con caja"></label>
+                <label class="campo"><span>Precio de venta</span><input id="pfPrecio" type="number" inputmode="decimal" step="0.01" min="0" placeholder="$"></label>
+                <label class="campo"><span>Costo por pieza</span><input id="pfCosto" type="number" inputmode="decimal" step="0.01" min="0" placeholder="$ con envío e impuestos"></label>
+                <label class="campo ancho chk-campo"><input type="checkbox" id="pfActivo" checked><span>Activo: se ve en la tienda y en los selectores</span></label>
+              </div>
+              <button class="btn ancho" id="btnProdGuardar" type="button">Guardar producto</button>
+              <button class="btn linea ancho" id="btnProdCancelar" type="button">Cancelar</button>
+              <div class="msg" id="pfmsg"></div>
+            </div>
           </div>
         </div>
         <div class="dos forma-lista">
