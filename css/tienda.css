@@ -1,15 +1,15 @@
 /* =====================================================================
-   NIXA BEAUTY · tienda v7 · "El abanico"
+   NIXA BEAUTY Â· tienda v7 Â· "El abanico"
    ---------------------------------------------------------------------
    1. Marca real: sprite marca-v7.svg trazado del PDF oficial de Majo.
       Un solo color plano (currentColor) para que funcione sobre los seis
       fondos de marca. viewBox normalizado a 0 0 W H: nunca se recorta.
-   2. Orden de la página: primero se enseña (abanico, kit), después se
-      vende (tienda). El pago ocurre aquí, no en WhatsApp.
+   2. Orden de la pÃ¡gina: primero se enseÃ±a (abanico, kit), despuÃ©s se
+      vende (tienda). El pago ocurre aquÃ­, no en WhatsApp.
    3. Cada capa de movimiento vive en su propio elemento
-      (.obj = ratón, .obj__flota = flotar, .obj__in = entrada) para que
+      (.obj = ratÃ³n, .obj__flota = flotar, .obj__in = entrada) para que
       dos animaciones nunca escriban la misma propiedad. Ese era el bug
-      de la portada al soltar el ratón.
+      de la portada al soltar el ratÃ³n.
    4. Nada de secciones fijadas al scroll: el abanico se maneja solo.
    ===================================================================== */
 
@@ -46,13 +46,13 @@
   font:400 10px/1 var(--label);letter-spacing:.24em;text-transform:uppercase;white-space:nowrap}
 .sello--nuevo{background:var(--cafe)}
 
-/* ---------- telón de entrada ---------- */
+/* ---------- telÃ³n de entrada ---------- */
 .telon-entrada{position:fixed;inset:0;z-index:200;background:var(--noche);display:grid;place-items:center;pointer-events:none}
 .telon-entrada svg{width:clamp(48px,6vw,78px);color:var(--rosa);opacity:0}
 body.sin-telon .telon-entrada{display:none}
 
 /* ---------- objetos recortados: tres capas, tres animaciones ---------- */
-.obj{position:absolute;margin:0;will-change:transform}          /* ratón */
+.obj{position:absolute;margin:0;will-change:transform}          /* ratÃ³n */
 .obj__flota{display:block;will-change:transform}                 /* flotar */
 .obj__in{display:block;position:relative}                        /* entrada */
 .obj img{display:block;width:100%;height:auto;pointer-events:none;user-select:none;-webkit-user-drag:none}
@@ -119,7 +119,7 @@ body.sin-telon .telon-entrada{display:none}
   .sello-giro{right:0;bottom:-2%;width:70px}
 }
 
-/* cabecera transparente mientras estás en la portada */
+/* cabecera transparente mientras estÃ¡s en la portada */
 body.arriba .top{background:var(--noche);border-color:transparent}
 body.arriba .top .nav a,body.arriba .top .marca-top,body.arriba .top .ayudar,body.arriba .top .hamb{color:var(--marfil-noche)}
 body.arriba .bolsa-btn{color:var(--marfil-noche)}
@@ -230,7 +230,7 @@ body.arriba .bolsa-btn .chip{background:var(--marfil-noche);color:var(--noche)}
 .incluye span span{display:block}
 .incluye li>span:last-child{color:var(--gris);font-size:.96rem}
 
-/* la compra va al final: primero se enseña, luego se vende */
+/* la compra va al final: primero se enseÃ±a, luego se vende */
 .kit__compra{margin-top:clamp(34px,4vw,60px);background:var(--noche);color:var(--marfil-noche);border-radius:var(--r-placa);
   padding:clamp(24px,3vw,42px);display:grid;gap:22px;align-items:center;position:relative;overflow:hidden}
 .kit__compra::before{content:"";position:absolute;inset:0;background:radial-gradient(90% 120% at 88% 0%,rgba(207,165,155,.2),rgba(207,165,155,0) 60%);pointer-events:none}
@@ -252,6 +252,11 @@ body.arriba .bolsa-btn .chip{background:var(--marfil-noche);color:var(--noche)}
 .placa-p .placa__cab{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;position:relative;z-index:2}
 .placa__no{font:400 10px/1 var(--label);letter-spacing:.24em;text-transform:uppercase;color:currentColor;opacity:.62}
 .placa__esc{flex:1;position:relative;display:block;width:100%;min-height:120px}
+/* Producto sin presentaciÃ³n propia: marca centrada, sin foto de otro producto */
+.placa__vacia{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:12px;color:var(--cafe);opacity:.85}
+.placa__vacia svg{width:clamp(52px,6vw,84px);height:auto;opacity:.5}
+.placa__vacia span{font:400 10.5px/1 var(--label);letter-spacing:.22em;text-transform:uppercase;opacity:.7}
+
 .placa-p .obj{width:var(--ancho,60%);left:50%;top:calc(50% + var(--dy,0%));translate:-50% -50%;rotate:var(--giro,0deg)}
 .placa-p .placa__txt{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;position:relative;z-index:2}
 .placa-p h3{font-size:1.5rem;line-height:1.05;color:currentColor}
@@ -279,7 +284,7 @@ body.arriba .bolsa-btn .chip{background:var(--marfil-noche);color:var(--noche)}
 .vitrina__pie .nota p{color:var(--gris);font-size:.96rem;margin-top:8px}
 @media(min-width:860px){.vitrina__pie{grid-template-columns:1fr auto}}
 
-/* recompra rápida */
+/* recompra rÃ¡pida */
 .otravez{margin-bottom:clamp(18px,2.4vw,30px);padding:18px 20px;background:var(--marfil);border:1px solid var(--filete);border-radius:var(--r-placa)}
 .otravez__cab{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
 .otravez__fila{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
@@ -294,7 +299,7 @@ body.arriba .bolsa-btn .chip{background:var(--marfil-noche);color:var(--noche)}
 .link--min{font-size:.84rem;border:0;color:var(--tenue);text-decoration:underline;padding:0}
 .link--min:hover{color:var(--vino)}
 
-/* ---------- 6. GARANTÍA: el certificado ---------- */
+/* ---------- 6. GARANTÃA: el certificado ---------- */
 .noche__grid{display:grid;gap:clamp(36px,5vw,72px);position:relative;z-index:1;align-items:center}
 @media(min-width:1000px){.noche__grid{grid-template-columns:.92fr 1.08fr}}
 .cert{perspective:1200px}
@@ -414,7 +419,7 @@ body.arriba .bolsa-btn .chip{background:var(--marfil-noche);color:var(--noche)}
 /* icono de bolsa con el abanico */
 .bolsa-btn__ico{position:relative;width:26px;height:28px;display:block;flex:none}
 .bolsa-btn__ico>svg{width:100%;height:100%}
-/* bolsa llena, abanico calado. El asa se queda de línea para que se lea como asa. */
+/* bolsa llena, abanico calado. El asa se queda de lÃ­nea para que se lea como asa. */
 .bolsa-btn__ico .cuerpo{fill:currentColor;stroke:none}
 .bolsa-btn__ico .asa{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round}
 
@@ -458,7 +463,7 @@ body::after{content:"";position:fixed;inset:0;z-index:9990;pointer-events:none;o
 .lede{font-size:clamp(1.05rem,.95rem + .5vw,1.28rem);line-height:1.55;color:var(--gris);max-width:44ch}
 section[id]{scroll-margin-top:96px}
 
-/* cabecera de sección */
+/* cabecera de secciÃ³n */
 .cab{display:grid;gap:22px;margin-bottom:clamp(40px,5vw,72px)}
 .cab .ced{margin-bottom:18px}
 @media(min-width:760px){
@@ -507,15 +512,15 @@ section[id]{scroll-margin-top:96px}
 .top.pegada{border-color:var(--filete)}
 /* OJO con el nombre: el estado oscuro de la cabecera es `top--noche`, NO `noche`.
    `.noche` es la clase de las SECCIONES oscuras (position:relative, padding-block,
-   overflow:clip). Cuando el JS se la ponía a la cabecera, la cabecera se volvía una
-   sección: crecía de 85 a 305 px, perdía el sticky y se iba con el scroll. Eso era
-   lo que se "bugeaba" al bajar por la garantía y por el pie.
+   overflow:clip). Cuando el JS se la ponÃ­a a la cabecera, la cabecera se volvÃ­a una
+   secciÃ³n: crecÃ­a de 85 a 305 px, perdÃ­a el sticky y se iba con el scroll. Eso era
+   lo que se "bugeaba" al bajar por la garantÃ­a y por el pie.
 
    Al entrar a una zona oscura, el color se cruza con OPACIDAD sobre una capa aparte.
    Antes se animaba el background (un color-mix) debajo de un backdrop-filter: eso
    obligaba a volver a desenfocar la franja entera cuadro por cuadro, justo al pasar
-   por la garantía y por el pie. Y sobre un fondo plano el desenfoque no se ve, así
-   que ahí se apaga. */
+   por la garantÃ­a y por el pie. Y sobre un fondo plano el desenfoque no se ve, asÃ­
+   que ahÃ­ se apaga. */
 .top::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--noche);opacity:0;
   transition:opacity .45s var(--ease);pointer-events:none;will-change:opacity}
 .top--noche::before{opacity:.96}
@@ -553,7 +558,7 @@ section[id]{scroll-margin-top:96px}
   .bolsa-btn{padding:0 4px 0 0;box-shadow:none}
   .bolsa-btn .chip{min-width:38px;height:38px}
 }
-/* menú móvil */
+/* menÃº mÃ³vil */
 /* El menu cerrado NO puede pintar nada. Antes su contenido se desbordaba por
    abajo y aterrizaba encima del logo del pie: eso era lo que se veia "bugeado". */
 .menu{position:fixed;inset:0;z-index:70;background:var(--marfil);transform:translateY(-100%);
@@ -569,9 +574,9 @@ section[id]{scroll-margin-top:96px}
 .menu__pie{margin-top:auto;display:grid;gap:10px;padding-top:30px}
 
 /* ---------- cinta ---------- */
-/* La cinta pesaba porque iba en serif grande, en café fuerte, encajonada entre dos
-   filetes y con las frases cortadas a filo en las orillas. Ahora: cursiva más chica
-   en gris, mucho más aire entre frases, un solo filete arriba y las orillas que se
+/* La cinta pesaba porque iba en serif grande, en cafÃ© fuerte, encajonada entre dos
+   filetes y con las frases cortadas a filo en las orillas. Ahora: cursiva mÃ¡s chica
+   en gris, mucho mÃ¡s aire entre frases, un solo filete arriba y las orillas que se
    desvanecen, para que las palabras entren y salgan en vez de cortarse de golpe. */
 .cinta{border-top:1px solid var(--filete);overflow:hidden;height:64px;display:flex;align-items:center;background:transparent;
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 13%,#000 87%,transparent);
@@ -584,7 +589,7 @@ section[id]{scroll-margin-top:96px}
 .cinta__riel svg{width:10px;height:10px;color:var(--rosa);opacity:.55}
 @keyframes cinta{to{transform:translateX(-50%)}}
 
-/* ---------- garantía (vino) ---------- */
+/* ---------- garantÃ­a (vino) ---------- */
 .noche{background:var(--vino);color:var(--marfil-noche);padding-block:var(--seccion);position:relative;overflow:clip;contain:paint}
 .noche h2{color:var(--marfil-noche)}
 .noche .ced{color:var(--rosa-2)}
@@ -604,8 +609,8 @@ section[id]{scroll-margin-top:96px}
 /* ---------- pie ---------- */
 .pie{background:var(--noche);color:var(--gris-noche);padding:var(--seccion) 0 40px;position:relative;overflow:clip;contain:paint}
 /* La entrada del pie: primero se traza el filete de lado a lado, luego el logo
-   SUBE desde detrás de él. Todo con transform y opacidad — el vector se dibuja una
-   vez y de ahí en adelante solo se desliza, así que no hay nada que repintar.
+   SUBE desde detrÃ¡s de Ã©l. Todo con transform y opacidad â€” el vector se dibuja una
+   vez y de ahÃ­ en adelante solo se desliza, asÃ­ que no hay nada que repintar.
    (La cortina anterior recortaba el logo cuadro por cuadro; esta no toca el pixel.) */
 .pie__marca{color:var(--marfil-noche);margin-bottom:clamp(40px,6vw,90px)}
 .pie__filo{display:block;height:1px;background:var(--filete-noche);margin-bottom:clamp(26px,4vw,48px);
@@ -626,7 +631,7 @@ section[id]{scroll-margin-top:96px}
 .pie__bajo{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:60px;padding-top:24px;border-top:1px solid var(--filete-noche);font-size:.85rem;color:var(--gris-noche)}
 @media(min-width:760px){.pie__grid{grid-template-columns:1.4fr 1fr 1fr 1fr}}
 
-/* ---------- barra móvil ---------- */
+/* ---------- barra mÃ³vil ---------- */
 .barra-mov{display:none}
 @media(max-width:999px){
   .barra-mov{position:fixed;left:0;right:0;bottom:0;z-index:55;display:grid;grid-template-columns:1fr auto;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));
@@ -749,7 +754,7 @@ section[id]{scroll-margin-top:96px}
 /* ---------- movimiento ---------- */
 .sin-anim .pie__filo{transform:none;transition:none}
 .sin-anim .pie__mascara svg{transform:none;opacity:1;transition:none}
-/* títulos por líneas */
+/* tÃ­tulos por lÃ­neas */
 .linea-mask{display:block;overflow:hidden;padding-bottom:.12em;margin-bottom:-.12em}
 h2.rev.lineas{opacity:1;transform:none}
 
