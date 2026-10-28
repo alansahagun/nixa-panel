@@ -131,6 +131,8 @@ function buildNav() {
   irA((LEGADO[h] || h) in CARGA ? (LEGADO[h] || h) : 'hoy');
 }
 function irA(k) {
+  if (k !== vista && !permiteSalirProd()) return;
+  if (k !== vista && !$('#prodForm').classList.contains('hide')) cancelaProd(true);
   vista = k;
   const i = VISTAS.findIndex(v => v[0] === k), enBarra = VISTAS[i][3];
   $$('#navDesk button, #indiceLista a').forEach(b => b.classList.toggle('on', b.dataset.k === k));
@@ -208,7 +210,17 @@ function filaProd(p, i) {
      los selectores, pero las piezas en casa, las ventas y las compras que ya
      los mencionan siguen contando su historia. */
 let prodEditando = null; // null = alta nueva
+let prodInicial = '';
+let prodGuardando = false;
+const estadoProd = () => ['#pfSku','#pfNombre','#pfPrecio','#pfCosto'].map(s => $(s).value).concat($('#pfActivo').checked).join('\u0000');
+const prodSucio = () => !$('#prodForm').classList.contains('hide') && estadoProd() !== prodInicial;
+const permiteSalirProd = () => {
+  if (prodGuardando) { msg('#pfmsg', 'Espera a que termine el guardado antes de salir o abrir otro producto.'); return false; }
+  return !prodSucio() || confirm('Hay cambios sin guardar en el producto. ¿Descartarlos?');
+};
+window.addEventListener('beforeunload', e => { if (prodGuardando || prodSucio()) { e.preventDefault(); e.returnValue = ''; } });
 function editaProd(p) {
+  if (!permiteSalirProd()) return;
   prodEditando = p;
   const b = $('#prodForm');
   b.classList.remove('hide');
@@ -223,6 +235,7 @@ function editaProd(p) {
   msg('#pfmsg', p
     ? (p.activo ? 'El SKU no se puede cambiar: de él cuelga el historial. Ojo: nombre y precio se ven en la tienda en cuanto guardes.' : 'Está pausado (borrador): no se ve en la tienda. Márcalo activo solo cuando quieran publicarlo.')
     : 'Nace como borrador (pausado): NO se ve en la tienda hasta que lo actives. El SKU es la clave interna (mayúsculas y números) y no se podrá cambiar después.');
+  prodInicial = estadoProd();
   b.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   $('#pfNombre').focus({ preventScroll: true });
 }
@@ -248,6 +261,9 @@ async function guardaProd() {
   if (!nombre) return msg('#pfmsg', 'Falta el nombre.', 'err');
   if (!Number.isFinite(precio) || precio <= 0) return msg('#pfmsg', 'Falta el precio (mayor a cero).', 'err');
   if (!Number.isFinite(costo) || costo < 0) return msg('#pfmsg', 'El costo no puede ser negativo.', 'err');
+  prodGuardando = true;
+  const campos = ['#pfSku', '#pfNombre', '#pfPrecio', '#pfCosto', '#pfActivo'].map(s => [$(s), $(s).disabled]);
+  campos.forEach(([campo]) => { campo.disabled = true; });
   btn.disabled = true; btn.textContent = 'Guardando…';
   const saleMal = t => { btn.disabled = false; btn.textContent = 'Guardar producto'; return msg('#pfmsg', t, 'err'); };
   try {
@@ -260,6 +276,9 @@ async function guardaProd() {
       }
       if (!p.activo && activo && !confirm(`¿Activar ${nombreCorto(p.sku)}?\n\nSe PUBLICA en la tienda en cuanto guardes. Si todavía no tiene foto y textos propios, saldrá con la marca NIXA y «Foto próximamente».`)) { btn.disabled = false; btn.textContent = 'Guardar producto'; return; }
       if (p.activo && Number(p.precio) !== precio && !confirm(`El precio nuevo (${moneyC(precio)}) se ve en la tienda en cuanto guardes. ¿Cambiarlo?`)) { btn.disabled = false; btn.textContent = 'Guardar producto'; return; }
+      if (p.nombre === nombre && Number(p.precio) === precio && Number(p.costo || 0) === costo && !!p.activo === activo) {
+        toast('Sin cambios'); cancelaProd(true); return;
+      }
       const cambios = { nombre, precio, costo, activo };
       const { data: act, error } = await sb.from('productos').update(cambios).eq('sku', p.sku).select('sku');
       if (error) return saleMal('No se guardó: ' + error.message);
@@ -274,7 +293,7 @@ async function guardaProd() {
       toast(diffs.length ? 'Producto actualizado' : 'Sin cambios');
       if (!notaOk) setTimeout(() => toast('Se guardó, pero no quedó asentado en la bitácora'), 2500);
     } else {
-      let sku = $('#pfSku').value.trim().toUpperCase().replace(/[^A-Z0-9]/g, '');
+      let sku = $('#pfSku').value.trim().toUpperCase();
       if (!sku) sku = sugiereSku(nombre);
       if (!/^[A-Z0-9]{2,12}$/.test(sku)) return saleMal('El SKU necesita de 2 a 12 letras o números, sin espacios.');
       if (productosTodos.some(p => p.sku === sku)) return saleMal(`El SKU ${sku} ya existe; ponle otro.`);
@@ -286,15 +305,19 @@ async function guardaProd() {
       if (activo) setTimeout(() => toast('En la tienda se verá con «Foto próximamente» hasta tener su presentación'), 2500);
       if (!notaOk) setTimeout(() => toast('Se guardó, pero no quedó asentado en la bitácora'), activo ? 5000 : 2500);
     }
+  } catch (e) {
+    return saleMal('No se pudo confirmar el guardado. No reintentes a ciegas: revisa el catálogo antes de guardar otra vez. Tus campos siguen aquí.');
   } finally {
+    prodGuardando = false;
+    campos.forEach(([campo, deshabilitado]) => { campo.disabled = deshabilitado; });
     btn.disabled = false; btn.textContent = 'Guardar producto';
   }
-  cancelaProd();
+  cancelaProd(true);
   await cargarProductos(); cargarBitacora(); recalcula();
 }
-function cancelaProd() { prodEditando = null; $('#prodForm').classList.add('hide'); msg('#pfmsg', ''); }
+function cancelaProd(forzar = false) { if (!forzar && !permiteSalirProd()) return; prodEditando = null; prodInicial = ''; $('#prodForm').classList.add('hide'); msg('#pfmsg', ''); }
 $('#btnProdGuardar').onclick = guardaProd;
-$('#btnProdCancelar').onclick = cancelaProd;
+$('#btnProdCancelar').onclick = () => cancelaProd();
 $('#pfNombre').addEventListener('input', () => { if (!prodEditando) $('#pfSku').placeholder = sugiereSku($('#pfNombre').value); });
 function cargarTodo() { return Promise.all([cargarTareas(), cargarCaja(), cargarInv(), cargarCompras(), cargarVentas(), cargarPedidos(), cargarMensajes(), cargarBitacora(), cargarProveedores()]).then(pintaMejoras); }
 // Cada carga avisa; "Qué mejorar" se recalcula una sola vez aunque lleguen varias seguidas.
