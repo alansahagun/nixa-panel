@@ -1,5 +1,5 @@
 /* =========================================================
-   NIXA BEAUTY Â· tienda v7 Â· "El abanico"
+   NIXA BEAUTY · tienda v7 · "El abanico"
    1) config  2) datos  3) utilidades  4) marca  5) abanico
    6) vitrina 7) ficha  8) bolsa y caja  9) ayudante
    10) movimiento  11) arranque
@@ -11,7 +11,7 @@
 const SB_URL = "https://jjtlkneoxmgcyrifckdf.supabase.co";
 const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpqdGxrbmVveG1nY3lyaWZja2RmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgzNjQ0ODcsImV4cCI6MjEwMzk0MDQ4N30.Ty2qZduVwcIfWuVAzb-judCXVIIpyBq2_D3bE2GsY7g";
 
-// âš ï¸ PENDIENTE: nÃºmero real de WhatsApp de NIXA. WhatsApp es soporte, no caja.
+// ⚠️ PENDIENTE: número real de WhatsApp de NIXA. WhatsApp es soporte, no caja.
 const WA = "523300000000";
 
 // se sobreescriben con la tabla config del panel
@@ -33,59 +33,59 @@ const ORDEN = ["KIT1","SIS1","ESP4","LAV1","RIZ1"];
 const NUM   = {KIT1:"01",SIS1:"02",ESP4:"03",LAV1:"04",RIZ1:"05"};
 
 const COPY = {
-  KIT1:{sello:"Empieza por aquÃ­",
-    desc:"Diez brochas numeradas, del polvo a las cejas, en un estuche rÃ­gido con dos esponjas de maquillaje y el mapa del rostro. Es la rutina completa: la piel primero, la mirada despuÃ©s, y ninguna brocha que se quede en el cajÃ³n.",
-    incluye:["Diez brochas numeradas, del 01 al 10","Estuche rÃ­gido con cierre","Dos esponjas de maquillaje","El mapa del rostro impreso"],
-    cuidado:"Agua tibia y jabÃ³n neutro, una vez a la semana. Se secan acostadas, con la cabeza fuera de la mesa, y quedan como el primer dÃ­a."},
+  KIT1:{sello:"Empieza por aquí",
+    desc:"Diez brochas numeradas, del polvo a las cejas, en un estuche rígido con dos esponjas de maquillaje y el mapa del rostro. Es la rutina completa: la piel primero, la mirada después, y ninguna brocha que se quede en el cajón.",
+    incluye:["Diez brochas numeradas, del 01 al 10","Estuche rígido con cierre","Dos esponjas de maquillaje","El mapa del rostro impreso"],
+    cuidado:"Agua tibia y jabón neutro, una vez a la semana. Se secan acostadas, con la cabeza fuera de la mesa, y quedan como el primer día."},
   SIS1:{sello:"Todo junto",
     desc:"La rutina completa: el kit de diez brochas, las esponjas de maquillaje, el tapete para lavarlas y el rizador. Es lo que regalamos nosotros cuando queremos quedar bien. {AHORRO}",
-    incluye:["Kit NÂ°1: diez brochas, estuche y dos esponjas","Esponjas de maquillaje, pack de 4","Tapete lavador de brochas","Rizador de pestaÃ±as"],
-    cuidado:"Cada pieza trae su cuidado escrito. En resumen: agua tibia, jabÃ³n neutro y paciencia."},
+    incluye:["Kit N°1: diez brochas, estuche y dos esponjas","Esponjas de maquillaje, pack de 4","Tapete lavador de brochas","Rizador de pestañas"],
+    cuidado:"Cada pieza trae su cuidado escrito. En resumen: agua tibia, jabón neutro y paciencia."},
   ESP4:{sello:"",
-    desc:"Cuatro esponjas de maquillaje que se usan hÃºmedas: crecen con el agua, no se beben la base y la dejan pareja, sin marcas ni rayas. Nosotros las cambiamos cada tres meses; por eso van de a cuatro, para que te duren el aÃ±o.",
-    incluye:["Cuatro esponjas de maquillaje","Se usan hÃºmedas; crecen con el agua","Punta fina para ojeras y nariz; base plana para mejillas"],
-    cuidado:"Se lavan con jabÃ³n neutro despuÃ©s de cada uso y se cambian cada tres meses. Por eso van de a cuatro."},
+    desc:"Cuatro esponjas de maquillaje que se usan húmedas: crecen con el agua, no se beben la base y la dejan pareja, sin marcas ni rayas. Nosotros las cambiamos cada tres meses; por eso van de a cuatro, para que te duren el año.",
+    incluye:["Cuatro esponjas de maquillaje","Se usan húmedas; crecen con el agua","Punta fina para ojeras y nariz; base plana para mejillas"],
+    cuidado:"Se lavan con jabón neutro después de cada uso y se cambian cada tres meses. Por eso van de a cuatro."},
   LAV1:{sello:"",
-    desc:"Tapete lavador de brochas, de silicÃ³n, que se pega al lavabo con ventosas. Es con el que lavamos las nuestras: agua tibia, jabÃ³n neutro, dos pasadas por los relieves, y la fibra suelta el rubor y la base sin maltratarse.",
-    incluye:["Tapete de silicÃ³n con relieves de tres texturas","Ventosas que lo fijan al lavabo"],
+    desc:"Tapete lavador de brochas, de silicón, que se pega al lavabo con ventosas. Es con el que lavamos las nuestras: agua tibia, jabón neutro, dos pasadas por los relieves, y la fibra suelta el rubor y la base sin maltratarse.",
+    incluye:["Tapete de silicón con relieves de tres texturas","Ventosas que lo fijan al lavabo"],
     cuidado:"Se enjuaga y se deja secar. No se deforma ni guarda olor."},
   RIZ1:{sello:"Para conocernos",
-    desc:"Rizador de pestaÃ±as de acero con almohadilla suave, y trae repuestos. Abre la mirada sin pellizcar: lo probamos en cada pedido antes de cerrarlo. Si quieres algo chico para conocernos, es este.",
-    incluye:["Rizador de pestaÃ±as de acero","Almohadilla suave","Repuestos de almohadilla"],
+    desc:"Rizador de pestañas de acero con almohadilla suave, y trae repuestos. Abre la mirada sin pellizcar: lo probamos en cada pedido antes de cerrarlo. Si quieres algo chico para conocernos, es este.",
+    incluye:["Rizador de pestañas de acero","Almohadilla suave","Repuestos de almohadilla"],
     cuidado:"La almohadilla se cambia cuando se marca. Los repuestos vienen en la caja."}
 };
-const PROMESA = "Antes de enviar un set, probamos cada pieza con las manos. Si en sus primeros noventa dÃ­as algo falla, nos escribes con una foto y te mandamos el reemplazo. Sin ticket, sin formulario.";
+const PROMESA = "Antes de enviar un set, probamos cada pieza con las manos. Si en sus primeros noventa días algo falla, nos escribes con una foto y te mandamos el reemplazo. Sin ticket, sin formulario.";
 
 const ZONA = {"01":"rostro","02":"rostro","03":"mejillas","04":"parpado","05":"pomulo","06":"parpado","07":"cuenca","08":"ojeras","09":"pestanas","10":"cejas"};
 const BROCHAS = [
   {n:"01",nom:"Polvo",         zona:"Rostro",   desc:"La grande y esponjosa. Sella el maquillaje con un velo de polvo, sin apelmazar ni apagar la piel.", tip:"sacude el exceso en el dorso de la mano antes de tocar la cara."},
-  {n:"02",nom:"Base",          zona:"Rostro",   desc:"Plana y densa. Reparte la base en cÃ­rculos hasta que no se vea dÃ³nde empieza ni dÃ³nde termina.", tip:"empieza por el centro de la cara y estira hacia afuera."},
-  {n:"03",nom:"Rubor",         zona:"Mejillas", desc:"Redonda y suave. Toma poco producto y lo lleva de la mejilla hacia la sien, en diagonal.", tip:"sonrÃ­e para encontrar la manzana de la mejilla y suelta ahÃ­."},
-  {n:"04",nom:"Difuminar",     zona:"PÃ¡rpado",  desc:"PequeÃ±a y mullida. Borra los bordes de la sombra para que todo se lea como un solo tono.", tip:"muÃ©vela en ochos, sin producto nuevo, solo para fundir."},
-  {n:"05",nom:"Contorno",      zona:"PÃ³mulo",   desc:"Angulada. Marca el hueco debajo del pÃ³mulo y difumina hacia arriba, nunca hacia la boca.", tip:"si se ve la lÃ­nea, te faltÃ³ difuminar, no te sobrÃ³ producto."},
-  {n:"06",nom:"Sombra",        zona:"PÃ¡rpado",  desc:"La pala. Deposita el color en el pÃ¡rpado mÃ³vil con presiÃ³n ligera y sin arrastrar.", tip:"toca y levanta; arrastrar es lo que borra el color."},
-  {n:"07",nom:"Cuenca",        zona:"Ojo",      desc:"LÃ¡piz cÃ³nico. Define la cuenca del ojo con un tono mÃ¡s oscuro y le da profundidad a la mirada.", tip:"mira al frente en el espejo para ver dÃ³nde cae tu pliegue real."},
-  {n:"08",nom:"Corrector",     zona:"Ojeras",   desc:"Chica y plana. Coloca el corrector en ojeras, aletas de la nariz y comisuras, y lo asienta.", tip:"menos producto y mÃ¡s golpecitos: la ojera se marca por exceso."},
-  {n:"09",nom:"Delinear",      zona:"PestaÃ±as", desc:"Fina y angulada. Delinea pegado a la lÃ­nea de las pestaÃ±as, con sombra o con gel.", tip:"apoya el meÃ±ique en la mejilla para que no te tiemble el pulso."},
-  {n:"10",nom:"Cejas y pestaÃ±as",corto:"Cejas",zona:"Cejas",  desc:"El cepillo en espiral. Peina la ceja hacia arriba y separa las pestaÃ±as despuÃ©s del rÃ­mel.", tip:"pÃ©inala antes de rellenar: a veces ya no hace falta rellenar."}
+  {n:"02",nom:"Base",          zona:"Rostro",   desc:"Plana y densa. Reparte la base en círculos hasta que no se vea dónde empieza ni dónde termina.", tip:"empieza por el centro de la cara y estira hacia afuera."},
+  {n:"03",nom:"Rubor",         zona:"Mejillas", desc:"Redonda y suave. Toma poco producto y lo lleva de la mejilla hacia la sien, en diagonal.", tip:"sonríe para encontrar la manzana de la mejilla y suelta ahí."},
+  {n:"04",nom:"Difuminar",     zona:"Párpado",  desc:"Pequeña y mullida. Borra los bordes de la sombra para que todo se lea como un solo tono.", tip:"muévela en ochos, sin producto nuevo, solo para fundir."},
+  {n:"05",nom:"Contorno",      zona:"Pómulo",   desc:"Angulada. Marca el hueco debajo del pómulo y difumina hacia arriba, nunca hacia la boca.", tip:"si se ve la línea, te faltó difuminar, no te sobró producto."},
+  {n:"06",nom:"Sombra",        zona:"Párpado",  desc:"La pala. Deposita el color en el párpado móvil con presión ligera y sin arrastrar.", tip:"toca y levanta; arrastrar es lo que borra el color."},
+  {n:"07",nom:"Cuenca",        zona:"Ojo",      desc:"Lápiz cónico. Define la cuenca del ojo con un tono más oscuro y le da profundidad a la mirada.", tip:"mira al frente en el espejo para ver dónde cae tu pliegue real."},
+  {n:"08",nom:"Corrector",     zona:"Ojeras",   desc:"Chica y plana. Coloca el corrector en ojeras, aletas de la nariz y comisuras, y lo asienta.", tip:"menos producto y más golpecitos: la ojera se marca por exceso."},
+  {n:"09",nom:"Delinear",      zona:"Pestañas", desc:"Fina y angulada. Delinea pegado a la línea de las pestañas, con sombra o con gel.", tip:"apoya el meñique en la mejilla para que no te tiemble el pulso."},
+  {n:"10",nom:"Cejas y pestañas",corto:"Cejas",zona:"Cejas",  desc:"El cepillo en espiral. Peina la ceja hacia arriba y separa las pestañas después del rímel.", tip:"péinala antes de rellenar: a veces ya no hace falta rellenar."}
 ];
 
 const FAQ = [
-  {c:"Pagos", q:"Â¿CÃ³mo pago?", r:"AquÃ­ mismo, en la pÃ¡gina. Aceptamos tarjeta de crÃ©dito y dÃ©bito, meses sin intereses, transferencia y pago en OXXO. El cobro lo procesa Mercado Pago en su pantalla segura: nosotros nunca vemos ni guardamos los datos de tu tarjeta."},
-  {c:"Pagos", q:"Â¿Puedo pagar en efectivo al recibir?", r:"En Guadalajara sÃ­, si nos lo pides por WhatsApp antes de cerrar el pedido. Fuera de la ciudad no, porque la paqueterÃ­a no cobra por nosotros."},
-  {c:"Pagos", q:"Â¿Dan factura?", r:"SÃ­. EscrÃ­benos con tus datos fiscales el mismo dÃ­a de la compra y te la mandamos por correo."},
-  {c:"EnvÃ­os", q:"Â¿CuÃ¡nto tarda en llegar?", r:"En Guadalajara y su zona metropolitana, el mismo dÃ­a si pides antes de las dos de la tarde. Al resto del paÃ­s, de dos a cuatro dÃ­as hÃ¡biles por paqueterÃ­a, con guÃ­a para que lo rastrees."},
-  {c:"EnvÃ­os", q:"Â¿CuÃ¡nto cuesta el envÃ­o?", r:"Gratis a partir de $599. Debajo de eso, $69 en Guadalajara y $129 al resto del paÃ­s. El costo aparece antes de pagar, nunca despuÃ©s."},
-  {c:"EnvÃ­os", q:"Â¿Puedo recoger?", r:"TodavÃ­a no tenemos local. Entregamos en mano en Guadalajara sin costo si tu pedido pasa de $599 y nos queda de paso; eso lo acordamos por WhatsApp."},
-  {c:"GarantÃ­a", q:"Â¿CÃ³mo funciona la garantÃ­a?", r:"Noventa dÃ­as desde que te llega. Si una brocha suelta pelo, se afloja o raya, nos mandas una foto por WhatsApp y te enviamos el reemplazo. Sin ticket y sin devolver la vieja."},
-  {c:"GarantÃ­a", q:"Â¿Y si no me gusta?", r:"Tienes treinta dÃ­as para decirnos. Si la pieza estÃ¡ sin usar y en su caja, te devolvemos tu dinero completo. Si ya la usaste y no te convenciÃ³, cuÃ©ntanos por quÃ©: casi siempre es que te tocaba otra pieza y eso lo arreglamos con un cambio."},
-  {c:"Cuidado", q:"Â¿CÃ³mo lavo las brochas?", r:"Agua tibia y jabÃ³n neutro, una vez a la semana. Dos pasadas por el tapete, enjuagas hasta que el agua salga clara y las secas acostadas con la cabeza fuera de la mesa. AsÃ­ no se deforman ni le entra agua al mango."},
-  {c:"Cuidado", q:"Â¿Cada cuÃ¡nto se cambian?", r:"Una brocha bien lavada dura aÃ±os. Las esponjas no: se cambian cada tres meses, por eso van de a cuatro."},
-  {c:"Elegir", q:"Â¿CuÃ¡l me conviene si empiezo de cero?", r:"El Kit NÂ°1. Trae las diez que de verdad se usan, con el nÃºmero y la zona en el mango, y el mapa del rostro. Si quieres algo chico para conocernos, el rizador."},
-  {c:"Elegir", q:"Â¿Son veganas?", r:"SÃ­. Todas las cerdas son sintÃ©ticas. AdemÃ¡s de que nadie sale lastimado, la fibra sintÃ©tica se lleva mejor con productos en crema y suelta menos pelo."}
+  {c:"Pagos", q:"¿Cómo pago?", r:"Aquí mismo, en la página. Aceptamos tarjeta de crédito y débito, meses sin intereses, transferencia y pago en OXXO. El cobro lo procesa Mercado Pago en su pantalla segura: nosotros nunca vemos ni guardamos los datos de tu tarjeta."},
+  {c:"Pagos", q:"¿Puedo pagar en efectivo al recibir?", r:"En Guadalajara sí, si nos lo pides por WhatsApp antes de cerrar el pedido. Fuera de la ciudad no, porque la paquetería no cobra por nosotros."},
+  {c:"Pagos", q:"¿Dan factura?", r:"Sí. Escríbenos con tus datos fiscales el mismo día de la compra y te la mandamos por correo."},
+  {c:"Envíos", q:"¿Cuánto tarda en llegar?", r:"En Guadalajara y su zona metropolitana, el mismo día si pides antes de las dos de la tarde. Al resto del país, de dos a cuatro días hábiles por paquetería, con guía para que lo rastrees."},
+  {c:"Envíos", q:"¿Cuánto cuesta el envío?", r:"Gratis a partir de $599. Debajo de eso, $69 en Guadalajara y $129 al resto del país. El costo aparece antes de pagar, nunca después."},
+  {c:"Envíos", q:"¿Puedo recoger?", r:"Todavía no tenemos local. Entregamos en mano en Guadalajara sin costo si tu pedido pasa de $599 y nos queda de paso; eso lo acordamos por WhatsApp."},
+  {c:"Garantía", q:"¿Cómo funciona la garantía?", r:"Noventa días desde que te llega. Si una brocha suelta pelo, se afloja o raya, nos mandas una foto por WhatsApp y te enviamos el reemplazo. Sin ticket y sin devolver la vieja."},
+  {c:"Garantía", q:"¿Y si no me gusta?", r:"Tienes treinta días para decirnos. Si la pieza está sin usar y en su caja, te devolvemos tu dinero completo. Si ya la usaste y no te convenció, cuéntanos por qué: casi siempre es que te tocaba otra pieza y eso lo arreglamos con un cambio."},
+  {c:"Cuidado", q:"¿Cómo lavo las brochas?", r:"Agua tibia y jabón neutro, una vez a la semana. Dos pasadas por el tapete, enjuagas hasta que el agua salga clara y las secas acostadas con la cabeza fuera de la mesa. Así no se deforman ni le entra agua al mango."},
+  {c:"Cuidado", q:"¿Cada cuánto se cambian?", r:"Una brocha bien lavada dura años. Las esponjas no: se cambian cada tres meses, por eso van de a cuatro."},
+  {c:"Elegir", q:"¿Cuál me conviene si empiezo de cero?", r:"El Kit N°1. Trae las diez que de verdad se usan, con el número y la zona en el mango, y el mapa del rostro. Si quieres algo chico para conocernos, el rizador."},
+  {c:"Elegir", q:"¿Son veganas?", r:"Sí. Todas las cerdas son sintéticas. Además de que nadie sale lastimado, la fibra sintética se lleva mejor con productos en crema y suelta menos pelo."}
 ];
 
-const CINTA = ["Cada brocha sabe su lugar","GarantÃ­a de 90 dÃ­as, sin ticket","Armado a mano en Guadalajara","EnvÃ­o el mismo dÃ­a en la ciudad","Pago seguro en la pÃ¡gina"];
+const CINTA = ["Cada brocha sabe su lugar","Garantía de 90 días, sin ticket","Armado a mano en Guadalajara","Envío el mismo día en la ciudad","Pago seguro en la página"];
 
 /* ---------- 3. UTILIDADES ---------- */
 const $  = s => document.querySelector(s);
@@ -139,16 +139,16 @@ function rostro(zona, clase = "rostro-svg"){
 const objHTML = (nombre, alt = "", extra = "") =>
   `<figure class="obj" ${extra}><span class="obj__flota"><span class="obj__in"><img class="sombra" src="${OBJ}/${nombre}-sombra.webp" alt=""><img src="${OBJ}/${nombre}.webp" alt="${esc(alt)}" loading="lazy"></span></span></figure>`;
 
-/* Un producto del catÃ¡logo que todavÃ­a no tiene su presentaciÃ³n (foto, objeto
+/* Un producto del catálogo que todavía no tiene su presentación (foto, objeto
    y textos en PIEZAS/COPY) se muestra con la marca, NUNCA con la foto de otro
-   producto: antes heredaba el objeto del Kit NÂ°1 y un gua sha parecÃ­a kit. */
-const marcaHTML = () => `<div class="placa__vacia"><svg viewBox="0 0 885.8 955.7" aria-hidden="true"><use href="#abanico"/></svg><span>Foto prÃ³ximamente</span></div>`;
+   producto: antes heredaba el objeto del Kit N°1 y un gua sha parecía kit. */
+const marcaHTML = () => `<div class="placa__vacia"><svg viewBox="0 0 885.8 955.7" aria-hidden="true"><use href="#abanico"/></svg><span>Foto próximamente</span></div>`;
 
 /* =========================================================
    5. EL ABANICO
    Diez brochas en abanico. La activa se endereza y sube.
-   Se maneja con clic, arrastre, flechas y el riel de nÃºmeros.
-   Nada de pinear el scroll: la secciÃ³n mide lo que mide.
+   Se maneja con clic, arrastre, flechas y el riel de números.
+   Nada de pinear el scroll: la sección mide lo que mide.
    ========================================================= */
 const APERTURA = 8.6;     // grados entre brocha y brocha
 const MEDIO = 4.5;        // el abanico se queda centrado, como el isotipo
@@ -283,7 +283,7 @@ function ahorroSistema(){
   const sueltas = PROD.filter(p => p.sku !== "SIS1").reduce((a,p) => a + Number(p.precio), 0);
   return sueltas > sis.precio ? `Sale ${money(sueltas - sis.precio)} menos que comprar las piezas por separado.` : "";
 }
-const titulo = p => { const [tit, ...r] = p.nombre.split(" Â· "); return {tit, sub:r.join(" Â· ")}; };
+const titulo = p => { const [tit, ...r] = p.nombre.split(" · "); return {tit, sub:r.join(" · ")}; };
 const descDe = p => (COPY[p.sku]?.desc || "").replace("{AHORRO}", ahorroSistema()).trim();
 
 function placa(p){
@@ -291,7 +291,7 @@ function placa(p){
   const sello = p.nuevo ? `<span class="sello sello--nuevo">Nuevo</span>` : (c.sello ? `<span class="sello">${esc(c.sello)}</span>` : "");
   return `<article class="placa placa-p placa--${z ? z.placa : "hueso"}" data-sku="${esc(p.sku)}" ${z && z.grande ? 'data-grande' : ''}>
     <div class="placa__cab">
-      <span class="placa__no num">NÂ° ${NUM[p.sku] || "â€”"}</span>${sello}
+      <span class="placa__no num">N° ${NUM[p.sku] || "—"}</span>${sello}
     </div>
     <button class="placa__esc" type="button" data-ficha="${esc(p.sku)}" aria-label="Ver ${esc(tit)}">
       ${z ? objHTML(z.obj, tit, `style="--ancho:${z.ancho};--giro:${z.giro}deg;--dy:${z.dy||"0%"}"`) : marcaHTML()}
@@ -331,8 +331,8 @@ async function cargar(){
 
   lista.setAttribute("aria-busy","false");
   if (error || !data || !data.length){
-    lista.innerHTML = `<p class="vacio">No pudimos cargar la colecciÃ³n en este momento.
-      <br><a class="link" style="margin-top:14px" href="https://wa.me/${WA}" target="_blank" rel="noopener">EscrÃ­benos por WhatsApp</a></p>`;
+    lista.innerHTML = `<p class="vacio">No pudimos cargar la colección en este momento.
+      <br><a class="link" style="margin-top:14px" href="https://wa.me/${WA}" target="_blank" rel="noopener">Escríbenos por WhatsApp</a></p>`;
     return;
   }
   PROD = data;
@@ -355,7 +355,7 @@ async function cargar(){
   }
 }
 
-/* recompra rÃ¡pida para quien ya nos comprÃ³ */
+/* recompra rápida para quien ya nos compró */
 function pintaOtraVez(){
   const caja = $("#otraVez");
   const skus = hist.filter(s => PROD.some(p => p.sku === s)).slice(0, 3);
@@ -366,7 +366,7 @@ function pintaOtraVez(){
     const z = PIEZAS[sku] || null;
     return `<div class="ov">
       <span class="ov__lam">${z ? `<img src="${OBJ}/${z.obj}.webp" alt="" loading="lazy">` : ""}</span>
-      <div><b>${esc(tit)}</b><small>${money(p.precio)} Â· lo pediste antes</small></div>
+      <div><b>${esc(tit)}</b><small>${money(p.precio)} · lo pediste antes</small></div>
       <button class="mas" type="button" data-sku="${esc(sku)}" aria-label="Volver a pedir ${esc(tit)}">
         <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5v13M1.5 8h13"/></svg></button>
     </div>`;
@@ -403,7 +403,7 @@ function abreFicha(sku){
     <div class="f-escena">
       <div class="placa placa--${z ? z.placa : "hueso"}">
         ${z ? objHTML(z.obj, tit, `style="--ancho:${z.ancho};--giro:${z.giro}deg"`) : marcaHTML()}
-        <span class="fig placa__fig">Fig. ${NUM[sku] || "â€”"} Â· ${esc(tit)}</span>
+        <span class="fig placa__fig">Fig. ${NUM[sku] || "—"} · ${esc(tit)}</span>
       </div>
     </div>
     <div class="f-info">
@@ -411,7 +411,7 @@ function abreFicha(sku){
       <h2 id="tituloModal">${esc(tit)}</h2>
       <div class="f-precio">
         <span class="v">${money(p.precio)}</span>
-        <span class="ced">MXN Â· EnvÃ­o gratis desde ${money(ENVIO.gratis_desde)}</span>
+        <span class="ced">MXN · Envío gratis desde ${money(ENVIO.gratis_desde)}</span>
       </div>
       ${descDe(p) ? `<p class="f-desc">${esc(descDe(p))}</p>` : ""}
       <div class="f-acciones">
@@ -420,18 +420,18 @@ function abreFicha(sku){
         <a class="btn btn--linea" href="https://wa.me/${WA}?text=${waTxt}" target="_blank" rel="noopener">Preguntar por WhatsApp</a>
       </div>
       <ul class="confia">
-        <li>${palomita}<span><b>EnvÃ­o gratis</b> desde ${money(ENVIO.gratis_desde)}. En Guadalajara, el mismo dÃ­a.</span></li>
-        <li>${palomita}<span><b>90 dÃ­as de garantÃ­a.</b> Si falla, te mandamos el reemplazo sin ticket.</span></li>
+        <li>${palomita}<span><b>Envío gratis</b> desde ${money(ENVIO.gratis_desde)}. En Guadalajara, el mismo día.</span></li>
+        <li>${palomita}<span><b>90 días de garantía.</b> Si falla, te mandamos el reemplazo sin ticket.</span></li>
         <li>${palomita}<span><b>Pago seguro.</b> Tarjeta, meses sin intereses, OXXO o transferencia.</span></li>
       </ul>
     </div>
   </div>
   <div class="f-bloques">
     ${(z && z.foto) || (c.incluye||[]).length ? `<div>${z && z.foto ? `<figure class="foto"><img src="${esc(z.foto)}" alt="" loading="lazy"></figure>` : ""}
-      ${(c.incluye||[]).length ? `<h4>QuÃ© incluye</h4>
+      ${(c.incluye||[]).length ? `<h4>Qué incluye</h4>
       <ul>${(c.incluye||[]).map(i => `<li>${palomita}${esc(i)}</li>`).join("")}</ul>` : ""}</div>` : ""}
     ${c.cuidado ? `<div><figure class="foto"><img src="${IMG}/brocha-polvo.jpg" alt="" loading="lazy" style="object-position:50% 50%"></figure>
-      <h4>CÃ³mo se cuida</h4><p>${esc(c.cuidado)}</p></div>` : ""}
+      <h4>Cómo se cuida</h4><p>${esc(c.cuidado)}</p></div>` : ""}
     <div><figure class="foto"><img src="${IMG}/manos-brocha.jpg" alt="" loading="lazy" style="object-position:50% 40%"></figure>
       <h4>La promesa NIXA</h4><p>${esc(PROMESA)}</p></div>
     ${(sku==="KIT1"||sku==="SIS1") ? `<div class="diez"><h4>Las diez brochas</h4><ol>${
@@ -488,7 +488,7 @@ function avisaAgregado(sku){
   const p = PROD.find(x => x.sku === sku);
   const n = Object.values(bolsa).reduce((x,y) => x+y, 0);
   a.innerHTML =
-    '<span class="avisado__tx"><b></b>' + (n > 1 ? "Ya llevas " + n + " en la bolsa" : "Ya estÃ¡ en la bolsa") + '</span>'
+    '<span class="avisado__tx"><b></b>' + (n > 1 ? "Ya llevas " + n + " en la bolsa" : "Ya está en la bolsa") + '</span>'
   + '<button class="avisado__ver" type="button">Ver bolsa</button>';
   a.querySelector("b").textContent = p ? titulo(p).tit : "Listo";
   /* cuelga del encabezado y alineado con la bolsa: se lee como que el
@@ -515,12 +515,12 @@ const subtotal = () => Object.entries(bolsa).reduce((a,[sku,q]) => {
 function costoEnvio(){
   const t = subtotal();
   if (!t) return {costo:0, etiqueta:"", nota:""};
-  if (t >= ENVIO.gratis_desde) return {costo:0, etiqueta:"EnvÃ­o gratis", nota:"Por pasar de " + money(ENVIO.gratis_desde)};
+  if (t >= ENVIO.gratis_desde) return {costo:0, etiqueta:"Envío gratis", nota:"Por pasar de " + money(ENVIO.gratis_desde)};
   const cp = ($("#cp")?.value || "").replace(/\D/g,"");
   const gdl = /^(44|45)/.test(cp);
   return gdl
-    ? {costo:ENVIO.gdl, etiqueta:"Guadalajara, mismo dÃ­a", nota:"Si pides antes de las 2 de la tarde"}
-    : {costo:ENVIO.nacional, etiqueta:"Todo MÃ©xico, 2 a 4 dÃ­as", nota:"Por paqueterÃ­a, con guÃ­a para rastrear"};
+    ? {costo:ENVIO.gdl, etiqueta:"Guadalajara, mismo día", nota:"Si pides antes de las 2 de la tarde"}
+    : {costo:ENVIO.nacional, etiqueta:"Todo México, 2 a 4 días", nota:"Por paquetería, con guía para rastrear"};
 }
 
 function pinta(){
@@ -540,7 +540,7 @@ function pinta(){
       <div>
         <p class="item__nom">${esc(tit)}${sub?`<small>${esc(sub)}</small>`:""}</p>
         <span class="cant">
-          <button type="button" data-menos="${esc(sku)}" aria-label="Quitar uno de ${esc(tit)}">âˆ’</button>
+          <button type="button" data-menos="${esc(sku)}" aria-label="Quitar uno de ${esc(tit)}">−</button>
           <span>${q}</span>
           <button type="button" data-mas="${esc(sku)}" aria-label="Agregar uno de ${esc(tit)}">+</button>
         </span>
@@ -553,8 +553,8 @@ function pinta(){
   }).join("");
 
   $("#items").innerHTML = filas ||
-    `<p class="vacio" style="text-align:left;padding:26px 0 6px">Tu bolsa estÃ¡ vacÃ­a.
-     Si no sabes por dÃ³nde empezar, el Kit NÂ°1 es buen lugar.</p>`;
+    `<p class="vacio" style="text-align:left;padding:26px 0 6px">Tu bolsa está vacía.
+     Si no sabes por dónde empezar, el Kit N°1 es buen lugar.</p>`;
   $("#total").textContent = money(t);
   $("#aPaso2").disabled = t === 0;
   $("#aPaso2").style.opacity = t === 0 ? .45 : 1;
@@ -564,8 +564,8 @@ function pinta(){
     barra.hidden = false;
     const falta = ENVIO.gratis_desde - t;
     $("#envioTexto").innerHTML = falta > 0
-      ? `Te faltan <b>${money(falta)}</b> para el envÃ­o gratis.`
-      : `<b>Ya tienes envÃ­o gratis.</b> Lo armamos hoy mismo.`;
+      ? `Te faltan <b>${money(falta)}</b> para el envío gratis.`
+      : `<b>Ya tienes envío gratis.</b> Lo armamos hoy mismo.`;
     $("#envioRiel").style.width = Math.min(100, (t/ENVIO.gratis_desde)*100) + "%";
   } else barra.hidden = true;
 
@@ -588,7 +588,7 @@ function vePaso(p){
     li.classList.toggle("hecho", k < p);
   });
   $("#tituloBolsa").textContent = p === 1 ? "Tu bolsa" : p === 2 ? "Tu entrega" : "Tu pago";
-  $("#cajaCed").textContent = p === 1 ? "Lo que llevas" : p === 2 ? "A dÃ³nde lo mandamos" : "Ãšltimo paso";
+  $("#cajaCed").textContent = p === 1 ? "Lo que llevas" : p === 2 ? "A dónde lo mandamos" : "Último paso";
   const cuerpo = $(".bolsa__cuerpo"); if (cuerpo) cuerpo.scrollTop = 0;
   if (p >= 2) pintaEnvio();
   if (p === 3) pintaResumen();
@@ -597,7 +597,7 @@ function vePaso(p){
 function pintaEnvio(){
   const e = costoEnvio();
   if (!e.etiqueta){ $("#envioOp").innerHTML = ""; return; }
-  $("#envioOp").innerHTML = `<span class="envio-op__t">EnvÃ­o</span>
+  $("#envioOp").innerHTML = `<span class="envio-op__t">Envío</span>
     <div class="eo ${e.costo ? "" : "gratis"}">
       <div><b>${esc(e.etiqueta)}</b><small>${esc(e.nota)}</small></div>
       <span class="v">${e.costo ? money(e.costo) : "Gratis"}</span>
@@ -608,13 +608,13 @@ function pintaResumen(){
   const t = subtotal(), e = costoEnvio(), tot = t + e.costo;
   const lineas = Object.entries(bolsa).map(([sku,q]) => {
     const p = PROD.find(x => x.sku === sku); if (!p) return "";
-    return `<div class="resumen__r"><span>${q} Ã— ${esc(titulo(p).tit)}</span><b>${money(p.precio*q)}</b></div>`;
+    return `<div class="resumen__r"><span>${q} × ${esc(titulo(p).tit)}</span><b>${money(p.precio*q)}</b></div>`;
   }).join("");
   $("#resumen").innerHTML = lineas +
-    `<div class="resumen__r"><span>${esc(e.etiqueta || "EnvÃ­o")}</span><b>${e.costo ? money(e.costo) : "Gratis"}</b></div>
+    `<div class="resumen__r"><span>${esc(e.etiqueta || "Envío")}</span><b>${e.costo ? money(e.costo) : "Gratis"}</b></div>
      <div class="resumen__r resumen__r--tot"><span>Total</span><b>${money(tot)}</b></div>
      <div class="resumen__dir"><b>${esc($("#nom").value.trim())}</b>${esc($("#dir").value.trim())}${
-        $("#cp").value ? " Â· CP " + esc($("#cp").value.trim()) : ""}<br>${esc($("#tel").value.trim())}</div>`;
+        $("#cp").value ? " · CP " + esc($("#cp").value.trim()) : ""}<br>${esc($("#tel").value.trim())}</div>`;
   $("#pagarTotal").textContent = money(tot);
 }
 
@@ -645,7 +645,7 @@ function cierraBolsa(){
   cierraCapa($("#bolsa"), "abierta");
 }
 
-/* validaciÃ³n amable */
+/* validación amable */
 function valida(){
   let ok = true;
   const v = id => $("#"+id).value.trim();
@@ -661,7 +661,7 @@ function valida(){
 async function pagar(){
   const msj = $("#msjPedido");
   const items = Object.entries(bolsa);
-  if (!items.length){ msj.className = "msj mal"; msj.textContent = "Tu bolsa estÃ¡ vacÃ­a."; return; }
+  if (!items.length){ msj.className = "msj mal"; msj.textContent = "Tu bolsa está vacía."; return; }
   const d = valida();
   if (!d){ vePaso(2); msj.textContent = ""; $(".campo.mal input, .campo.mal textarea")?.focus(); return; }
 
@@ -673,7 +673,7 @@ async function pagar(){
   const total = subtotal() + e.costo;
 
   $("#pagar").disabled = true;
-  msj.className = "msj"; msj.textContent = "Preparando tu pagoâ€¦";
+  msj.className = "msj"; msj.textContent = "Preparando tu pago…";
 
   // 1. queda registrado antes de mandarte a pagar
   let pedidoId = null;
@@ -710,10 +710,10 @@ async function pagar(){
   } catch (err) {
     $("#pagar").disabled = false;
     msj.className = "msj mal";
-    msj.innerHTML = `No pudimos abrir el pago en lÃ­nea en este momento. Tu pedido quedÃ³ apartado${pedidoId ? " con el folio " + pedidoId : ""}.
+    msj.innerHTML = `No pudimos abrir el pago en línea en este momento. Tu pedido quedó apartado${pedidoId ? " con el folio " + pedidoId : ""}.
       <a class="link" style="margin-top:10px" href="https://wa.me/${WA}?text=${encodeURIComponent(
-        `Hola NIXA, quiero cerrar mi pedido${pedidoId ? " (folio " + pedidoId + ")" : ""} de ${money(total)}. No me abriÃ³ el pago en la pÃ¡gina.`)}"
-        target="_blank" rel="noopener">CiÃ©rralo por WhatsApp</a>`;
+        `Hola NIXA, quiero cerrar mi pedido${pedidoId ? " (folio " + pedidoId + ")" : ""} de ${money(total)}. No me abrió el pago en la página.`)}"
+        target="_blank" rel="noopener">Ciérralo por WhatsApp</a>`;
   }
 }
 
@@ -730,15 +730,15 @@ function revisaVuelta(){
     $("#pasoAyuda").textContent = "Listo";
     $("#cuerpoAyuda").innerHTML = `<div class="reco">
       <h3 id="tituloAyuda">Gracias. Ya es tuyo.</h3>
-      <p class="razon">Tu pago se registrÃ³${pend?.id ? " con el folio " + pend.id : ""}. Te llega el comprobante por correo y te escribimos por WhatsApp en cuanto salga el paquete.</p>
+      <p class="razon">Tu pago se registró${pend?.id ? " con el folio " + pend.id : ""}. Te llega el comprobante por correo y te escribimos por WhatsApp en cuanto salga el paquete.</p>
       <div style="margin-top:20px"><button class="btn btn--ancho" type="button" id="otraVez">Seguir viendo</button></div></div>`;
     $("#otraVez").onclick = () => { cierraAyuda(); limpiaUrl(); };
   } else {
     abreCapa($("#ayuda"), "abierta");
-    $("#pasoAyuda").textContent = "El pago no se completÃ³";
+    $("#pasoAyuda").textContent = "El pago no se completó";
     $("#cuerpoAyuda").innerHTML = `<div class="reco">
-      <h3 id="tituloAyuda">No se completÃ³ el pago.</h3>
-      <p class="razon">Tu bolsa sigue como la dejaste, no se cobrÃ³ nada. Puedes intentar otra vez o escribirnos y lo cerramos contigo.</p>
+      <h3 id="tituloAyuda">No se completó el pago.</h3>
+      <p class="razon">Tu bolsa sigue como la dejaste, no se cobró nada. Puedes intentar otra vez o escribirnos y lo cerramos contigo.</p>
       <div style="display:grid;gap:11px;margin-top:22px">
         <button class="btn btn--ancho" type="button" id="otraVez">Intentar de nuevo</button>
         <a class="btn btn--linea btn--ancho" href="https://wa.me/${WA}" target="_blank" rel="noopener">Escribirnos</a>
@@ -751,24 +751,24 @@ const limpiaUrl = () => history.replaceState({}, "", location.pathname);
 
 /* ---------- 9. AYUDANTE ---------- */
 const PREG = [
-  {q:"Â¿Empiezas de cero o ya tienes brochas?", nota:"Con esto sabemos si te conviene el kit o una pieza suelta.",
+  {q:"¿Empiezas de cero o ya tienes brochas?", nota:"Con esto sabemos si te conviene el kit o una pieza suelta.",
    o:[["cero","Empiezo de cero"],["tengo","Ya tengo brochas"],["chico","Quiero algo chico para probar"]]},
-  {q:"Â¿Te maquillas diario o para salir?", nota:"Si es regalo, piensa en quien lo va a usar.",
+  {q:"¿Te maquillas diario o para salir?", nota:"Si es regalo, piensa en quien lo va a usar.",
    o:[["diario","Diario, o casi"],["salir","Para salir"]]},
-  {q:"Â¿Es para ti o de regalo?", nota:"",
-   o:[["mi","Para mÃ­"],["regalo","De regalo"],["todo","Lo quiero todo"]]}
+  {q:"¿Es para ti o de regalo?", nota:"",
+   o:[["mi","Para mí"],["regalo","De regalo"],["todo","Lo quiero todo"]]}
 ];
 let resp = [];
 
 function recomienda([inicio, uso, quien]){
-  if (quien === "regalo") return {sku:"SIS1", razon:"Para regalar, la rutina completa: no falta nada, del polvo a las pestaÃ±as, y sale mÃ¡s barato que las piezas por separado."};
-  if (quien === "todo")   return {sku:"SIS1", razon:"Si lo quieres todo, junto sale mÃ¡s barato. Es lo que regalamos nosotros cuando queremos quedar bien."};
-  if (inicio === "chico") return {sku:"RIZ1", razon:"Para probar sin gastar mucho, el rizador: abre la mirada sin pellizcar. Si te gusta cÃ³mo hacemos las cosas, despuÃ©s vienes por el kit."};
+  if (quien === "regalo") return {sku:"SIS1", razon:"Para regalar, la rutina completa: no falta nada, del polvo a las pestañas, y sale más barato que las piezas por separado."};
+  if (quien === "todo")   return {sku:"SIS1", razon:"Si lo quieres todo, junto sale más barato. Es lo que regalamos nosotros cuando queremos quedar bien."};
+  if (inicio === "chico") return {sku:"RIZ1", razon:"Para probar sin gastar mucho, el rizador: abre la mirada sin pellizcar. Si te gusta cómo hacemos las cosas, después vienes por el kit."};
   if (inicio === "cero")  return {sku:"KIT1", razon: uso === "diario"
-    ? "Empiezas de cero y te maquillas diario: con el Kit NÂ°1 tienes las diez que se usan, de la base a las cejas, y ninguna que sobre."
-    : "Empiezas de cero: el Kit NÂ°1 trae las diez que se usan, con el nÃºmero y el oficio en el mango para no adivinar."};
-  if (uso === "diario")   return {sku:"ESP4", razon:"Ya tienes brochas y te maquillas diario: lo que se gasta son las esponjas. Cuatro te duran el aÃ±o y la base queda sin marcas."};
-  return {sku:"LAV1", razon:"Ya tienes brochas; lo que las acaba es lavarlas mal. Con el tapete sueltan el producto sin maltratarse y te duran aÃ±os."};
+    ? "Empiezas de cero y te maquillas diario: con el Kit N°1 tienes las diez que se usan, de la base a las cejas, y ninguna que sobre."
+    : "Empiezas de cero: el Kit N°1 trae las diez que se usan, con el número y el oficio en el mango para no adivinar."};
+  if (uso === "diario")   return {sku:"ESP4", razon:"Ya tienes brochas y te maquillas diario: lo que se gasta son las esponjas. Cuatro te duran el año y la base queda sin marcas."};
+  return {sku:"LAV1", razon:"Ya tienes brochas; lo que las acaba es lavarlas mal. Con el tapete sueltan el producto sin maltratarse y te duran años."};
 }
 
 function pintaAyuda(){
@@ -787,19 +787,19 @@ function pintaAyuda(){
   }
   const {sku, razon} = recomienda(resp);
   const p = PROD.find(x => x.sku === sku);
-  $("#pasoAyuda").textContent = "Nuestra recomendaciÃ³n";
-  const waTxt = encodeURIComponent(p ? `Hola NIXA, me recomendaron ${p.nombre} y tengo una duda.` : "Hola NIXA, ayÃºdenme a elegir.");
+  $("#pasoAyuda").textContent = "Nuestra recomendación";
+  const waTxt = encodeURIComponent(p ? `Hola NIXA, me recomendaron ${p.nombre} y tengo una duda.` : "Hola NIXA, ayúdenme a elegir.");
   if (!p){
     c.innerHTML = `<div class="reco"><h3 id="tituloAyuda">Casi.</h3>
-      <p class="razon">TodavÃ­a no carga la colecciÃ³n. EscrÃ­benos y te decimos en el momento.</p>
+      <p class="razon">Todavía no carga la colección. Escríbenos y te decimos en el momento.</p>
       <div style="margin-top:20px"><a class="btn btn--ancho" href="https://wa.me/${WA}?text=${waTxt}" target="_blank" rel="noopener">Preguntarnos por WhatsApp</a></div>
       <button class="link" type="button" id="otraVez" style="margin-top:18px">Empezar de nuevo</button></div>`;
   } else {
     const {tit, sub} = titulo(p);
     const o = (PIEZAS[sku]||PIEZAS.KIT1).obj;
     c.innerHTML = `<div class="reco">
-      <span class="ced">Nosotros te dirÃ­amos</span>
-      <h3 id="tituloAyuda">Empieza por aquÃ­.</h3>
+      <span class="ced">Nosotros te diríamos</span>
+      <h3 id="tituloAyuda">Empieza por aquí.</h3>
       <div class="reco__prod">
         <span class="lam"><img src="${OBJ}/${o}.webp" alt="" loading="lazy"></span>
         <b>${esc(tit)}${sub?`<small>${esc(sub)}</small>`:""}</b>
@@ -904,7 +904,7 @@ function animaciones(){
   }
 
   /* entrada. Cada capa anima su propia propiedad:
-     .obj__in = entrada, .obj__flota = flotar, .obj = ratÃ³n. */
+     .obj__in = entrada, .obj__flota = flotar, .obj = ratón. */
   const telon = $("#telonEntrada");
   const yaVisto = (() => { try { return sessionStorage.getItem("nixa.telon"); } catch { return null; } })();
   const tl = gsap.timeline({defaults:{ease:"power3.out"}});
@@ -932,14 +932,14 @@ function animaciones(){
     } catch {}
   });
 
-  // flotar: vive en .obj__flota, nunca choca con el ratÃ³n
+  // flotar: vive en .obj__flota, nunca choca con el ratón
   $$(".obj").forEach((o,i) => {
     const f = o.querySelector(".obj__flota"); if (!f) return;
     gsap.to(f, {y: 8 + (i%4)*4, rotation: (i%2 ? 1.4 : -1.4), duration: 3.2 + (i%5)*.55,
       yoyo:true, repeat:-1, ease:"sine.inOut", delay: i*.35});
   });
 
-  // ratÃ³n: vive en .obj, solo x/y, y siempre vuelve a cero
+  // ratón: vive en .obj, solo x/y, y siempre vuelve a cero
   if (conRaton){
     const escena = $("#escena");
     const qs = objs.map(o => ({
@@ -954,7 +954,7 @@ function animaciones(){
       qs.forEach(q => { q.x(px * 40 * q.p); q.y(py * 26 * q.p); });
     });
     $(".portada").addEventListener("pointerleave", centro);
-    // si el ratÃ³n se va de la ventana o pierdes el foco, las piezas regresan solas
+    // si el ratón se va de la ventana o pierdes el foco, las piezas regresan solas
     document.addEventListener("mouseleave", centro);
     addEventListener("blur", centro);
     document.addEventListener("visibilitychange", () => { if (document.hidden) centro(); });
@@ -966,7 +966,7 @@ function animaciones(){
   // el abanico se abre solo cuando lo ves, una vez
   ScrollTrigger.create({trigger:"#abanico", start:"top 70%", once:true, onEnter:abreAbanico});
 
-  // kit: pins y lista se seÃ±alan entre sÃ­
+  // kit: pins y lista se señalan entre sí
   const activaPin = k => {
     $$(".pin").forEach(p => p.classList.toggle("activo", p.dataset.pin === k));
     $$("#incluye li").forEach(l => l.classList.toggle("activo", l.dataset.pin === k));
@@ -994,7 +994,7 @@ function animaciones(){
 
   /* El certificado se inclina como una tarjeta que traes en la mano. La perspectiva
      ya estaba puesta en .cert y no la usaba nadie.
-     REGLA DE ORO: el giro vive en .cert__hoja, NO en .cert â€” .cert ya usa transform
+     REGLA DE ORO: el giro vive en .cert__hoja, NO en .cert — .cert ya usa transform
      para su entrada, y dos animaciones nunca escriben la misma propiedad del mismo
      elemento (ese fue el bug de la portada). */
   const cert = $(".cert"), hoja = $(".cert__hoja");
@@ -1063,18 +1063,18 @@ document.addEventListener("keydown", e => {
   if ($("#menu").classList.contains("abierto")) cierraMenu();
 });
 
-// WhatsApp: dudas, soporte y seguimiento. La caja estÃ¡ en la pÃ¡gina.
+// WhatsApp: dudas, soporte y seguimiento. La caja está en la página.
 const waLink = t => `https://wa.me/${WA}?text=${encodeURIComponent(t)}`;
-$("#waGarantia").href = waLink("Hola NIXA, tengo una duda sobre la garantÃ­a.");
+$("#waGarantia").href = waLink("Hola NIXA, tengo una duda sobre la garantía.");
 $("#waFaq").href      = waLink("Hola NIXA, tengo una pregunta antes de comprar.");
 ["#waPie","#waMenu","#waBarra"].forEach(s => { const a = $(s); if (a) a.href = `https://wa.me/${WA}`; });
 $("#certFolio").textContent = "NX-" + String(new Date().getFullYear()).slice(2) + "-" + String(Math.floor(Math.random()*900+100));
 
 let tic = false;
-/* alScroll corre en CADA cuadro del scroll. Antes pedÃ­a offsetHeight dos veces,
-   scrollHeight una y volvÃ­a a buscar las secciones oscuras en el DOM, o sea cuatro
-   cÃ¡lculos de layout forzados por cuadro. Ahora todo eso se mide una vez y solo se
-   vuelve a medir al cambiar de tamaÃ±o la ventana. */
+/* alScroll corre en CADA cuadro del scroll. Antes pedía offsetHeight dos veces,
+   scrollHeight una y volvía a buscar las secciones oscuras en el DOM, o sea cuatro
+   cálculos de layout forzados por cuadro. Ahora todo eso se mide una vez y solo se
+   vuelve a medir al cambiar de tamaño la ventana. */
 const elTop = $("#top"), elPie = $(".pie"), elProg = $("#progreso"),
       elAyuda = $("#btnAyuda"), elBarra = $("#barraMov"), elPortada = $(".portada");
 const oscuras = $$(".noche,.pie");
@@ -1096,13 +1096,13 @@ function alScroll(){
   const pie = elPie.getBoundingClientRect();
   elAyuda.classList.toggle("visible", y > innerHeight * .8 && pie.top > innerHeight - 40);
   elBarra.classList.toggle("visible", y > innerHeight * .9);
-  /* histÃ©resis: una vez oscura, la cabecera necesita 30px de mÃ¡s para volver a
-     aclararse. Sin esto parpadeaba en el borde exacto de la garantÃ­a y del pie,
-     y cada parpadeo arrastraba medio segundo de transiciÃ³n. */
+  /* histéresis: una vez oscura, la cabecera necesita 30px de más para volver a
+     aclararse. Sin esto parpadeaba en el borde exacto de la garantía y del pie,
+     y cada parpadeo arrastraba medio segundo de transición. */
   const h = altoTop + 38, m = esNoche ? 30 : 0;
   const oscuro = oscuras.some(s => { const r = s.getBoundingClientRect(); return r.top <= h + m && r.bottom >= h - m; });
   // "top--noche", NO "noche": `.noche` es la clase de las secciones oscuras y le
-  // metÃ­a a la cabecera su padding y su position:relative, rompiÃ©ndole el sticky.
+  // metía a la cabecera su padding y su position:relative, rompiéndole el sticky.
   if (oscuro !== esNoche){ esNoche = oscuro; elTop.classList.toggle("top--noche", oscuro); }
   tic = false;
 }
