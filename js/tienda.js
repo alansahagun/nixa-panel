@@ -315,7 +315,7 @@ async function cargar(){
   try {
     if (!sb) throw new Error("sin cliente");
     const r = await Promise.all([
-      sb.from("productos").select("*").eq("activo", true).order("precio",{ascending:false}),
+      sb.from("productos").select("sku,nombre,precio,activo,nuevo").eq("activo", true).order("precio",{ascending:false}),
       sb.from("config").select("clave,valor").in("clave",["envio_gratis_desde","envio_gdl","envio_nacional"])
     ]);
     data = r[0].data; error = r[0].error; cfg = r[1].data;
