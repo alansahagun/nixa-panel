@@ -759,13 +759,9 @@ section{padding:0 0 32px}
       </section>
 
       <!-- N°04 INVENTARIO Y COMPRAS -->
-      <section id="v-inv" class="hide">
-        <header class="cab"><span class="ico"><svg class="ic" aria-hidden="true"><use href="#i-inv"/></svg></span><div class="cab-t"><h2>Inventario y compras</h2><span class="n">04</span></div><p class="res" id="invResumen">0 piezas en casa</p></header>
-        <div class="dos">
-          <div class="bloque">
-            <div class="sub"><h3>Piezas en casa</h3><span class="eti">− y + ajustan</span></div>
-            <div class="lista" id="listInv"></div>
-          </div>
+      <section id="v-prod" class="hide">
+        <header class="cab"><span class="ico"><svg class="ic" aria-hidden="true"><use href="#i-inv"/></svg></span><div class="cab-t"><h2>Productos</h2></div><p class="res">Agrega o edita lo que van a vender</p></header>
+        <p class="mej-nota">Aquí puedes cargar productos manualmente. Los nuevos empiezan como borrador. Activarlos los muestra en la tienda; no se borran productos con historial.</p>
           <div class="bloque">
             <div class="sub"><h3>Catálogo</h3><span class="eti">precio y margen · editable</span></div>
             <div class="lista" id="listProd"></div>
@@ -783,6 +779,16 @@ section{padding:0 0 32px}
               <div class="msg" id="pfmsg"></div>
             </div>
           </div>
+      </section>
+
+      <section id="v-inv" class="hide">
+        <header class="cab"><span class="ico"><svg class="ic" aria-hidden="true"><use href="#i-inv"/></svg></span><div class="cab-t"><h2>Inventario y compras</h2><span class="n">04</span></div><p class="res" id="invResumen">0 piezas en casa</p></header>
+        <div class="dos">
+          <div class="bloque">
+            <div class="sub"><h3>Piezas en casa</h3><span class="eti">− y + ajustan</span></div>
+            <div class="lista" id="listInv"></div>
+          </div>
+
         </div>
         <div class="dos forma-lista">
           <div class="bloque pegado">
@@ -938,7 +944,7 @@ section{padding:0 0 32px}
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-<script src="app.js?v=20261007"></script>
+<script src="app.js?v=20261028-productos"></script>
 <script src="puerta.js?v=20261007"></script>
 </body>
 </html>

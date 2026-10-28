@@ -106,24 +106,25 @@ const VISTAS = [
   ['hoy', 'Hoy', 'Pendientes y cifras del día', true],
   ['caja', 'Caja', 'Gastos, pagos entre socios y cuentas', true],
   ['ven', 'Ventas', 'La meta de diez y cada venta', true],
-  ['inv', 'Piezas', 'Inventario, catálogo y compras', false],
+  ['prod', 'Productos', 'Agregar y editar lo que vamos a vender', true],
+  ['inv', 'Piezas', 'Inventario y compras', false],
   ['env', 'Envíos', 'Pedidos y su estado', false],
   ['sop', 'Soporte', 'Mensajes por atender', false],
   ['mej', 'Mejorar', 'Hallazgos sobre los datos', false],
   ['bit', 'Bitácora', 'Todo lo que pasó', false],
   ['margen', 'Margen', 'Precio y margen por kit', false],
-  ['prov', 'Proveedores', 'Cotizaciones, muestras y costo puesto', true],
+  ['prov', 'Proveedores', 'Cotizaciones, muestras y costo puesto', false],
 ];
 const NOMBRE_LARGO = { inv: 'Inventario y compras', mej: 'Qué mejorar', margen: 'Calculadora de margen' };
-const CARGA = { hoy: () => { cargarTareas(); cargarProveedores(); }, caja: () => cargarCaja(), ven: () => cargarVentas(), inv: () => { cargarInv(); cargarCompras(); }, env: () => cargarPedidos(), sop: () => cargarMensajes(), mej: () => cargarTodo(), bit: () => cargarBitacora(), margen: () => pintaMargen(), prov: () => cargarProveedores() };
+const CARGA = { prod: () => cargarProductos(), hoy: () => { cargarTareas(); cargarProveedores(); }, caja: () => cargarCaja(), ven: () => cargarVentas(), inv: () => { cargarInv(); cargarCompras(); }, env: () => cargarPedidos(), sop: () => cargarMensajes(), mej: () => cargarTodo(), bit: () => cargarBitacora(), margen: () => pintaMargen(), prov: () => cargarProveedores() };
 const LEGADO = { com: 'inv' };
 let vista = 'hoy';
 function buildNav() {
   if ($('#navDesk').children.length) return;
   VISTAS.forEach(([k, txt, nota, enBarra], i) => {
-    const d = el(`<button type="button" data-k="${k}">${icono(k)}<span>${NOMBRE_LARGO[k] || txt}</span><span class="n">${idx(i)}</span></button>`); d.onclick = () => irA(k); $('#navDesk').appendChild(d);
-    if (enBarra) { const b = el(`<button type="button" data-k="${k}"><span class="n">${idx(i)}</span><span class="ic-wrap">${icono(k)}</span><span class="t">${txt}</span></button>`); b.onclick = () => irA(k); $('#navTabs').appendChild(b); }
-    const a = el(`<a href="#${k}" data-k="${k}"><span class="n">${idx(i)}</span><span class="ico">${icono(k)}</span><span>${NOMBRE_LARGO[k] || txt}<small>${nota}</small></span></a>`); a.onclick = e => { e.preventDefault(); cierraIndice(); irA(k); }; $('#indiceLista').appendChild(a);
+    const d = el(`<button type="button" data-k="${k}">${icono(k === 'prod' ? 'inv' : k)}<span>${NOMBRE_LARGO[k] || txt}</span><span class="n">${idx(i)}</span></button>`); d.onclick = () => irA(k); $('#navDesk').appendChild(d);
+    if (enBarra) { const b = el(`<button type="button" data-k="${k}"><span class="n">${idx(i)}</span><span class="ic-wrap">${icono(k === 'prod' ? 'inv' : k)}</span><span class="t">${txt}</span></button>`); b.onclick = () => irA(k); $('#navTabs').appendChild(b); }
+    const a = el(`<a href="#${k}" data-k="${k}"><span class="n">${idx(i)}</span><span class="ico">${icono(k === 'prod' ? 'inv' : k)}</span><span>${NOMBRE_LARGO[k] || txt}<small>${nota}</small></span></a>`); a.onclick = e => { e.preventDefault(); cierraIndice(); irA(k); }; $('#indiceLista').appendChild(a);
   });
   const mas = el(`<button type="button" data-k="mas"><span class="n">…</span><span class="ic-wrap">${icono('mas')}</span><span class="t">Más</span></button>`); mas.onclick = abreIndice; $('#navTabs').appendChild(mas);
   const h = location.hash.replace('#', '');
@@ -160,7 +161,15 @@ async function cargarProductos() {
   // El catálogo se administra desde aquí: altas, nombres, precios y pausas.
   // `productos` sigue siendo SOLO los activos (de eso dependen ventas, compras,
   // margen y proveedores); los pausados se listan aparte para poder reactivarlos.
-  const { data } = await sb.from('productos').select('*').order('precio', { ascending: false });
+  const { data, error } = await sb.from('productos').select('*').order('precio', { ascending: false });
+  if (error) {
+    $('#listProd').innerHTML = '';
+    const aviso = el(vacio('No se pudo cargar el catálogo.', 'No guardes cambios hasta recuperar el acceso. Vuelve a intentar; si sigue, revisa tu sesión.'));
+    const retry = el('<button class="btn linea ancho" type="button">Reintentar cargar productos</button>');
+    retry.onclick = () => cargarProductos();
+    $('#listProd').append(aviso, retry);
+    return;
+  }
   productosTodos = data || [];
   productos = productosTodos.filter(p => p.activo);
   productosPausados = productosTodos.filter(p => !p.activo);
