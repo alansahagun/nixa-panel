@@ -35,7 +35,7 @@ const fechaMes = ts => new Date(ts).toLocaleDateString('es-MX', { timeZone: TZ, 
 const horaSola = ts => new Date(ts).toLocaleTimeString('es-MX', { timeZone: TZ, hour:'2-digit', minute:'2-digit', hour12:false });
 const PERSONAS = ['Majo', 'Alan', 'Jarvis'];
 const META_ML = 10;
-let productos = [], YO = null, tareasCache = [], filtroTar = 'todas', filtroEnv = 'activos', filtroSop = 'pendientes';
+let productos = [], productosTodos = [], productosPausados = [], YO = null, tareasCache = [], filtroTar = 'todas', filtroEnv = 'activos', filtroSop = 'pendientes';
 // Lo que ya se cargó, para que "Qué mejorar" calcule sobre datos reales sin volver a pedirlos.
 const D = { tareas: [], inv: [], ventas: [], compras: [], saldo: null, socios: null, mensajes: [], pedidos: [], provs: [], listo: {} };
 // Supuestos de importación; viven en la tabla config para poder cambiarlos sin tocar código.
@@ -45,7 +45,9 @@ async function cargarConfig() {
   (data || []).forEach(({ clave, valor }) => { const n = parseFloat(valor); if (Number.isFinite(n) && n >= 0) CONF[clave] = n; });
   const o = $('#cpImp').options[0]; o.value = CONF.importacion_impuesto; o.textContent = `Por paquetería (DHL, FedEx): ${+(CONF.importacion_impuesto * 100).toFixed(1)}%`;
 }
-const nombreDe = sku => (productos.find(p => p.sku === sku) || {}).nombre || sku || '';
+// Incluye pausados: una pieza en casa o una venta vieja de un producto pausado
+// debe seguir mostrando su nombre, no el SKU pelón.
+const nombreDe = sku => (productosTodos.find(p => p.sku === sku) || productos.find(p => p.sku === sku) || {}).nombre || sku || '';
 const nombreCorto = sku => nombreDe(sku).split(' · ')[0];
 const nombreResto = sku => nombreDe(sku).split(' · ').slice(1).join(' · ');
 const abanico = '<svg class="ilu" viewBox="0 0 100 100" aria-hidden="true"><use href="#abanico"/></svg>';
@@ -155,19 +157,136 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') { cierraLigh
 
 /* ================= datos ================= */
 async function cargarProductos() {
-  const { data } = await sb.from('productos').select('*').eq('activo', true).order('precio', { ascending: false });
-  productos = data || [];
+  // El catálogo se administra desde aquí: altas, nombres, precios y pausas.
+  // `productos` sigue siendo SOLO los activos (de eso dependen ventas, compras,
+  // margen y proveedores); los pausados se listan aparte para poder reactivarlos.
+  const { data } = await sb.from('productos').select('*').order('precio', { ascending: false });
+  productosTodos = data || [];
+  productos = productosTodos.filter(p => p.activo);
+  productosPausados = productosTodos.filter(p => !p.activo);
   ['#csku', '#vsku'].forEach(sel => { const s = $(sel); s.innerHTML = ''; productos.forEach(p => s.appendChild(el(`<option value="${esc(p.sku)}">${esc(p.nombre)}</option>`))); });
   const cont = $('#listProd'); cont.innerHTML = '';
-  if (!productos.length) cont.appendChild(el(vacio('Sin productos activos.', 'El catálogo se llena desde la base.')));
-  productos.forEach((p, i) => {
-    const mg = p.precio - (p.costo || 0), pct = p.precio ? Math.round(mg / p.precio * 100) : 0;
-    cont.appendChild(el(`<div class="prod"><span class="n">${idx(i)}</span><div><div class="t">${esc(nombreCorto(p.sku))}</div><div class="s">${nombreResto(p.sku) ? esc(nombreResto(p.sku)) + ' · ' : ''}${esc(p.sku)} · costo ${money(p.costo)}</div></div>
-      <div class="der"><div class="imp">${money(p.precio)}</div><div class="mg ${pct < 50 ? 'bajo' : ''}">margen ${money(mg)} · ${pct}%</div></div></div>`));
-  });
+  if (!productos.length && !productosPausados.length) cont.appendChild(el(vacio('Sin productos todavía.', 'Agrega el primero con el botón de abajo.')));
+  else if (!productos.length) cont.appendChild(el(vacio('Sin productos activos.', 'Todo el catálogo está pausado.')));
+  productos.forEach((p, i) => cont.appendChild(filaProd(p, i)));
+  if (productosPausados.length) {
+    const paus = el(`<div class="prod prod-pausados"><div><div class="t">Pausados (${productosPausados.length})</div><div class="s">No se ven en la tienda ni en los selectores; su historial sigue intacto.</div></div><button class="link suave" type="button">ver</button></div>`);
+    const listaPaus = el('<div class="hide"></div>');
+    productosPausados.forEach((p, i) => listaPaus.appendChild(filaProd(p, i)));
+    paus.querySelector('button').onclick = e => { const h = listaPaus.classList.toggle('hide'); e.target.textContent = h ? 'ver' : 'ocultar'; };
+    cont.appendChild(paus); cont.appendChild(listaPaus);
+  }
+  const btnNuevo = el('<button class="btn linea ancho" id="btnProdNuevo" type="button">Agregar producto</button>');
+  btnNuevo.onclick = () => editaProd(null);
+  cont.appendChild(btnNuevo);
   llenaParaProv();
   calcVenta();
 }
+function filaProd(p, i) {
+  const mg = p.precio - (p.costo || 0), pct = p.precio ? Math.round(mg / p.precio * 100) : 0;
+  const r = el(`<div class="prod"><span class="n">${idx(i)}</span><div><div class="t">${esc(nombreCorto(p.sku))}</div><div class="s">${nombreResto(p.sku) ? esc(nombreResto(p.sku)) + ' · ' : ''}${esc(p.sku)} · costo ${money(p.costo)}</div></div>
+    <div class="der"><div class="imp">${money(p.precio)}</div><div class="mg ${pct < 50 ? 'bajo' : ''}">margen ${money(mg)} · ${pct}%</div><button class="link suave" type="button">Editar</button></div></div>`);
+  r.querySelector('button').onclick = () => editaProd(p);
+  return r;
+}
+
+/* ---- editor de productos ----
+   Lo que NO se puede hacer aquí a propósito:
+   - Cambiar el SKU de un producto que ya existe. Ventas, compras, inventario y
+     proveedores lo referencian como texto; moverlo rompería ese historial.
+     Si un nombre ya no aplica, se edita el nombre; el SKU queda.
+   - Borrar productos. Se pausan (activo = falso): desaparecen de la tienda y de
+     los selectores, pero las piezas en casa, las ventas y las compras que ya
+     los mencionan siguen contando su historia. */
+let prodEditando = null; // null = alta nueva
+function editaProd(p) {
+  prodEditando = p;
+  const b = $('#prodForm');
+  b.classList.remove('hide');
+  $('#prodFormTit').textContent = p ? 'Editar producto' : 'Agregar producto';
+  $('#pfSkuWrap').innerHTML = p
+    ? `<span>SKU</span><input id="pfSku" value="${esc(p.sku)}" disabled>`
+    : `<span>SKU</span><input id="pfSku" placeholder="Se sugiere solo; puedes cambiarlo" autocapitalize="characters" spellcheck="false">`;
+  $('#pfNombre').value = p ? p.nombre : '';
+  $('#pfPrecio').value = p ? p.precio : '';
+  $('#pfCosto').value = p ? (p.costo ?? '') : '';
+  $('#pfActivo').checked = p ? !!p.activo : false; // alta = borrador: nadie publica en la tienda sin querer
+  msg('#pfmsg', p
+    ? (p.activo ? 'El SKU no se puede cambiar: de él cuelga el historial. Ojo: nombre y precio se ven en la tienda en cuanto guardes.' : 'Está pausado (borrador): no se ve en la tienda. Márcalo activo solo cuando quieran publicarlo.')
+    : 'Nace como borrador (pausado): NO se ve en la tienda hasta que lo actives. El SKU es la clave interna (mayúsculas y números) y no se podrá cambiar después.');
+  b.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  $('#pfNombre').focus({ preventScroll: true });
+}
+// SKU sugerido a partir del nombre: consonantes/iniciales en mayúsculas + dígito libre.
+function sugiereSku(nombre) {
+  const base = String(nombre || '').toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^A-Z0-9 ]/g, ' ');
+  let clave = (base.split(/\s+/).filter(Boolean).map(w => w[0]).join('') || base.replace(/\s/g, '')).slice(0, 3) || 'PROD';
+  const usados = new Set(productosTodos.map(p => p.sku));
+  for (let i = 1; i < 100; i++) { const c = clave + i; if (!usados.has(c)) return c; }
+  return clave + Date.now() % 100;
+}
+// La bitácora nunca debe hacer que un cambio ya guardado parezca fallido:
+// si el asiento falla, el cambio principal igual quedó y se dice aparte.
+async function anotaSinRomper(texto) {
+  try { const { error } = await anota(texto); return !error; } catch (e) { return false; }
+}
+async function guardaProd() {
+  const btn = $('#btnProdGuardar');
+  if (btn.disabled) return; // doble clic
+  const nombre = $('#pfNombre').value.trim();
+  const precio = parseFloat($('#pfPrecio').value), costo = parseFloat($('#pfCosto').value || '0');
+  const activo = $('#pfActivo').checked;
+  if (!nombre) return msg('#pfmsg', 'Falta el nombre.', 'err');
+  if (!Number.isFinite(precio) || precio <= 0) return msg('#pfmsg', 'Falta el precio (mayor a cero).', 'err');
+  if (!Number.isFinite(costo) || costo < 0) return msg('#pfmsg', 'El costo no puede ser negativo.', 'err');
+  btn.disabled = true; btn.textContent = 'Guardando…';
+  const saleMal = t => { btn.disabled = false; btn.textContent = 'Guardar producto'; return msg('#pfmsg', t, 'err'); };
+  try {
+    if (prodEditando) {
+      const p = prodEditando;
+      if (p.activo && !activo) {
+        const piezas = (D.inv.find(x => x.sku === p.sku) || {}).cantidad || 0;
+        const aviso = piezas > 0 ? `\n\nOjo: todavía hay ${piezas} ${plural(piezas, 'pieza', 'piezas')} en casa; seguirán en «Piezas en casa» hasta agotarse.` : '';
+        if (!confirm(`¿Pausar ${nombreCorto(p.sku)}?\n\nDeja de verse en la tienda y en los selectores, pero su historial (ventas, compras, inventario) se conserva.${aviso}`)) { btn.disabled = false; btn.textContent = 'Guardar producto'; return; }
+      }
+      if (!p.activo && activo && !confirm(`¿Activar ${nombreCorto(p.sku)}?\n\nSe PUBLICA en la tienda en cuanto guardes. Si todavía no tiene foto y textos propios, saldrá con la marca NIXA y «Foto próximamente».`)) { btn.disabled = false; btn.textContent = 'Guardar producto'; return; }
+      if (p.activo && Number(p.precio) !== precio && !confirm(`El precio nuevo (${moneyC(precio)}) se ve en la tienda en cuanto guardes. ¿Cambiarlo?`)) { btn.disabled = false; btn.textContent = 'Guardar producto'; return; }
+      const cambios = { nombre, precio, costo, activo };
+      const { data: act, error } = await sb.from('productos').update(cambios).eq('sku', p.sku).select('sku');
+      if (error) return saleMal('No se guardó: ' + error.message);
+      if (!act || !act.length) return saleMal('No se actualizó ningún producto. Recarga el panel y vuelve a intentar; si sigue, puede ser un permiso de la base.');
+      const diffs = [];
+      if (p.nombre !== nombre) diffs.push(`nombre: «${p.nombre}» → «${nombre}»`);
+      if (Number(p.precio) !== precio) diffs.push(`precio: ${moneyC(p.precio)} → ${moneyC(precio)}`);
+      if (Number(p.costo || 0) !== costo) diffs.push(`costo: ${moneyC(p.costo)} → ${moneyC(costo)}`);
+      if (!!p.activo !== activo) diffs.push(activo ? 'reactivado' : 'pausado');
+      let notaOk = true;
+      if (diffs.length) notaOk = await anotaSinRomper(`Catálogo · ${p.sku}: ${diffs.join(' · ')}.`);
+      toast(diffs.length ? 'Producto actualizado' : 'Sin cambios');
+      if (!notaOk) setTimeout(() => toast('Se guardó, pero no quedó asentado en la bitácora'), 2500);
+    } else {
+      let sku = $('#pfSku').value.trim().toUpperCase().replace(/[^A-Z0-9]/g, '');
+      if (!sku) sku = sugiereSku(nombre);
+      if (!/^[A-Z0-9]{2,12}$/.test(sku)) return saleMal('El SKU necesita de 2 a 12 letras o números, sin espacios.');
+      if (productosTodos.some(p => p.sku === sku)) return saleMal(`El SKU ${sku} ya existe; ponle otro.`);
+      if (activo && !confirm(`¿Crearlo ACTIVO?\n\nSe publica en la tienda en cuanto guardes, con la marca NIXA y «Foto próximamente» hasta que tenga foto y textos. Si aún no lo quieren visible, desmarca «Activo» y queda como borrador.`)) { btn.disabled = false; btn.textContent = 'Guardar producto'; return; }
+      const { error } = await sb.from('productos').insert({ sku, nombre, precio, costo, activo });
+      if (error) return saleMal('No se guardó: ' + error.message);
+      const notaOk = await anotaSinRomper(`Catálogo · producto nuevo ${sku}: «${nombre}», ${moneyC(precio)}${costo ? ` (costo ${moneyC(costo)})` : ''}${activo ? '' : ' (borrador, sin publicar)'}.`);
+      toast(activo ? 'Producto agregado y publicado' : 'Borrador guardado: no se ve en la tienda');
+      if (activo) setTimeout(() => toast('En la tienda se verá con «Foto próximamente» hasta tener su presentación'), 2500);
+      if (!notaOk) setTimeout(() => toast('Se guardó, pero no quedó asentado en la bitácora'), activo ? 5000 : 2500);
+    }
+  } finally {
+    btn.disabled = false; btn.textContent = 'Guardar producto';
+  }
+  cancelaProd();
+  await cargarProductos(); cargarBitacora(); recalcula();
+}
+function cancelaProd() { prodEditando = null; $('#prodForm').classList.add('hide'); msg('#pfmsg', ''); }
+$('#btnProdGuardar').onclick = guardaProd;
+$('#btnProdCancelar').onclick = cancelaProd;
+$('#pfNombre').addEventListener('input', () => { if (!prodEditando) $('#pfSku').placeholder = sugiereSku($('#pfNombre').value); });
 function cargarTodo() { return Promise.all([cargarTareas(), cargarCaja(), cargarInv(), cargarCompras(), cargarVentas(), cargarPedidos(), cargarMensajes(), cargarBitacora(), cargarProveedores()]).then(pintaMejoras); }
 // Cada carga avisa; "Qué mejorar" se recalcula una sola vez aunque lleguen varias seguidas.
 let _tm; const recalcula = () => { clearTimeout(_tm); _tm = setTimeout(pintaMejoras, 120); };
