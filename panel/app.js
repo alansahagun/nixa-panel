@@ -313,7 +313,7 @@ async function guardaProd() {
     btn.disabled = false; btn.textContent = 'Guardar producto';
   }
   cancelaProd(true);
-  await cargarProductos(); cargarBitacora(); recalcula();
+  await cargarProductos(); cargarInv(); cargarBitacora(); recalcula();
 }
 function cancelaProd(forzar = false) { if (!forzar && !permiteSalirProd()) return; prodEditando = null; prodInicial = ''; $('#prodForm').classList.add('hide'); msg('#pfmsg', ''); }
 $('#btnProdGuardar').onclick = guardaProd;
@@ -582,19 +582,80 @@ function anotaAjuste(sku, desde, hasta) {
   a.t = setTimeout(() => { const d = hasta - a.desde; delete _ajustes[sku]; if (d) { anota(`Inventario · ${nombreCorto(sku)}: de ${a.desde} a ${hasta} (${d > 0 ? '+' : ''}${d})`); cargarBitacora(); } }, 1400);
 }
 async function cargarInv() {
-  const { data } = await sb.from('inventario').select('*').order('sku');
-  // Mismo orden que el catálogo (por precio); lo que no esté en el catálogo, al final.
-  const pos = sku => { const i = productos.findIndex(p => p.sku === sku); return i < 0 ? 99 : i; };
-  D.inv = (data || []).slice().sort((a, b) => pos(a.sku) - pos(b.sku));
-  const cont = $('#listInv'); cont.innerHTML = ''; let total = 0;
-  D.inv.forEach((i, k) => { total += i.cantidad;
+  const cont = $('#listInv');
+  let data, error;
+  try {
+    ({ data, error } = await sb.from('inventario').select('*').order('sku'));
+  } catch (e) {
+    error = e; // promesa rechazada (red caída a mitad): mismo camino que un error devuelto
+  }
+  if (error) {
+    // Un error de red o de permisos NO es un inventario en ceros: se conserva lo
+    // último cargado y se avisa, en vez de pintar un «sin existencia» inventado.
+    const retryViejo = cont.querySelector('.reintento-inv');
+    if (retryViejo) { retryViejo.disabled = false; toast('Sigue sin cargar el inventario; intenta de nuevo'); return; }
+    if (cont.children.length) { toast('No se pudo actualizar el inventario; se muestra lo último que cargó'); return; }
+    cont.appendChild(el(vacio('No se pudo cargar el inventario.', 'Revisa tu conexión y vuelve a intentar. Tus piezas siguen registradas.')));
+    const retry = el('<button class="btn linea ancho reintento-inv" type="button">Reintentar</button>');
+    retry.onclick = async () => {
+      retry.disabled = true;
+      try { await cargarInv(); } catch (e) {} finally { if (retry.isConnected) retry.disabled = false; }
+    };
+    cont.appendChild(retry);
+    return;
+  }
+  // Todo producto activo aparece aunque no tenga asiento en inventario (cantidad 0,
+  // «sin existencia»): si no, uno nuevo no se veía ni se podía ajustar hasta su
+  // primera compra. Los asientos de productos pausados o borradores conservan su
+  // fila al final; el orden sigue siendo el del catálogo.
+  const asientos = new Map((data || []).map(i => [i.sku, i]));
+  const filas = productos.map(p => asientos.get(p.sku) || { sku: p.sku, cantidad: 0, sinAsiento: true });
+  (data || []).forEach(i => { if (!productos.some(p => p.sku === i.sku)) filas.push(i); });
+  D.inv = filas;
+  cont.innerHTML = ''; let total = 0;
+  filas.forEach((i, k) => { total += i.cantidad;
     const aviso = i.cantidad === 0 ? '<span class="aviso">sin existencia</span>' : i.cantidad < 15 ? '<span class="aviso">reponer</span>' : '';
     const r = el(`<div class="pieza"><span class="n">${idx(k)}</span><div><div class="t">${esc(nombreCorto(i.sku))}</div><div class="s">${nombreResto(i.sku) ? esc(nombreResto(i.sku)) + ' · ' : ''}${esc(i.sku)}${aviso ? ' · ' + aviso : ''}</div></div>
       <div class="ctl"><button class="mas menos" type="button" aria-label="una menos"><svg viewBox="0 0 16 16"><path d="M1 8h14"/></svg></button><div class="cant">${i.cantidad}</div><button class="mas" type="button" aria-label="una más"><svg viewBox="0 0 16 16"><path d="M8 1v14M1 8h14"/></svg></button></div></div>`);
     const [menos, mas] = r.querySelectorAll('button');
-    const mueve = async d => { const nuevo = Math.max(0, i.cantidad + d); await sb.from('inventario').update({ cantidad: nuevo, actualizado: new Date().toISOString() }).eq('sku', i.sku); anotaAjuste(i.sku, i.cantidad, nuevo); cargarInv(); };
+    let ocupada = false;
+    const mueve = async d => {
+      if (ocupada) return; // un ajuste a la vez por fila: el doble clic no duplica
+      const desde = Number(i.cantidad), nuevo = Math.max(0, desde + d);
+      if (nuevo === desde) return;
+      ocupada = true; menos.disabled = true; mas.disabled = true;
+      const ahora = new Date().toISOString();
+      let ok = false, conflicto = false, desdeReal = desde, hastaReal = nuevo;
+      try {
+        if (i.sinAsiento) {
+          // Primer asiento del producto: se crea. Si otra pestaña o una compra lo
+          // creó justo antes (llave duplicada), se relee y el ajuste cae sobre lo real.
+          const { error } = await sb.from('inventario').insert({ sku: i.sku, cantidad: nuevo });
+          if (!error) ok = true;
+          else if (error.code === '23505') {
+            const { data: actual } = await sb.from('inventario').select('cantidad').eq('sku', i.sku).maybeSingle();
+            if (actual) {
+              desdeReal = Number(actual.cantidad); hastaReal = Math.max(0, desdeReal + d);
+              const { data: act, error: e2 } = await sb.from('inventario').update({ cantidad: hastaReal, actualizado: ahora }).eq('sku', i.sku).eq('cantidad', desdeReal).select('sku');
+              if (!e2 && act && act.length) ok = true; else if (!e2) conflicto = true;
+            }
+          }
+        } else {
+          // Compare-and-swap: solo escribe si la cantidad sigue siendo la que vimos.
+          // 0 filas = otra pestaña o una compra la movió entre tanto: no es éxito.
+          const { data: act, error } = await sb.from('inventario').update({ cantidad: nuevo, actualizado: ahora }).eq('sku', i.sku).eq('cantidad', desde).select('sku');
+          if (!error && act && act.length) ok = true; else if (!error) conflicto = true;
+        }
+      } catch (e) { ok = false; }
+      // La fila se bloquea hasta el refresco final: nada de clics con datos viejos.
+      if (ok) anotaAjuste(i.sku, desdeReal, hastaReal);
+      else toast(conflicto ? 'El inventario cambió en otra pantalla; actualizando…' : 'No se pudo confirmar el ajuste; actualizando inventario…');
+      try { await cargarInv(); } catch (e) { /* la fila vieja se rehabilita abajo */ }
+      // Si la recarga no reemplazó la fila (falló la carga), los botones viejos reviven.
+      if (menos.isConnected) { ocupada = false; menos.disabled = false; mas.disabled = false; }
+    };
     menos.onclick = () => mueve(-1); mas.onclick = () => mueve(1); cont.appendChild(r); });
-  if (!data?.length) cont.appendChild(el(vacio('Sin piezas en casa.', 'El inventario empieza cuando llega la primera caja del proveedor.')));
+  if (!filas.length) cont.appendChild(el(vacio('Sin piezas en casa.', 'El inventario empieza cuando llega la primera caja del proveedor.')));
   $('#kStock').textContent = total; $('#invResumen').textContent = `${total} ${plural(total, 'pieza', 'piezas')} en casa`;
   recalcula();
 }
